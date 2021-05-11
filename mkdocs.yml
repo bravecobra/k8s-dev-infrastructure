@@ -1,0 +1,12 @@
+site_name: K8S Dev Infrastructure
+theme:
+  name: material
+nav:
+    - Home: 'index.md'
+    - About:
+        - 'License': 'license.md'
+        - 'Release Notes': 'release-notes.md'
+dev_addr: '0.0.0.0:8080'
+
+markdown_extensions:
+  - pymdownx.tabbed
