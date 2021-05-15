@@ -1,0 +1,10 @@
+# Quickstart
+
+## Prerequisites
+
+```powershell
+choco install mkcert
+choco install terraform
+choco install kubernetes-cli
+choco install kubernetes-helm
+```
