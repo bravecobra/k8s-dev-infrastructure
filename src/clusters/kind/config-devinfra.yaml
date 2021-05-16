@@ -24,5 +24,6 @@ nodes:
     hostPort: 8100
     protocol: TCP
     listenAddress: "127.0.0.1"
-- role: worker
-- role: worker
+# - role: worker
+# - role: worker
+# - role: worker

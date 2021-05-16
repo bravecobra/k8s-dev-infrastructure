@@ -1,0 +1,12 @@
+podAnnotations:
+  "consul.hashicorp.com/connect-inject": "true"
+  "consul.hashicorp.com/connect-service-port": "3100"
+  "consul.hashicorp.com/transparent-proxy": "true"
+
+tracing:
+  jaegerAgentHost: jaeger-agent.infrastructure.svc.cluster.local
+
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: "prometheus"

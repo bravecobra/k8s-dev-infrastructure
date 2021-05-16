@@ -1,0 +1,24 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger
+  namespace: infrastructure
+spec:
+  annotations:
+    "consul.hashicorp.com/connect-inject": "true"
+    "consul.hashicorp.com/connect-service-port": "6831"
+    "consul.hashicorp.com/transparent-proxy": "true"
+  ingress:
+    enabled: false
+  allInOne:
+    options:
+      query:
+        base-path: /jaeger
+agent:
+  podAnnotations:
+    "consul.hashicorp.com/connect-inject": "true"
+    "consul.hashicorp.com/transparent-proxy": "true"
+query:
+  podAnnotations:
+    "consul.hashicorp.com/connect-inject": "true"
+    "consul.hashicorp.com/transparent-proxy": "true"

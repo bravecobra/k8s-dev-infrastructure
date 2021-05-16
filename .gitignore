@@ -79,3 +79,4 @@ $RECYCLE.BIN/
 *.crt
 *.key
 *.p12
+certs.yaml

@@ -1,0 +1,913 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jaeger-dashboard
+  namespace: infrastructure
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    k8s-sidecar-target-directory: /tmp/dashboards/Infrastructure
+data:
+  jaeger-dashboard.json: "{\r\n    \"annotations\": {\r\n      \"list\": [\r\n        {\r\n
+    \         \"builtIn\": 1,\r\n          \"datasource\": \"-- Grafana --\",\r\n
+    \         \"enable\": true,\r\n          \"hide\": true,\r\n          \"iconColor\":
+    \"rgba(0, 211, 255, 1)\",\r\n          \"name\": \"Annotations & Alerts\",\r\n
+    \         \"type\": \"dashboard\"\r\n        }\r\n      ]\r\n    },\r\n    \"description\":
+    \"Dashboard for monitoring jaeger running in a k8s environment. Works with 1.9+.
+    Feedbacks? Please send to luong.vo@employmenthero.com\",\r\n    \"editable\":
+    false,\r\n    \"gnetId\": 10001,\r\n    \"graphTooltip\": 0,\r\n    \"id\": 30,\r\n
+    \   \"links\": [],\r\n    \"panels\": [\r\n      {\r\n        \"collapsed\": false,\r\n
+    \       \"datasource\": null,\r\n        \"gridPos\": {\r\n          \"h\": 1,\r\n
+    \         \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\": 0\r\n        },\r\n
+    \       \"id\": 32,\r\n        \"panels\": [],\r\n        \"title\": \"Jaeger Dashboard
+    Collector\",\r\n        \"type\": \"row\"\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": \"Prometheus\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {},\r\n          \"overrides\": []\r\n        },\r\n
+    \       \"fill\": 1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n
+    \         \"h\": 7,\r\n          \"w\": 8,\r\n          \"x\": 0,\r\n          \"y\":
+    1\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 34,\r\n
+    \       \"legend\": {\r\n          \"avg\": false,\r\n          \"current\": false,\r\n
+    \         \"max\": false,\r\n          \"min\": false,\r\n          \"show\":
+    true,\r\n          \"total\": false,\r\n          \"values\": false\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"paceLength\": 10,\r\n        \"percentage\": false,\r\n
+    \       \"pluginVersion\": \"7.5.3\",\r\n        \"pointradius\": 5,\r\n        \"points\":
+    false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\": [],\r\n
+    \       \"spaceLength\": 10,\r\n        \"stack\": false,\r\n        \"steppedLine\":
+    false,\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_collector_spans_received_total[5m]))\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"hide\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"\",\r\n            \"refId\": \"A\"\r\n
+    \         }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"Spans Received/sec\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n
+    \         \"sort\": 0,\r\n          \"value_type\": \"individual\"\r\n        },\r\n
+    \       \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"buckets\":
+    null,\r\n          \"mode\": \"time\",\r\n          \"name\": null,\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": null,\r\n            \"logBase\":
+    1,\r\n            \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 7,\r\n          \"w\": 8,\r\n
+    \         \"x\": 8,\r\n          \"y\": 1\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 36,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"jaeger_collector_in_queue_latency_sum
+    / jaeger_collector_in_queue_latency_count\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"hide\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"Average in-queue latency (sec)\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n          \"name\":
+    null,\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"label\": null,\r\n
+    \           \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false,\r\n          \"alignLevel\": null\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 7,\r\n          \"w\": 8,\r\n
+    \         \"x\": 16,\r\n          \"y\": 1\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 42,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"jaeger_collector_batch_size\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"\",\r\n            \"refId\": \"A\"\r\n          }\r\n
+    \       ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\":
+    [],\r\n        \"timeShift\": null,\r\n        \"title\": \"Batch Size (spans)\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 7,\r\n          \"w\": 8,\r\n
+    \         \"x\": 0,\r\n          \"y\": 8\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 38,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"jaeger_collector_queue_length\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"hide\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"\",\r\n            \"refId\": \"A\"\r\n
+    \         }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"Queue Length (Spans)\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n
+    \         \"sort\": 0,\r\n          \"value_type\": \"individual\"\r\n        },\r\n
+    \       \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"buckets\":
+    null,\r\n          \"mode\": \"time\",\r\n          \"name\": null,\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": null,\r\n            \"logBase\":
+    1,\r\n            \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 7,\r\n          \"w\": 8,\r\n
+    \         \"x\": 8,\r\n          \"y\": 8\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 40,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"rate(jaeger_collector_spans_dropped_total[5m])\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"\",\r\n            \"refId\": \"A\"\r\n          }\r\n
+    \       ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\":
+    [],\r\n        \"timeShift\": null,\r\n        \"title\": \"Spans Dropped/sec\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 7,\r\n          \"w\": 8,\r\n
+    \         \"x\": 16,\r\n          \"y\": 8\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 44,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"jaeger_collector_save_latency_sum
+    / jaeger_collector_save_latency_count\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"intervalFactor\": 1,\r\n            \"legendFormat\": \"\",\r\n
+    \           \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"Span save latency (sec)\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n          \"name\":
+    null,\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"label\": null,\r\n
+    \           \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false,\r\n          \"alignLevel\": null\r\n        }\r\n
+    \     },\r\n      {\r\n        \"collapsed\": false,\r\n        \"datasource\":
+    null,\r\n        \"gridPos\": {\r\n          \"h\": 1,\r\n          \"w\": 24,\r\n
+    \         \"x\": 0,\r\n          \"y\": 15\r\n        },\r\n        \"id\": 30,\r\n
+    \       \"panels\": [],\r\n        \"repeat\": null,\r\n        \"title\": \"Jaeger
+    Agent\",\r\n        \"type\": \"row\"\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": \"Prometheus\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {},\r\n          \"overrides\": []\r\n        },\r\n
+    \       \"fill\": 1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n
+    \         \"h\": 6,\r\n          \"w\": 8,\r\n          \"x\": 0,\r\n          \"y\":
+    16\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 8,\r\n
+    \       \"legend\": {\r\n          \"avg\": false,\r\n          \"current\": false,\r\n
+    \         \"max\": false,\r\n          \"min\": false,\r\n          \"show\":
+    true,\r\n          \"total\": false,\r\n          \"values\": false\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"paceLength\": 10,\r\n        \"percentage\": false,\r\n
+    \       \"pluginVersion\": \"7.5.3\",\r\n        \"pointradius\": 5,\r\n        \"points\":
+    false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\": [],\r\n
+    \       \"spaceLength\": 10,\r\n        \"stack\": false,\r\n        \"steppedLine\":
+    false,\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_agent_thrift_udp_server_packets_processed_total[5m]))
+    by (protocol)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"jaeger_agent_thrift_udp_server_packets_processed/sec\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 8,\r\n          \"y\": 16\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 20,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"avg(jaeger_agent_thrift_udp_server_packet_size)
+    by (protocol)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"avg(jaeger_agent_thrift_udp_server_packet_size)\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 16,\r\n          \"y\": 16\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 24,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"avg(jaeger_agent_thrift_udp_server_queue_size)
+    by (protocol)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"jaeger_agent_thrift_udp_server_queue_size\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 0,\r\n          \"y\": 22\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 26,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_agent_thrift_udp_server_read_errors_total[5m]))
+    by (protocol)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"jaeger_agent_thrift_udp_server_read_errors/sec\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 8,\r\n          \"y\": 22\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 22,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_agent_thrift_udp_server_packets_dropped_total[5m]))
+    by (protocol)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"jaeger_agent_thrift_udp_server_packets_dropped/sec\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 16,\r\n          \"y\": 22\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 28,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_agent_thrift_udp_t_processor_handler_errors_total[5m]))
+    by (protocol)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"jaeger_agent_thrift_udp_t_processor_handler_errors/sec\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 0,\r\n          \"y\": 28\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 6,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_agent_reporter_batches_submitted_total[5m]))
+    by (format)\",\r\n            \"format\": \"time_series\",\r\n            \"hide\":
+    false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"jaeger_agent_tchannel_reporter_batches_submitted/sec\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 8,\r\n          \"y\": 28\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 16,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_agent_reporter_spans_submitted_total[5m]))
+    by (format)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"jaeger_agent_tchannel_reporter_spans_submitted/sec\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 16,\r\n          \"y\": 28\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 12,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"avg(jaeger_agent_reporter_batch_size)
+    by (format)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"avg(jaeger_agent_tchannel_reporter_batch_size)\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 0,\r\n          \"y\": 34\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 4,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_agent_http_server_requests_total[5m]))
+    by (type)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"\",\r\n            \"refId\": \"A\"\r\n
+    \         }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"jaeger_agent_http_server_requests/sec\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 0,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"buckets\":
+    null,\r\n          \"mode\": \"time\",\r\n          \"name\": null,\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": null,\r\n            \"logBase\":
+    1,\r\n            \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 8,\r\n          \"y\": 34\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 14,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_agent_reporter_batches_failures_total[5m]))
+    by (format)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"jaeger_agent_tchannel_reporter_batches_failures/sec\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 16,\r\n          \"y\": 34\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 18,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_agent_reporter_spans_failures_total[5m]))
+    by (format)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"jaeger_agent_tchannel_reporter_spans_failures/sec\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 8,\r\n
+    \         \"x\": 0,\r\n          \"y\": 40\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 2,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_agent_http_server_errors_total[5m]))
+    by (source, status)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{source}}.{{status}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"jaeger_agent_http_server_errors/sec\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 0,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"buckets\":
+    null,\r\n          \"mode\": \"time\",\r\n          \"name\": null,\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": null,\r\n            \"logBase\":
+    1,\r\n            \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 16,\r\n
+    \         \"x\": 8,\r\n          \"y\": 40\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 10,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(jaeger_agent_collector_proxy_total)
+    by (endpoint,protocol,result)\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"intervalFactor\": 1,\r\n            \"refId\": \"A\"\r\n          }\r\n
+    \       ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\":
+    [],\r\n        \"timeShift\": null,\r\n        \"title\": \"total(jaeger_agent_collector_proxy)\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"collapsed\": false,\r\n
+    \       \"datasource\": null,\r\n        \"gridPos\": {\r\n          \"h\": 1,\r\n
+    \         \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\": 46\r\n        },\r\n
+    \       \"id\": 46,\r\n        \"panels\": [],\r\n        \"title\": \"Jaeger
+    Query\",\r\n        \"type\": \"row\"\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": \"Prometheus\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {},\r\n          \"overrides\": []\r\n        },\r\n
+    \       \"fill\": 1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n
+    \         \"h\": 7,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    47\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 48,\r\n
+    \       \"legend\": {\r\n          \"avg\": false,\r\n          \"current\": false,\r\n
+    \         \"hideEmpty\": true,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"(jaeger_rpc_request_latency_sum /
+    jaeger_rpc_request_latency_count)*1000\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"intervalFactor\": 1,\r\n            \"legendFormat\": \"\",\r\n
+    \           \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"Average request latency (milliseconds)\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n          \"name\":
+    null,\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"label\": null,\r\n
+    \           \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false,\r\n          \"alignLevel\": null\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 7,\r\n          \"w\": 8,\r\n
+    \         \"x\": 0,\r\n          \"y\": 54\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 50,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"hide\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"All requests (/min)\",\r\n            \"refId\":
+    \"A\"\r\n          },\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{status_code=~\\\"2xx\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"2xx Requests (/min)\",\r\n            \"refId\":
+    \"B\"\r\n          },\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{status_code!=\\\"2xx\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"Non-2xx Requests (/min)\",\r\n            \"refId\":
+    \"C\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"Requests/min (All requests)\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 0,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"buckets\":
+    null,\r\n          \"mode\": \"time\",\r\n          \"name\": null,\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": null,\r\n            \"logBase\":
+    1,\r\n            \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 7,\r\n          \"w\": 8,\r\n
+    \         \"x\": 8,\r\n          \"y\": 54\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 52,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/traces\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"All requests (/min)\",\r\n            \"refId\":
+    \"A\"\r\n          },\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/traces\\\",status_code=~\\\"2xx\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"2xx Requests (/min)\",\r\n            \"refId\":
+    \"B\"\r\n          },\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/traces\\\",status_code!=\\\"2xx\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"Non-2xx Requests (/min)\",\r\n            \"refId\":
+    \"C\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"Requests/min (endpoint=\\\"/api/traces\\\")\",\r\n        \"tooltip\": {\r\n
+    \         \"shared\": true,\r\n          \"sort\": 0,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n          \"name\":
+    null,\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"label\": null,\r\n
+    \           \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false,\r\n          \"alignLevel\": null\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 7,\r\n          \"w\": 8,\r\n
+    \         \"x\": 16,\r\n          \"y\": 54\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 54,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/traces/-traceID-\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"All requests (/min)\",\r\n            \"refId\":
+    \"A\"\r\n          },\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/traces/-traceID-\\\",status_code=~\\\"2xx\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"2xx Requests (/min)\",\r\n            \"refId\":
+    \"B\"\r\n          },\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/traces/-traceID-\\\",status_code!=\\\"2xx\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"Non-2xx Requests (/min)\",\r\n            \"refId\":
+    \"C\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"Requests/min (endpoint=\\\"/api/traces/-traceID-\\\")\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n          \"name\":
+    null,\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"label\": null,\r\n
+    \           \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false,\r\n          \"alignLevel\": null\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 8,\r\n          \"w\": 12,\r\n
+    \         \"x\": 0,\r\n          \"y\": 61\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 56,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/services/-service-/operations\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"All requests (/min)\",\r\n            \"refId\":
+    \"A\"\r\n          },\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/services/-service-/operations\\\",status_code=~\\\"2xx\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"2xx Requests (/min)\",\r\n            \"refId\":
+    \"B\"\r\n          },\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/services/-service-/operations\\\",status_code!=\\\"2xx\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"Non-2xx Requests (/min)\",\r\n            \"refId\":
+    \"C\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"Requests/min (endpoint=\\\"/api/services/-service-/operations\\\")\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n          \"name\":
+    null,\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"label\": null,\r\n
+    \           \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false,\r\n          \"alignLevel\": null\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 8,\r\n          \"w\": 12,\r\n
+    \         \"x\": 12,\r\n          \"y\": 61\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 58,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/services\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"All requests (/min)\",\r\n            \"refId\":
+    \"A\"\r\n          },\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/services\\\",status_code=~\\\"2xx\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"2xx Requests (/min)\",\r\n            \"refId\":
+    \"B\"\r\n          },\r\n          {\r\n            \"expr\": \"sum(rate(jaeger_rpc_http_requests_total{endpoint=~\\\"/api/services\\\",status_code!=\\\"2xx\\\"}[5m]))*60\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 1,\r\n
+    \           \"legendFormat\": \"Non-2xx Requests (/min)\",\r\n            \"refId\":
+    \"C\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"Requests/min (endpoint=\\\"/api/services\\\")\",\r\n        \"tooltip\": {\r\n
+    \         \"shared\": true,\r\n          \"sort\": 0,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n          \"name\":
+    null,\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"label\": null,\r\n
+    \           \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false,\r\n          \"alignLevel\": null\r\n        }\r\n
+    \     }\r\n    ],\r\n    \"refresh\": false,\r\n    \"schemaVersion\": 27,\r\n
+    \   \"style\": \"dark\",\r\n    \"tags\": [\r\n      \"jaeger\"\r\n    ],\r\n
+    \   \"templating\": {\r\n      \"list\": []\r\n    },\r\n    \"time\": {\r\n      \"from\":
+    \"now-15m\",\r\n      \"to\": \"now\"\r\n    },\r\n    \"timepicker\": {\r\n      \"refresh_intervals\":
+    [\r\n        \"5s\",\r\n        \"10s\",\r\n        \"30s\",\r\n        \"1m\",\r\n
+    \       \"5m\",\r\n        \"15m\",\r\n        \"30m\",\r\n        \"1h\",\r\n
+    \       \"2h\",\r\n        \"1d\"\r\n      ],\r\n      \"time_options\": [\r\n
+    \       \"5m\",\r\n        \"15m\",\r\n        \"1h\",\r\n        \"6h\",\r\n
+    \       \"12h\",\r\n        \"24h\",\r\n        \"2d\",\r\n        \"7d\",\r\n
+    \       \"30d\"\r\n      ]\r\n    },\r\n    \"timezone\": \"\",\r\n    \"title\":
+    \"Jaeger Dashboard\",\r\n    \"uid\": \"zLOi95xmk\",\r\n    \"version\": 2\r\n  }"
+

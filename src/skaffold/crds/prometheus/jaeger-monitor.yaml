@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: jaeger
+  namespace: infrastructure
+  labels:
+    app: jaeger
+    release: prometheus
+spec:
+  jobLabel: jaeger-metrics
+  selector:
+    matchLabels:
+      app: jaeger
+  namespaceSelector:
+    matchNames:
+    - infrastructure
+  endpoints:
+  - port: admin-http

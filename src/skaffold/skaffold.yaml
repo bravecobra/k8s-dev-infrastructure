@@ -1,0 +1,71 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: devinfra
+build:
+profiles:
+- name: minikube
+  activation:
+    - kubeContext: minikube
+- name: docker-desktop
+  activation:
+    - kubeContext: docker-desktop
+- name: kind
+  activation:
+    - kubeContext: kind-devinfra
+      command: dev
+deploy:
+  kubectl:
+    manifests:
+    - 'crds/certs/*.yaml'
+    - 'crds/traefik/routes/*.yaml'
+    - 'crds/traefik/*.yaml'
+    - 'crds/jaeger/*.yaml'
+    - 'crds/prometheus/*.yaml'
+    - 'crds/loki/*.yaml'
+  helm:
+    releases:
+    - name: consul
+      # repo: https://helm.releases.hashicorp.com
+      remoteChart: hashicorp/consul
+      namespace: infrastructure
+      wait: true
+      # createNamespace: true
+      valuesFiles:
+      - consul/consul-values.yaml
+
+    - name: traefik
+      # repo: https://helm.traefik.io/traefik
+      remoteChart: traefik/traefik
+      skipBuildDependencies: true
+      valuesFiles:
+      - traefik/traefik-values.yaml
+
+    - name: prometheus
+      # repo: https://prometheus-community.github.io/helm-charts
+      remoteChart: prometheus-community/kube-prometheus-stack
+      namespace: prometheus
+      createNamespace: true
+      valuesFiles:
+      - prometheus/prometheus-values.yaml
+
+    - name: loki
+      # repo: https://grafana.github.io/helm-charts
+      remoteChart: grafana/loki
+      namespace: infrastructure
+      valuesFiles:
+      - loki/loki-values.yaml
+
+    - name: promtail
+      # repo: https://grafana.github.io/helm-charts
+      remoteChart: grafana/promtail
+      namespace: infrastructure
+      valuesFiles:
+      - loki/promtail-values.yaml
+
+    - name: jaeger-operator
+      # repo: https://jaegertracing.github.io/helm-charts
+      remoteChart: jaegertracing/jaeger-operator
+      namespace: infrastructure
+      valuesFiles:
+      - jaeger/jaeger-values.yaml

@@ -1,0 +1,483 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-dashboard
+  namespace: default
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    k8s-sidecar-target-directory: /tmp/dashboards/Infrastructure
+data:
+  traefik-dashboard.json: "{\r\n    \"annotations\": {\r\n      \"list\": [\r\n        {\r\n
+    \         \"builtIn\": 1,\r\n          \"datasource\": \"-- Grafana --\",\r\n
+    \         \"enable\": true,\r\n          \"hide\": true,\r\n          \"iconColor\":
+    \"rgba(0, 211, 255, 1)\",\r\n          \"name\": \"Annotations & Alerts\",\r\n
+    \         \"type\": \"dashboard\"\r\n        }\r\n      ]\r\n    },\r\n    \"description\":
+    \"Simple dashboard for Traefik 2\",\r\n    \"editable\": true,\r\n    \"gnetId\":
+    11462,\r\n    \"graphTooltip\": 0,\r\n    \"id\": 43,\r\n    \"iteration\": 1619877456583,\r\n
+    \   \"links\": [],\r\n    \"panels\": [\r\n      {\r\n        \"cacheTimeout\":
+    null,\r\n        \"colorBackground\": false,\r\n        \"colorValue\": false,\r\n
+    \       \"colors\": [\r\n          \"#299c46\",\r\n          \"rgba(237, 129,
+    40, 0.89)\",\r\n          \"#d44a3a\"\r\n        ],\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"format\": \"s\",\r\n        \"gauge\":
+    {\r\n          \"maxValue\": 100,\r\n          \"minValue\": 0,\r\n          \"show\":
+    false,\r\n          \"thresholdLabels\": false,\r\n          \"thresholdMarkers\":
+    true\r\n        },\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\":
+    3,\r\n          \"x\": 0,\r\n          \"y\": 0\r\n        },\r\n        \"id\":
+    22,\r\n        \"interval\": null,\r\n        \"links\": [],\r\n        \"mappingType\":
+    1,\r\n        \"mappingTypes\": [\r\n          {\r\n            \"name\": \"value
+    to text\",\r\n            \"value\": 1\r\n          },\r\n          {\r\n            \"name\":
+    \"range to text\",\r\n            \"value\": 2\r\n          }\r\n        ],\r\n
+    \       \"maxDataPoints\": 100,\r\n        \"nullPointMode\": \"connected\",\r\n
+    \       \"nullText\": null,\r\n        \"postfix\": \"\",\r\n        \"postfixFontSize\":
+    \"50%\",\r\n        \"prefix\": \"\",\r\n        \"prefixFontSize\": \"50%\",\r\n
+    \       \"rangeMaps\": [\r\n          {\r\n            \"from\": \"null\",\r\n
+    \           \"text\": \"N/A\",\r\n            \"to\": \"null\"\r\n          }\r\n
+    \       ],\r\n        \"sparkline\": {\r\n          \"fillColor\": \"rgba(31,
+    118, 189, 0.18)\",\r\n          \"full\": false,\r\n          \"lineColor\": \"rgb(31,
+    120, 193)\",\r\n          \"show\": false\r\n        },\r\n        \"tableColumn\":
+    \"\",\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"time()
+    - process_start_time_seconds{job=\\\"$job\\\"}\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"intervalFactor\": 2,\r\n            \"refId\": \"A\"\r\n          }\r\n
+    \       ],\r\n        \"thresholds\": \"\",\r\n        \"title\": \"Uptime\",\r\n
+    \       \"type\": \"singlestat\",\r\n        \"valueFontSize\": \"80%\",\r\n        \"valueMaps\":
+    [\r\n          {\r\n            \"op\": \"=\",\r\n            \"text\": \"N/A\",\r\n
+    \           \"value\": \"null\"\r\n          }\r\n        ],\r\n        \"valueName\":
+    \"current\"\r\n      },\r\n      {\r\n        \"cacheTimeout\": null,\r\n        \"colorBackground\":
+    false,\r\n        \"colorValue\": true,\r\n        \"colors\": [\r\n          \"#37872D\",\r\n
+    \         \"#37872D\",\r\n          \"#C4162A\"\r\n        ],\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"decimals\": 0,\r\n        \"fieldConfig\": {\r\n
+    \         \"defaults\": {},\r\n          \"overrides\": []\r\n        },\r\n        \"format\":
+    \"none\",\r\n        \"gauge\": {\r\n          \"maxValue\": 100,\r\n          \"minValue\":
+    0,\r\n          \"show\": false,\r\n          \"thresholdLabels\": false,\r\n
+    \         \"thresholdMarkers\": true\r\n        },\r\n        \"gridPos\": {\r\n
+    \         \"h\": 6,\r\n          \"w\": 3,\r\n          \"x\": 3,\r\n          \"y\":
+    0\r\n        },\r\n        \"id\": 26,\r\n        \"interval\": null,\r\n        \"links\":
+    [],\r\n        \"mappingType\": 1,\r\n        \"mappingTypes\": [\r\n          {\r\n
+    \           \"name\": \"value to text\",\r\n            \"value\": 1\r\n          },\r\n
+    \         {\r\n            \"name\": \"range to text\",\r\n            \"value\":
+    2\r\n          }\r\n        ],\r\n        \"maxDataPoints\": 100,\r\n        \"nullPointMode\":
+    \"connected\",\r\n        \"nullText\": null,\r\n        \"postfix\": \"\",\r\n
+    \       \"postfixFontSize\": \"50%\",\r\n        \"prefix\": \"\",\r\n        \"prefixFontSize\":
+    \"200%\",\r\n        \"rangeMaps\": [\r\n          {\r\n            \"from\":
+    \"null\",\r\n            \"text\": \"N/A\",\r\n            \"to\": \"null\"\r\n
+    \         }\r\n        ],\r\n        \"sparkline\": {\r\n          \"fillColor\":
+    \"rgba(31, 118, 189, 0.18)\",\r\n          \"full\": false,\r\n          \"lineColor\":
+    \"rgb(31, 120, 193)\",\r\n          \"show\": false\r\n        },\r\n        \"tableColumn\":
+    \"\",\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(increase(traefik_service_requests_total{code=\\\"404\\\",protocol=~\\\"$protocol\\\"}[$interval]))\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 2,\r\n
+    \           \"legendFormat\": \"\",\r\n            \"metric\": \"traefik_requests_total\",\r\n
+    \           \"refId\": \"A\",\r\n            \"step\": 60\r\n          }\r\n        ],\r\n
+    \       \"thresholds\": \"0,1\",\r\n        \"title\": \"404 Error Count\",\r\n
+    \       \"type\": \"singlestat\",\r\n        \"valueFontSize\": \"200%\",\r\n
+    \       \"valueMaps\": [\r\n          {\r\n            \"op\": \"=\",\r\n            \"text\":
+    \"N/A\",\r\n            \"value\": \"null\"\r\n          }\r\n        ],\r\n        \"valueName\":
+    \"max\"\r\n      },\r\n      {\r\n        \"cacheTimeout\": null,\r\n        \"colorBackground\":
+    false,\r\n        \"colorValue\": true,\r\n        \"colors\": [\r\n          \"#37872D\",\r\n
+    \         \"#C4162A\",\r\n          \"#C4162A\"\r\n        ],\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"decimals\": 0,\r\n        \"fieldConfig\": {\r\n
+    \         \"defaults\": {},\r\n          \"overrides\": []\r\n        },\r\n        \"format\":
+    \"none\",\r\n        \"gauge\": {\r\n          \"maxValue\": 100,\r\n          \"minValue\":
+    0,\r\n          \"show\": false,\r\n          \"thresholdLabels\": false,\r\n
+    \         \"thresholdMarkers\": true\r\n        },\r\n        \"gridPos\": {\r\n
+    \         \"h\": 6,\r\n          \"w\": 3,\r\n          \"x\": 6,\r\n          \"y\":
+    0\r\n        },\r\n        \"id\": 32,\r\n        \"interval\": null,\r\n        \"links\":
+    [],\r\n        \"mappingType\": 1,\r\n        \"mappingTypes\": [\r\n          {\r\n
+    \           \"name\": \"value to text\",\r\n            \"value\": 1\r\n          },\r\n
+    \         {\r\n            \"name\": \"range to text\",\r\n            \"value\":
+    2\r\n          }\r\n        ],\r\n        \"maxDataPoints\": 100,\r\n        \"nullPointMode\":
+    \"connected\",\r\n        \"nullText\": null,\r\n        \"postfix\": \"\",\r\n
+    \       \"postfixFontSize\": \"50%\",\r\n        \"prefix\": \"\",\r\n        \"prefixFontSize\":
+    \"200%\",\r\n        \"rangeMaps\": [\r\n          {\r\n            \"from\":
+    \"null\",\r\n            \"text\": \"N/A\",\r\n            \"to\": \"null\"\r\n
+    \         }\r\n        ],\r\n        \"sparkline\": {\r\n          \"fillColor\":
+    \"rgba(31, 118, 189, 0.18)\",\r\n          \"full\": false,\r\n          \"lineColor\":
+    \"rgb(31, 120, 193)\",\r\n          \"show\": false,\r\n          \"ymax\": null,\r\n
+    \         \"ymin\": null\r\n        },\r\n        \"tableColumn\": \"\",\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(increase(traefik_service_requests_total{code=\\\"503\\\",protocol=~\\\"$protocol\\\"}[$interval]))\",\r\n
+    \           \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    \"0,1\",\r\n        \"timeFrom\": null,\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"503 Error count\",\r\n        \"type\": \"singlestat\",\r\n        \"valueFontSize\":
+    \"200%\",\r\n        \"valueMaps\": [\r\n          {\r\n            \"op\": \"=\",\r\n
+    \           \"text\": \"N/A\",\r\n            \"value\": \"null\"\r\n          }\r\n
+    \       ],\r\n        \"valueName\": \"max\"\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"breakPoint\": \"50%\",\r\n        \"cacheTimeout\": null,\r\n
+    \       \"combine\": {\r\n          \"label\": \"Others\",\r\n          \"threshold\":
+    0\r\n        },\r\n        \"datasource\": \"Prometheus\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {},\r\n          \"overrides\": []\r\n        },\r\n
+    \       \"fontSize\": \"80%\",\r\n        \"format\": \"short\",\r\n        \"gridPos\":
+    {\r\n          \"h\": 6,\r\n          \"w\": 4,\r\n          \"x\": 9,\r\n          \"y\":
+    0\r\n        },\r\n        \"id\": 18,\r\n        \"interval\": null,\r\n        \"legend\":
+    {\r\n          \"percentage\": true,\r\n          \"show\": true,\r\n          \"sort\":
+    null,\r\n          \"sortDesc\": null,\r\n          \"values\": true\r\n        },\r\n
+    \       \"legendType\": \"Right side\",\r\n        \"links\": [],\r\n        \"maxDataPoints\":
+    3,\r\n        \"nullPointMode\": \"connected\",\r\n        \"pieType\": \"pie\",\r\n
+    \       \"strokeWidth\": 1,\r\n        \"targets\": [\r\n          {\r\n            \"expr\":
+    \"topk(5, sum(traefik_service_requests_total{protocol=~\\\"$protocol\\\"}) by
+    (code))\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    2,\r\n            \"legendFormat\": \"{{code}}\",\r\n            \"refId\": \"A\"\r\n
+    \         }\r\n        ],\r\n        \"title\": \"Top 5 $protocol return code\",\r\n
+    \       \"type\": \"grafana-piechart-panel\",\r\n        \"valueName\": \"current\"\r\n
+    \     },\r\n      {\r\n        \"cacheTimeout\": null,\r\n        \"colorBackground\":
+    false,\r\n        \"colorValue\": false,\r\n        \"colors\": [\r\n          \"#299c46\",\r\n
+    \         \"rgba(237, 129, 40, 0.89)\",\r\n          \"#d44a3a\"\r\n        ],\r\n
+    \       \"datasource\": \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\":
+    {},\r\n          \"overrides\": []\r\n        },\r\n        \"format\": \"ms\",\r\n
+    \       \"gauge\": {\r\n          \"maxValue\": 100,\r\n          \"minValue\":
+    0,\r\n          \"show\": false,\r\n          \"thresholdLabels\": false,\r\n
+    \         \"thresholdMarkers\": true\r\n        },\r\n        \"gridPos\": {\r\n
+    \         \"h\": 6,\r\n          \"w\": 4,\r\n          \"x\": 13,\r\n          \"y\":
+    0\r\n        },\r\n        \"id\": 20,\r\n        \"interval\": null,\r\n        \"links\":
+    [],\r\n        \"mappingType\": 1,\r\n        \"mappingTypes\": [\r\n          {\r\n
+    \           \"name\": \"value to text\",\r\n            \"value\": 1\r\n          },\r\n
+    \         {\r\n            \"name\": \"range to text\",\r\n            \"value\":
+    2\r\n          }\r\n        ],\r\n        \"maxDataPoints\": 100,\r\n        \"nullPointMode\":
+    \"connected\",\r\n        \"nullText\": null,\r\n        \"postfix\": \"\",\r\n
+    \       \"postfixFontSize\": \"50%\",\r\n        \"prefix\": \"\",\r\n        \"prefixFontSize\":
+    \"50%\",\r\n        \"rangeMaps\": [\r\n          {\r\n            \"from\": \"null\",\r\n
+    \           \"text\": \"N/A\",\r\n            \"to\": \"null\"\r\n          }\r\n
+    \       ],\r\n        \"sparkline\": {\r\n          \"fillColor\": \"rgba(31,
+    118, 189, 0.18)\",\r\n          \"full\": false,\r\n          \"lineColor\": \"rgb(31,
+    120, 193)\",\r\n          \"show\": true\r\n        },\r\n        \"tableColumn\":
+    \"\",\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(traefik_entrypoint_request_duration_seconds_sum)
+    / sum(traefik_entrypoint_requests_total) * 1000\",\r\n            \"format\":
+    \"time_series\",\r\n            \"intervalFactor\": 2,\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": \"\",\r\n        \"title\":
+    \"Average response time\",\r\n        \"type\": \"singlestat\",\r\n        \"valueFontSize\":
+    \"80%\",\r\n        \"valueMaps\": [\r\n          {\r\n            \"op\": \"=\",\r\n
+    \           \"text\": \"N/A\",\r\n            \"value\": \"null\"\r\n          }\r\n
+    \       ],\r\n        \"valueName\": \"avg\"\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": \"Prometheus\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 6,\r\n          \"w\": 7,\r\n
+    \         \"x\": 17,\r\n          \"y\": 0\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 14,\r\n        \"legend\": {\r\n          \"avg\": false,\r\n
+    \         \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"show\": true,\r\n          \"total\": false,\r\n          \"values\":
+    false\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n        \"pointradius\": 5,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [],\r\n        \"spaceLength\": 10,\r\n        \"stack\": false,\r\n        \"steppedLine\":
+    false,\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(traefik_service_request_duration_seconds_sum{protocol=~\\\"$protocol\\\"})
+    / sum(traefik_entrypoint_requests_total{protocol=~\\\"$protocol\\\"}) * 1000\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 2,\r\n
+    \           \"legendFormat\": \"Average response time (ms)\",\r\n            \"refId\":
+    \"A\",\r\n            \"step\": 240\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"Average response time\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n          \"name\":
+    null,\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"ms\",\r\n            \"label\":
+    null,\r\n            \"logBase\": 10,\r\n            \"max\": null,\r\n            \"min\":
+    \"0\",\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          }\r\n        ],\r\n        \"yaxis\": {\r\n          \"align\":
+    false,\r\n          \"alignLevel\": null\r\n        }\r\n      },\r\n      {\r\n
+    \       \"aliasColors\": {},\r\n        \"bars\": false,\r\n        \"dashLength\":
+    10,\r\n        \"dashes\": false,\r\n        \"datasource\": \"Prometheus\",\r\n
+    \       \"decimals\": 0,\r\n        \"fieldConfig\": {\r\n          \"defaults\":
+    {\r\n            \"links\": []\r\n          },\r\n          \"overrides\": []\r\n
+    \       },\r\n        \"fill\": 1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\":
+    {\r\n          \"h\": 6,\r\n          \"w\": 12,\r\n          \"x\": 0,\r\n          \"y\":
+    6\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 10,\r\n
+    \       \"legend\": {\r\n          \"alignAsTable\": true,\r\n          \"avg\":
+    false,\r\n          \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"rightSide\": true,\r\n          \"show\": true,\r\n          \"total\":
+    false,\r\n          \"values\": false\r\n        },\r\n        \"lines\": true,\r\n
+    \       \"linewidth\": 1,\r\n        \"links\": [],\r\n        \"nullPointMode\":
+    \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\": true\r\n
+    \       },\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(increase(traefik_service_requests_total{code=\\\"404\\\",method=\\\"GET\\\",protocol=~\\\"$protocol\\\"}[$interval]))
+    by (service)\",\r\n            \"format\": \"time_series\",\r\n            \"interval\":
+    \"\",\r\n            \"intervalFactor\": 2,\r\n            \"legendFormat\": \"{{service}}
+    \",\r\n            \"refId\": \"A\",\r\n            \"step\": 240\r\n          }\r\n
+    \       ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\":
+    [],\r\n        \"timeShift\": null,\r\n        \"title\": \"Bad Status Code Count\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": null,\r\n            \"logBase\":
+    1,\r\n            \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": false\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    true,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {\r\n
+    \           \"links\": []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n
+    \       \"fill\": 1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n
+    \         \"h\": 6,\r\n          \"w\": 12,\r\n          \"x\": 12,\r\n          \"y\":
+    6\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"hideTimeOverride\":
+    false,\r\n        \"id\": 4,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": true,\r\n          \"current\": false,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": true,\r\n          \"show\":
+    true,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": false,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"7.5.3\",\r\n        \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(traefik_service_requests_total[$interval]))\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"intervalFactor\": 2,\r\n
+    \           \"legendFormat\": \"Total requests\",\r\n            \"refId\": \"A\"\r\n
+    \         }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"Total requests\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n
+    \         \"sort\": 0,\r\n          \"value_type\": \"individual\"\r\n        },\r\n
+    \       \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"buckets\":
+    null,\r\n          \"mode\": \"time\",\r\n          \"name\": null,\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"decimals\": 0,\r\n            \"format\": \"short\",\r\n            \"label\":
+    null,\r\n            \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          }\r\n        ],\r\n        \"yaxis\": {\r\n          \"align\":
+    false,\r\n          \"alignLevel\": null\r\n        }\r\n      },\r\n      {\r\n
+    \       \"aliasColors\": {},\r\n        \"bars\": false,\r\n        \"dashLength\":
+    10,\r\n        \"dashes\": false,\r\n        \"datasource\": \"Prometheus\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    6,\r\n          \"w\": 10,\r\n          \"x\": 0,\r\n          \"y\": 12\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 8,\r\n        \"legend\":
+    {\r\n          \"avg\": false,\r\n          \"current\": false,\r\n          \"max\":
+    false,\r\n          \"min\": false,\r\n          \"show\": true,\r\n          \"total\":
+    false,\r\n          \"values\": false\r\n        },\r\n        \"lines\": true,\r\n
+    \       \"linewidth\": 1,\r\n        \"links\": [],\r\n        \"nullPointMode\":
+    \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\": true\r\n
+    \       },\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"process_open_fds{job=~\\\"$job\\\"}\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"interval\": \"\",\r\n
+    \           \"intervalFactor\": 2,\r\n            \"legendFormat\": \"{{ instance
+    }}\",\r\n            \"refId\": \"A\",\r\n            \"step\": 240\r\n          }\r\n
+    \       ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\":
+    [],\r\n        \"timeShift\": null,\r\n        \"title\": \"Used sockets\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"decimals\": 0,\r\n        \"fieldConfig\": {\r\n
+    \         \"defaults\": {\r\n            \"links\": []\r\n          },\r\n          \"overrides\":
+    []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\":
+    {\r\n          \"h\": 6,\r\n          \"w\": 14,\r\n          \"x\": 10,\r\n          \"y\":
+    12\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 24,\r\n
+    \       \"legend\": {\r\n          \"alignAsTable\": true,\r\n          \"avg\":
+    true,\r\n          \"current\": true,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"rightSide\": true,\r\n          \"show\": true,\r\n          \"total\":
+    true,\r\n          \"values\": true\r\n        },\r\n        \"lines\": true,\r\n
+    \       \"linewidth\": 1,\r\n        \"links\": [],\r\n        \"nullPointMode\":
+    \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\": true\r\n
+    \       },\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(traefik_service_requests_total{protocol=~\\\"http|https\\\"}[$interval]))
+    by (service)\",\r\n            \"format\": \"time_series\",\r\n            \"interval\":
+    \"\",\r\n            \"intervalFactor\": 2,\r\n            \"legendFormat\": \"{{service}}
+    \",\r\n            \"refId\": \"A\",\r\n            \"step\": 240\r\n          }\r\n
+    \       ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\":
+    [],\r\n        \"timeShift\": null,\r\n        \"title\": \"Access to services\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 0,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n
+    \         \"name\": null,\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": null,\r\n            \"logBase\":
+    1,\r\n            \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": false\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    \"Prometheus\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {\r\n
+    \           \"links\": []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n
+    \       \"fill\": 7,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n
+    \         \"h\": 7,\r\n          \"w\": 12,\r\n          \"x\": 0,\r\n          \"y\":
+    18\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 30,\r\n
+    \       \"legend\": {\r\n          \"alignAsTable\": true,\r\n          \"avg\":
+    true,\r\n          \"current\": true,\r\n          \"max\": true,\r\n          \"min\":
+    false,\r\n          \"rightSide\": true,\r\n          \"show\": true,\r\n          \"sort\":
+    \"avg\",\r\n          \"sortDesc\": true,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n        \"pointradius\": 5,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [],\r\n        \"spaceLength\": 10,\r\n        \"stack\": true,\r\n        \"steppedLine\":
+    false,\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(traefik_entrypoint_open_connections)
+    by (method)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{ method }}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"ENTRYPOINT - Open Connections\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 0,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"buckets\":
+    null,\r\n          \"mode\": \"time\",\r\n          \"name\": null,\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"decimals\": 0,\r\n            \"format\": \"short\",\r\n            \"label\":
+    null,\r\n            \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    false\r\n          }\r\n        ],\r\n        \"yaxis\": {\r\n          \"align\":
+    false,\r\n          \"alignLevel\": null\r\n        }\r\n      },\r\n      {\r\n
+    \       \"aliasColors\": {},\r\n        \"bars\": false,\r\n        \"dashLength\":
+    10,\r\n        \"dashes\": false,\r\n        \"datasource\": \"Prometheus\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    7,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    7,\r\n          \"w\": 12,\r\n          \"x\": 12,\r\n          \"y\": 18\r\n
+    \       },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 28,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": true,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": false,\r\n          \"rightSide\":
+    true,\r\n          \"show\": true,\r\n          \"sort\": \"avg\",\r\n          \"sortDesc\":
+    true,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"7.5.3\",\r\n        \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [],\r\n        \"spaceLength\": 10,\r\n
+    \       \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(traefik_service_open_connections)
+    by (method)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{ method }}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeFrom\":
+    null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\": null,\r\n        \"title\":
+    \"SERVICE - Open Connections\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 0,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"buckets\":
+    null,\r\n          \"mode\": \"time\",\r\n          \"name\": null,\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"decimals\": 0,\r\n            \"format\": \"short\",\r\n            \"label\":
+    null,\r\n            \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": null,\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    false\r\n          }\r\n        ],\r\n        \"yaxis\": {\r\n          \"align\":
+    false,\r\n          \"alignLevel\": null\r\n        }\r\n      },\r\n      {\r\n
+    \       \"aliasColors\": {},\r\n        \"bars\": false,\r\n        \"dashLength\":
+    10,\r\n        \"dashes\": false,\r\n        \"datasource\": \"Prometheus\",\r\n
+    \       \"decimals\": 0,\r\n        \"fieldConfig\": {\r\n          \"defaults\":
+    {\r\n            \"links\": []\r\n          },\r\n          \"overrides\": []\r\n
+    \       },\r\n        \"fill\": 1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\":
+    {\r\n          \"h\": 7,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    25\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 12,\r\n
+    \       \"legend\": {\r\n          \"alignAsTable\": true,\r\n          \"avg\":
+    false,\r\n          \"current\": false,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"rightSide\": true,\r\n          \"show\": true,\r\n          \"total\":
+    false,\r\n          \"values\": false\r\n        },\r\n        \"lines\": true,\r\n
+    \       \"linewidth\": 1,\r\n        \"links\": [],\r\n        \"nullPointMode\":
+    \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\": true\r\n
+    \       },\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.3\",\r\n
+    \       \"pointradius\": 5,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^[^234].*/\",\r\n            \"transform\": \"negative-Y\"\r\n          }\r\n
+    \       ],\r\n        \"spaceLength\": 10,\r\n        \"stack\": false,\r\n        \"steppedLine\":
+    false,\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(increase(traefik_service_requests_total{protocol=~\\\"$protocol\\\"}[$interval]))
+    by (code)\",\r\n            \"format\": \"time_series\",\r\n            \"intervalFactor\":
+    2,\r\n            \"legendFormat\": \"{{code}}\",\r\n            \"refId\": \"A\",\r\n
+    \           \"step\": 120\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"Status Code Count \",\r\n        \"tooltip\": {\r\n
+    \         \"shared\": true,\r\n          \"sort\": 0,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n          \"name\":
+    null,\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"decimals\": 0,\r\n            \"format\":
+    \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\": 1,\r\n
+    \           \"max\": null,\r\n            \"min\": \"0\",\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": false\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      }\r\n    ],\r\n    \"refresh\": false,\r\n    \"schemaVersion\":
+    27,\r\n    \"style\": \"dark\",\r\n    \"tags\": [\r\n      \"traefik\",\r\n      \"load-balancer\",\r\n
+    \     \"docker\",\r\n      \"prometheus\"\r\n    ],\r\n    \"templating\": {\r\n
+    \     \"list\": [\r\n        {\r\n          \"allValue\": null,\r\n          \"current\":
+    {\r\n            \"selected\": false,\r\n            \"text\": \"traefik-dashboard\",\r\n
+    \           \"value\": \"traefik-dashboard\"\r\n          },\r\n          \"datasource\":
+    \"Prometheus\",\r\n          \"definition\": \"\",\r\n          \"description\":
+    null,\r\n          \"error\": null,\r\n          \"hide\": 0,\r\n          \"includeAll\":
+    false,\r\n          \"label\": \"Job:\",\r\n          \"multi\": false,\r\n          \"name\":
+    \"job\",\r\n          \"options\": [],\r\n          \"query\": {\r\n            \"query\":
+    \"label_values(job)\",\r\n            \"refId\": \"Prometheus-job-Variable-Query\"\r\n
+    \         },\r\n          \"refresh\": 1,\r\n          \"regex\": \"\",\r\n          \"skipUrlSync\":
+    false,\r\n          \"sort\": 2,\r\n          \"tagValuesQuery\": \"\",\r\n          \"tags\":
+    [],\r\n          \"tagsQuery\": \"\",\r\n          \"type\": \"query\",\r\n          \"useTags\":
+    false\r\n        },\r\n        {\r\n          \"allValue\": null,\r\n          \"current\":
+    {\r\n            \"selected\": false,\r\n            \"text\": \"All\",\r\n            \"value\":
+    \"$__all\"\r\n          },\r\n          \"datasource\": \"Prometheus\",\r\n          \"definition\":
+    \"label_values(traefik_service_requests_total, protocol)\",\r\n          \"description\":
+    null,\r\n          \"error\": null,\r\n          \"hide\": 0,\r\n          \"includeAll\":
+    true,\r\n          \"label\": \"Service:\",\r\n          \"multi\": true,\r\n
+    \         \"name\": \"protocol\",\r\n          \"options\": [],\r\n          \"query\":
+    {\r\n            \"query\": \"label_values(traefik_service_requests_total, protocol)\",\r\n
+    \           \"refId\": \"Prometheus-protocol-Variable-Query\"\r\n          },\r\n
+    \         \"refresh\": 1,\r\n          \"regex\": \"\",\r\n          \"skipUrlSync\":
+    false,\r\n          \"sort\": 0,\r\n          \"tagValuesQuery\": \"\",\r\n          \"tags\":
+    [],\r\n          \"tagsQuery\": \"\",\r\n          \"type\": \"query\",\r\n          \"useTags\":
+    false\r\n        },\r\n        {\r\n          \"auto\": true,\r\n          \"auto_count\":
+    30,\r\n          \"auto_min\": \"10s\",\r\n          \"current\": {\r\n            \"selected\":
+    false,\r\n            \"text\": \"auto\",\r\n            \"value\": \"$__auto_interval_interval\"\r\n
+    \         },\r\n          \"description\": null,\r\n          \"error\": null,\r\n
+    \         \"hide\": 0,\r\n          \"label\": \"Interval\",\r\n          \"name\":
+    \"interval\",\r\n          \"options\": [\r\n            {\r\n              \"selected\":
+    true,\r\n              \"text\": \"auto\",\r\n              \"value\": \"$__auto_interval_interval\"\r\n
+    \           },\r\n            {\r\n              \"selected\": false,\r\n              \"text\":
+    \"1m\",\r\n              \"value\": \"1m\"\r\n            },\r\n            {\r\n
+    \             \"selected\": false,\r\n              \"text\": \"10m\",\r\n              \"value\":
+    \"10m\"\r\n            },\r\n            {\r\n              \"selected\": false,\r\n
+    \             \"text\": \"30m\",\r\n              \"value\": \"30m\"\r\n            },\r\n
+    \           {\r\n              \"selected\": false,\r\n              \"text\":
+    \"1h\",\r\n              \"value\": \"1h\"\r\n            },\r\n            {\r\n
+    \             \"selected\": false,\r\n              \"text\": \"6h\",\r\n              \"value\":
+    \"6h\"\r\n            },\r\n            {\r\n              \"selected\": false,\r\n
+    \             \"text\": \"12h\",\r\n              \"value\": \"12h\"\r\n            },\r\n
+    \           {\r\n              \"selected\": false,\r\n              \"text\":
+    \"1d\",\r\n              \"value\": \"1d\"\r\n            },\r\n            {\r\n
+    \             \"selected\": false,\r\n              \"text\": \"7d\",\r\n              \"value\":
+    \"7d\"\r\n            },\r\n            {\r\n              \"selected\": false,\r\n
+    \             \"text\": \"14d\",\r\n              \"value\": \"14d\"\r\n            },\r\n
+    \           {\r\n              \"selected\": false,\r\n              \"text\":
+    \"30d\",\r\n              \"value\": \"30d\"\r\n            }\r\n          ],\r\n
+    \         \"query\": \"1m,10m,30m,1h,6h,12h,1d,7d,14d,30d\",\r\n          \"refresh\":
+    2,\r\n          \"skipUrlSync\": false,\r\n          \"type\": \"interval\"\r\n
+    \       }\r\n      ]\r\n    },\r\n    \"time\": {\r\n      \"from\": \"now-3h\",\r\n
+    \     \"to\": \"now\"\r\n    },\r\n    \"timepicker\": {\r\n      \"refresh_intervals\":
+    [\r\n        \"5s\",\r\n        \"10s\",\r\n        \"30s\",\r\n        \"1m\",\r\n
+    \       \"5m\",\r\n        \"15m\",\r\n        \"30m\",\r\n        \"1h\",\r\n
+    \       \"2h\",\r\n        \"1d\"\r\n      ],\r\n      \"time_options\": [\r\n
+    \       \"5m\",\r\n        \"15m\",\r\n        \"1h\",\r\n        \"6h\",\r\n
+    \       \"12h\",\r\n        \"24h\",\r\n        \"2d\",\r\n        \"7d\",\r\n
+    \       \"30d\"\r\n      ]\r\n    },\r\n    \"timezone\": \"\",\r\n    \"title\":
+    \"Traefik 2\",\r\n    \"uid\": \"3ipsWfViz\",\r\n    \"version\": 2\r\n  }"
+

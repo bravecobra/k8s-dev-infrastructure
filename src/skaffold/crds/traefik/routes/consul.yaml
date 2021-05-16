@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: "consul-ingressroute"
+  namespace: infrastructure
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`consul.infrastructure.k8s.local`) && PathPrefix(`/`)
+      kind: Rule
+      namespace: infrastructure
+      services:
+      - name: consul-consul-ui
+        port: 443
+        path: /
+        passHostHeader: true
+        tls:
+          - secretName: traefik-cert

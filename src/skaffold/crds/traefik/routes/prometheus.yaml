@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: "prometheus-ingressroute"
+  namespace: prometheus
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`prometheus.infrastructure.k8s.local`) && PathPrefix(`/`)
+      kind: Rule
+      namespace: prometheus
+      services:
+      - name: prometheus-operated
+        port: 9090
+        path: /
+        passHostHeader: true
+        tls:
+          - secretName: traefik-cert
