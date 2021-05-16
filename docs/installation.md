@@ -20,14 +20,14 @@ We use self-signed certificates instead of LetsEncrypt as that would require eit
 To generate the certficates for `k8s.local` and `*.k8s.local`, use [mkcert](https://github.com/FiloSottile/mkcert) which you can install easily with `choco install mkcert`.
 
 ```powershell
-mkcert -cert-file src/skaffold/crds/certs/k8s.local.crt -key-file src/skaffold/crds/certs/k8s.local.key k8s.local *.k8s.local infrastructure.k8s.local *.infrastructure.k8s.local
-# mkcert -pkcs12 src/skaffold/crds/certs/k8s.local.pfx k8s.local *.k8s.local *.k8s.local infrastructure.k8s.local *.infrastructure.k8s.local
+mkcert -cert-file src/skaffold/traefik/crds/certs/k8s.local.crt -key-file src/skaffold/traefik/crds/certs/k8s.local.key k8s.local *.k8s.local infrastructure.k8s.local *.infrastructure.k8s.local
+# mkcert -pkcs12 src/skaffold/traefik/crds/certs/k8s.local.pfx k8s.local *.k8s.local *.k8s.local infrastructure.k8s.local *.infrastructure.k8s.local
 ```
 
 We then generate a kubernetes secret from the certificate
 
 ```powershell
-kubectl create secret tls traefik-cert --cert=./src/skaffold/crds/certs/k8s.local.crt --key=./src/skaffold/crds/certs/k8s.local.key --dry-run=client -o yaml > ./src/skaffold/crds/certs/certs.yaml
+kubectl create secret tls traefik-cert --cert=./src/skaffold/traefik/crds/certs/k8s.local.crt --key=./src/skaffold/traefik/crds/certs/k8s.local.key --dry-run=client -o yaml > ./src/skaffold/traefik/crds/certs/certs.yaml
 ```
 
 ## Adding helm repo's
@@ -88,18 +88,18 @@ Fetch the ip address of the Consul DNS
 kubectl get svc consul-consul-dns -o jsonpath='{.spec.clusterIP}' --namespace=infrastructure
 ```
 
-Update the values of the consul dns service in `.\infrastructure\coredns\coredns.yaml`
+Update the values of the consul dns service in `./src/skaffold/coredns/coredns.yaml`
 
 > Important: `coredns.yaml` is the syntax for CoreDNS 1.7.0, matching the tested. You can also fetch the current configmap and append the consul part as described in the [Consul Docs](https://www.consul.io/docs/k8s/dns).
 
 ```powershell
-kubectl apply -f .\infrastructure\coredns\coredns.yaml
+kubectl apply -f ./src/skaffold/coredns/coredns.yaml
 ```
 
 Test it out by running a job
 
 ```powershell
-kubectl apply -f .\infrastructure\coredns\test-dns-job.yaml --namespace=infrastructure
+kubectl apply -f ./src/skaffold/coredns/test-dns-job.yaml --namespace=infrastructure
 ```
 
 ## Generated credentials
