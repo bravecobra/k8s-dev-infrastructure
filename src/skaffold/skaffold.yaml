@@ -23,7 +23,7 @@ deploy:
     - 'jaeger/crds/*.yaml'
     - 'prometheus/crds/*.yaml'
     - 'loki/crds/*.yaml'
-    - 'coredns/crds/*.yaml'
+    - 'coredns/*.yaml'
   helm:
     releases:
     - name: consul
