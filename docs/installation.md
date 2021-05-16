@@ -1,8 +1,19 @@
 # Installation
 
-## Generating the traefik certificate secret
+## Local DNS
 
-### Using a self-signed certificate
+Since we running completely locally, we want to add some entries to the hosts file.
+Open `C:\Windows\system32\drivers\etc\hosts` in an editor as `Administrator` and add the following entries
+
+```text
+127.0.0.1 k8s.local infrastructure.k8s.local traefik.infrastructure.k8s.local
+127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local grafana.infrastructure.k8s.local
+127.0.0.1 seq.infrastructure.k8s.local
+127.0.0.1 consul.infrastructure.k8s.local vault.infrastructure.k8s.local
+#127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
+```
+
+## Generating the traefik certificate secret
 
 We use self-signed certificates instead of LetsEncrypt as that would require either a proper DNS or an accessible HTTP endpoint. Neither might be an option, so we'll go with the self-signed for now. We could extend it further later on.
 
@@ -13,7 +24,7 @@ mkcert -cert-file src/skaffold/crds/certs/k8s.local.crt -key-file src/skaffold/c
 # mkcert -pkcs12 src/skaffold/crds/certs/k8s.local.pfx k8s.local *.k8s.local *.k8s.local infrastructure.k8s.local *.infrastructure.k8s.local
 ```
 
-### Converting the certificate into a k8s secret
+We then generate a kubernetes secret from the certificate
 
 ```powershell
 kubectl create secret tls traefik-cert --cert=./src/skaffold/crds/certs/k8s.local.crt --key=./src/skaffold/crds/certs/k8s.local.key --dry-run=client -o yaml > ./src/skaffold/crds/certs/certs.yaml
@@ -107,3 +118,11 @@ kubectl get secrets/consul-consul-bootstrap-acl-token -n infrastructure --templa
 username: admin
 password: prom-operator
 ```
+
+## Endpoints
+
+- [Traefik](https://traefik.infrastructure.k8s.local/dashboard/)
+- [Consul](https://consul.infrastructure.k8s.local/)
+- [Prometheus](https://prometheus.infrastructure.k8s.local/)
+- [Grafana](https://grafana.infrastructure.k8s.local/)
+- [Jaeger](https://jaeger.infrastructure.k8s.local/)
