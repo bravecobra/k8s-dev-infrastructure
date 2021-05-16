@@ -36,14 +36,15 @@ helm repo update
 
 If running on KinD, we need to update the external IP for traefik to be able to reroute traffic
 
-To find out the ip that master node got
+To find out the ip that master node got during creation
 
 ```powershell
 > kubectl get nodes -o wide
 NAME                     STATUS   ROLES                  VERSION   INTERNAL-IP
-devinfra-control-plane   Ready    control-plane,master   v1.20.2   172.18.0.4
+devinfra-control-plane   Ready    control-plane,master   v1.20.2   172.18.0.5
 devinfra-worker          Ready    <none>                 v1.20.2   172.18.0.3
 devinfra-worker2         Ready    <none>                 v1.20.2   172.18.0.2
+devinfra-worker3         Ready    <none>                 v1.20.2   172.18.0.4
 ```
 
 and update the `externalIPs` entry in `src/skaffold/traefik/traefik-values.yaml`
@@ -51,7 +52,7 @@ and update the `externalIPs` entry in `src/skaffold/traefik/traefik-values.yaml`
 ```yaml
 service:
   externalIPs: [
-    172.18.0.4
+    172.18.0.5
   ]
 ```
 
