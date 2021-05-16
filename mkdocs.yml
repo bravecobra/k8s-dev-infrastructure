@@ -4,6 +4,7 @@ theme:
 nav:
     - Home: 'index.md'
     - Introduction: 'introduction.md'
+    - QuickStart: 'quickstart.md'
     - Installing:
       - Preparation:
         - CLI: './preparation/cli.md'

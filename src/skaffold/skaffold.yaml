@@ -17,13 +17,13 @@ profiles:
 deploy:
   kubectl:
     manifests:
-    - 'crds/certs/*.yaml'
-    - 'crds/traefik/routes/*.yaml'
-    - 'crds/traefik/*.yaml'
-    - 'crds/jaeger/*.yaml'
-    - 'crds/prometheus/*.yaml'
-    - 'crds/loki/*.yaml'
-    - 'crds/coredns/*.yaml'
+    - 'traefik/crds/certs/*.yaml'
+    - 'traefik/crds/routes/*.yaml'
+    - 'traefik/crds/*.yaml'
+    - 'jaeger/crds/*.yaml'
+    - 'prometheus/crds/*.yaml'
+    - 'loki/crds/*.yaml'
+    - 'coredns/*.yaml'
   helm:
     releases:
     - name: consul
