@@ -1,0 +1,69 @@
+# Choose an optional name for the datacenter
+global:
+  datacenter: datacenter1
+  tls:
+    enabled: true
+    verify: false
+  acls:
+    manageSystemACLs: true
+
+# Enable the Consul Web UI via a NodePort
+ui:
+  enabled: true
+  # service:
+  #   enabled: true
+  #   type: 'NodePort'
+
+# Enable Connect for secure communication between nodes
+connectInject:
+  enabled: true
+  aclBindingRuleSelector: ""  # https://github.com/hashicorp/consul-helm/issues/242
+# Enable CRD Controller
+controller:
+  enabled: true
+
+# ingressGateways:
+#   enabled: true
+#   defaults:
+#     replicas: 1 #default = 2, but they cannot be on the same node. there is only one node on docker-desktop
+#     affinitiy: null
+#     service:
+#       type: 'NodePort'
+#     ports:
+#         - port: 8080
+#           nodePort: null
+#         - port: 8443
+#           nodePort: null
+#   gateways:
+#     - name: ingress-gateway
+#       service:
+#         type: LoadBalancer
+
+# client:
+#   affinity: |
+#     nodeAffinity:
+#       requiredDuringSchedulingIgnoredDuringExecution:
+#         nodeSelectorTerms:
+#         - matchExpressions:
+#           - key: node-role.kubernetes.io/master
+#             operator: DoesNotExist
+
+# Use only one Consul server for local development
+server:
+  replicas: 1
+  bootstrapExpect: 1
+  disruptionBudget:
+    enabled: true
+    maxUnavailable: 0
+  updatePartition: 0
+  # extraConfig: |
+  #   {
+  #     "ui_config": {
+  #       "content_path": "/consul"
+  #     }
+  #   }
+
+# syncCatalog:
+#   enabled: true
+#   k8sAllowNamespaces: ['webshop']
+#   k8sDenyNamespaces: ['kube-system', 'kube-public']

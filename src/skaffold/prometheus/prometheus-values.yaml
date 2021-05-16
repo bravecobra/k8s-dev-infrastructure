@@ -1,0 +1,40 @@
+prometheus-node-exporter:
+    hostRootFsMount: false
+
+kubeApiServer:
+  enabled: true
+  tlsConfig:
+    serverName: kubernetes
+    insecureSkipVerify: true
+
+prometheus:
+  prometheusSpec:
+    podMetadata:
+      annotations:
+        "consul.hashicorp.com/connect-inject": 'true'
+        "consul.hashicorp.com/connect-service": "prometheus-kube-prometheus-prometheus"
+        "consul.hashicorp.com/transparent-proxy": "true"
+
+grafana:
+  defaultDashboardsEnabled: true
+  sidecar:
+    dashboards:
+      searchNamespace: ALL
+      enabled: true
+      label: grafana_dashboard
+      folder: /tmp/dashboards
+      provider:
+        foldersFromFilesStructure: true
+      annotations:
+        k8s-sidecar-target-directory: /tmp/dashboards/Infrastructure/Kubernetes
+  additionalDataSources:
+    - name: Loki
+      access: proxy
+      orgId: 1
+      type: loki
+      url: http://loki.infrastructure.svc.cluster.local:3100
+      version: 1
+  plugins:
+  - grafana-piechart-panel
+  - digrich-bubblechart-panel
+  - grafana-clock-panel

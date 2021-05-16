@@ -1,0 +1,11 @@
+config:
+  lokiAddress: http://loki.infrastructure.svc.cluster.local:3100/loki/api/v1/push
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "http-metrics"
+
+serviceMonitor:
+  enabled: true
+  labels:
+    release: "prometheus"

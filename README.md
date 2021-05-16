@@ -11,3 +11,7 @@ This repository contains a kubernetes dev infrastructure, providing:
 - Secret management
 
 Each component is intended to be optional.
+
+## Quickstart
+
+To get started quicky, have a look at the [quickstart](./docs/quickstart.md)

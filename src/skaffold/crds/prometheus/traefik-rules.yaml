@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  annotations:
+    meta.helm.sh/release-name: prometheus
+    meta.helm.sh/release-namespace: prometheus
+  labels:
+    app: kube-prometheus-stack
+    release: prometheus
+  name: traefik-alert-rules
+  namespace: prometheus
+spec:
+  groups:
+  - name: Traefik
+    rules:
+    - alert: TooManyRequest
+      expr: avg(traefik_entrypoint_open_connections{job="traefik-dashboard",namespace="default"})
+        > 5
+      for: 1m
+      labels:
+        severity: critical

@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: "jaeger-ingressroute"
+  namespace: infrastructure
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`jaeger.infrastructure.k8s.local`) && PathPrefix(`/`)
+      kind: Rule
+      namespace: infrastructure
+      services:
+      - name: jaeger-query
+        port: 16686
+        path: /
+        passHostHeader: true
+        tls:
+          - secretName: traefik-cert
+
