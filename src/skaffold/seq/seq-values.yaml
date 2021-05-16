@@ -1,0 +1,7 @@
+# config.yaml
+gelf:
+  enabled: true
+
+resources:
+  limits:
+    memory: 4Gi

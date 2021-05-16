@@ -126,3 +126,4 @@ password: prom-operator
 - [Prometheus](https://prometheus.infrastructure.k8s.local/)
 - [Grafana](https://grafana.infrastructure.k8s.local/)
 - [Jaeger](https://jaeger.infrastructure.k8s.local/)
+- [~~Seq~~](https://seq.infrastructure.k8s.local/)
