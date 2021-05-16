@@ -10,6 +10,7 @@ To generate the certficates for `k8s.local` and `*.k8s.local`, use [mkcert](http
 
 ```powershell
 mkcert -cert-file src/skaffold/crds/certs/k8s.local.crt -key-file src/skaffold/crds/certs/k8s.local.key k8s.local *.k8s.local infrastructure.k8s.local *.infrastructure.k8s.local
+# mkcert -pkcs12 src/skaffold/crds/certs/k8s.local.pfx k8s.local *.k8s.local *.k8s.local infrastructure.k8s.local *.infrastructure.k8s.local
 ```
 
 ### Converting the certificate into a k8s secret
@@ -66,13 +67,43 @@ skaffold run
 
 > If running on Docker-Desktop, you need to restart Docker to get it fully working as consult-inject does not find a route to the host. `KinD` does not seem to have this problem.
 
-## Terraform
+## Forward internal DNS Queries to Consul with CoreDNS
 
-Edit your variables to connect to the correct cluster
+In order for the internal services to be able to use the Consul DNS, we need to update the CoreDNS configmap to add consul as a DNS server
+
+Fetch the ip address of the Consul DNS
 
 ```powershell
-cd src\terraform
-terraform init
-terraform plan
-terraform apply -var-file="configuration.tfvars"
+kubectl get svc consul-consul-dns -o jsonpath='{.spec.clusterIP}' --namespace=infrastructure
+```
+
+Update the values of the consul dns service in `.\infrastructure\coredns\coredns.yaml`
+
+> Important: `coredns.yaml` is the syntax for CoreDNS 1.7.0, matching the tested. You can also fetch the current configmap and append the consul part as described in the [Consul Docs](https://www.consul.io/docs/k8s/dns).
+
+```powershell
+kubectl apply -f .\infrastructure\coredns\coredns.yaml
+```
+
+Test it out by running a job
+
+```powershell
+kubectl apply -f .\infrastructure\coredns\test-dns-job.yaml --namespace=infrastructure
+```
+
+## Generated credentials
+
+### Consul
+
+Grab the bootstrap ACL token and use it to login into the ACL tab of the UI.
+
+```powershell
+kubectl get secrets/consul-consul-bootstrap-acl-token -n infrastructure --template={{.data.token}} | base64 -d
+```
+
+### Grafana
+
+```text
+username: admin
+password: prom-operator
 ```

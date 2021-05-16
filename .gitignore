@@ -80,3 +80,4 @@ $RECYCLE.BIN/
 *.key
 *.p12
 certs.yaml
+*.log
