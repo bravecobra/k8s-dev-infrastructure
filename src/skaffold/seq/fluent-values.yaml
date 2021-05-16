@@ -1,0 +1,72 @@
+env:
+- name: "FLUENTD_CONF"
+  value: "../../etc/fluent/fluent.conf"
+- name: FLUENT_GELF_HOST
+  value: "seq.infrastructure.svc.cluster.local"
+- name: FLUENT_GELF_PORT
+  value: "12201"
+- name: FLUENT_GELF_PROTOCOL
+  value: "tcp"
+
+service:
+  labels:
+    app: fluent-bit
+  annotations:
+    prometheus.io/path: "/api/v1/metrics/prometheus"
+    prometheus.io/port: "2020"
+    prometheus.io/scrape: "true"
+
+serviceMonitor:
+  enabled: true
+  namespace: infrastructure
+  interval: 10s
+  scrapeTimeout: 10s
+  selector:
+    prometheus: prometheus
+    app: traefik
+    release: prometheus
+
+dashboards:
+  enabled: true
+  labelKey: grafana_dashboard
+  annotations:
+    k8s-sidecar-target-directory: /tmp/dashboards/Infrastructure
+config:
+  inputs: |
+    [INPUT]
+        Name tail
+        Path /var/log/containers/*.log
+        Exclude_Path /var/log/containers/*_kube-system_*.log
+        Parser docker
+        Tag kube.*
+        Mem_Buf_Limit 5MB
+        Skip_Long_Lines On
+        Key log
+        Refresh_Interval 10
+
+    [INPUT]
+        Name systemd
+        Tag host.*
+        Systemd_Filter _SYSTEMD_UNIT=kubelet.service
+        Read_From_Tail On
+        Key log
+  filters: |
+    [FILTER]
+        Name kubernetes
+        Match kube.*
+        Merge_Log On
+        Keep_Log Off
+        K8S-Logging.Parser On
+        K8S-Logging.Exclude On
+        Kube_Tag_Prefix kube.var.log.containers.
+        Merge_Log_Key log_processed
+  outputs: |
+    [OUTPUT]
+        Name gelf
+        Match *
+        Host ${FLUENT_GELF_HOST}
+        Port ${FLUENT_GELF_PORT}
+        Mode ${FLUENT_GELF_PROTOCOL}
+        Gelf_Short_Message_Key log
+
+

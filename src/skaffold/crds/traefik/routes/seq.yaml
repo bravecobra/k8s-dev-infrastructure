@@ -1,0 +1,19 @@
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: "seq-ingressroute"
+#   namespace: infrastructure
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#     - match: Host(`seq.infrastructure.k8s.local`) && PathPrefix(`/`)
+#       kind: Rule
+#       namespace: infrastructure
+#       services:
+#       - name: seq
+#         port: 80
+#         path: /
+#         passHostHeader: true
+#         tls:
+#           - secretName: traefik-cert

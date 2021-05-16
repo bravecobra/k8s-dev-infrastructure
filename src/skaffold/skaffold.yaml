@@ -70,3 +70,17 @@ deploy:
       namespace: infrastructure
       valuesFiles:
       - jaeger/jaeger-values.yaml
+
+    # - name: seq
+    #   # repo: https://helm.datalust.co
+    #   remoteChart: datalust/seq
+    #   namespace: infrastructure
+    #   valuesFiles:
+    #   - seq/seq-values.yaml
+
+    # - name: fluent
+    #   # repo: https://fluent.github.io/helm-charts
+    #   remoteChart: fluent/fluent-bit
+    #   namespace: infrastructure
+    #   valuesFiles:
+    #   - seq/fluent-values.yaml
