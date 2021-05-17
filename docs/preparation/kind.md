@@ -21,7 +21,7 @@ kind create cluster --name=devinfra --config .\config-devinfra.yaml
 
 We specifically expose ports 80, 443 and 8100 to this cluster on ip `127.0.0.1`. Think carefully what ports to expose. `kind` has no update strategy to change this afterwards.
 
-![kind cluster creation](..\images\kind-cluster-creation.png)
+![kind cluster creation](../images/kind-cluster-creation.png)
 
 The cluster creation automatically add configuration to connect to the new cluster
 

@@ -15,7 +15,7 @@ choco install minikube
 
 Next fire up your cluster
 
-![minikube windows](..\images\minikube-windows.png)
+![minikube windows](../images/minikube-windows.png)
 
 The cluster creation automatically add configuration to connect to the new cluster
 
