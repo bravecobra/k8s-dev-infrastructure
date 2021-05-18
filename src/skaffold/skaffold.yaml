@@ -38,6 +38,7 @@ deploy:
     - name: traefik
       # repo: https://helm.traefik.io/traefik
       remoteChart: traefik/traefik
+      namespace: infrastructure
       skipBuildDependencies: true
       valuesFiles:
       - traefik/traefik-values.yaml

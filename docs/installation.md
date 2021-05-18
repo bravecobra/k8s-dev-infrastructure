@@ -27,7 +27,7 @@ mkcert -cert-file src/skaffold/traefik/crds/certs/k8s.local.crt -key-file src/sk
 We then generate a kubernetes secret from the certificate
 
 ```powershell
-kubectl create secret tls traefik-cert --cert=./src/skaffold/traefik/crds/certs/k8s.local.crt --key=./src/skaffold/traefik/crds/certs/k8s.local.key --dry-run=client -o yaml > ./src/skaffold/traefik/crds/certs/certs.yaml
+kubectl create secret tls traefik-cert -n infrastructure --cert=./src/skaffold/traefik/crds/certs/k8s.local.crt --key=./src/skaffold/traefik/crds/certs/k8s.local.key --dry-run=client -o yaml > ./src/skaffold/traefik/crds/certs/certs.yaml
 ```
 
 ## Adding helm repo's
