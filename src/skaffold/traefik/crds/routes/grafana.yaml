@@ -2,14 +2,14 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: "grafana-ingressroute"
-  namespace: prometheus
+  namespace: infrastructure
 spec:
   entryPoints:
     - websecure
   routes:
     - match: Host(`grafana.infrastructure.k8s.local`) && PathPrefix(`/`)
       kind: Rule
-      namespace: prometheus
+      namespace: infrastructure
       services:
       - name: prometheus-grafana
         port: 80
