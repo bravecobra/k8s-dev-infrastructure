@@ -38,15 +38,14 @@ deploy:
     - name: traefik
       # repo: https://helm.traefik.io/traefik
       remoteChart: traefik/traefik
-      skipBuildDependencies: true
+      namespace: infrastructure
       valuesFiles:
       - traefik/traefik-values.yaml
 
     - name: prometheus
       # repo: https://prometheus-community.github.io/helm-charts
       remoteChart: prometheus-community/kube-prometheus-stack
-      namespace: prometheus
-      createNamespace: true
+      namespace: infrastructure
       valuesFiles:
       - prometheus/prometheus-values.yaml
 
