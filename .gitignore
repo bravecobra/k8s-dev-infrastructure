@@ -82,3 +82,4 @@ $RECYCLE.BIN/
 certs.yaml
 *.log
 site/
+src/terraform/.terraform.lock.hcl

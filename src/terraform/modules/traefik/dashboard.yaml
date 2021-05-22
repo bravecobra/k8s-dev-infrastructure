@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+  namespace: infrastructure
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`traefik.infrastructure.k8s.local`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+          tls:
+          - secretName: traefik-cert

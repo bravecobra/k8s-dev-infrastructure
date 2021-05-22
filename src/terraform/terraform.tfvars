@@ -1,0 +1,1 @@
+cluster-context-name = "minikube"
