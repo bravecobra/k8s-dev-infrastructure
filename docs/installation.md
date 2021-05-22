@@ -41,6 +41,7 @@ helm repo add traefik https://helm.traefik.io/traefik
 helm repo add datalust https://helm.datalust.co
 helm repo add fluent https://fluent.github.io/helm-charts
 helm repo add grafana https://grafana.github.io/helm-charts
+helm repo add elastic https://helm.elastic.co
 helm repo update
 ```
 
@@ -117,6 +118,14 @@ kubectl get secrets/consul-consul-bootstrap-acl-token -n infrastructure --templa
 ```text
 username: admin
 password: prom-operator
+```
+
+### Elastic & Kibana
+
+Grab the password from the kubernetes secrets. The username is `elastic`:
+
+```powershell
+kubectl get secrets/elastic-es-es-elastic-user -n infrastructure -o json --template='{{.data.elastic}}') | base64 -d`
 ```
 
 ## Endpoints

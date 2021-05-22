@@ -24,6 +24,7 @@ deploy:
     - 'prometheus/crds/*.yaml'
     - 'loki/crds/*.yaml'
     - 'coredns/*.yaml'
+    - 'elasticsearch/crds/*.yaml'
   helm:
     releases:
     - name: consul
@@ -83,3 +84,10 @@ deploy:
     #   namespace: infrastructure
     #   valuesFiles:
     #   - seq/fluent-values.yaml
+
+    - name: elastic-operator
+      # repo:  https://helm.elastic.co
+      remoteChart: elastic/eck-operator
+      namespace: infrastructure
+      valuesFiles:
+      - elasticsearch/eck-values.yaml

@@ -8,6 +8,7 @@ This repository contains a kubernetes dev infrastructure, providing:
 - Metrics
 - Tracing
 - Service discovery
+- Elastic stack
 - Secret management
 
 Each component is intended to be optional.
