@@ -3,6 +3,7 @@
 Install/download the CLIs.
 
 ```powershell
+choco install base64
 choco install mkcert
 choco install terraform
 choco install kubernetes-cli
