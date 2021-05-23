@@ -10,7 +10,8 @@ Open `C:\Windows\system32\drivers\etc\hosts` in an editor as `Administrator` and
 127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local grafana.infrastructure.k8s.local
 127.0.0.1 seq.infrastructure.k8s.local
 127.0.0.1 consul.infrastructure.k8s.local vault.infrastructure.k8s.local
-#127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
+127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
+127.0.0.1 login.k8s.local admin.login.k8s.local
 ```
 
 ## Generating the traefik certificate secret
@@ -135,4 +136,5 @@ kubectl get secrets/elastic-es-es-elastic-user -n infrastructure -o json --templ
 - [Prometheus](https://prometheus.infrastructure.k8s.local/)
 - [Grafana](https://grafana.infrastructure.k8s.local/)
 - [Jaeger](https://jaeger.infrastructure.k8s.local/)
+- [IdentityServer4Admin](http://admin.login.k8s.local/)
 - [~~Seq~~](https://seq.infrastructure.k8s.local/)

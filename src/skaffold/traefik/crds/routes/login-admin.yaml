@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: "login-admin-ingressroute"
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`admin.login.k8s.local`) && PathPrefix(`/`)
+      kind: Rule
+      namespace: default
+      services:
+      - name: identityserver4-admin
+        port: 80
+        path: /
+        passHostHeader: true
+        # tls:
+        #   - secretName: traefik-cert

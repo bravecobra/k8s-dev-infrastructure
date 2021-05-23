@@ -1,0 +1,6 @@
+admin:
+  podAnnotations:
+      "consul.hashicorp.com/connect-inject": "true"
+identity:
+  podAnnotations:
+      "consul.hashicorp.com/connect-inject": "true"
