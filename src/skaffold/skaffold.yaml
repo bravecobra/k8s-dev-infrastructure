@@ -92,7 +92,7 @@ deploy:
       valuesFiles:
       - elasticsearch/eck-values.yaml
 
-    - name: identityserver4admin
+    - name: identityserver4
       # repo:  https://bravecobra.github.io/identityserver4.admin-helm/charts/
       remoteChart: identityserver4admin/identityserver4admin
       namespace: default
