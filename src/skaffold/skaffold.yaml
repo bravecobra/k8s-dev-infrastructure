@@ -17,7 +17,7 @@ profiles:
 deploy:
   kubectl:
     manifests:
-    - 'traefik/crds/certs/*.yaml'
+    - 'cert-manager/crds/*.yaml'
     - 'traefik/crds/routes/*.yaml'
     - 'traefik/crds/*.yaml'
     - 'jaeger/crds/*.yaml'
@@ -35,6 +35,16 @@ deploy:
       # createNamespace: true
       valuesFiles:
       - consul/consul-values.yaml
+
+    - name: cert-manager
+      # repo: https://charts.jetstack.io
+      remoteChart: jetstack/cert-manager
+      namespace: cert-manager
+      version: v1.3.1
+      createNamespace: true
+      wait: true
+      setValues:
+        installCRDs: true
 
     - name: traefik
       # repo: https://helm.traefik.io/traefik

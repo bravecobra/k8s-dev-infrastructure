@@ -78,7 +78,9 @@ $RECYCLE.BIN/
 
 *.crt
 *.key
+*.pem
 *.p12
 certs.yaml
 *.log
 site/
+cacerts.yaml
