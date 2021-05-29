@@ -34,3 +34,19 @@ identity:
   podAnnotations:
       "consul.hashicorp.com/connect-inject": "true"
       "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-identity"
+  ingress:
+    enabled: true
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: login.k8s.local
+        paths:
+        - path: /
+          backend:
+            serviceName: identityserver4-identity
+            servicePort: 443
+    tls:
+    - secretName: traefik-cert
+      hosts:
+        - login.k8s.local

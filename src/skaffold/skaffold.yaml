@@ -115,6 +115,6 @@ deploy:
       # repo:  https://bravecobra.github.io/identityserver4.admin-helm/charts/
       remoteChart: identityserver4admin/identityserver4admin
       namespace: infrastructure
-      version: 0.2.1
+      version: 0.2.2
       valuesFiles:
       - identityserver4admin/identityserver4admin-values.yaml
