@@ -31,6 +31,7 @@ deploy:
       # repo: https://helm.releases.hashicorp.com
       remoteChart: hashicorp/consul
       namespace: infrastructure
+      version: 0.31.1
       wait: true
       # createNamespace: true
       valuesFiles:
@@ -40,6 +41,7 @@ deploy:
       # repo: https://helm.traefik.io/traefik
       remoteChart: traefik/traefik
       namespace: infrastructure
+      version: 9.19.1
       valuesFiles:
       - traefik/traefik-values.yaml
 
@@ -47,6 +49,7 @@ deploy:
       # repo: https://prometheus-community.github.io/helm-charts
       remoteChart: prometheus-community/kube-prometheus-stack
       namespace: infrastructure
+      version: 16.0.1
       valuesFiles:
       - prometheus/prometheus-values.yaml
 
@@ -54,6 +57,7 @@ deploy:
       # repo: https://grafana.github.io/helm-charts
       remoteChart: grafana/loki
       namespace: infrastructure
+      version: 2.5.0
       valuesFiles:
       - loki/loki-values.yaml
 
@@ -61,6 +65,7 @@ deploy:
       # repo: https://grafana.github.io/helm-charts
       remoteChart: grafana/promtail
       namespace: infrastructure
+      version: 3.5.1
       valuesFiles:
       - loki/promtail-values.yaml
 
@@ -68,6 +73,7 @@ deploy:
       # repo: https://jaegertracing.github.io/helm-charts
       remoteChart: jaegertracing/jaeger-operator
       namespace: infrastructure
+      version: 2.21.1
       valuesFiles:
       - jaeger/jaeger-values.yaml
 
@@ -75,6 +81,7 @@ deploy:
     #   # repo: https://helm.datalust.co
     #   remoteChart: datalust/seq
     #   namespace: infrastructure
+    #   version: 2021.2.5647
     #   valuesFiles:
     #   - seq/seq-values.yaml
 
@@ -82,6 +89,7 @@ deploy:
     #   # repo: https://fluent.github.io/helm-charts
     #   remoteChart: fluent/fluent-bit
     #   namespace: infrastructure
+    #   version: 0.15.11
     #   valuesFiles:
     #   - seq/fluent-values.yaml
 
@@ -89,5 +97,6 @@ deploy:
       # repo:  https://helm.elastic.co
       remoteChart: elastic/eck-operator
       namespace: infrastructure
+      version: 1.6.0
       valuesFiles:
       - elasticsearch/eck-values.yaml
