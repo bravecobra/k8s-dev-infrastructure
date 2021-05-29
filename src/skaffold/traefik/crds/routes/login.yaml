@@ -2,18 +2,18 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: "login-ingressroute"
-  namespace: default
+  namespace: infrastructure
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`login.k8s.local`) && PathPrefix(`/`)
       kind: Rule
-      namespace: default
+      namespace: infrastructure
       services:
       - name: identityserver4-identity
-        port: 80
+        port: 443
         path: /
         passHostHeader: true
-        # tls:
-        #   - secretName: traefik-cert
+        tls:
+          - secretName: traefik-cert

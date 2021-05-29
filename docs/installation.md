@@ -133,7 +133,7 @@ password: prom-operator
 Grab the password from the kubernetes secrets. The username is `elastic`:
 
 ```powershell
-kubectl get secrets/elastic-es-es-elastic-user -n infrastructure -o json --template='{{.data.elastic}}') | base64 -d`
+kubectl get secret elastic-es-es-elastic-user -n infrastructure -o go-template='{{.data.elastic | base64decode}}'
 ```
 
 ## Endpoints

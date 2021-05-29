@@ -16,8 +16,8 @@ data:
         health {
           lameduck 5s
         }
-        rewrite name login.k8s.local identityserver4-identity.default.svc.cluster.local
-        rewrite name admin.login.k8s.local identityserver4-admin.default.svc.cluster.local
+        rewrite name login.k8s.local identityserver4-identity.infrastructure.svc.cluster.local
+        rewrite name admin.login.k8s.local identityserver4-admin.infrastructure.svc.cluster.local
         ready
         kubernetes cluster.local in-addr.arpa ip6.arpa {
           pods insecure
