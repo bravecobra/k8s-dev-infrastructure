@@ -12,6 +12,7 @@ additionalArguments:
   - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.infrastructure.svc:5778/sampling"
   - "--tracing.jaeger.localAgentHostPort=jaeger-agent.infrastructure.svc:6831"
   - "--serversTransport.insecureSkipVerify=true"
+  - "--providers.kubernetesingress=true"
 
 logs:
   access:

@@ -28,3 +28,9 @@ The cluster creation automatically add configuration to connect to the new clust
 ```powershell
 kubectl cluster-info --context kind-devinfra
 ```
+
+To delete the cluster again
+
+```powershell
+kind delete cluster --name devinfra
+```
