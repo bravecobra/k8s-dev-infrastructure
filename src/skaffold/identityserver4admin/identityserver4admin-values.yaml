@@ -70,3 +70,34 @@ identity:
     - secretName: traefik-cert
       hosts:
         - login.k8s.local
+api:
+  enabled: true
+  protocol: https
+  domainName: api.login.k8s.local
+  ssl:
+    enabled: true
+    secretName: identityserver4-cert-api
+  service:
+    type: ClusterIP
+    port: 443
+  podAnnotations:
+      "consul.hashicorp.com/connect-inject": "true"
+      "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-api"
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: api.login.k8s.local
+        paths:
+        - path: /
+          backend:
+            serviceName: identityserver4-api
+            servicePort: 443
+    tls:
+    - secretName: traefik-cert
+      hosts:
+        - api.login.k8s.local
