@@ -9,7 +9,17 @@ spec:
     "consul.hashicorp.com/connect-service-port": "6831"
     "consul.hashicorp.com/transparent-proxy": "true"
   ingress:
-    enabled: false
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+    hosts:
+      - jaeger.infrastructure.k8s.local
+    path: /
+    tls:
+      - secretName: traefik-cert
+        hosts:
+        - jaeger.infrastructure.k8s.local
   allInOne:
     options:
       query:

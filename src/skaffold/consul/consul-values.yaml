@@ -13,6 +13,23 @@ ui:
   # service:
   #   enabled: true
   #   type: 'NodePort'
+  ingress:
+    enabled: true
+    hosts:
+    - host: consul.infrastructure.k8s.local
+      paths:
+        - /
+      passHostHeader: true
+      backend:
+        serviceName: consul-consul-ui
+        servicePort: 443
+    tls:
+      - hosts:
+        - consul.infrastructure.k8s.local
+        secretName: traefik-cert
+    annotations: |
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
 
 # Enable Connect for secure communication between nodes
 connectInject:
