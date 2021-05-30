@@ -44,6 +44,13 @@ ingressClass:
 #   # Use to force a networking.k8s.io API Version for certain CI/CD applications. E.g. "v1beta1"
 #   # fallbackApiVersion:
 
+ingressRoute:
+  dashboard:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+
 service:
   enabled: true
   spec:
