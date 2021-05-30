@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: elasticsearch
+  namespace: infrastructure
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+spec:
+  rules:
+    - host: es.infrastructure.k8s.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: elastic-es-es-http
+                port:
+                  number: 9200
+  tls:
+  - secretName: traefik-cert
+    hosts:
+    - es.infrastructure.k8s.local
