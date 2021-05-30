@@ -5,3 +5,19 @@ gelf:
 resources:
   limits:
     memory: 4Gi
+
+ingress:
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+  tls:
+    - secretName: traefik-cert
+      hosts:
+      - seq.infrastructure.k8s.local
+ui:
+  ingress:
+    enabled: true
+    path: /
+    hosts:
+      - seq.infrastructure.k8s.local
+    pathType: Prefix

@@ -10,24 +10,24 @@ Open `C:\Windows\system32\drivers\etc\hosts` in an editor as `Administrator` and
 127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local grafana.infrastructure.k8s.local
 127.0.0.1 seq.infrastructure.k8s.local
 127.0.0.1 consul.infrastructure.k8s.local vault.infrastructure.k8s.local
-#127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
+127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
+127.0.0.1 login.k8s.local admin.login.k8s.local api.login.k8s.local
 ```
 
-## Generating the traefik certificate secret
+## Generating the CA certificate k8s secret with mkcert
 
-We use self-signed certificates instead of LetsEncrypt as that would require either a proper DNS or an accessible HTTP endpoint. Neither might be an option, so we'll go with the self-signed for now. We could extend it further later on.
+We use self-signed certificates instead of LetsEncrypt as the latter would require either a proper DNS domain which is publically available or an publically accessible HTTP endpoint. Neither might be an option in a local development setup, so we'll go with the self-signed option for now. We could extend it further later on.
 
-To generate the certficates for `k8s.local` and `*.k8s.local`, use [mkcert](https://github.com/FiloSottile/mkcert) which you can install easily with `choco install mkcert`.
-
-```powershell
-mkcert -cert-file src/skaffold/traefik/crds/certs/k8s.local.crt -key-file src/skaffold/traefik/crds/certs/k8s.local.key k8s.local *.k8s.local infrastructure.k8s.local *.infrastructure.k8s.local
-# mkcert -pkcs12 src/skaffold/traefik/crds/certs/k8s.local.pfx k8s.local *.k8s.local *.k8s.local infrastructure.k8s.local *.infrastructure.k8s.local
-```
-
-We then generate a kubernetes secret from the certificate
+To be able to generate the certficates for `k8s.local` and `*.k8s.local`, we'll use `cert-manager` and provide it with the CA certificate from [mkcert](https://github.com/FiloSottile/mkcert) which you can install easily with `choco install mkcert`. The certificates will be created by `cert-manager` and as the CA is available on our local machine through mkcert, those will also be valid in the local browser (only).
 
 ```powershell
-kubectl create secret tls traefik-cert -n infrastructure --cert=./src/skaffold/traefik/crds/certs/k8s.local.crt --key=./src/skaffold/traefik/crds/certs/k8s.local.key --dry-run=client -o yaml > ./src/skaffold/traefik/crds/certs/certs.yaml
+# execute under elevated Administrator privileges
+mkcert --install
+copy $env:LOCALAPPDATA\mkcert\rootCA.pem ./src/certs/cacerts.crt
+copy $env:LOCALAPPDATA\mkcert\rootCA-key.pem ./src/certs/cacerts.key
+
+# Create a k8s secret manifest containing the CA Root certificate of mkcert
+kubectl create secret tls ca-key-pair --namespace=cert-manager --cert=./src/certs/cacerts.crt --key=./src/certs/cacerts.key  --dry-run=client -o yaml > ./src/skaffold/cert-manager/crds/cacerts.yaml
 ```
 
 ## Adding helm repo's
@@ -42,6 +42,8 @@ helm repo add datalust https://helm.datalust.co
 helm repo add fluent https://fluent.github.io/helm-charts
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo add elastic https://helm.elastic.co
+helm repo add identityserver4admin https://bravecobra.github.io/identityserver4.admin-helm/charts/
+helm repo add jetstack https://charts.jetstack.io
 helm repo update
 ```
 
@@ -105,6 +107,12 @@ kubectl apply -f ./src/skaffold/coredns/test-dns-job.yaml --namespace=infrastruc
 
 ## Generated credentials
 
+### Verify the Traefik certificate
+
+```powershell
+kubectl describe certificates traefik-cert -n infrastructure
+```
+
 ### Consul
 
 Grab the bootstrap ACL token and use it to login into the ACL tab of the UI.
@@ -125,7 +133,14 @@ password: prom-operator
 Grab the password from the kubernetes secrets. The username is `elastic`:
 
 ```powershell
-kubectl get secrets/elastic-es-es-elastic-user -n infrastructure -o json --template='{{.data.elastic}}') | base64 -d`
+kubectl get secret elastic-es-es-elastic-user -n infrastructure -o go-template='{{.data.elastic | base64decode}}'
+```
+
+### IdentityServer4Admin
+
+```text
+username: admin
+password: Password_123
 ```
 
 ## Endpoints
@@ -135,4 +150,5 @@ kubectl get secrets/elastic-es-es-elastic-user -n infrastructure -o json --templ
 - [Prometheus](https://prometheus.infrastructure.k8s.local/)
 - [Grafana](https://grafana.infrastructure.k8s.local/)
 - [Jaeger](https://jaeger.infrastructure.k8s.local/)
+- [IdentityServer4Admin](http://admin.login.k8s.local/)
 - [~~Seq~~](https://seq.infrastructure.k8s.local/)

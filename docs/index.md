@@ -10,6 +10,7 @@ This repository contains a kubernetes dev infrastructure, providing:
 - Service discovery
 - Elastic stack
 - Secret management
+- Identity Provider (IdentityServer4)
 
 Each component is intended to be optional.
 
