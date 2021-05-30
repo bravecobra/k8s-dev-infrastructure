@@ -11,7 +11,7 @@ Open `C:\Windows\system32\drivers\etc\hosts` in an editor as `Administrator` and
 127.0.0.1 seq.infrastructure.k8s.local
 127.0.0.1 consul.infrastructure.k8s.local vault.infrastructure.k8s.local
 127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
-127.0.0.1 login.k8s.local admin.login.k8s.local
+127.0.0.1 login.k8s.local admin.login.k8s.local api.login.k8s.local
 ```
 
 ## Generating the CA certificate k8s secret with mkcert
@@ -134,6 +134,13 @@ Grab the password from the kubernetes secrets. The username is `elastic`:
 
 ```powershell
 kubectl get secret elastic-es-es-elastic-user -n infrastructure -o go-template='{{.data.elastic | base64decode}}'
+```
+
+### IdentityServer4Admin
+
+```text
+username: admin
+password: Password_123
 ```
 
 ## Endpoints
