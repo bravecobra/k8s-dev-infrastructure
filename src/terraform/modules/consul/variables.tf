@@ -6,10 +6,6 @@ variable "namespace" {
     type = string
 }
 
-variable "traefik-domain-name" {
-    type = string
-}
-
-variable "service-ip" {
+variable "datacenter" {
     type = string
 }

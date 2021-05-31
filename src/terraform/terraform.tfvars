@@ -1,1 +1,5 @@
-cluster-context-name = "minikube"
+cluster-context-name = "kind-devinfra"
+namespace = "infrastructure"
+domain-name = "k8s.local"
+consul-datacenter = "datacenter1"
+service-ip="172.18.0.2"

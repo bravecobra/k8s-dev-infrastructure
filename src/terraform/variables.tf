@@ -4,5 +4,16 @@ variable "cluster-context-name" {
 
 variable "domain-name" {
     type = string
-    default = "k8s.local"
+}
+
+variable "namespace" {
+    type = string
+}
+
+variable "consul-datacenter" {
+    type = string
+}
+
+variable "service-ip" {
+    type = string
 }
