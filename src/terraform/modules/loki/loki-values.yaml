@@ -4,7 +4,7 @@ podAnnotations:
   "consul.hashicorp.com/transparent-proxy": "true"
 
 tracing:
-  jaegerAgentHost: jaeger-agent.{namespace}.svc.cluster.local
+  jaegerAgentHost: jaeger-agent.${namespace}.svc.cluster.local
 
 serviceMonitor:
   enabled: true
