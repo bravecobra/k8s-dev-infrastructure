@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kibana
+  namespace: ${namespace}
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+spec:
+  rules:
+    - host: ${kibana-domain-name}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: elastic-kb-kb-http
+                port:
+                  number: 5601
+  tls:
+  - secretName: traefik-cert
+    hosts:
+    - ${kibana-domain-name}

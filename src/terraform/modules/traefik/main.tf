@@ -38,9 +38,6 @@ resource "kubectl_manifest" "http-redirect-middleware" {
 }
 
 resource "kubectl_manifest" "traefik-cert" {
-    depends_on = [
-        helm_release.traefik,
-    ]
     yaml_body = templatefile("${path.module}/traefik-cert.yaml", {
         namespace = var.namespace,
         domain-name = var.domain-name
@@ -57,18 +54,20 @@ resource "kubectl_manifest" "dashboard-ingress" {
     })
 }
 
-# resource "kubernetes_manifest" "tls-store" {
-#   provider = kubernetes-alpha
-#   manifest = yamldecode(file("${path.module}/certs.yaml"))
-#   depends_on = [
-#     helm_release.traefik
-#   ]
-# }
+resource "kubectl_manifest" "dashboard-service" {
+    depends_on = [
+        helm_release.traefik,
+    ]
+    yaml_body = templatefile("${path.module}/crds/traefik-dashboard-service.yaml", {
+        namespace = var.namespace
+    })
+}
 
-# resource "kubernetes_manifest" "route_dashboard" {
-#   provider = kubernetes-alpha
-#   manifest = yamldecode(file("${path.module}/dashboard.yaml"))
-#   depends_on = [
-#     helm_release.traefik
-#   ]
-# }
+resource "kubectl_manifest" "traefik-grafana-dashboard" {
+    depends_on = [
+        helm_release.traefik,
+    ]
+    yaml_body = templatefile("${path.module}/crds/traefik-grafana-dashboard.yaml", {
+        namespace = var.namespace
+    })
+}

@@ -1,3 +1,10 @@
+resource "kubernetes_namespace" "cert-manager" {
+  metadata {
+    name = "cert-manager"
+  }
+}
+
+
 resource "helm_release" "cert-manager" {
   name       = "cert-manager"
 
@@ -5,16 +12,16 @@ resource "helm_release" "cert-manager" {
   chart      = "cert-manager"
   namespace  = "cert-manager"
   version    = "v1.3.1"
-  create_namespace = true
   wait       = true
   wait_for_jobs = true
   set {
     name  = "installCRDs"
     value = "true"
   }
-  provisioner "local-exec" {
-    command = "echo 'Waiting for cert-manager validating webhook to get its CA injected, so we can start to apply custom resources ...' ; timeout 60"
-  }
+
+  depends_on = [
+    kubernetes_namespace.cert-manager
+  ]
 }
 
 resource "kubernetes_secret" "ca-key-pair" {
@@ -29,10 +36,18 @@ resource "kubernetes_secret" "ca-key-pair" {
   type = "kubernetes.io/tls"
 }
 
+resource "time_sleep" "wait_10_seconds" {
+  depends_on = [
+    helm_release.cert-manager,
+    kubernetes_secret.ca-key-pair
+  ]
+
+  create_duration = "10s"
+}
+
 resource "kubectl_manifest" "cluster-issuer" {
     depends_on = [
-        helm_release.cert-manager,
-        kubernetes_secret.ca-key-pair
+      time_sleep.wait_10_seconds
     ]
     yaml_body = file("${path.module}/cluster-issuer.yaml")
 }
