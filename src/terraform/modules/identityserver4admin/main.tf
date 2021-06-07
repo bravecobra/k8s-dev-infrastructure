@@ -5,8 +5,6 @@ resource "helm_release" "identityserver4" {
   chart      = "identityserver4admin"
   namespace  = var.namespace
   version    = "0.4.0"
-//   wait       = true
-//   wait_for_jobs = true
   values = [
     "${templatefile("${path.module}/identityserver4admin-values.yaml", {
         admin-domain-name = var.admin-domain-name,
@@ -14,4 +12,14 @@ resource "helm_release" "identityserver4" {
         api-domain-name = var.api-domain-name
     })}"
   ]
+}
+
+output "login-url" {
+  value = "https://${var.login-domain-name}"
+}
+output "admin-url" {
+  value = "https://${var.admin-domain-name}"
+}
+output "api-url" {
+  value = "https://${var.api-domain-name}"
 }

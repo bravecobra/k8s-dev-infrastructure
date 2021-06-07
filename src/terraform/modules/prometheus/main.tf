@@ -44,3 +44,11 @@ resource "kubectl_manifest" "traefik-rules" {
     ]
     yaml_body = file("${path.module}/crds/traefik-rules.yaml")
 }
+
+output "prometheus-url" {
+  value = "https://${var.prometheus-domain-name}"
+}
+
+output "grafana-url" {
+  value = "https://${var.grafana-domain-name}"
+}

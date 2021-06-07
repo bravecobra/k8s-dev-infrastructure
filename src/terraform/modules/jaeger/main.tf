@@ -43,3 +43,7 @@ resource "kubectl_manifest" "jaeger-grafana-dashboard" {
       namespace = var.namespace,
     })}"
 }
+
+output "jaeger-url" {
+  value = "https://${var.jaeger-domain-name}"
+}

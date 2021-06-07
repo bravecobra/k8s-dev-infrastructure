@@ -63,3 +63,26 @@ resource "kubectl_manifest" "kibana-ingress" {
         kibana-domain-name = var.kibana-domain-name
     })
 }
+
+data "kubernetes_secret" "elastic-user" {
+    metadata {
+        name = "elastic-es-es-elastic-user"
+        namespace = var.namespace
+    }
+    depends_on = [
+        helm_release.elastic-operator,
+    ]
+}
+
+output "elastic-user" {
+    value = data.kubernetes_secret.elastic-user.data.elastic
+    sensitive = true
+}
+
+output "elastic-url" {
+  value = "https://${var.elastic-domain-name}"
+}
+
+output "kibana-url" {
+  value = "https://${var.kibana-domain-name}"
+}

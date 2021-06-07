@@ -14,3 +14,7 @@ resource "helm_release" "consul" {
     })}"
   ]
 }
+
+output "consul-url" {
+  value = "https://${var.domain-name}"
+}

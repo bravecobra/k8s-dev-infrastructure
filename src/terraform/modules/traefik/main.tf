@@ -71,3 +71,7 @@ resource "kubectl_manifest" "traefik-grafana-dashboard" {
         namespace = var.namespace
     })
 }
+
+output "traefik-url" {
+  value = "https://${var.traefik-domain-name}"
+}
