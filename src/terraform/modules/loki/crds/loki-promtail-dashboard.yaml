@@ -1,0 +1,145 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loki-promtail-dashboard
+  namespace: ${namespace}
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    k8s-sidecar-target-directory: /tmp/dashboards/Infrastructure
+data:
+  loki-promtail-dashboard.json: "{\r\n    \"annotations\": {\r\n      \"list\": [\r\n
+    \       {\r\n          \"builtIn\": 1,\r\n          \"datasource\": \"-- Grafana
+    --\",\r\n          \"enable\": true,\r\n          \"hide\": true,\r\n          \"iconColor\":
+    \"rgba(0, 211, 255, 1)\",\r\n          \"name\": \"Annotations & Alerts\",\r\n
+    \         \"type\": \"dashboard\"\r\n        }\r\n      ]\r\n    },\r\n    \"description\":
+    \"an example for loki and promtail.\",\r\n    \"editable\": true,\r\n    \"gnetId\":
+    10004,\r\n    \"graphTooltip\": 1,\r\n    \"id\": 30,\r\n    \"links\": [],\r\n
+    \   \"panels\": [\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    null,\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n          \"overrides\":
+    []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\":
+    {\r\n          \"h\": 9,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    0\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 2,\r\n
+    \       \"legend\": {\r\n          \"alignAsTable\": true,\r\n          \"avg\":
+    false,\r\n          \"current\": true,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"rightSide\": true,\r\n          \"show\": true,\r\n          \"total\":
+    false,\r\n          \"values\": true\r\n        },\r\n        \"lines\": true,\r\n
+    \       \"linewidth\": 1,\r\n        \"links\": [],\r\n        \"nullPointMode\":
+    \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\": true\r\n
+    \       },\r\n        \"paceLength\": 10,\r\n        \"percentage\": false,\r\n
+    \       \"pluginVersion\": \"7.5.5\",\r\n        \"pointradius\": 2,\r\n        \"points\":
+    false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\": [],\r\n
+    \       \"spaceLength\": 10,\r\n        \"stack\": false,\r\n        \"steppedLine\":
+    false,\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum
+    (rate(loki_distributor_bytes_received_total[5m]))\",\r\n            \"format\":
+    \"time_series\",\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"Bytes Receiced\",\r\n            \"refId\": \"B\"\r\n          },\r\n          {\r\n
+    \           \"expr\": \"sum (rate(loki_distributor_lines_received_total[5m]))\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"interval\": \"\",\r\n
+    \           \"intervalFactor\": 1,\r\n            \"legendFormat\": \"Lines Received\",\r\n
+    \           \"refId\": \"C\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"Loki\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 0,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"buckets\":
+    null,\r\n          \"mode\": \"time\",\r\n          \"name\": null,\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": null,\r\n            \"logBase\":
+    1,\r\n            \"max\": null,\r\n            \"min\": null,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    null,\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n          \"overrides\":
+    []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\":
+    {\r\n          \"h\": 9,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    9\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 3,\r\n
+    \       \"legend\": {\r\n          \"alignAsTable\": true,\r\n          \"avg\":
+    false,\r\n          \"current\": true,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"rightSide\": true,\r\n          \"show\": true,\r\n          \"sort\":
+    \"current\",\r\n          \"sortDesc\": true,\r\n          \"total\": false,\r\n
+    \         \"values\": true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\":
+    1,\r\n        \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"paceLength\":
+    10,\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"7.5.5\",\r\n
+    \       \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"lag\",\r\n            \"yaxis\": 2\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum (rate(promtail_read_bytes_total[5m]))\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"hide\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"read\",\r\n            \"refId\": \"B\"\r\n
+    \         },\r\n          {\r\n            \"expr\": \"sum (rate(promtail_sent_bytes_total[5m]))\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"hide\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"sent\",\r\n            \"refId\": \"C\"\r\n
+    \         },\r\n          {\r\n            \"expr\": \"sum (rate(promtail_encoded_bytes_total[5m]))\",\r\n
+    \           \"format\": \"time_series\",\r\n            \"hide\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"encoded\",\r\n            \"refId\": \"D\"\r\n
+    \         },\r\n          {\r\n            \"expr\": \"sum(promtail_file_bytes_total
+    - promtail_read_bytes_total)\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"intervalFactor\": 1,\r\n            \"legendFormat\": \"lag\",\r\n
+    \           \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\": [],\r\n        \"timeShift\":
+    null,\r\n        \"title\": \"Promtail\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 2,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"buckets\":
+    null,\r\n          \"mode\": \"time\",\r\n          \"name\": null,\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": null,\r\n            \"logBase\":
+    1,\r\n            \"max\": null,\r\n            \"min\": \"0\",\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false,\r\n          \"alignLevel\":
+    null\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    null,\r\n        \"fieldConfig\": {\r\n          \"defaults\": {},\r\n          \"overrides\":
+    []\r\n        },\r\n        \"fill\": 1,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\":
+    {\r\n          \"h\": 8,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    18\r\n        },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 5,\r\n
+    \       \"legend\": {\r\n          \"alignAsTable\": true,\r\n          \"avg\":
+    false,\r\n          \"current\": true,\r\n          \"max\": false,\r\n          \"min\":
+    false,\r\n          \"rightSide\": true,\r\n          \"show\": true,\r\n          \"sideWidth\":
+    null,\r\n          \"sort\": \"current\",\r\n          \"sortDesc\": true,\r\n
+    \         \"total\": false,\r\n          \"values\": true\r\n        },\r\n        \"lines\":
+    true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n        \"nullPointMode\":
+    \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\": true\r\n
+    \       },\r\n        \"paceLength\": 10,\r\n        \"percentage\": false,\r\n
+    \       \"pluginVersion\": \"7.5.5\",\r\n        \"pointradius\": 2,\r\n        \"points\":
+    false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\": [],\r\n
+    \       \"spaceLength\": 10,\r\n        \"stack\": false,\r\n        \"steppedLine\":
+    false,\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"promtail_file_bytes_total
+    - promtail_read_bytes_total > 100000\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"hide\": false,\r\n            \"interval\": \"\",\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{path}}\",\r\n            \"refId\": \"A\"\r\n
+    \         },\r\n          {\r\n            \"expr\": \"promtail_file_bytes_total
+    - promtail_read_bytes_total < -100000\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"hide\": true,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"{{path}}\",\r\n            \"refId\": \"B\"\r\n          }\r\n        ],\r\n
+    \       \"thresholds\": [],\r\n        \"timeFrom\": null,\r\n        \"timeRegions\":
+    [],\r\n        \"timeShift\": null,\r\n        \"title\": \"Lag\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"buckets\": null,\r\n          \"mode\": \"time\",\r\n          \"name\":
+    null,\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": null,\r\n            \"logBase\": 1,\r\n            \"max\":
+    null,\r\n            \"min\": null,\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"label\": null,\r\n
+    \           \"logBase\": 1,\r\n            \"max\": null,\r\n            \"min\":
+    null,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false,\r\n          \"alignLevel\": null\r\n        }\r\n
+    \     }\r\n    ],\r\n    \"refresh\": \"5s\",\r\n    \"schemaVersion\": 27,\r\n
+    \   \"style\": \"dark\",\r\n    \"tags\": [],\r\n    \"templating\": {\r\n      \"list\":
+    []\r\n    },\r\n    \"time\": {\r\n      \"from\": \"now-30m\",\r\n      \"to\":
+    \"now\"\r\n    },\r\n    \"timepicker\": {\r\n      \"refresh_intervals\": [\r\n
+    \       \"5s\",\r\n        \"10s\",\r\n        \"30s\",\r\n        \"1m\",\r\n
+    \       \"5m\",\r\n        \"15m\",\r\n        \"30m\",\r\n        \"1h\",\r\n
+    \       \"2h\",\r\n        \"1d\"\r\n      ],\r\n      \"time_options\": [\r\n
+    \       \"5m\",\r\n        \"15m\",\r\n        \"1h\",\r\n        \"6h\",\r\n
+    \       \"12h\",\r\n        \"24h\",\r\n        \"2d\",\r\n        \"7d\",\r\n
+    \       \"30d\"\r\n      ]\r\n    },\r\n    \"timezone\": \"\",\r\n    \"title\":
+    \"Loki-Promtail\",\r\n    \"uid\": \"htcadXCiz\",\r\n    \"version\": 1\r\n  }"

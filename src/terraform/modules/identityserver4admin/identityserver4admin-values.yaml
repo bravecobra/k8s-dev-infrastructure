@@ -1,0 +1,103 @@
+seed:
+  defaultAdmin:
+    password: Password_123
+    email: your.email@gmail.com
+
+certificates:
+  certManager:
+    enabled: true
+    issuerRef:
+      name: selfsigned-ca-issuer
+      kind: ClusterIssuer
+
+admin:
+  protocol: https
+  domainName: ${admin-domain-name}
+  ssl:
+    enabled: true
+    secretName: identityserver4-cert-admin
+  service:
+    type: ClusterIP
+    port: 443
+  podAnnotations:
+      "consul.hashicorp.com/connect-inject": "true"
+      "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-admin"
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: ${admin-domain-name}
+        paths:
+        - path: /
+          backend:
+            serviceName: identityserver4-admin
+            servicePort: 443
+    tls:
+    - secretName: traefik-cert
+      hosts:
+        - ${admin-domain-name}
+identity:
+  protocol: https
+  domainName: ${login-domain-name}
+  ssl:
+    enabled: true
+    secretName: identityserver4-cert-identity
+  service:
+    type: ClusterIP
+    port: 443
+  podAnnotations:
+      "consul.hashicorp.com/connect-inject": "true"
+      "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-identity"
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: ${login-domain-name}
+        paths:
+        - path: /
+          backend:
+            serviceName: identityserver4-identity
+            servicePort: 443
+    tls:
+    - secretName: traefik-cert
+      hosts:
+        - ${login-domain-name}
+api:
+  enabled: true
+  protocol: https
+  domainName: ${api-domain-name}
+  ssl:
+    enabled: true
+    secretName: identityserver4-cert-api
+  service:
+    type: ClusterIP
+    port: 443
+  podAnnotations:
+      "consul.hashicorp.com/connect-inject": "true"
+      "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-api"
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: ${api-domain-name}
+        paths:
+        - path: /
+          backend:
+            serviceName: identityserver4-api
+            servicePort: 443
+    tls:
+    - secretName: traefik-cert
+      hosts:
+        - ${api-domain-name}
