@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: consul
+  name: consul-subchart
   namespace: consul
   finalizers:
   - resources-finalizer.argocd.argoproj.io
