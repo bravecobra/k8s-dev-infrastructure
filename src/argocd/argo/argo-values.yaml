@@ -68,6 +68,11 @@ server:
             hs = {}
             hs.status = "Healthy"
             return hs
+      jaegertracing.io/Jaeger:
+          health.lua: |
+            hs = {}
+            hs.status = "Healthy"
+            return hs
       admissionregistration.k8s.io/MutatingWebhookConfiguration:
         ignoreDifferences: |
           jsonPointers:
