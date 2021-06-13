@@ -44,7 +44,7 @@ server:
       - secretName: argocd-tls-certificate
         hosts:
           - argo.k8s.local
-    https: false
+    https: true
   extraArgs: []
     # - --insecure
   certificate:
