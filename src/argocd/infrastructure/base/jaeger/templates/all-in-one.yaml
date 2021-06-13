@@ -18,7 +18,7 @@ spec:
     path: /
     pathType: Prefix
     tls:
-      - secretName: traefik-cert
+      - secretName: jaeger-cert
         hosts:
         - jaeger.infrastructure.k8s.local
   allInOne:

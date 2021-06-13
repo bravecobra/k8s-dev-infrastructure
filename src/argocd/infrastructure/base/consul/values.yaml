@@ -27,7 +27,7 @@ consul:
       tls:
         - hosts:
           - consul.infrastructure.k8s.local
-          secretName: traefik-cert
+          secretName: consul-cert
       annotations: |
         traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
         traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
