@@ -3,15 +3,13 @@ kind: Application
 metadata:
   name: consul
   namespace: consul
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: consul
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: src/argocd/infrastructure/base/consul/
+    path: src/argocd/infrastructure/base/
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
   syncPolicy:
