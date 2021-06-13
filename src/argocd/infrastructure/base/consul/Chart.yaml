@@ -24,6 +24,6 @@ version: 0.1.0
 appVersion: "0.1.0"
 
 dependencies:
-- name: consul
-  version: 0.31.1
-  repository: https://helm.releases.hashicorp.com
+  - name: consul
+    version: 0.31.1
+    repository: https://helm.releases.hashicorp.com
