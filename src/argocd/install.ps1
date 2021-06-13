@@ -18,8 +18,8 @@ kubectl apply -f ./src/argocd/argo/cert-manager/crds/cluster-issuer.yaml
 Start-Sleep -Seconds 10
 
 ## install traefik as ingress-controller
-kubectl create namespace infrastructure
-helm upgrade --install --wait traefik traefik/traefik -n infrastructure -f ./src/argocd/argo/traefik/traefik-values.yaml
+kubectl create namespace traefik
+helm upgrade --install --wait traefik traefik/traefik -n traefik -f ./src/argocd/argo/traefik/traefik-values.yaml
 
 kubectl apply -f ./src/argocd/argo/traefik/crds/cert-store.yaml
 kubectl apply -f ./src/argocd/argo/traefik/crds/http-redirect-middleware.yaml
