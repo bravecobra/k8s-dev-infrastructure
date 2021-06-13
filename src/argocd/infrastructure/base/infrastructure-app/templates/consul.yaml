@@ -11,7 +11,7 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: src/argocd/infrastructure/base/consul
+    path: src/argocd/infrastructure/base/consul-subchart/
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
   syncPolicy:
