@@ -63,6 +63,11 @@ server:
             hs = {}
             hs.status = "Healthy"
             return hs
+      extensions/Ingress:
+          health.lua: |
+            hs = {}
+            hs.status = "Healthy"
+            return hs
       admissionregistration.k8s.io/MutatingWebhookConfiguration:
         ignoreDifferences: |
           jsonPointers:
