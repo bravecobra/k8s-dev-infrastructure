@@ -5,3 +5,6 @@ jaeger-operator:
   query:
     podAnnotations:
         "consul.hashicorp.com/connect-inject": "true"
+  rbac:
+    create: true
+    clusterRole: true
