@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: consul-subchart
+  namespace: consul
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: consul
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    path: src/argocd/infrastructure/base/consul
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}

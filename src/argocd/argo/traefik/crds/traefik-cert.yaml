@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-cert
+  namespace: infrastructure
+spec:
+  secretName: traefik-cert
+  issuerRef:
+    name: selfsigned-ca-issuer
+    kind: ClusterIssuer
+  commonName: traefik-cert
+  dnsNames:
+  - k8s.local
+  - '*.k8s.local'
+  - '*.infrastructure.k8s.local'
+  - '*.login.k8s.local'

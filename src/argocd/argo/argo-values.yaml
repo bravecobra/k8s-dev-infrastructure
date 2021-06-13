@@ -1,0 +1,59 @@
+server:
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+    labels: {}
+    hosts:
+      - argo.k8s.local
+    paths:
+      - /
+    extraPaths:
+      - path: /*
+        pathType: Prefix
+        backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+    tls:
+      - secretName: argocd-tls-certificate
+        hosts:
+          - argo.k8s.local
+    https: true
+  ingressGrpc:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+    labels: {}
+    hosts:
+      - argo.k8s.local
+    paths:
+      - /
+    extraPaths:
+      - path: /*
+        pathType: Prefix
+        backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+    tls:
+      - secretName: argocd-tls-certificate
+        hosts:
+          - argo.k8s.local
+    https: false
+  extraArgs: []
+    # - --insecure
+  certificate:
+    enabled: true
+    domain: argo.k8s.local
+    issuer:
+      kind: ClusterIssuer
+      name: selfsigned-ca-issuer
+    additionalHosts: []
+    secretName: argocd-tls-certificate
+  config:
+    url: https://argo.k8s.local
