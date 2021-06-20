@@ -21,7 +21,7 @@ identityserver4admin:
       type: ClusterIP
       port: 443
     serviceAccount:
-      name: identityserver4-identityserver4admin-admin
+      name: identityserver4-identityserver4admin
     podAnnotations:
         "consul.hashicorp.com/connect-inject": "true"
         "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-admin"
@@ -53,7 +53,7 @@ identityserver4admin:
       type: ClusterIP
       port: 443
     serviceAccount:
-      name: identityserver4-identityserver4admin-identity
+      name: identityserver4-identityserver4admin
     podAnnotations:
         "consul.hashicorp.com/connect-inject": "true"
         "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-identity"
@@ -86,7 +86,7 @@ identityserver4admin:
       type: ClusterIP
       port: 443
     serviceAccount:
-      name: identityserver4-identityserver4admin-api
+      name: identityserver4-identityserver4admin
     podAnnotations:
         "consul.hashicorp.com/connect-inject": "true"
         "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-api"
