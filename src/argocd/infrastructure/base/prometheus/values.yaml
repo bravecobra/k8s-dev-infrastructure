@@ -59,7 +59,7 @@ kube-prometheus-stack:
         access: proxy
         orgId: 1
         type: loki
-        url: http://loki.infrastructure.svc.cluster.local:3100
+        url: http://loki.loki.svc.cluster.local:3100
         version: 1
     plugins:
     - grafana-piechart-panel
