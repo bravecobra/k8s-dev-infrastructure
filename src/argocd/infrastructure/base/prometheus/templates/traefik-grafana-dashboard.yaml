@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-dashboard
+  namespace: traefik
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    k8s-sidecar-target-directory: /tmp/dashboards/Infrastructure
+data:
+  {{ (.Files.Glob "files/traefik-grafana-dashboard.json").AsConfig | nindent 2}}
