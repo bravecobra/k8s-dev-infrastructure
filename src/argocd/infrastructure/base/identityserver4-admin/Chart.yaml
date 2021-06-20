@@ -24,6 +24,6 @@ version: 0.1.0
 appVersion: "0.1.0"
 
 dependencies:
-  - name: identityserver4
+  - name: identityserver4admin
     version: 0.4.0
     repository: https://bravecobra.github.io/identityserver4.admin-helm/charts/
