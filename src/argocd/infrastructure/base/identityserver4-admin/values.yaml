@@ -1,4 +1,4 @@
-identityserver4-admin:
+identityserver4admin:
   seed:
     defaultAdmin:
       password: Password_123
