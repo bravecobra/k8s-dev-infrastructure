@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: identityserver4
+    namespace: identityserver4-admin
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
