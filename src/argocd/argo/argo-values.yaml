@@ -73,6 +73,20 @@ server:
             hs = {}
             hs.status = "Healthy"
             return hs
+      admissionregistration.k8s.io/ValidatingWebhookConfiguration:
+        ignoreDifferences: |
+          jsonPointers:
+          - /webhooks/0/clientconfig/caBundle
+          - /webhooks/1/clientconfig/caBundle
+          - /webhooks/2/clientconfig/caBundle
+          - /webhooks/3/clientconfig/caBundle
+          - /webhooks/4/clientconfig/caBundle
+          - /webhooks/5/clientconfig/caBundle
+          - /webhooks/6/clientconfig/caBundle
+          - /webhooks/7/clientconfig/caBundle
+          - /webhooks/8/clientconfig/caBundle
+          - /webhooks/9/clientconfig/caBundle
+          - /webhooks/10/clientconfig/caBundle
       admissionregistration.k8s.io/MutatingWebhookConfiguration:
         ignoreDifferences: |
           jsonPointers:
