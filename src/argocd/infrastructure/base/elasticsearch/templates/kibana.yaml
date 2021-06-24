@@ -2,7 +2,7 @@ apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
   name: elastic-kb
-  namespace: infrastructure
+  namespace: elasticsearch
 spec:
   version: 7.12.1
   count: 1
