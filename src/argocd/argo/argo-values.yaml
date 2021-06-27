@@ -1,3 +1,6 @@
+global:
+    image:
+      tag: v2.0.3
 server:
   # resources:
   #   limits:
@@ -82,11 +85,13 @@ server:
           health.lua: |
             hs = {}
             hs.status = "Healthy"
+            hs.status.loadBalancer.ingress = {}
             return hs
       extensions/Ingress:
           health.lua: |
             hs = {}
             hs.status = "Healthy"
+            hs.status.loadBalancer.ingress = {}
             return hs
       jaegertracing.io/Jaeger:
           health.lua: |
