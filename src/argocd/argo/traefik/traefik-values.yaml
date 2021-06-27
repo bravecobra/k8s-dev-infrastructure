@@ -13,7 +13,8 @@ additionalArguments:
   - "--tracing.jaeger.localAgentHostPort=jaeger-agent.jaeger.svc:6831"
   - "--serversTransport.insecureSkipVerify=true"
   - "--providers.kubernetesingress=true"
-  - "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.2"
+  - "--providers.kubernetesingress.ingressendpoint"
+  - "--providers.kubernetesingress.ingressendpoint.ip=127.0.0.1"
 
 logs:
   access:
