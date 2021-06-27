@@ -23,3 +23,14 @@ spec:
       spec:
         automountServiceAccountToken: true
         serviceAccount: elastic-es
+        containers:
+        - name: elasticsearch
+          env:
+          - name: ES_JAVA_OPTS
+            value: -Xms1g -Xmx1g
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: 0.5
+            limits:
+              memory: 1Gi

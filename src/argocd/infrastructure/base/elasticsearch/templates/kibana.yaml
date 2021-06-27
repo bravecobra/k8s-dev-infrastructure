@@ -27,11 +27,20 @@ spec:
     spec:
       automountServiceAccountToken: true
       serviceAccount: elastic-kb
-      # containers:
-      #   - name: kibana
-      #     env:
-      #       - name: ELASTICSEARCH_PASSWORD
-      #         valueFrom:
-      #           secretKeyRef:
-      #             name: elastic-es-es-elastic-user
-      #             key: elastic
+      containers:
+      - name: kibana
+        env:
+          - name: NODE_OPTIONS
+            value: "--max-old-space-size=2048"
+          # - name: ELASTICSEARCH_PASSWORD
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: elastic-es-es-elastic-user
+          #       key: elastic
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 0.5
+          limits:
+            memory: 1Gi
+            cpu: 1
