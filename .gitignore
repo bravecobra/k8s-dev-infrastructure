@@ -85,3 +85,4 @@ certs.yaml
 site/
 cacerts.yaml
 src/terraform/.terraform.lock.hcl
+charts/
