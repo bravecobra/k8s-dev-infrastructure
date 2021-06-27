@@ -79,6 +79,9 @@ argocd:
         - type: helm
           name: cert-manager
           url: https://charts.jetstack.io
+        - type: helm
+          name: traefik
+          url: https://helm.traefik.io/traefik
       resource.customizations: |
         networking.k8s.io/Ingress:
             health.lua: |
