@@ -1,4 +1,5 @@
 traefik:
+  installCRDs: false
   dashboard:
     enabled: true
     domain: traefik.infrastructure.k8s.local
