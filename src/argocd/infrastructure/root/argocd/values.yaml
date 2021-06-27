@@ -87,16 +87,13 @@ argocd:
             health.lua: |
               hs = {}
               hs.status = "Healthy"
-              return hs
-        networking.k8s.io/Service:
-            health.lua: |
-              hs = {}
-              hs.status = "Healthy"
+              hs.status.loadBalancer.ingress = {}
               return hs
         extensions/Ingress:
             health.lua: |
               hs = {}
               hs.status = "Healthy"
+              hs.status.loadBalancer.ingress = {}
               return hs
         jaegertracing.io/Jaeger:
             health.lua: |
