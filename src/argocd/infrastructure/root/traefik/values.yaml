@@ -15,7 +15,9 @@ traefik:
     - "--tracing.jaeger.localAgentHostPort=jaeger-agent.jaeger.svc:6831"
     - "--serversTransport.insecureSkipVerify=true"
     - "--providers.kubernetesingress=true"
+    - "--providers.kubernetesingress.ingressendpoint"
     - "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.2"
+    - "--providers.kubernetesingress.ingressendpoint.hostname=traefik"
   logs:
     access:
       enabled: true
