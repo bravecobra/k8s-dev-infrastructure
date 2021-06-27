@@ -108,3 +108,5 @@ identityserver4admin:
       - secretName: traefik-cert
         hosts:
           - api.login.k8s.local
+  mssql:
+    MSSQL_MEMORY_LIMIT_MB: 1024
