@@ -88,6 +88,11 @@ argocd:
               hs = {}
               hs.status = "Healthy"
               return hs
+        networking.k8s.io/Service:
+            health.lua: |
+              hs = {}
+              hs.status = "Healthy"
+              return hs
         extensions/Ingress:
             health.lua: |
               hs = {}
