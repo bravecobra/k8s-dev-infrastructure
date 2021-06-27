@@ -29,10 +29,14 @@ kubectl apply -f ./src/argocd/argo/traefik/crds/dashboard.yaml
 ## install argocd
 kubectl create namespace argocd
 helm upgrade --install --wait argocd argo/argo-cd -n argocd -f ./src/argocd/argo/argo-values.yaml
-$argopass = kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
 
 kubectl apply -f ./src/argocd/infrastructure/base/coredns/coredns.yaml
 
-# argocd login argo.k8s.local:443 --grpc-web --username admin --password $argopass
-# argocd app create infrastructure --grpc-web --repo=https://github.com/bravecobra/k8s-dev-infrastructure --path=src/argocd/infrastructure/base/infrastructure-app --revision=feature/argocd --dest-server=https://kubernetes.default.svc --dest-namespace=infrastructure --self-heal --auto-prune --sync-option CreateNamespace=true --sync-policy=automated
+$argopass = kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+argocd login argo.k8s.local:443 --grpc-web --username admin --password $argopass
+argocd app create infrastructure --grpc-web --repo=https://github.com/bravecobra/k8s-dev-infrastructure --path=src/argocd/infrastructure/base/infrastructure-app --revision=feature/argocd --dest-server=https://kubernetes.default.svc --dest-namespace=infrastructure --self-heal --auto-prune --sync-option CreateNamespace=true --sync-policy=automated
+
+# $elasticpass = kubectl -n elasticsearch get secret elastic-es-es-elastic-user -o jsonpath="{.data.elastic}" | base64 -d
+
 Write-Host "Argo admin pass: $argopass"
