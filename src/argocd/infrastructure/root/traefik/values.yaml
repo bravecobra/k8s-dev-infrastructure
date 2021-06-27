@@ -17,7 +17,7 @@ traefik:
     - "--providers.kubernetesingress=true"
     - "--providers.kubernetesingress.ingressendpoint"
     - "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.2"
-
+    - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
   logs:
     access:
       enabled: true
