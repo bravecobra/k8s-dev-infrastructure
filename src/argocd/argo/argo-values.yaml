@@ -1,4 +1,11 @@
 server:
+  # resources:
+  #   limits:
+  #     cpu: 100m
+  #     memory: 128Mi
+  #   requests:
+  #     cpu: 50m
+  #     memory: 64Mi
   ingress:
     enabled: true
     annotations:
@@ -97,3 +104,36 @@ server:
           - /webhooks/5/clientConfig/caBundle
           - /webhooks/6/clientConfig/caBundle
           - /webhooks/7/clientConfig/caBundle
+
+# controller:
+#   resources:
+#     limits:
+#       cpu: 500m
+#       memory: 512Mi
+#     requests:
+#       cpu: 250m
+#       memory: 256Mi
+# dex:
+#   resources:
+#    limits:
+#      cpu: 50m
+#      memory: 64Mi
+#    requests:
+#      cpu: 10m
+#      memory: 32Mi
+# redis:
+#   resources:
+#    limits:
+#      cpu: 200m
+#      memory: 128Mi
+#    requests:
+#      cpu: 100m
+#      memory: 64Mi
+# repoServer:
+#   resources:
+#     limits:
+#       cpu: 50m
+#       memory: 128Mi
+#     requests:
+#       cpu: 10m
+#       memory: 64Mi
