@@ -76,6 +76,9 @@ argocd:
         - type: helm
           name: argo-cd
           url: https://argoproj.github.io/argo-helm
+        - type: helm
+          name: cert-manager
+          url: https://charts.jetstack.io
       resource.customizations: |
         networking.k8s.io/Ingress:
             health.lua: |
