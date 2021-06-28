@@ -14,7 +14,7 @@ additionalArguments:
   - "--serversTransport.insecureSkipVerify=true"
   - "--providers.kubernetesingress=true"
   - "--providers.kubernetesingress.ingressendpoint"
-  - "--providers.kubernetesingress.ingressendpoint.ip=127.0.0.1"
+  - "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.2"
 
 logs:
   access:
@@ -52,13 +52,21 @@ ingressRoute:
     annotations:
       traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
       traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+providers:
+  kubernetesCRD:
+    enabled: true
+    namespaces: []
+  kubernetesIngress:
+    enabled: true
+    namespaces: []
 
 service:
   enabled: true
+  type: ClusterIP
   spec:
-    externalTrafficPolicy: Cluster
+  #   externalTrafficPolicy: Cluster
+  # clusterIP: 172.18.0.2
   externalIPs: [
-    #192.168.49.2
     172.18.0.2
   ]
 

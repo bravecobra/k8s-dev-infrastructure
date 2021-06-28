@@ -24,9 +24,9 @@ server:
         pathType: Prefix
         backend:
           service:
-            name: ssl-redirect
+            name: argocd-server
             port:
-              name: use-annotation
+              number: 443
     tls:
       - secretName: argocd-tls-certificate
         hosts:
@@ -47,9 +47,9 @@ server:
         pathType: Prefix
         backend:
           service:
-            name: ssl-redirect
+            name: argocd-server
             port:
-              name: use-annotation
+              number: 443
     tls:
       - secretName: argocd-tls-certificate
         hosts:

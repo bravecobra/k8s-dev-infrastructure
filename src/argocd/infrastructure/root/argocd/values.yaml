@@ -1,5 +1,4 @@
 argocd:
-  installCRDs: false
   global:
       image:
         tag: v2.0.3
@@ -26,9 +25,9 @@ argocd:
           pathType: Prefix
           backend:
             service:
-              name: ssl-redirect
+              name: argocd-server
               port:
-                name: use-annotation
+                number: 443
       tls:
         - secretName: argocd-tls-certificate
           hosts:
@@ -49,9 +48,9 @@ argocd:
           pathType: Prefix
           backend:
             service:
-              name: ssl-redirect
+              name: argocd-server
               port:
-                name: use-annotation
+                number: 443
       tls:
         - secretName: argocd-tls-certificate
           hosts:
