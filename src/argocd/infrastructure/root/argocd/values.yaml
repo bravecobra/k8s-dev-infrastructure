@@ -82,23 +82,25 @@ argocd:
           name: traefik
           url: https://helm.traefik.io/traefik
       resource.customizations: |
-        networking.k8s.io/Ingress:
-            health.lua: |
-              hs = {}
-              hs.status = "Healthy"
-              hs.status.loadBalancer.ingress = {}
-              return hs
-        extensions/Ingress:
-            health.lua: |
-              hs = {}
-              hs.status = "Healthy"
-              hs.status.loadBalancer.ingress = {}
-              return hs
+        argoproj.io/Application:
+          health.lua: |
+            hs = {}
+            hs.status = "Progressing"
+            hs.message = ""
+            if obj.status ~= nil then
+              if obj.status.health ~= nil then
+                hs.status = obj.status.health.status
+                if obj.status.health.message ~= nil then
+                  hs.message = obj.status.health.message
+                end
+              end
+            end
+            return hs
         jaegertracing.io/Jaeger:
-            health.lua: |
-              hs = {}
-              hs.status = "Healthy"
-              return hs
+          health.lua: |
+            hs = {}
+            hs.status = "Healthy"
+            return hs
         admissionregistration.k8s.io/ValidatingWebhookConfiguration:
           ignoreDifferences: |
             jsonPointers:
@@ -124,36 +126,36 @@ argocd:
             - /webhooks/6/clientConfig/caBundle
             - /webhooks/7/clientConfig/caBundle
 
-  # controller:
-  #   resources:
-  #     limits:
-  #       cpu: 500m
-  #       memory: 512Mi
-  #     requests:
-  #       cpu: 250m
-  #       memory: 256Mi
+  controller:
+    # resources:
+    #   limits:
+    #     cpu: 500m
+    #     memory: 512Mi
+    #   requests:
+    #     cpu: 250m
+    #     memory: 256Mi
   dex:
     enabled: false
-  #   resources:
-  #    limits:
-  #      cpu: 50m
-  #      memory: 64Mi
-  #    requests:
-  #      cpu: 10m
-  #      memory: 32Mi
-  # redis:
-  #   resources:
-  #    limits:
-  #      cpu: 200m
-  #      memory: 128Mi
-  #    requests:
-  #      cpu: 100m
-  #      memory: 64Mi
-  # repoServer:
-  #   resources:
-  #     limits:
-  #       cpu: 50m
-  #       memory: 128Mi
-  #     requests:
-  #       cpu: 10m
-  #       memory: 64Mi
+    # resources:
+    #  limits:
+    #    cpu: 50m
+    #    memory: 64Mi
+    #  requests:
+    #    cpu: 10m
+    #    memory: 32Mi
+  redis:
+    resources:
+    #  limits:
+    #    cpu: 200m
+    #    memory: 128Mi
+    #  requests:
+    #    cpu: 100m
+    #    memory: 64Mi
+  repoServer:
+    resources:
+      # limits:
+      #   cpu: 50m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 10m
+      #   memory: 64Mi
