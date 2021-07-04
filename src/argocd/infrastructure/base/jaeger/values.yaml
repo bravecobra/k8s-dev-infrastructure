@@ -1,0 +1,10 @@
+jaeger-operator:
+  agent:
+    podAnnotations:
+        "consul.hashicorp.com/connect-inject": "true"
+  query:
+    podAnnotations:
+        "consul.hashicorp.com/connect-inject": "true"
+  rbac:
+    create: true
+    clusterRole: true

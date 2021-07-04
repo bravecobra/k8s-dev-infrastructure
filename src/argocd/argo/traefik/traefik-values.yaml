@@ -1,0 +1,89 @@
+dashboard:
+  enabled: true
+  domain: traefik.infrastructure.k8s.local
+# deployment:
+#   podAnnotations:
+#     "consul.hashicorp.com/connect-inject": "true"
+#     "consul.hashicorp.com/connect-service-port": "8000"
+#    "consul.hashicorp.com/transparent-proxy": "true"
+additionalArguments:
+  - "--metrics.prometheus=true"
+  - "--tracing.jaeger=true"
+  - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.jaeger.svc:5778/sampling"
+  - "--tracing.jaeger.localAgentHostPort=jaeger-agent.jaeger.svc:6831"
+  - "--serversTransport.insecureSkipVerify=true"
+  - "--providers.kubernetesingress=true"
+  - "--providers.kubernetesingress.ingressendpoint"
+  - "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.2"
+
+logs:
+  access:
+    enabled: true
+    format: json
+  general:
+    format: json
+    level: INFO
+
+kubernetes:
+  namespaces:
+    - default
+    - kube-system
+
+ports:
+  websecure:
+    tls:
+      enabled: true
+
+volumes:
+  - name: traefik-cert
+    mountPath: "/certs"
+    type: secret
+
+ingressClass:
+#   # true is not unit-testable yet, pending https://github.com/rancher/helm-unittest/pull/12
+  enabled: true
+  isDefaultClass: true
+#   # Use to force a networking.k8s.io API Version for certain CI/CD applications. E.g. "v1beta1"
+  fallbackApiVersion: "v1beta1"
+
+ingressRoute:
+  dashboard:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+providers:
+  kubernetesCRD:
+    enabled: true
+    namespaces: []
+  kubernetesIngress:
+    enabled: true
+    namespaces: []
+
+service:
+  enabled: true
+  type: ClusterIP
+  spec:
+  #   externalTrafficPolicy: Cluster
+  # clusterIP: 172.18.0.2
+  externalIPs: [
+    172.18.0.2
+  ]
+
+tls:
+  certificates:
+    - certFile: /certs/tls.crt
+      keyFile: /certs/tls.key
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/tls.crt
+        keyFile: /certs/tls.key
+
+# consul:
+#   enabled: true
+#   endpoint: "consul-consul-server:8500"
+#   datacenter: datacenter1
+#   watch: true
+#   exposedByDefault: true
+#   prefix: traefik

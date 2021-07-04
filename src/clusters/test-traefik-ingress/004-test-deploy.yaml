@@ -62,4 +62,3 @@ spec:
         backend:
           serviceName: bar-service
           servicePort: 5678
----

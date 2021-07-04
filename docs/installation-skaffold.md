@@ -2,7 +2,7 @@
 
 ## Local DNS
 
-Since we running completely locally, we want to add some entries to the hosts file.
+Since we running completely locally, we want to add some entries to the hosts file to forward domainnames to our locally running cluster.
 Open `C:\Windows\system32\drivers\etc\hosts` in an editor as `Administrator` and add the following entries
 
 ```text
@@ -33,6 +33,7 @@ kubectl create secret tls ca-key-pair --namespace=cert-manager --cert=./src/cert
 ## Adding helm repo's
 
 ```powershell
+helm repo add argo https://argoproj.github.io/argo-helm
 helm repo add hashicorp https://helm.releases.hashicorp.com
 helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
 helm repo add bitnami https://charts.bitnami.com/bitnami
