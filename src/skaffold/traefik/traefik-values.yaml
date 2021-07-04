@@ -1,18 +1,20 @@
 dashboard:
   enabled: true
   domain: traefik.infrastructure.k8s.local
-deployment:
-  podAnnotations:
-    "consul.hashicorp.com/connect-inject": "true"
-    "consul.hashicorp.com/connect-service-port": "8000"
-    "consul.hashicorp.com/transparent-proxy": "true"
+# deployment:
+#   podAnnotations:
+#     "consul.hashicorp.com/connect-inject": "true"
+#     "consul.hashicorp.com/connect-service-port": "8000"
+#     "consul.hashicorp.com/transparent-proxy": "true"
 additionalArguments:
   - "--metrics.prometheus=true"
   - "--tracing.jaeger=true"
-  - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.infrastructure.svc:5778/sampling"
-  - "--tracing.jaeger.localAgentHostPort=jaeger-agent.infrastructure.svc:6831"
+  - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.jaeger.svc:5778/sampling"
+  - "--tracing.jaeger.localAgentHostPort=jaeger-agent.jaeger.svc:6831"
   - "--serversTransport.insecureSkipVerify=true"
   - "--providers.kubernetesingress=true"
+  - "--providers.kubernetesingress.ingressendpoint"
+  - "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.2"
 
 logs:
   access:
@@ -42,7 +44,7 @@ ingressClass:
   enabled: true
   isDefaultClass: true
 #   # Use to force a networking.k8s.io API Version for certain CI/CD applications. E.g. "v1beta1"
-#   # fallbackApiVersion:
+  fallbackApiVersion: "v1beta1"
 
 ingressRoute:
   dashboard:
@@ -50,13 +52,21 @@ ingressRoute:
     annotations:
       traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
       traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+providers:
+  kubernetesCRD:
+    enabled: true
+    namespaces: []
+  kubernetesIngress:
+    enabled: true
+    namespaces: []
 
 service:
   enabled: true
+  type: ClusterIP
   spec:
-    externalTrafficPolicy: Cluster
+  #   externalTrafficPolicy: Cluster
+  # clusterIP: 172.18.0.2
   externalIPs: [
-    #192.168.49.2
     172.18.0.2
   ]
 

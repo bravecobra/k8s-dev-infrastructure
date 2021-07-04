@@ -4,7 +4,7 @@ metadata:
   name: jaeger-admin
   labels:
     app: jaeger
-  namespace: infrastructure
+  namespace: jaeger
 spec:
   selector:
     app: jaeger

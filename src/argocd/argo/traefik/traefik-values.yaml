@@ -5,7 +5,7 @@ dashboard:
 #   podAnnotations:
 #     "consul.hashicorp.com/connect-inject": "true"
 #     "consul.hashicorp.com/connect-service-port": "8000"
-#    "consul.hashicorp.com/transparent-proxy": "true"
+#     "consul.hashicorp.com/transparent-proxy": "true"
 additionalArguments:
   - "--metrics.prometheus=true"
   - "--tracing.jaeger=true"

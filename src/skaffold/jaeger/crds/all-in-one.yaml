@@ -2,7 +2,7 @@ apiVersion: jaegertracing.io/v1
 kind: Jaeger
 metadata:
   name: jaeger
-  namespace: infrastructure
+  namespace: jaeger
 spec:
   annotations:
     "consul.hashicorp.com/connect-inject": "true"
