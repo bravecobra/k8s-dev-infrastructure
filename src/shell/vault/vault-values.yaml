@@ -1,0 +1,50 @@
+
+global:
+  enabled: true
+ui:
+  enabled: true
+# dev:
+#   enabled: true
+injector:
+  enabled: true
+server:
+  affinity: ""
+  dev:
+    enabled: true
+    # Set VAULT_DEV_ROOT_TOKEN_ID value
+    devRootToken: "root"
+  annotations:
+    "consul.hashicorp.com/connect-inject": "true"
+  ingress:
+      enabled: true
+      hosts:
+      - host: vault.infrastructure.k8s.local
+        paths:
+          - /
+        passHostHeader: true
+        backend:
+          serviceName: vault-ui
+          servicePort: 8200
+      tls:
+        - hosts:
+          - vault.infrastructure.k8s.local
+          secretName: vault-cert
+      annotations: |
+        traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+        traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+  # ha:
+  #   enabled: true
+  #   replicas: 1
+  #   config: |
+  #     ui = true
+  #     listener "tcp" {
+  #       tls_disable = 1
+  #       address = "0.0.0.0:8200"
+  #       cluster_address = "0.0.0.0:8201"
+  #     }
+  #     storage "consul" {
+  #       path = "vault"
+  #       address = "HOST_IP:8500"
+  #       advertise_addr = "HOST_IP:8300"
+  #       scheme = "http"
+  #     }
