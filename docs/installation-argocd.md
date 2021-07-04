@@ -31,7 +31,8 @@ copy $env:LOCALAPPDATA\mkcert\rootCA-key.pem ./src/certs/cacerts.key
 kubectl create secret tls ca-key-pair --namespace=cert-manager --cert=./src/certs/cacerts.crt --key=./src/certs/cacerts.key  --dry-run=client -o yaml > ./src/argocd/base/cert-manager/crds/cacerts.yaml
 ```
 
+Next run the installer:
+
 ```powershell
-kubectl create namespace argocd
-helm upgrade --install argocd argo/argo-cd -f ./src/argocd/argo/argo-values.yaml
+./src/argocd/install.ps1
 ```

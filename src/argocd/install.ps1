@@ -21,10 +21,7 @@ Start-Sleep -Seconds 10
 kubectl create namespace traefik
 helm upgrade --install --wait traefik traefik/traefik -n traefik -f ./src/argocd/argo/traefik/traefik-values.yaml
 
-kubectl apply -f ./src/argocd/argo/traefik/crds/cert-store.yaml
-kubectl apply -f ./src/argocd/argo/traefik/crds/http-redirect-middleware.yaml
-kubectl apply -f ./src/argocd/argo/traefik/crds/traefik-cert.yaml
-kubectl apply -f ./src/argocd/argo/traefik/crds/dashboard.yaml
+kubectl apply -f ./src/argocd/argo/traefik/crds/
 
 ## install argocd
 kubectl create namespace argocd
@@ -34,8 +31,8 @@ kubectl apply -f ./src/argocd/infrastructure/base/coredns/coredns.yaml
 
 $argopass = kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 argocd login argo.k8s.local:443 --grpc-web --username admin --password $argopass
-argocd app create root --grpc-web --repo=https://github.com/bravecobra/k8s-dev-infrastructure --path=src/argocd/infrastructure/root/root-app --revision=feature/argocd --dest-server=https://kubernetes.default.svc --dest-namespace=default --self-heal --auto-prune --sync-option CreateNamespace=true --sync-policy=automated
-argocd app create infrastructure --grpc-web --repo=https://github.com/bravecobra/k8s-dev-infrastructure --path=src/argocd/infrastructure/base/infrastructure-app --revision=feature/argocd --dest-server=https://kubernetes.default.svc --dest-namespace=infrastructure --self-heal --auto-prune --sync-option CreateNamespace=true --sync-policy=automated
+argocd app create root --grpc-web --repo=https://github.com/bravecobra/k8s-dev-infrastructure --path=src/argocd/infrastructure/root/root-app --revision=develop --dest-server=https://kubernetes.default.svc --dest-namespace=default --self-heal --auto-prune --sync-option CreateNamespace=true --sync-policy=automated
+argocd app create infrastructure --grpc-web --repo=https://github.com/bravecobra/k8s-dev-infrastructure --path=src/argocd/infrastructure/base/infrastructure-app --revision=develop --dest-server=https://kubernetes.default.svc --dest-namespace=infrastructure --self-heal --auto-prune --sync-option CreateNamespace=true --sync-policy=automated
 
 # $elasticpass = kubectl -n elasticsearch get secret elastic-es-es-elastic-user -o jsonpath="{.data.elastic}" | base64 -d
 
