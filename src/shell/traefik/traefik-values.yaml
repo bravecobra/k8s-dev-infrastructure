@@ -15,6 +15,7 @@ additionalArguments:
   - "--providers.kubernetesingress=true"
   - "--providers.kubernetesingress.ingressendpoint"
   - "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.2"
+  - "--entryPoints.streaming.address=:6831/udp"
 
 logs:
   access:
