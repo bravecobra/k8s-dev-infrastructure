@@ -7,6 +7,7 @@ $promtail_helm_version= "3.5.1"
 $consul_helm_version= "0.31.1"
 $vault_helm_version = "0.13.0"
 $elastic_helm_version = "1.6.0"
+$identityserver4admin_helm_version = "0.4.0"
 
 Copy-Item $env:LOCALAPPDATA\mkcert\rootCA.pem ./src/certs/cacerts.crt
 Copy-Item $env:LOCALAPPDATA\mkcert\rootCA-key.pem ./src/certs/cacerts.key
@@ -34,6 +35,7 @@ kubectl create namespace prometheus
 kubectl create namespace loki
 kubectl create namespace jaeger
 kubectl create namespace elasticsearch
+kubectl create namespace identityserver4
 
 ## Cert-manager
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.crds.yaml
@@ -50,6 +52,9 @@ kubectl apply -f ./src/shell/traefik/crds/
 ## Consul
 helm upgrade --install --wait consul hashicorp/consul -n consul --version $consul_helm_version -f ./src/shell/consul/consul-values.yaml
 kubectl apply -f ./src/shell/consul/crds/
+
+## Update CoreDNS
+kubectl apply -f ./src/shell/coredns/coredns.yaml
 
 ## Prometheus
 helm upgrade --install --wait prometheus prometheus-community/kube-prometheus-stack -n prometheus --version $prometheus_helm_version -f ./src/shell/prometheus/prometheus-values.yaml
@@ -72,6 +77,10 @@ kubectl apply -f ./src/shell/vault/crds/
 ## ElasticSearch & Kibana
 helm upgrade --install --wait elastic-operator elastic/eck-operator -n elasticsearch --version $elastic_helm_version -f ./src/shell/elasticsearch/eck-values.yaml
 kubectl apply -f ./src/shell/elasticsearch/crds/
+
+## Identityserver admin
+helm upgrade --install --wait identityserver4 identityserver4admin/identityserver4admin -n identityserver4 --version $identityserver4admin_helm_version -f ./src/shell/identityserver4-admin/identityserver4admin-values.yaml
+kubectl apply -f ./src/shell/identityserver4admin/crds/
 
 $elasticsearchpass = kubectl -n elasticsearch get secret elastic-es-es-elastic-user -o jsonpath='{.data.elastic}' | base64 -d
 Write-Host "Elasticsearch username: elastic"

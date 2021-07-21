@@ -9,13 +9,15 @@ data:
     #   log
     #   errors
     #   cache 30
-    #   forward . 10.103.207.22
+    #   forward . 10.96.215.99
     # }
     .:53 {
         errors
         health {
           lameduck 5s
         }
+        rewrite name login.k8s.local identityserver4-identity.identityserver4.svc.cluster.local
+        rewrite name admin.login.k8s.local identityserver4-admin.identityserver4.svc.cluster.local
         ready
         kubernetes cluster.local in-addr.arpa ip6.arpa {
           pods insecure
