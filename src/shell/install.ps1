@@ -6,6 +6,7 @@ $loki_helm_version= "2.5.0"
 $promtail_helm_version= "3.5.1"
 $consul_helm_version= "0.31.1"
 $vault_helm_version = "0.13.0"
+$elastic_version = "1.6.0"
 
 Copy-Item $env:LOCALAPPDATA\mkcert\rootCA.pem ./src/certs/cacerts.crt
 Copy-Item $env:LOCALAPPDATA\mkcert\rootCA-key.pem ./src/certs/cacerts.key
@@ -32,6 +33,7 @@ kubectl create namespace vault
 kubectl create namespace prometheus
 kubectl create namespace loki
 kubectl create namespace jaeger
+kubectl create namespace elasticsearch
 
 ## Cert-manager
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.crds.yaml
@@ -63,9 +65,16 @@ helm upgrade --install --wait promtail grafana/promtail -n loki --version $promt
 helm upgrade --install --wait jaeger jaegertracing/jaeger-operator -n jaeger --version $jaeger_helm_version -f ./src/shell/jaeger/jaeger-values.yaml
 kubectl apply -f ./src/shell/jaeger/crds/
 
-#Vault
+## Vault
 helm upgrade --install --wait vault hashicorp/vault -n vault --version $vault_helm_version -f ./src/shell/vault/vault-values.yaml
 kubectl apply -f ./src/shell/vault/crds/
 
+## ElasticSearch & Kibana
+helm upgrade --install --wait elastic-operator elastic/eck-operator -n elasticsearch --version $elastic_version -f ./src/shell/elasticsearch/eck-values.yaml
+kubectl apply -f ./src/shell/elasticsearch/crds/
+
+$elasticsearchpass = kubectl -n elasticsearch get secret elastic-es-es-elastic-user -o jsonpath='{.data.elastic}' | base64 -d
+Write-Host "Elasticsearch username: elastic"
+Write-Host "Elasticsearch password: $elasticsearchpass"
 $consultoken = kubectl -n consul get secret consul-consul-bootstrap-acl-token -o jsonpath="{.data.token}" | base64 -d
 Write-Host "Consul bootstrap root token: $consultoken"

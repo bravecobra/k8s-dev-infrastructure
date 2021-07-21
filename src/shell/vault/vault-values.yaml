@@ -3,8 +3,6 @@ global:
   enabled: true
 ui:
   enabled: true
-# dev:
-#   enabled: true
 injector:
   enabled: true
 server:
