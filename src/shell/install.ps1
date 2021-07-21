@@ -6,7 +6,7 @@ $loki_helm_version= "2.5.0"
 $promtail_helm_version= "3.5.1"
 $consul_helm_version= "0.31.1"
 $vault_helm_version = "0.13.0"
-$elastic_version = "1.6.0"
+$elastic_helm_version = "1.6.0"
 
 Copy-Item $env:LOCALAPPDATA\mkcert\rootCA.pem ./src/certs/cacerts.crt
 Copy-Item $env:LOCALAPPDATA\mkcert\rootCA-key.pem ./src/certs/cacerts.key
@@ -70,7 +70,7 @@ helm upgrade --install --wait vault hashicorp/vault -n vault --version $vault_he
 kubectl apply -f ./src/shell/vault/crds/
 
 ## ElasticSearch & Kibana
-helm upgrade --install --wait elastic-operator elastic/eck-operator -n elasticsearch --version $elastic_version -f ./src/shell/elasticsearch/eck-values.yaml
+helm upgrade --install --wait elastic-operator elastic/eck-operator -n elasticsearch --version $elastic_helm_version -f ./src/shell/elasticsearch/eck-values.yaml
 kubectl apply -f ./src/shell/elasticsearch/crds/
 
 $elasticsearchpass = kubectl -n elasticsearch get secret elastic-es-es-elastic-user -o jsonpath='{.data.elastic}' | base64 -d
