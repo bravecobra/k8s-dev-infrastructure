@@ -117,4 +117,4 @@ echo "Elasticsearch password: $elasticsearchpass"
 consultoken = kubectl -n consul get secret consul-consul-bootstrap-acl-token -o jsonpath="{.data.token}" | base64 -d
 consuldns = kubectl get svc consul-consul-dns -o jsonpath='{.spec.clusterIP}' --namespace=consul
 echo "Consul DNS Server ClusterIP: $consuldns"
-echo"Consul bootstrap root token: $consultoken"
+echo "Consul bootstrap root token: $consultoken"
