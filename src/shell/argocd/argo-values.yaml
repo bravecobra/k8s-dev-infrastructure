@@ -124,8 +124,30 @@ server:
           - /webhooks/5/clientConfig/caBundle
           - /webhooks/6/clientConfig/caBundle
           - /webhooks/7/clientConfig/caBundle
+  metrics:
+    enabled: true
+    service:
+      annotations: {}
+      labels: {}
+      servicePort: 8082
+    serviceMonitor:
+      enabled: false
+      interval: 30s
+  # selector:
+  #   prometheus: kube-prometheus
+  #   namespace: prometheus
+  #   additionalLabels: {}
 
-# controller:
+controller:
+  metrics:
+    enabled: true
+    service:
+      annotations: {}
+      labels: {}
+      servicePort: 8082
+    serviceMonitor:
+      enabled: false
+      interval: 30s
   # resources:
   #   limits:
   #     cpu: 500m
@@ -142,7 +164,16 @@ dex:
   #  requests:
   #    cpu: 10m
   #    memory: 32Mi
-# redis:
+redis:
+  metrics:
+    enabled: true
+    service:
+      annotations: {}
+      labels: {}
+      servicePort: 8082
+    serviceMonitor:
+      enabled: false
+      interval: 30s
   # resources:
   #  limits:
   #    cpu: 200m
@@ -150,7 +181,16 @@ dex:
   #  requests:
   #    cpu: 100m
   #    memory: 64Mi
-# repoServer:
+repoServer:
+  metrics:
+    enabled: true
+    service:
+      annotations: {}
+      labels: {}
+      servicePort: 8082
+    serviceMonitor:
+      enabled: false
+      interval: 30s
   # resources:
   #   limits:
   #     cpu: 50m
