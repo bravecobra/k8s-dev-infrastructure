@@ -131,12 +131,15 @@ server:
       labels: {}
       servicePort: 8082
     serviceMonitor:
-      enabled: false
+      namespace: argocd
+      enabled: true
       interval: 30s
-  # selector:
-  #   prometheus: kube-prometheus
-  #   namespace: prometheus
-  #   additionalLabels: {}
+      additionalLabels :
+        release: prometheus
+    # selector:
+    #   prometheus: prometheus-kube-prometheus-prometheus
+    #   namespace: prometheus
+    #   additionalLabels: {}
 
 controller:
   metrics:
@@ -146,8 +149,11 @@ controller:
       labels: {}
       servicePort: 8082
     serviceMonitor:
-      enabled: false
+      namespace: argocd
+      enabled: true
       interval: 30s
+      additionalLabels :
+        release: prometheus
   # resources:
   #   limits:
   #     cpu: 500m
@@ -172,8 +178,11 @@ redis:
       labels: {}
       servicePort: 8082
     serviceMonitor:
-      enabled: false
+      namespace: argocd
+      enabled: true
       interval: 30s
+      additionalLabels :
+        release: prometheus
   # resources:
   #  limits:
   #    cpu: 200m
@@ -189,8 +198,11 @@ repoServer:
       labels: {}
       servicePort: 8082
     serviceMonitor:
-      enabled: false
+      namespace: argocd
+      enabled: true
       interval: 30s
+      additionalLabels :
+        release: prometheus
   # resources:
   #   limits:
   #     cpu: 50m
