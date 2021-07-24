@@ -9,6 +9,9 @@ $vault_helm_version = "0.13.0" # 0.13.0
 $elastic_helm_version = "1.6.0" # 1.6.0
 $identityserver4admin_helm_version = "0.4.0" # 0.4.0
 
+# $login_domain="login.k8s.local"
+# $login_admin_domain="admin.login.k8s.local"
+
 Copy-Item $env:LOCALAPPDATA\mkcert\rootCA.pem ./src/certs/cacerts.crt
 Copy-Item $env:LOCALAPPDATA\mkcert\rootCA-key.pem ./src/certs/cacerts.key
 kubectl create secret tls ca-key-pair --namespace=cert-manager --cert=./src/certs/cacerts.crt --key=./src/certs/cacerts.key  --dry-run=client -o yaml > ./src/argocd/argo/cert-manager/crds/cacerts.yaml
@@ -53,6 +56,8 @@ kubectl apply -f ./src/shell/traefik/crds/
 ## Consul
 helm upgrade --install --wait consul hashicorp/consul -n consul --version $consul_helm_version -f ./src/shell/consul/consul-values.yaml
 kubectl apply -f ./src/shell/consul/crds/
+$consultoken = kubectl -n consul get secret consul-consul-bootstrap-acl-token -o jsonpath="{.data.token}" | base64 -d
+$consuldns = kubectl get svc consul-consul-dns -o jsonpath='{.spec.clusterIP}' --namespace=consul
 
 ## Update CoreDNS
 kubectl apply -f ./src/shell/coredns/coredns.yaml
@@ -95,7 +100,6 @@ Write-Host "ArgoCD password: $argopass"
 $elasticsearchpass = kubectl -n elasticsearch get secret elastic-es-es-elastic-user -o jsonpath='{.data.elastic}' | base64 -d
 Write-Host "Elasticsearch username: elastic"
 Write-Host "Elasticsearch password: $elasticsearchpass"
-$consultoken = kubectl -n consul get secret consul-consul-bootstrap-acl-token -o jsonpath="{.data.token}" | base64 -d
-$consuldns = kubectl get svc consul-consul-dns -o jsonpath='{.spec.clusterIP}' --namespace=consul
+
 Write-Host "Consul DNS Server ClusterIP: $consuldns"
 Write-Host "Consul bootstrap root token: $consultoken"

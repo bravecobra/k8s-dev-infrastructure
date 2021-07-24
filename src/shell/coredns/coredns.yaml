@@ -5,12 +5,6 @@ metadata:
   namespace: kube-system
 data:
   Corefile: |
-    # consul:53 {
-    #   log
-    #   errors
-    #   cache 30
-    #   forward . 10.96.215.99
-    # }
     .:53 {
         errors
         health {
@@ -33,3 +27,9 @@ data:
         reload
         loadbalance
     }
+    # consul:53 {
+    #   log
+    #   errors
+    #   cache 30
+    #   forward . REPLACE_ME_WITH_CONSUL_CLUSTER_IP
+    # }

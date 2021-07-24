@@ -6,6 +6,10 @@
 # install mkcert in ubuntu
 # https://computingforgeeks.com/how-to-create-locally-trusted-ssl-certificates-on-linux-and-macos-with-mkcert/
 
+
+login_domain=login.k8s.local
+login_admin_domain=admin.login.k8s.local
+
 traefik_helm_version=9.19.1 # 10.1.1
 certmanager_helm_version=v1.3.1 # v1.4.0
 jaeger_helm_version=2.21.1 # 2.23.0
@@ -29,8 +33,8 @@ fi
 localappdata=`wslpath "$(wslvar LOCALAPPDATA)"`
 cp $localappdata/mkcert/rootCA.pem ./src/certs/cacerts.crt
 cp $localappdata/mkcert/rootCA-key.pem ./src/certs/cacerts.key
-
 kubectl create secret tls ca-key-pair --namespace=cert-manager --cert=./src/certs/cacerts.crt --key=./src/certs/cacerts.key  --dry-run=client -o yaml > ./src/argocd/argo/cert-manager/crds/cacerts.yaml
+
 helm repo add hashicorp https://helm.releases.hashicorp.com
 helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -74,7 +78,12 @@ helm upgrade --install --wait consul hashicorp/consul -n consul --version $consu
 kubectl apply -f ./src/shell/consul/crds/
 
 ## Update CoreDNS
-kubectl apply -f ./src/shell/coredns/coredns.yaml
+# todo: sed coredns.yaml to contain the correct consul dns ip
+kubectl -n kube-system get configmap coredns -o yaml > ./src/shell/coredns/coredns-orig.yaml
+if ! grep -q "identityserver4" ./src/shell/coredns/coredns-orig.yaml; then
+  cat ./src/shell/coredns/coredns-orig.yaml | sed -e 's/ready/rewrite name login.k8s.local identityserver4-identity.identityserver4.svc.cluster.local\n        rewrite name admin.login.k8s.local identityserver4-admin.identityserver4.svc.cluster.local\n        ready/g' > ./src/shell/coredns/coredns-patched.yaml
+  kubectl apply -f ./src/shell/coredns/coredns-patched.yaml
+fi
 
 ## Prometheus
 helm upgrade --install --wait prometheus prometheus-community/kube-prometheus-stack -n prometheus --version $prometheus_helm_version -f ./src/shell/prometheus/prometheus-values.yaml
@@ -114,7 +123,7 @@ echo "ArgoCD password: $argopass"
 elasticsearchpass=`kubectl -n elasticsearch get secret elastic-es-es-elastic-user -o jsonpath='{.data.elastic}' | base64 -d`
 echo "Elasticsearch username: elastic"
 echo "Elasticsearch password: $elasticsearchpass"
-consultoken = kubectl -n consul get secret consul-consul-bootstrap-acl-token -o jsonpath="{.data.token}" | base64 -d
-consuldns = kubectl get svc consul-consul-dns -o jsonpath='{.spec.clusterIP}' --namespace=consul
+consultoken=`kubectl -n consul get secret consul-consul-bootstrap-acl-token -o jsonpath="{.data.token}" | base64 -d`
+consuldns=`kubectl get svc consul-consul-dns -o jsonpath='{.spec.clusterIP}' --namespace=consul`
 echo "Consul DNS Server ClusterIP: $consuldns"
 echo "Consul bootstrap root token: $consultoken"
