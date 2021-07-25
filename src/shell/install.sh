@@ -3,25 +3,21 @@
 # For using WSL's kubectl copy the context to the default kubectl context
 # cp /mnt/c/users/<username>/.kube/config ~/.kube/config
 
-# install mkcert in ubuntu
-# https://computingforgeeks.com/how-to-create-locally-trusted-ssl-certificates-on-linux-and-macos-with-mkcert/
-
-
 login_domain=login.k8s.local
 login_admin_domain=admin.login.k8s.local
 
 metrics_helm_version=5.9.0
 traefik_helm_version=9.19.1 # 10.1.1
-certmanager_helm_version=v1.3.1 # v1.4.0
+certmanager_helm_version=v1.4.1
 jaeger_helm_version=2.21.1 # 2.23.0
 prometheus_helm_version=16.0.1 # 16.15.0
 loki_helm_version=2.5.0 # 2.5.3
 promtail_helm_version=3.5.1 # 3.6.0
 consul_helm_version=0.31.1 # 0.32.1
-vault_helm_version=0.13.0 # 0.13.0
-lastic_helm_version=1.6.0 # 1.6.0
-identityserver4admin_helm_version=0.4.0 # 0.4.0
-argocd_helm_version=3.10.0 # 3.10.0
+vault_helm_version=0.13.0
+lastic_helm_version=1.6.0
+identityserver4admin_helm_version=0.4.0
+argocd_helm_version=3.10.0
 
 if grep -q microsoft /proc/version; then
   echo "Ubuntu on Windows"
@@ -66,7 +62,7 @@ kubectl create namespace argocd
 helm upgrade --install --wait metrics-server bitnami/metrics-server --version=$metrics_helm_version --values=./src/shell/metrics/metrics-values.yaml
 
 ## Cert-manager
-kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.crds.yaml
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/$certmanager_helm_version/cert-manager.crds.yaml
 helm upgrade --install --wait cert-manager jetstack/cert-manager -n cert-manager --version $certmanager_helm_version --set installCRDs=false
 kubectl apply -f ./src/shell/cert-manager/crds/
 sleep 10s
