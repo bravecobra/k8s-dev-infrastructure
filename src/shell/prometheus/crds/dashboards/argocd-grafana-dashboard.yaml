@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2021-07-24T11:58:01Z"
   name: argocd-dashboard
   namespace: argocd
-  resourceVersion: "868343"
-  uid: 23456e98-b636-45db-8f3c-c4895e765982
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    k8s-sidecar-target-directory: /tmp/dashboards/Infrastructure
 data:
   argocd-dashboard.json: "{\r\n    \"annotations\": {\r\n      \"list\": [\r\n        {\r\n
     \         \"builtIn\": 1,\r\n          \"datasource\": \"-- Grafana --\",\r\n
