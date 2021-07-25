@@ -10,6 +10,7 @@
 login_domain=login.k8s.local
 login_admin_domain=admin.login.k8s.local
 
+metrics_helm_version=5.9.0
 traefik_helm_version=9.19.1 # 10.1.1
 certmanager_helm_version=v1.3.1 # v1.4.0
 jaeger_helm_version=2.21.1 # 2.23.0
@@ -61,15 +62,17 @@ kubectl create namespace elasticsearch
 kubectl create namespace identityserver4
 kubectl create namespace argocd
 
+## Enabling metrics addon
+helm upgrade --install --wait metrics-server bitnami/metrics-server --version=$metrics_helm_version --values=./src/shell/metrics/metrics-values.yaml
+
 ## Cert-manager
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.crds.yaml
 helm upgrade --install --wait cert-manager jetstack/cert-manager -n cert-manager --version $certmanager_helm_version --set installCRDs=false
-
-kubectl apply -f ./src/shell/cert-manager/crds/cacerts.yaml
-kubectl apply -f ./src/shell/cert-manager/crds/cluster-issuer.yaml
+kubectl apply -f ./src/shell/cert-manager/crds/
 sleep 10s
 
 ## install traefik as ingress-controller
+kubectl apply -f ./src/shell/traefik/crds/trafik-cert.yaml
 helm upgrade --install --wait traefik traefik/traefik -n traefik --version $traefik_helm_version -f ./src/shell/traefik/traefik-values.yaml
 kubectl apply -f ./src/shell/traefik/crds/
 
