@@ -31,6 +31,8 @@ For 2.0.3 an env variable needs to be set holding the name of the executable. Th
 $env:ARGOCD_BINARY_NAME = 'argocd'
 ```
 
+Now move `argocd.exe` to a location in your PATH.
+
 ## Linux/WSL
 
 ```bash

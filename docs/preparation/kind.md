@@ -15,8 +15,7 @@ An example of running a multi-node cluster on docker can be done with `kind`. Th
 To fire up the cluster, run the following:
 
 ```powershell
-cd ./src/clusters/kind/
-kind create cluster --name=devinfra --config .\config-devinfra.yaml
+kind create cluster --name=devinfra --config ./src/clusters/kind/config-devinfra.yaml
 ```
 
 We specifically expose ports 80, 443 and 8100 to this cluster on ip `127.0.0.1`. Think carefully what ports to expose. `kind` has no update strategy to change this afterwards.
