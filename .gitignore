@@ -84,5 +84,6 @@ certs.yaml
 *.log
 site/
 cacerts.yaml
-src/terraform/.terraform.lock.hcl
+.terraform.lock.hcl
 charts/
+coredns-*.yaml

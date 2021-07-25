@@ -4,7 +4,6 @@ theme:
 nav:
     - Home: 'index.md'
     - Introduction: 'introduction.md'
-    - QuickStart: 'quickstart.md'
     - Installing:
       - Preparation:
         - CLI: './preparation/cli.md'
@@ -14,7 +13,7 @@ nav:
           - Kind: './preparation/kind.md'
         - Testing Ingress: './preparation/test-ingress-controller.md'
       - Install:
-        - Skaffold: './installation-skaffold.md'
+        - Shell: './installation-shell.md'
         - ArgoCD: './installation-argocd.md'
     - About:
         - 'License': 'license.md'

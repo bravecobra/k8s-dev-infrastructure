@@ -11,9 +11,3 @@ This repository contains a kubernetes dev infrastructure, providing:
 - Elastic stack
 - Secret management
 - Identity Provider (IdentityServer4)
-
-Each component is intended to be optional.
-
-## Quickstart
-
-To get started quicky, have a look at the [quickstart](quickstart.md)
