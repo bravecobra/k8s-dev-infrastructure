@@ -15,10 +15,11 @@ loki_helm_version=2.5.0 # 2.5.3
 promtail_helm_version=3.5.1 # 3.6.0
 consul_helm_version=0.31.1 # 0.32.1
 vault_helm_version=0.13.0
-lastic_helm_version=1.6.0
+elastic_helm_version=1.6.0
 identityserver4admin_helm_version=0.4.0
 argocd_helm_version=3.10.0
 
+# Creating Root certificates and corresponding k8s secret
 if grep -q microsoft /proc/version; then
   echo "Ubuntu on Windows"
   localappdata=`wslpath "$(wslvar LOCALAPPDATA)"`
@@ -26,12 +27,13 @@ else
   echo "native Linux"
   localappdata=`~/.local/share`
 fi
-
+mkcert -install
 localappdata=`wslpath "$(wslvar LOCALAPPDATA)"`
 cp $localappdata/mkcert/rootCA.pem ./src/certs/cacerts.crt
 cp $localappdata/mkcert/rootCA-key.pem ./src/certs/cacerts.key
 kubectl create secret tls ca-key-pair --namespace=cert-manager --cert=./src/certs/cacerts.crt --key=./src/certs/cacerts.key  --dry-run=client -o yaml > ./src/argocd/argo/cert-manager/crds/cacerts.yaml
 
+## Adding helm repos
 helm repo add hashicorp https://helm.releases.hashicorp.com
 helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -47,21 +49,21 @@ helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 
 ## Creating namespaces
-kubectl create namespace cert-manager
-kubectl create namespace traefik
-kubectl create namespace consul
-kubectl create namespace vault
-kubectl create namespace prometheus
-kubectl create namespace loki
-kubectl create namespace jaeger
-kubectl create namespace elasticsearch
-kubectl create namespace identityserver4
-kubectl create namespace argocd
+kubectl create namespace cert-manager --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace traefik --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace consul --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace vault --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace prometheus --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace loki --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace jaeger --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace elasticsearch --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace identityserver4 --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
 
 ## Enabling metrics addon
 helm upgrade --install --wait metrics-server bitnami/metrics-server --version=$metrics_helm_version --values=./src/shell/metrics/metrics-values.yaml
 
-## Cert-manager
+## install Cert-manager
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/$certmanager_helm_version/cert-manager.crds.yaml
 helm upgrade --install --wait cert-manager jetstack/cert-manager -n cert-manager --version $certmanager_helm_version --set installCRDs=false
 kubectl apply -f ./src/shell/cert-manager/crds/
