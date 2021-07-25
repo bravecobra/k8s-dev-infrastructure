@@ -34,3 +34,9 @@ To delete the cluster again
 ```powershell
 kind delete cluster --name devinfra
 ```
+
+When using WSL (Windows Subsystem for Linux), you need to copy the context configuration to your .kubeconfig file on the WSL home directory.
+
+```powershell
+cp /mnt/c/users/$(whoami)/.kube/config ~/.kube/config
+```
