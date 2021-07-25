@@ -7,12 +7,12 @@ login_domain=login.k8s.local
 login_admin_domain=admin.login.k8s.local
 
 metrics_helm_version=5.9.0
-traefik_helm_version=9.19.1 # 10.1.1
+traefik_helm_version=10.1.1
 certmanager_helm_version=v1.4.1
-jaeger_helm_version=2.21.1 # 2.23.0
-prometheus_helm_version=16.0.1 # 16.15.0
-loki_helm_version=2.5.0 # 2.5.3
-promtail_helm_version=3.5.1 # 3.6.0
+jaeger_helm_version=2.23.0
+prometheus_helm_version=16.15.0
+loki_helm_version=2.5.3
+promtail_helm_version=3.6.0
 consul_helm_version=0.31.1 # 0.32.1
 vault_helm_version=0.13.0
 elastic_helm_version=1.6.0
@@ -70,7 +70,7 @@ kubectl apply -f ./src/shell/cert-manager/crds/
 sleep 10s
 
 ## install traefik as ingress-controller
-kubectl apply -f ./src/shell/traefik/crds/trafik-cert.yaml
+kubectl apply -f ./src/shell/traefik/crds/traefik-cert.yaml
 helm upgrade --install --wait traefik traefik/traefik -n traefik --version $traefik_helm_version -f ./src/shell/traefik/traefik-values.yaml
 kubectl apply -f ./src/shell/traefik/crds/
 
