@@ -20,8 +20,7 @@ admin:
     type: ClusterIP
     port: 443
   podAnnotations:
-      "consul.hashicorp.com/connect-inject": "true"
-      "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-admin"
+      "linkerd.io/inject": "enabled"
   ingress:
     enabled: true
     annotations:
@@ -50,8 +49,7 @@ identity:
     type: ClusterIP
     port: 443
   podAnnotations:
-      "consul.hashicorp.com/connect-inject": "true"
-      "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-identity"
+      "linkerd.io/inject": "enabled"
   ingress:
     enabled: true
     annotations:
@@ -81,8 +79,7 @@ api:
     type: ClusterIP
     port: 443
   podAnnotations:
-      "consul.hashicorp.com/connect-inject": "true"
-      "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-api"
+      "linkerd.io/inject": "enabled"
   ingress:
     enabled: true
     annotations:
@@ -101,3 +98,29 @@ api:
     - secretName: traefik-cert
       hosts:
         - api.login.k8s.local
+mssql:
+  enabled: true
+  sa_password: "Toughpass1!"
+  mssql:
+    enabled: true
+    MSSQL_MEMORY_LIMIT_MB: 512
+    pvc:
+      StorageClass: "standard"
+      userdbaccessMode: ReadWriteOnce
+      userdbsize: 1Gi
+      userlogaccessMode: ReadWriteOnce
+      userlogsize: 1Gi
+      tempdbaccessMode: ReadWriteOnce
+      tempsize: 500Mi
+      mssqldataaccessMode: ReadWriteOnce
+      mssqldbsize: 500Mi
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        memory: 256Mi
+  resources:
+    limits:
+      memory: 500Mi
+    requests:
+      memory: 250Mi

@@ -15,11 +15,6 @@ spec:
     config:
       node.store.allow_mmap: false
     podTemplate:
-      metadata:
-        annotations:
-          consul.hashicorp.com/connect-service: "elastic-es"
-          consul.hashicorp.com/connect-inject: "true"
-          consul.hashicorp.com/connect-service-port: "http"
       spec:
         automountServiceAccountToken: true
         serviceAccount: elastic-es

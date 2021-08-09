@@ -5,9 +5,7 @@ metadata:
   namespace: jaeger
 spec:
   annotations:
-    "consul.hashicorp.com/connect-inject": "true"
-    "consul.hashicorp.com/connect-service-port": "6831"
-    "consul.hashicorp.com/transparent-proxy": "true"
+    "linkerd.io/inject": "enabled"
   ingress:
     enabled: true
     annotations:
@@ -25,11 +23,3 @@ spec:
     options:
       query:
         base-path: /jaeger
-agent:
-  podAnnotations:
-    "consul.hashicorp.com/connect-inject": "true"
-    "consul.hashicorp.com/transparent-proxy": "true"
-query:
-  podAnnotations:
-    "consul.hashicorp.com/connect-inject": "true"
-    "consul.hashicorp.com/transparent-proxy": "true"

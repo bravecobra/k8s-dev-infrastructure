@@ -1,0 +1,5 @@
+dashboard:
+  enforcedHostRegexp: "^linkerd\\.infrastructure\\.k8s\\.local$"
+# prometheusUrl: "http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090"
+# prometheus:
+#   enabled: false

@@ -7,13 +7,17 @@ kubeApiServer:
     serverName: kubernetes
     insecureSkipVerify: true
 
+prometheusOperator:
+  admissionWebhooks:
+    patch:
+      podAnnotations:
+        linkerd.io/inject: disabled
+
 prometheus:
   prometheusSpec:
     podMetadata:
       annotations:
-        "consul.hashicorp.com/connect-inject": 'true'
-        "consul.hashicorp.com/connect-service": "prometheus-kube-prometheus-prometheus"
-        "consul.hashicorp.com/transparent-proxy": "true"
+        "linkerd.io/inject": "enabled"
   ingress:
     enabled: true
     annotations:

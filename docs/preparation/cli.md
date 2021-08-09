@@ -65,4 +65,8 @@ sudo apt-get install helm
 # argocd
 sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 sudo chmod +x /usr/local/bin/argocd
+
+#linkerd
+curl -sL https://run.linkerd.io/install | sh
+export PATH=$PATH:~/.linkerd2/bin
 ```
