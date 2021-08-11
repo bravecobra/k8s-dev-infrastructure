@@ -1,3 +1,4 @@
+namespace: linkerd
 identity:
   issuer:
     scheme: kubernetes.io/tls

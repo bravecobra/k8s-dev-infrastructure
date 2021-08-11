@@ -1,7 +1,13 @@
 seed:
-  defaultAdmin:
-    password: Password_123
-    email: your.email@gmail.com
+  seedidentity:
+    enabled: true
+    defaultSeed: true
+    defaultAdmin:
+      password: Pa$$word123
+      email: your-admin@email.com
+  seedserverdata:
+    enabled: true
+    defaultSeed: true
 
 certificates:
   certManager:
@@ -99,28 +105,6 @@ api:
       hosts:
         - api.login.k8s.local
 mssql:
-  enabled: true
-  sa_password: "Toughpass1!"
-  mssql:
-    enabled: true
-    MSSQL_MEMORY_LIMIT_MB: 512
-    pvc:
-      StorageClass: "standard"
-      userdbaccessMode: ReadWriteOnce
-      userdbsize: 1Gi
-      userlogaccessMode: ReadWriteOnce
-      userlogsize: 1Gi
-      tempdbaccessMode: ReadWriteOnce
-      tempsize: 500Mi
-      mssqldataaccessMode: ReadWriteOnce
-      mssqldbsize: 500Mi
-    resources:
-      limits:
-        memory: 512Mi
-      requests:
-        memory: 256Mi
-  resources:
-    limits:
-      memory: 500Mi
-    requests:
-      memory: 250Mi
+  enabled: false
+  auth:
+    password: Toughpass1!
