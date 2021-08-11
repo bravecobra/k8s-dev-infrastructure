@@ -61,6 +61,8 @@ create_cluster_wsl:
 	@kind create cluster --name=devinfra --config ./src/clusters/kind/config-devinfra.yaml
 	@whoami | xargs -i cp /mnt/c/users/'{}'/.kube/config /mnt/c/users/'{}'/.kube/config.bak
 	@whoami | xargs -i cp ~/.kube/config /mnt/c/users/'{}'/.kube/config
+	@echo "Cluster created"
+	@echo Adjusting fs.inotify.max_user_watches
 	@sudo sysctl fs.inotify.max_user_watches=524288
 	@sudo sysctl fs.inotify.max_user_instances=512
 
@@ -76,10 +78,14 @@ clean: delete_cluster
 
 .init:
 	@echo Generating CA vertificate
-	# @if [[ "$(< /proc/sys/kernel/osrelease)" == *Microsoft ]]; then localappdata=$(wslpath "$(wslvar LOCALAPPDATA)"); else localappdata=~/.local/share; fi;
 	@mkcert -install
-	# @cp $$localappdata/mkcert/rootCA.pem ./src/certs/cacerts.crt
-	# @cp $$localappdata/mkcert/rootCA-key.pem ./src/certs/cacerts.key
+ifdef WSLENV
+	@cp $(shell wslpath `wslvar LOCALAPPDATA`)/mkcert/rootCA.pem ./src/certs/cacerts.crt
+	@cp $(shell wslpath `wslvar LOCALAPPDATA`)/mkcert/rootCA-key.pem ./src/certs/cacerts.key
+else
+	@cp ~/.local/share/mkcert/rootCA.pem ./src/certs/cacerts.crt
+	@cp ~/.local/share/mkcert/rootCA-key.pem ./src/certs/cacerts.key
+endif
 	@kubectl create secret tls ca-key-pair --namespace=cert-manager --cert=./src/certs/cacerts.crt --key=./src/certs/cacerts.key  --dry-run=client -o yaml > ./src/shell/cert-manager/crds/cacerts.yaml
 
 	@helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -206,16 +212,16 @@ endif
 .output_creds:
 ifeq ($(INSTALL_ELASTICSEARCH),true)
 	@echo "Elasticsearch username: elastic"
-	@kubectl -n elasticsearch get secret elastic-es-es-elastic-user -o jsonpath='{.data.elastic}' | base64 -d | xargs echo "Elasticsearch password:$1"
+	@kubectl get secret elastic-es-es-elastic-user -n elasticsearch -o jsonpath='{.data.elastic}' | base64 -d | xargs echo "Elasticsearch password:$1"
 endif
 ifeq ($(INSTALL_ARGOCD),true)
 	@echo "ArgoCD username: admin"
-	@kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs echo "ArgoCD password:$1"
+	@kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d | xargs echo "ArgoCD password:$1"
 endif
 ifeq ($(INSTALL_VAULT),true)
 	@echo "Vault token: root"
 endif
 ifeq ($(INSTALL_PROMETHEUS),true)
-	@kubectl -n prometheus get secret prometheus-grafana -o jsonpath="{.data.admin-user}" | base64 -d | xargs echo "Grafana user:$1"
-	@kubectl -n prometheus get secret prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 -d | xargs echo "Grafana password:$1"
+	@kubectl get secret prometheus-grafana -n prometheus -o jsonpath="{.data.admin-user}" | base64 -d | xargs echo "Grafana user:$1"
+	@kubectl get secret prometheus-grafana -n prometheus -o jsonpath="{.data.admin-password}" | base64 -d | xargs echo "Grafana password:$1"
 endif

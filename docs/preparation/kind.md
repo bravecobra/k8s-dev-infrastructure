@@ -39,3 +39,10 @@ When using WSL (Windows Subsystem for Linux), you need to copy the context confi
 ```powershell
 cp /mnt/c/users/$(whoami)/.kube/config ~/.kube/config
 ```
+
+The same commands have been added to the `makefile` to simplify the creation of the cluster.
+
+```bash
+make -f ./src/shell/Makefile create-cluster-wsl
+make -f ./src/shell/Makefile clean
+```

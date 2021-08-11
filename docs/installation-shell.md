@@ -32,8 +32,8 @@ On linux edit your `/etc/hosts` file as root.
 
 ## Installer
 
-Next run the installer in as Linux/WSL shell:
+Next run the installer in a Linux/WSL shell:
 
 ```bash
-./src/shell/install.sh
+make -f ./src/shell/Makefile install
 ```
