@@ -28,6 +28,7 @@ On linux edit your `/etc/hosts` file as root.
 127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
 127.0.0.1 login.k8s.local admin.login.k8s.local api.login.k8s.local
 127.0.0.1 argo.k8s.local
+127.0.0.1 linkerd.infrastructure.k8s.local
 ```
 
 ## Installer

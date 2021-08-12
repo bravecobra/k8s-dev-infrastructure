@@ -57,17 +57,16 @@ ifeq ($(INSTALL_ELASTICSEARCH),true)
 endif
 	targets+= .output_creds
 
-create_cluster_wsl:
-	@kind create cluster --name=devinfra --config ./src/clusters/kind/config-devinfra.yaml
+create_cluster_wsl: create_cluster	
 	@whoami | xargs -i cp /mnt/c/users/'{}'/.kube/config /mnt/c/users/'{}'/.kube/config.bak
 	@whoami | xargs -i cp ~/.kube/config /mnt/c/users/'{}'/.kube/config
-	@echo "Cluster created"
-	@echo Adjusting fs.inotify.max_user_watches
-	@sudo sysctl fs.inotify.max_user_watches=524288
-	@sudo sysctl fs.inotify.max_user_instances=512
 
 create_cluster:
 	@kind create cluster --name=devinfra --config ./src/clusters/kind/config-devinfra.yaml
+	@echo "Cluster created"
+	@echo Adjusting fs.inotify.max_user_watches
+	@sudo sysctl fs.inotify.max_user_watches=524288
+	@sudo sysctl fs.inotify.max_user_instances=512	
 
 delete_cluster:
 	@kind delete cluster --name devinfra
@@ -79,6 +78,7 @@ clean: delete_cluster
 .init:
 	@echo Generating CA vertificate
 	@mkcert -install
+	@mkdir -p ./src/certs
 ifdef WSLENV
 	@cp $(shell wslpath `wslvar LOCALAPPDATA`)/mkcert/rootCA.pem ./src/certs/cacerts.crt
 	@cp $(shell wslpath `wslvar LOCALAPPDATA`)/mkcert/rootCA-key.pem ./src/certs/cacerts.key
