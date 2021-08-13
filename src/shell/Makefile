@@ -23,7 +23,7 @@ INSTALL_LOKI ?= true
 INSTALL_VAULT ?= true
 INSTALL_JAEGER ?= true
 INSTALL_ELASTICSEARCH ?= true
-INSTALL_IDENTITIYSERVER ?= true
+INSTALL_IDENTITYSERVER ?= true
 INSTALL_ARGOCD ?= true
 
 ### Don't edit after this line ###
@@ -46,7 +46,7 @@ endif
 ifeq ($(INSTALL_VAULT),true)
 	targets+= .vault
 endif
-ifeq ($(INSTALL_IDENTITIYSERVER),true)
+ifeq ($(INSTALL_IDENTITYSERVER),true)
 	targets+= .identityserver
 endif
 ifeq ($(INSTALL_ARGOCD),true)
@@ -57,7 +57,7 @@ ifeq ($(INSTALL_ELASTICSEARCH),true)
 endif
 	targets+= .output_creds
 
-create_cluster_wsl: create_cluster	
+create_cluster_wsl: create_cluster
 	@whoami | xargs -i cp /mnt/c/users/'{}'/.kube/config /mnt/c/users/'{}'/.kube/config.bak
 	@whoami | xargs -i cp ~/.kube/config /mnt/c/users/'{}'/.kube/config
 
@@ -66,7 +66,7 @@ create_cluster:
 	@echo "Cluster created"
 	@echo Adjusting fs.inotify.max_user_watches
 	@sudo sysctl fs.inotify.max_user_watches=524288
-	@sudo sysctl fs.inotify.max_user_instances=512	
+	@sudo sysctl fs.inotify.max_user_instances=512
 
 delete_cluster:
 	@kind delete cluster --name devinfra
@@ -116,7 +116,7 @@ ifeq ($(INSTALL_ELASTICSEARCH),true)
 	@kubectl create namespace elasticsearch --dry-run=client -o yaml | kubectl apply -f -
 	@kubectl annotate --overwrite namespace elasticsearch linkerd.io/inject=enabled
 endif
-ifeq ($(INSTALL_IDENTITIYSERVER),true)
+ifeq ($(INSTALL_IDENTITYSERVER),true)
 	@helm repo add identityserver4admin https://bravecobra.github.io/identityserver4.admin-helm/charts/
 	@kubectl create namespace identityserver4 --dry-run=client -o yaml | kubectl apply -f -
 	@kubectl annotate --overwrite namespace identityserver4 linkerd.io/inject=enabled
