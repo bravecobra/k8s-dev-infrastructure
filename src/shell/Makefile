@@ -77,12 +77,15 @@ clean: delete_cluster
 
 .init:
 	@echo Generating CA vertificate
-	@mkcert -install
 	@mkdir -p ./src/certs
 ifdef WSLENV
 	@cp $(shell wslpath `wslvar LOCALAPPDATA`)/mkcert/rootCA.pem ./src/certs/cacerts.crt
 	@cp $(shell wslpath `wslvar LOCALAPPDATA`)/mkcert/rootCA-key.pem ./src/certs/cacerts.key
+	@cp ./src/certs/cacerts.crt ~/.local/share/mkcert/rootCA.pem
+	@cp ./src/certs/cacerts.key ~/.local/share/mkcert/rootCA-key.pem
+	@mkcert -install
 else
+	@mkcert -install
 	@cp ~/.local/share/mkcert/rootCA.pem ./src/certs/cacerts.crt
 	@cp ~/.local/share/mkcert/rootCA-key.pem ./src/certs/cacerts.key
 endif
