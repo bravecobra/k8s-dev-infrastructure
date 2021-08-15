@@ -1,4 +1,4 @@
-
+# Override of https://github.com/hashicorp/vault-helm/blob/master/values.yaml
 global:
   enabled: true
 ui:

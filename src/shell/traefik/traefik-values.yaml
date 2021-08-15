@@ -1,3 +1,5 @@
+# Override of: https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+
 dashboard:
   enabled: true
   domain: traefik.infrastructure.k8s.local

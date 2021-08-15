@@ -1,3 +1,5 @@
+# Override of : https://github.com/bravecobra/identityserver4.admin-helm/blob/develop/src/identityserver4admin/values.yaml
+
 seed:
   seedidentity:
     enabled: true

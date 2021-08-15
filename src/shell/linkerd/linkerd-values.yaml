@@ -1,3 +1,4 @@
+# Override of: https://github.com/linkerd/linkerd2/blob/main/charts/linkerd2/values.yaml
 namespace: linkerd
 identity:
   issuer:

@@ -1,3 +1,4 @@
+# Override of: https://github.com/linkerd/linkerd2/blob/main/jaeger/charts/linkerd-jaeger/values.yaml
 # dashboard:
   # enforcedHostRegexp: "^linkerd\\.infrastructure\\.k8s\\.local$"
 # prometheusUrl: "http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090"
