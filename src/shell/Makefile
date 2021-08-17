@@ -11,7 +11,7 @@ promtail_helm_version=3.6.0
 vault_helm_version=0.13.0
 elastic_helm_version=1.6.0
 mssql_helm_version=0.1.0
-identityserver4admin_helm_version=0.5.1
+identityserver4admin_helm_version=0.5.2
 argocd_helm_version=3.10.0
 linkerd_version=2.10.2
 linkerd_viz_version=2.10.2
@@ -62,7 +62,11 @@ create_cluster_wsl: create_cluster
 	@whoami | xargs -i cp ~/.kube/config /mnt/c/users/'{}'/.kube/config
 
 create_cluster:
+	@echo "Creating registry coontainer"
+	@docker run -d --restart=always -p "127.0.0.1:5000:5000" --name "kind-registry" registry:2
 	@kind create cluster --name=devinfra --config ./src/clusters/kind/config-devinfra.yaml
+	@docker network connect "kind" "kind-registry"
+	@kubectl apply -f ./src/clusters/kind/config-registry.yaml
 	@echo "Cluster created"
 	@echo Adjusting fs.inotify.max_user_watches
 	@sudo sysctl fs.inotify.max_user_watches=524288
@@ -70,6 +74,7 @@ create_cluster:
 
 delete_cluster:
 	@kind delete cluster --name devinfra
+	@docker rm $(shell docker stop $(shell docker ps -a -q --filter ancestor=registry:2 --format="{{.ID}}"))
 
 install: $(targets)
 
