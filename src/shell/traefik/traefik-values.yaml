@@ -20,6 +20,8 @@ entryPoints:
     address: ":9100"
 
 deployment:
+  labels:
+    app: traefik
   podLabels:
     app: traefik
 metrics:
