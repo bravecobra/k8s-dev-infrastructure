@@ -1,27 +1,27 @@
 SHELL := /bin/bash
 _all: install
 
-metrics_helm_version=5.9.0
-traefik_helm_version=10.1.1
-certmanager_helm_version=v1.4.1
-jaeger_helm_version=2.23.0
-prometheus_helm_version=16.15.0
-loki_helm_version=2.5.3
-promtail_helm_version=3.6.0
-vault_helm_version=0.13.0
-elastic_helm_version=1.6.0
+metrics_helm_version=5.10.4
+traefik_helm_version=10.3.6
+certmanager_helm_version=v1.5.4
+jaeger_helm_version=2.25.0
+prometheus_helm_version=19.0.2
+loki_helm_version=2.6.0
+promtail_helm_version=3.8.1
+vault_helm_version=0.16.1
+elastic_helm_version=1.8.0
 mssql_helm_version=0.1.0
 identityserver4admin_helm_version=0.5.2
-argocd_helm_version=3.10.0
-linkerd_version=2.10.2
-linkerd_viz_version=2.10.2
-linkerd_jaeger_version=2.10.2
+argocd_helm_version=3.24.0
+linkerd_version=2.11.0
+linkerd_viz_version=2.11.0
+linkerd_jaeger_version=2.11.0
 
 INSTALL_LINKERD ?= true
 INSTALL_PROMETHEUS ?= true
 INSTALL_LOKI ?= true
-INSTALL_VAULT ?= true
 INSTALL_JAEGER ?= true
+INSTALL_VAULT ?= true
 INSTALL_ELASTICSEARCH ?= true
 INSTALL_IDENTITYSERVER ?= true
 INSTALL_ARGOCD ?= true
@@ -62,7 +62,7 @@ create_cluster_wsl: create_cluster
 	@whoami | xargs -i cp ~/.kube/config /mnt/c/users/'{}'/.kube/config
 
 create_cluster:
-	@echo "Creating registry coontainer"
+	@echo "Creating registry container"
 	@docker run -d --restart=always -p "127.0.0.1:5000:5000" --name "kind-registry" registry:2
 	@kind create cluster --name=devinfra --config ./src/clusters/kind/config-devinfra.yaml
 	@docker network connect "kind" "kind-registry"
