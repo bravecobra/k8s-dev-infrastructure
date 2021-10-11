@@ -34,7 +34,6 @@ prometheus:
         hosts:
         - prometheus.infrastructure.k8s.local
 
-
 grafana:
   defaultDashboardsEnabled: true
   sidecar:

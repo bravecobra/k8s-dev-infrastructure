@@ -23,3 +23,5 @@ spec:
     options:
       query:
         base-path: /jaeger
+      log-level:  "debug"
+      memory.max-traces: 100000

@@ -5,4 +5,4 @@ dashboard:
 # prometheusUrl: "http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090"
 # prometheus:
 #   enabled: false
-# jaegerUrl: jaeger-query.jaeger:16686
+jaegerUrl: jaeger-query.jaeger:16686

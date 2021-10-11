@@ -68,9 +68,9 @@ create_cluster:
 	@docker network connect "kind" "kind-registry"
 	@kubectl apply -f ./src/clusters/kind/config-registry.yaml
 	@echo "Cluster created"
-	@echo Adjusting fs.inotify.max_user_watches
-	@sudo sysctl fs.inotify.max_user_watches=524288
-	@sudo sysctl fs.inotify.max_user_instances=512
+# 	@echo Adjusting fs.inotify.max_user_watches
+#	@sudo sysctl fs.inotify.max_user_watches=524288
+#	@sudo sysctl fs.inotify.max_user_instances=512
 
 delete_cluster:
 	@kind delete cluster --name devinfra
@@ -141,9 +141,19 @@ ifeq ($(INSTALL_VAULT),true)
 endif
 ifeq ($(INSTALL_LINKERD),true)
 	@helm repo add linkerd https://helm.linkerd.io/stable
+#	linkerd namespace
 	@kubectl create namespace linkerd --dry-run=client -o yaml | kubectl apply -f -
 	@kubectl annotate --overwrite namespace linkerd linkerd.io/inject=disabled
 	@kubectl label --overwrite namespaces linkerd config.linkerd.io/admission-webhooks=disabled
+#	linkerd-viz namespace
+#	@kubectl create namespace linkerd-viz --dry-run=client -o yaml | kubectl apply -f -
+#	@kubectl annotate --overwrite namespace linkerd-viz linkerd.io/inject=enabled
+#	@kubectl label --overwrite namespaces linkerd-viz config.linkerd.io/admission-webhooks=enabled
+#	linkerd-jaeger namespace
+#	@kubectl create namespace linkerd-jaeger --dry-run=client -o yaml | kubectl apply -f -
+#	@kubectl annotate --overwrite namespace linkerd-jaeger linkerd.io/inject=enabled
+#	@kubectl label --overwrite namespaces linkerd-jaeger config.linkerd.io/admission-webhooks=enabled
+
 endif
 	@helm repo update
 
@@ -188,8 +198,10 @@ endif
 .linkerd_viz: .init
 	@helm upgrade --install --wait linkerd-viz linkerd/linkerd-viz -n linkerd --version ${linkerd_viz_version} -f ./src/shell/linkerd/linkerd-viz-values.yaml
 	@kubectl apply -f ./src/shell/linkerd/crds/ingress.yaml
+ifeq ($(INSTALL_JAEGER),true)
 	@helm upgrade --install --wait linkerd-jaeger linkerd/linkerd-jaeger -n linkerd  --version ${linkerd_jaeger_version} -f ./src/shell/linkerd/linkerd-jaeger-values.yaml
 	@kubectl apply -f ./src/shell/linkerd/crds/ingress.yaml
+endif
 
 .jaeger: .init
 	@helm upgrade --install --wait jaeger jaegertracing/jaeger-operator -n jaeger --version ${jaeger_helm_version} -f ./src/shell/jaeger/jaeger-values.yaml
