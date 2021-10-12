@@ -1,0 +1,455 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: linkerd-prometheus-dashboard
+  namespace: linkerd
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    k8s-sidecar-target-directory: /tmp/dashboards/Linkerd
+data:
+  prometheus.json: "{\r\n  \"annotations\": {\r\n    \"list\": [\r\n      {\r\n        \"builtIn\":
+    1,\r\n        \"datasource\": \"-- Grafana --\",\r\n        \"enable\": true,\r\n
+    \       \"hide\": true,\r\n        \"iconColor\": \"rgba(0, 211, 255, 1)\",\r\n
+    \       \"name\": \"Annotations & Alerts\",\r\n        \"type\": \"dashboard\"\r\n
+    \     }\r\n    ]\r\n  },\r\n  \"editable\": true,\r\n  \"gnetId\": null,\r\n  \"graphTooltip\":
+    1,\r\n  \"id\": null,\r\n  \"links\": [\r\n    {\r\n      \"icon\": \"info\",\r\n
+    \     \"tags\": [],\r\n      \"targetBlank\": true,\r\n      \"title\": \"Grafana
+    Docs\",\r\n      \"tooltip\": \"\",\r\n      \"type\": \"link\",\r\n      \"url\":
+    \"http://docs.grafana.org/\"\r\n    },\r\n    {\r\n      \"icon\": \"info\",\r\n
+    \     \"tags\": [],\r\n      \"targetBlank\": true,\r\n      \"title\": \"Prometheus
+    Docs\",\r\n      \"type\": \"link\",\r\n      \"url\": \"http://prometheus.io/docs/introduction/overview/\"\r\n
+    \   }\r\n  ],\r\n  \"panels\": [\r\n    {\r\n      \"aliasColors\": {\r\n        \"prometheus\":
+    \"#C15C17\",\r\n        \"{instance=\\\"localhost:9090\\\",job=\\\"prometheus\\\"}\":
+    \"#CCA300\"\r\n      },\r\n      \"bars\": false,\r\n      \"dashLength\": 10,\r\n
+    \     \"dashes\": false,\r\n      \"datasource\": \"Prometheus\",\r\n      \"editable\":
+    true,\r\n      \"error\": false,\r\n      \"fill\": 0,\r\n      \"grid\": {},\r\n
+    \     \"gridPos\": {\r\n        \"h\": 5,\r\n        \"w\": 6,\r\n        \"x\":
+    0,\r\n        \"y\": 0\r\n      },\r\n      \"id\": 3,\r\n      \"legend\": {\r\n
+    \       \"avg\": false,\r\n        \"current\": false,\r\n        \"max\": false,\r\n
+    \       \"min\": false,\r\n        \"show\": true,\r\n        \"total\": false,\r\n
+    \       \"values\": false\r\n      },\r\n      \"lines\": true,\r\n      \"linewidth\":
+    1,\r\n      \"links\": [],\r\n      \"nullPointMode\": \"connected\",\r\n      \"options\":
+    {},\r\n      \"percentage\": false,\r\n      \"pointradius\": 2,\r\n      \"points\":
+    false,\r\n      \"renderer\": \"flot\",\r\n      \"seriesOverrides\": [],\r\n
+    \     \"spaceLength\": 10,\r\n      \"stack\": false,\r\n      \"steppedLine\":
+    false,\r\n      \"targets\": [\r\n        {\r\n          \"expr\": \"sum(irate(prometheus_tsdb_head_samples_appended_total{job=\\\"prometheus\\\"}[5m]))\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"hide\": false,\r\n          \"interval\":
+    \"\",\r\n          \"intervalFactor\": 2,\r\n          \"legendFormat\": \"samples\",\r\n
+    \         \"metric\": \"\",\r\n          \"refId\": \"A\",\r\n          \"step\":
+    20\r\n        }\r\n      ],\r\n      \"thresholds\": [],\r\n      \"timeFrom\":
+    null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\": null,\r\n      \"title\":
+    \"Samples Appended\",\r\n      \"tooltip\": {\r\n        \"shared\": true,\r\n
+    \       \"sort\": 0,\r\n        \"value_type\": \"cumulative\"\r\n      },\r\n
+    \     \"type\": \"graph\",\r\n      \"xaxis\": {\r\n        \"buckets\": null,\r\n
+    \       \"mode\": \"time\",\r\n        \"name\": null,\r\n        \"show\": true,\r\n
+    \       \"values\": []\r\n      },\r\n      \"yaxes\": [\r\n        {\r\n          \"format\":
+    \"short\",\r\n          \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\":
+    \"0\",\r\n          \"show\": true\r\n        },\r\n        {\r\n          \"format\":
+    \"short\",\r\n          \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\":
+    null,\r\n          \"show\": true\r\n        }\r\n      ],\r\n      \"yaxis\":
+    {\r\n        \"align\": false,\r\n        \"alignLevel\": null\r\n      }\r\n
+    \   },\r\n    {\r\n      \"aliasColors\": {},\r\n      \"bars\": false,\r\n      \"dashLength\":
+    10,\r\n      \"dashes\": false,\r\n      \"datasource\": \"Prometheus\",\r\n      \"editable\":
+    true,\r\n      \"error\": false,\r\n      \"fill\": 0,\r\n      \"grid\": {},\r\n
+    \     \"gridPos\": {\r\n        \"h\": 5,\r\n        \"w\": 6,\r\n        \"x\":
+    6,\r\n        \"y\": 0\r\n      },\r\n      \"id\": 14,\r\n      \"legend\": {\r\n
+    \       \"avg\": false,\r\n        \"current\": false,\r\n        \"max\": false,\r\n
+    \       \"min\": false,\r\n        \"show\": true,\r\n        \"total\": false,\r\n
+    \       \"values\": false\r\n      },\r\n      \"lines\": true,\r\n      \"linewidth\":
+    1,\r\n      \"links\": [],\r\n      \"nullPointMode\": \"connected\",\r\n      \"options\":
+    {},\r\n      \"percentage\": false,\r\n      \"pointradius\": 5,\r\n      \"points\":
+    false,\r\n      \"renderer\": \"flot\",\r\n      \"seriesOverrides\": [],\r\n
+    \     \"spaceLength\": 10,\r\n      \"stack\": false,\r\n      \"steppedLine\":
+    false,\r\n      \"targets\": [\r\n        {\r\n          \"expr\": \"topk(5, max(scrape_duration_seconds)
+    by (job))\",\r\n          \"format\": \"time_series\",\r\n          \"interval\":
+    \"\",\r\n          \"intervalFactor\": 2,\r\n          \"legendFormat\": \"{{job}}\",\r\n
+    \         \"metric\": \"\",\r\n          \"refId\": \"A\",\r\n          \"step\":
+    20\r\n        }\r\n      ],\r\n      \"thresholds\": [],\r\n      \"timeFrom\":
+    null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\": null,\r\n      \"title\":
+    \"Scrape Duration\",\r\n      \"tooltip\": {\r\n        \"shared\": true,\r\n
+    \       \"sort\": 0,\r\n        \"value_type\": \"cumulative\"\r\n      },\r\n
+    \     \"type\": \"graph\",\r\n      \"xaxis\": {\r\n        \"buckets\": null,\r\n
+    \       \"mode\": \"time\",\r\n        \"name\": null,\r\n        \"show\": true,\r\n
+    \       \"values\": []\r\n      },\r\n      \"yaxes\": [\r\n        {\r\n          \"format\":
+    \"s\",\r\n          \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\":
+    null,\r\n          \"show\": true\r\n        },\r\n        {\r\n          \"format\":
+    \"short\",\r\n          \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\":
+    null,\r\n          \"show\": true\r\n        }\r\n      ],\r\n      \"yaxis\":
+    {\r\n        \"align\": false,\r\n        \"alignLevel\": null\r\n      }\r\n
+    \   },\r\n    {\r\n      \"aliasColors\": {},\r\n      \"bars\": false,\r\n      \"dashLength\":
+    10,\r\n      \"dashes\": false,\r\n      \"datasource\": \"Prometheus\",\r\n      \"description\":
+    \"\",\r\n      \"fill\": 0,\r\n      \"gridPos\": {\r\n        \"h\": 5,\r\n        \"w\":
+    6,\r\n        \"x\": 12,\r\n        \"y\": 0\r\n      },\r\n      \"id\": 16,\r\n
+    \     \"legend\": {\r\n        \"avg\": false,\r\n        \"current\": false,\r\n
+    \       \"max\": false,\r\n        \"min\": false,\r\n        \"show\": true,\r\n
+    \       \"total\": false,\r\n        \"values\": false\r\n      },\r\n      \"lines\":
+    true,\r\n      \"linewidth\": 1,\r\n      \"links\": [],\r\n      \"nullPointMode\":
+    \"null\",\r\n      \"options\": {},\r\n      \"percentage\": false,\r\n      \"pointradius\":
+    5,\r\n      \"points\": false,\r\n      \"renderer\": \"flot\",\r\n      \"seriesOverrides\":
+    [],\r\n      \"spaceLength\": 10,\r\n      \"stack\": false,\r\n      \"steppedLine\":
+    false,\r\n      \"targets\": [\r\n        {\r\n          \"expr\": \"sum(process_resident_memory_bytes{job=\\\"prometheus\\\"})\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"hide\": false,\r\n          \"interval\":
+    \"\",\r\n          \"intervalFactor\": 2,\r\n          \"legendFormat\": \"p8s
+    process resident memory\",\r\n          \"refId\": \"D\",\r\n          \"step\":
+    20\r\n        },\r\n        {\r\n          \"expr\": \"process_virtual_memory_bytes{job=\\\"prometheus\\\"}\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"hide\": false,\r\n          \"intervalFactor\":
+    2,\r\n          \"legendFormat\": \"virtual memory\",\r\n          \"refId\":
+    \"C\",\r\n          \"step\": 20\r\n        }\r\n      ],\r\n      \"thresholds\":
+    [],\r\n      \"timeFrom\": null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\":
+    null,\r\n      \"title\": \"Memory Profile\",\r\n      \"tooltip\": {\r\n        \"shared\":
+    true,\r\n        \"sort\": 2,\r\n        \"value_type\": \"individual\"\r\n      },\r\n
+    \     \"type\": \"graph\",\r\n      \"xaxis\": {\r\n        \"buckets\": null,\r\n
+    \       \"mode\": \"time\",\r\n        \"name\": null,\r\n        \"show\": true,\r\n
+    \       \"values\": []\r\n      },\r\n      \"yaxes\": [\r\n        {\r\n          \"format\":
+    \"bytes\",\r\n          \"label\": \"\",\r\n          \"logBase\": 1,\r\n          \"max\":
+    null,\r\n          \"min\": \"0\",\r\n          \"show\": true\r\n        },\r\n
+    \       {\r\n          \"format\": \"short\",\r\n          \"label\": null,\r\n
+    \         \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\": null,\r\n
+    \         \"show\": true\r\n        }\r\n      ],\r\n      \"yaxis\": {\r\n        \"align\":
+    false,\r\n        \"alignLevel\": null\r\n      }\r\n    },\r\n    {\r\n      \"cacheTimeout\":
+    null,\r\n      \"colorBackground\": false,\r\n      \"colorValue\": true,\r\n
+    \     \"colors\": [\r\n        \"rgba(50, 172, 45, 0.97)\",\r\n        \"rgba(237,
+    129, 40, 0.89)\",\r\n        \"rgba(245, 54, 54, 0.9)\"\r\n      ],\r\n      \"datasource\":
+    \"Prometheus\",\r\n      \"format\": \"none\",\r\n      \"gauge\": {\r\n        \"maxValue\":
+    100,\r\n        \"minValue\": 0,\r\n        \"show\": false,\r\n        \"thresholdLabels\":
+    false,\r\n        \"thresholdMarkers\": true\r\n      },\r\n      \"gridPos\":
+    {\r\n        \"h\": 5,\r\n        \"w\": 6,\r\n        \"x\": 18,\r\n        \"y\":
+    0\r\n      },\r\n      \"id\": 37,\r\n      \"interval\": null,\r\n      \"links\":
+    [],\r\n      \"mappingType\": 1,\r\n      \"mappingTypes\": [\r\n        {\r\n
+    \         \"name\": \"value to text\",\r\n          \"value\": 1\r\n        },\r\n
+    \       {\r\n          \"name\": \"range to text\",\r\n          \"value\": 2\r\n
+    \       }\r\n      ],\r\n      \"maxDataPoints\": 100,\r\n      \"nullPointMode\":
+    \"connected\",\r\n      \"nullText\": null,\r\n      \"options\": {},\r\n      \"postfix\":
+    \"\",\r\n      \"postfixFontSize\": \"50%\",\r\n      \"prefix\": \"\",\r\n      \"prefixFontSize\":
+    \"50%\",\r\n      \"rangeMaps\": [\r\n        {\r\n          \"from\": \"null\",\r\n
+    \         \"text\": \"N/A\",\r\n          \"to\": \"null\"\r\n        }\r\n      ],\r\n
+    \     \"sparkline\": {\r\n        \"fillColor\": \"rgba(31, 118, 189, 0.18)\",\r\n
+    \       \"full\": false,\r\n        \"lineColor\": \"rgb(31, 120, 193)\",\r\n
+    \       \"show\": false\r\n      },\r\n      \"tableColumn\": \"\",\r\n      \"targets\":
+    [\r\n        {\r\n          \"expr\": \"prometheus_tsdb_wal_corruptions_total{job=\\\"prometheus\\\"}\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"intervalFactor\": 2,\r\n
+    \         \"legendFormat\": \"\",\r\n          \"refId\": \"A\",\r\n          \"step\":
+    60\r\n        }\r\n      ],\r\n      \"thresholds\": \"0.1,1\",\r\n      \"title\":
+    \"WAL Corruptions\",\r\n      \"type\": \"singlestat\",\r\n      \"valueFontSize\":
+    \"200%\",\r\n      \"valueMaps\": [\r\n        {\r\n          \"op\": \"=\",\r\n
+    \         \"text\": \"None\",\r\n          \"value\": \"0\"\r\n        }\r\n      ],\r\n
+    \     \"valueName\": \"max\"\r\n    },\r\n    {\r\n      \"aliasColors\": {},\r\n
+    \     \"bars\": false,\r\n      \"dashLength\": 10,\r\n      \"dashes\": false,\r\n
+    \     \"datasource\": \"Prometheus\",\r\n      \"fill\": 0,\r\n      \"gridPos\":
+    {\r\n        \"h\": 5,\r\n        \"w\": 6,\r\n        \"x\": 0,\r\n        \"y\":
+    5\r\n      },\r\n      \"id\": 29,\r\n      \"legend\": {\r\n        \"avg\":
+    false,\r\n        \"current\": false,\r\n        \"max\": false,\r\n        \"min\":
+    false,\r\n        \"show\": true,\r\n        \"total\": false,\r\n        \"values\":
+    false\r\n      },\r\n      \"lines\": true,\r\n      \"linewidth\": 1,\r\n      \"links\":
+    [],\r\n      \"nullPointMode\": \"null\",\r\n      \"options\": {},\r\n      \"percentage\":
+    false,\r\n      \"pointradius\": 5,\r\n      \"points\": false,\r\n      \"renderer\":
+    \"flot\",\r\n      \"seriesOverrides\": [],\r\n      \"spaceLength\": 10,\r\n
+    \     \"stack\": false,\r\n      \"steppedLine\": false,\r\n      \"targets\":
+    [\r\n        {\r\n          \"expr\": \"sum(prometheus_tsdb_head_active_appenders{job=\\\"prometheus\\\"})\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"interval\": \"\",\r\n          \"intervalFactor\":
+    2,\r\n          \"legendFormat\": \"active_appenders\",\r\n          \"metric\":
+    \"\",\r\n          \"refId\": \"A\",\r\n          \"step\": 20\r\n        },\r\n
+    \       {\r\n          \"expr\": \"sum(process_open_fds{job=\\\"prometheus\\\"})\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"interval\": \"\",\r\n          \"intervalFactor\":
+    2,\r\n          \"legendFormat\": \"open_fds\",\r\n          \"refId\": \"B\",\r\n
+    \         \"step\": 20\r\n        }\r\n      ],\r\n      \"thresholds\": [],\r\n
+    \     \"timeFrom\": null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\":
+    null,\r\n      \"title\": \"Active Appenders\",\r\n      \"tooltip\": {\r\n        \"shared\":
+    true,\r\n        \"sort\": 0,\r\n        \"value_type\": \"individual\"\r\n      },\r\n
+    \     \"type\": \"graph\",\r\n      \"xaxis\": {\r\n        \"buckets\": null,\r\n
+    \       \"mode\": \"time\",\r\n        \"name\": null,\r\n        \"show\": true,\r\n
+    \       \"values\": []\r\n      },\r\n      \"yaxes\": [\r\n        {\r\n          \"format\":
+    \"short\",\r\n          \"label\": null,\r\n          \"logBase\": 1,\r\n          \"max\":
+    null,\r\n          \"min\": null,\r\n          \"show\": true\r\n        },\r\n
+    \       {\r\n          \"format\": \"short\",\r\n          \"label\": null,\r\n
+    \         \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\": null,\r\n
+    \         \"show\": false\r\n        }\r\n      ],\r\n      \"yaxis\": {\r\n        \"align\":
+    false,\r\n        \"alignLevel\": null\r\n      }\r\n    },\r\n    {\r\n      \"aliasColors\":
+    {\r\n        \"prometheus\": \"#F9BA8F\",\r\n        \"{instance=\\\"localhost:9090\\\",interval=\\\"5s\\\",job=\\\"prometheus\\\"}\":
+    \"#F9BA8F\"\r\n      },\r\n      \"bars\": false,\r\n      \"dashLength\": 10,\r\n
+    \     \"dashes\": false,\r\n      \"datasource\": \"Prometheus\",\r\n      \"editable\":
+    true,\r\n      \"error\": false,\r\n      \"fill\": 0,\r\n      \"grid\": {},\r\n
+    \     \"gridPos\": {\r\n        \"h\": 5,\r\n        \"w\": 6,\r\n        \"x\":
+    6,\r\n        \"y\": 5\r\n      },\r\n      \"id\": 2,\r\n      \"legend\": {\r\n
+    \       \"avg\": false,\r\n        \"current\": false,\r\n        \"max\": false,\r\n
+    \       \"min\": false,\r\n        \"show\": true,\r\n        \"total\": false,\r\n
+    \       \"values\": false\r\n      },\r\n      \"lines\": true,\r\n      \"linewidth\":
+    1,\r\n      \"links\": [],\r\n      \"nullPointMode\": \"connected\",\r\n      \"options\":
+    {},\r\n      \"percentage\": false,\r\n      \"pointradius\": 5,\r\n      \"points\":
+    false,\r\n      \"renderer\": \"flot\",\r\n      \"seriesOverrides\": [],\r\n
+    \     \"spaceLength\": 10,\r\n      \"stack\": false,\r\n      \"steppedLine\":
+    false,\r\n      \"targets\": [\r\n        {\r\n          \"expr\": \"prometheus_tsdb_blocks_loaded{job=\\\"prometheus\\\"}\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"intervalFactor\": 2,\r\n
+    \         \"legendFormat\": \"blocks\",\r\n          \"refId\": \"A\",\r\n          \"step\":
+    20\r\n        }\r\n      ],\r\n      \"thresholds\": [],\r\n      \"timeFrom\":
+    null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\": null,\r\n      \"title\":
+    \"Blocks Loaded\",\r\n      \"tooltip\": {\r\n        \"shared\": true,\r\n        \"sort\":
+    0,\r\n        \"value_type\": \"cumulative\"\r\n      },\r\n      \"type\": \"graph\",\r\n
+    \     \"xaxis\": {\r\n        \"buckets\": null,\r\n        \"mode\": \"time\",\r\n
+    \       \"name\": null,\r\n        \"show\": true,\r\n        \"values\": []\r\n
+    \     },\r\n      \"yaxes\": [\r\n        {\r\n          \"format\": \"short\",\r\n
+    \         \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\": null,\r\n
+    \         \"show\": true\r\n        },\r\n        {\r\n          \"format\": \"short\",\r\n
+    \         \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\": null,\r\n
+    \         \"show\": true\r\n        }\r\n      ],\r\n      \"yaxis\": {\r\n        \"align\":
+    false,\r\n        \"alignLevel\": null\r\n      }\r\n    },\r\n    {\r\n      \"aliasColors\":
+    {},\r\n      \"bars\": false,\r\n      \"dashLength\": 10,\r\n      \"dashes\":
+    false,\r\n      \"datasource\": \"Prometheus\",\r\n      \"decimals\": null,\r\n
+    \     \"description\": \"\",\r\n      \"fill\": 0,\r\n      \"gridPos\": {\r\n
+    \       \"h\": 5,\r\n        \"w\": 6,\r\n        \"x\": 12,\r\n        \"y\":
+    5\r\n      },\r\n      \"id\": 33,\r\n      \"legend\": {\r\n        \"avg\":
+    false,\r\n        \"current\": false,\r\n        \"max\": false,\r\n        \"min\":
+    false,\r\n        \"show\": true,\r\n        \"total\": false,\r\n        \"values\":
+    false\r\n      },\r\n      \"lines\": true,\r\n      \"linewidth\": 1,\r\n      \"links\":
+    [],\r\n      \"nullPointMode\": \"connected\",\r\n      \"options\": {},\r\n      \"percentage\":
+    false,\r\n      \"pointradius\": 5,\r\n      \"points\": false,\r\n      \"renderer\":
+    \"flot\",\r\n      \"seriesOverrides\": [],\r\n      \"spaceLength\": 10,\r\n
+    \     \"stack\": false,\r\n      \"steppedLine\": false,\r\n      \"targets\":
+    [\r\n        {\r\n          \"expr\": \"prometheus_tsdb_head_chunks{job=\\\"prometheus\\\"}\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"interval\": \"\",\r\n          \"intervalFactor\":
+    2,\r\n          \"legendFormat\": \"chunks\",\r\n          \"refId\": \"A\",\r\n
+    \         \"step\": 20\r\n        }\r\n      ],\r\n      \"thresholds\": [],\r\n
+    \     \"timeFrom\": null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\":
+    null,\r\n      \"title\": \"Head Chunks\",\r\n      \"tooltip\": {\r\n        \"shared\":
+    true,\r\n        \"sort\": 0,\r\n        \"value_type\": \"individual\"\r\n      },\r\n
+    \     \"type\": \"graph\",\r\n      \"xaxis\": {\r\n        \"buckets\": null,\r\n
+    \       \"mode\": \"time\",\r\n        \"name\": null,\r\n        \"show\": true,\r\n
+    \       \"values\": []\r\n      },\r\n      \"yaxes\": [\r\n        {\r\n          \"format\":
+    \"short\",\r\n          \"label\": null,\r\n          \"logBase\": 1,\r\n          \"max\":
+    null,\r\n          \"min\": null,\r\n          \"show\": true\r\n        },\r\n
+    \       {\r\n          \"format\": \"bytes\",\r\n          \"label\": \"\",\r\n
+    \         \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\": null,\r\n
+    \         \"show\": false\r\n        }\r\n      ],\r\n      \"yaxis\": {\r\n        \"align\":
+    false,\r\n        \"alignLevel\": null\r\n      }\r\n    },\r\n    {\r\n      \"aliasColors\":
+    {},\r\n      \"bars\": false,\r\n      \"dashLength\": 10,\r\n      \"dashes\":
+    false,\r\n      \"datasource\": \"Prometheus\",\r\n      \"fill\": 1,\r\n      \"gridPos\":
+    {\r\n        \"h\": 5,\r\n        \"w\": 6,\r\n        \"x\": 18,\r\n        \"y\":
+    5\r\n      },\r\n      \"id\": 36,\r\n      \"legend\": {\r\n        \"avg\":
+    false,\r\n        \"current\": false,\r\n        \"max\": false,\r\n        \"min\":
+    false,\r\n        \"show\": true,\r\n        \"total\": false,\r\n        \"values\":
+    false\r\n      },\r\n      \"lines\": true,\r\n      \"linewidth\": 1,\r\n      \"links\":
+    [],\r\n      \"nullPointMode\": \"null\",\r\n      \"options\": {},\r\n      \"percentage\":
+    false,\r\n      \"pointradius\": 5,\r\n      \"points\": false,\r\n      \"renderer\":
+    \"flot\",\r\n      \"seriesOverrides\": [\r\n        {\r\n          \"alias\":
+    \"duration-p99\",\r\n          \"yaxis\": 2\r\n        }\r\n      ],\r\n      \"spaceLength\":
+    10,\r\n      \"stack\": false,\r\n      \"steppedLine\": false,\r\n      \"targets\":
+    [\r\n        {\r\n          \"expr\": \"prometheus_tsdb_head_gc_duration_seconds{job=\\\"prometheus\\\",quantile=\\\"0.99\\\"}\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"intervalFactor\": 2,\r\n
+    \         \"legendFormat\": \"duration-p99\",\r\n          \"refId\": \"A\",\r\n
+    \         \"step\": 20\r\n        },\r\n        {\r\n          \"expr\": \"irate(prometheus_tsdb_head_gc_duration_seconds_count{job=\\\"prometheus\\\"}[5m])\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"intervalFactor\": 2,\r\n
+    \         \"legendFormat\": \"collections\",\r\n          \"refId\": \"B\",\r\n
+    \         \"step\": 20\r\n        }\r\n      ],\r\n      \"thresholds\": [],\r\n
+    \     \"timeFrom\": null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\":
+    null,\r\n      \"title\": \"Head Block GC Activity\",\r\n      \"tooltip\": {\r\n
+    \       \"shared\": true,\r\n        \"sort\": 0,\r\n        \"value_type\": \"individual\"\r\n
+    \     },\r\n      \"type\": \"graph\",\r\n      \"xaxis\": {\r\n        \"buckets\":
+    null,\r\n        \"mode\": \"time\",\r\n        \"name\": null,\r\n        \"show\":
+    true,\r\n        \"values\": []\r\n      },\r\n      \"yaxes\": [\r\n        {\r\n
+    \         \"format\": \"short\",\r\n          \"label\": null,\r\n          \"logBase\":
+    1,\r\n          \"max\": null,\r\n          \"min\": \"0\",\r\n          \"show\":
+    true\r\n        },\r\n        {\r\n          \"format\": \"s\",\r\n          \"label\":
+    null,\r\n          \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\":
+    \"0\",\r\n          \"show\": true\r\n        }\r\n      ],\r\n      \"yaxis\":
+    {\r\n        \"align\": false,\r\n        \"alignLevel\": null\r\n      }\r\n
+    \   },\r\n    {\r\n      \"aliasColors\": {},\r\n      \"bars\": false,\r\n      \"dashLength\":
+    10,\r\n      \"dashes\": false,\r\n      \"datasource\": \"Prometheus\",\r\n      \"decimals\":
+    null,\r\n      \"description\": \"\",\r\n      \"fill\": 0,\r\n      \"gridPos\":
+    {\r\n        \"h\": 5,\r\n        \"w\": 8,\r\n        \"x\": 0,\r\n        \"y\":
+    10\r\n      },\r\n      \"id\": 20,\r\n      \"legend\": {\r\n        \"avg\":
+    false,\r\n        \"current\": false,\r\n        \"max\": false,\r\n        \"min\":
+    false,\r\n        \"show\": true,\r\n        \"total\": false,\r\n        \"values\":
+    false\r\n      },\r\n      \"lines\": true,\r\n      \"linewidth\": 1,\r\n      \"links\":
+    [],\r\n      \"nullPointMode\": \"connected\",\r\n      \"options\": {},\r\n      \"percentage\":
+    false,\r\n      \"pointradius\": 5,\r\n      \"points\": false,\r\n      \"renderer\":
+    \"flot\",\r\n      \"seriesOverrides\": [\r\n        {\r\n          \"alias\":
+    \"duration-p99\",\r\n          \"yaxis\": 2\r\n        }\r\n      ],\r\n      \"spaceLength\":
+    10,\r\n      \"stack\": false,\r\n      \"steppedLine\": false,\r\n      \"targets\":
+    [\r\n        {\r\n          \"expr\": \"histogram_quantile(0.99, sum(rate(prometheus_tsdb_compaction_duration_bucket{job=\\\"prometheus\\\"}[5m]))
+    by (le))\",\r\n          \"format\": \"time_series\",\r\n          \"hide\": false,\r\n
+    \         \"interval\": \"\",\r\n          \"intervalFactor\": 2,\r\n          \"legendFormat\":
+    \"duration-{{p99}}\",\r\n          \"refId\": \"A\",\r\n          \"step\": 20\r\n
+    \       },\r\n        {\r\n          \"expr\": \"irate(prometheus_tsdb_compactions_total{job=\\\"prometheus\\\"}[5m])\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"intervalFactor\": 2,\r\n
+    \         \"legendFormat\": \"compactions\",\r\n          \"refId\": \"B\",\r\n
+    \         \"step\": 20\r\n        },\r\n        {\r\n          \"expr\": \"irate(prometheus_tsdb_compactions_failed_total{job=\\\"prometheus\\\"}[5m])\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"intervalFactor\": 2,\r\n
+    \         \"legendFormat\": \"failed\",\r\n          \"refId\": \"C\",\r\n          \"step\":
+    20\r\n        },\r\n        {\r\n          \"expr\": \"irate(prometheus_tsdb_compactions_triggered_total{job=\\\"prometheus\\\"}[5m])\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"intervalFactor\": 2,\r\n
+    \         \"legendFormat\": \"triggered\",\r\n          \"refId\": \"D\",\r\n
+    \         \"step\": 20\r\n        }\r\n      ],\r\n      \"thresholds\": [],\r\n
+    \     \"timeFrom\": null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\":
+    null,\r\n      \"title\": \"Compaction Activity\",\r\n      \"tooltip\": {\r\n
+    \       \"shared\": true,\r\n        \"sort\": 0,\r\n        \"value_type\": \"individual\"\r\n
+    \     },\r\n      \"type\": \"graph\",\r\n      \"xaxis\": {\r\n        \"buckets\":
+    null,\r\n        \"mode\": \"time\",\r\n        \"name\": null,\r\n        \"show\":
+    true,\r\n        \"values\": []\r\n      },\r\n      \"yaxes\": [\r\n        {\r\n
+    \         \"format\": \"short\",\r\n          \"label\": null,\r\n          \"logBase\":
+    1,\r\n          \"max\": null,\r\n          \"min\": \"0\",\r\n          \"show\":
+    true\r\n        },\r\n        {\r\n          \"format\": \"s\",\r\n          \"label\":
+    \"\",\r\n          \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\":
+    \"0\",\r\n          \"show\": true\r\n        }\r\n      ],\r\n      \"yaxis\":
+    {\r\n        \"align\": false,\r\n        \"alignLevel\": null\r\n      }\r\n
+    \   },\r\n    {\r\n      \"aliasColors\": {},\r\n      \"bars\": false,\r\n      \"dashLength\":
+    10,\r\n      \"dashes\": false,\r\n      \"datasource\": \"Prometheus\",\r\n      \"fill\":
+    1,\r\n      \"gridPos\": {\r\n        \"h\": 5,\r\n        \"w\": 8,\r\n        \"x\":
+    8,\r\n        \"y\": 10\r\n      },\r\n      \"id\": 32,\r\n      \"legend\":
+    {\r\n        \"avg\": false,\r\n        \"current\": false,\r\n        \"max\":
+    false,\r\n        \"min\": false,\r\n        \"show\": true,\r\n        \"total\":
+    false,\r\n        \"values\": false\r\n      },\r\n      \"lines\": true,\r\n
+    \     \"linewidth\": 1,\r\n      \"links\": [],\r\n      \"nullPointMode\": \"null\",\r\n
+    \     \"options\": {},\r\n      \"percentage\": false,\r\n      \"pointradius\":
+    5,\r\n      \"points\": false,\r\n      \"renderer\": \"flot\",\r\n      \"seriesOverrides\":
+    [],\r\n      \"spaceLength\": 10,\r\n      \"stack\": false,\r\n      \"steppedLine\":
+    false,\r\n      \"targets\": [\r\n        {\r\n          \"expr\": \"rate(prometheus_tsdb_reloads_total{job=\\\"prometheus\\\"}[5m])\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"intervalFactor\": 2,\r\n
+    \         \"legendFormat\": \"reloads\",\r\n          \"refId\": \"A\",\r\n          \"step\":
+    20\r\n        },\r\n        {\r\n          \"expr\": \"rate(prometheus_tsdb_reloads_failures_total{job=\\\"prometheus\\\"}[5m])\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"hide\": false,\r\n          \"intervalFactor\":
+    2,\r\n          \"legendFormat\": \"failures\",\r\n          \"refId\": \"B\",\r\n
+    \         \"step\": 20\r\n        }\r\n      ],\r\n      \"thresholds\": [],\r\n
+    \     \"timeFrom\": null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\":
+    null,\r\n      \"title\": \"Reload Count\",\r\n      \"tooltip\": {\r\n        \"shared\":
+    true,\r\n        \"sort\": 0,\r\n        \"value_type\": \"individual\"\r\n      },\r\n
+    \     \"type\": \"graph\",\r\n      \"xaxis\": {\r\n        \"buckets\": null,\r\n
+    \       \"mode\": \"time\",\r\n        \"name\": null,\r\n        \"show\": true,\r\n
+    \       \"values\": []\r\n      },\r\n      \"yaxes\": [\r\n        {\r\n          \"format\":
+    \"short\",\r\n          \"label\": null,\r\n          \"logBase\": 1,\r\n          \"max\":
+    null,\r\n          \"min\": null,\r\n          \"show\": true\r\n        },\r\n
+    \       {\r\n          \"format\": \"short\",\r\n          \"label\": null,\r\n
+    \         \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\": null,\r\n
+    \         \"show\": true\r\n        }\r\n      ],\r\n      \"yaxis\": {\r\n        \"align\":
+    false,\r\n        \"alignLevel\": null\r\n      }\r\n    },\r\n    {\r\n      \"aliasColors\":
+    {},\r\n      \"bars\": false,\r\n      \"dashLength\": 10,\r\n      \"dashes\":
+    false,\r\n      \"datasource\": \"Prometheus\",\r\n      \"fill\": 0,\r\n      \"gridPos\":
+    {\r\n        \"h\": 5,\r\n        \"w\": 8,\r\n        \"x\": 16,\r\n        \"y\":
+    10\r\n      },\r\n      \"id\": 38,\r\n      \"legend\": {\r\n        \"avg\":
+    false,\r\n        \"current\": false,\r\n        \"max\": false,\r\n        \"min\":
+    false,\r\n        \"show\": true,\r\n        \"total\": false,\r\n        \"values\":
+    false\r\n      },\r\n      \"lines\": true,\r\n      \"linewidth\": 1,\r\n      \"links\":
+    [],\r\n      \"nullPointMode\": \"null\",\r\n      \"options\": {},\r\n      \"percentage\":
+    false,\r\n      \"pointradius\": 5,\r\n      \"points\": false,\r\n      \"renderer\":
+    \"flot\",\r\n      \"seriesOverrides\": [],\r\n      \"spaceLength\": 10,\r\n
+    \     \"stack\": false,\r\n      \"steppedLine\": false,\r\n      \"targets\":
+    [\r\n        {\r\n          \"expr\": \"prometheus_engine_query_duration_seconds{job=\\\"prometheus\\\",
+    quantile=\\\"0.99\\\"}\",\r\n          \"format\": \"time_series\",\r\n          \"intervalFactor\":
+    2,\r\n          \"legendFormat\": \"{{slice}}_p99\",\r\n          \"refId\": \"A\",\r\n
+    \         \"step\": 20\r\n        }\r\n      ],\r\n      \"thresholds\": [],\r\n
+    \     \"timeFrom\": null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\":
+    null,\r\n      \"title\": \"Query Durations\",\r\n      \"tooltip\": {\r\n        \"shared\":
+    true,\r\n        \"sort\": 0,\r\n        \"value_type\": \"individual\"\r\n      },\r\n
+    \     \"type\": \"graph\",\r\n      \"xaxis\": {\r\n        \"buckets\": null,\r\n
+    \       \"mode\": \"time\",\r\n        \"name\": null,\r\n        \"show\": true,\r\n
+    \       \"values\": []\r\n      },\r\n      \"yaxes\": [\r\n        {\r\n          \"format\":
+    \"short\",\r\n          \"label\": null,\r\n          \"logBase\": 1,\r\n          \"max\":
+    null,\r\n          \"min\": null,\r\n          \"show\": true\r\n        },\r\n
+    \       {\r\n          \"format\": \"short\",\r\n          \"label\": null,\r\n
+    \         \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\": null,\r\n
+    \         \"show\": true\r\n        }\r\n      ],\r\n      \"yaxis\": {\r\n        \"align\":
+    false,\r\n        \"alignLevel\": null\r\n      }\r\n    },\r\n    {\r\n      \"aliasColors\":
+    {},\r\n      \"bars\": false,\r\n      \"dashLength\": 10,\r\n      \"dashes\":
+    false,\r\n      \"datasource\": \"Prometheus\",\r\n      \"decimals\": null,\r\n
+    \     \"editable\": true,\r\n      \"error\": false,\r\n      \"fill\": 0,\r\n
+    \     \"grid\": {},\r\n      \"gridPos\": {\r\n        \"h\": 7,\r\n        \"w\":
+    12,\r\n        \"x\": 0,\r\n        \"y\": 15\r\n      },\r\n      \"id\": 35,\r\n
+    \     \"legend\": {\r\n        \"alignAsTable\": false,\r\n        \"avg\": false,\r\n
+    \       \"current\": false,\r\n        \"hideEmpty\": true,\r\n        \"max\":
+    false,\r\n        \"min\": false,\r\n        \"show\": true,\r\n        \"total\":
+    false,\r\n        \"values\": false\r\n      },\r\n      \"lines\": true,\r\n
+    \     \"linewidth\": 1,\r\n      \"links\": [],\r\n      \"nullPointMode\": \"connected\",\r\n
+    \     \"options\": {},\r\n      \"percentage\": false,\r\n      \"pointradius\":
+    5,\r\n      \"points\": false,\r\n      \"renderer\": \"flot\",\r\n      \"seriesOverrides\":
+    [],\r\n      \"spaceLength\": 10,\r\n      \"stack\": false,\r\n      \"steppedLine\":
+    false,\r\n      \"targets\": [\r\n        {\r\n          \"expr\": \"max(prometheus_rule_group_duration_seconds{job=\\\"prometheus\\\"})
+    by (quantile)\",\r\n          \"format\": \"time_series\",\r\n          \"interval\":
+    \"\",\r\n          \"intervalFactor\": 2,\r\n          \"legendFormat\": \"{{quantile}}\",\r\n
+    \         \"refId\": \"A\",\r\n          \"step\": 10\r\n        }\r\n      ],\r\n
+    \     \"thresholds\": [],\r\n      \"timeFrom\": null,\r\n      \"timeRegions\":
+    [],\r\n      \"timeShift\": null,\r\n      \"title\": \"Rule Group Eval Duration\",\r\n
+    \     \"tooltip\": {\r\n        \"shared\": true,\r\n        \"sort\": 0,\r\n
+    \       \"value_type\": \"cumulative\"\r\n      },\r\n      \"type\": \"graph\",\r\n
+    \     \"xaxis\": {\r\n        \"buckets\": null,\r\n        \"mode\": \"time\",\r\n
+    \       \"name\": null,\r\n        \"show\": true,\r\n        \"values\": []\r\n
+    \     },\r\n      \"yaxes\": [\r\n        {\r\n          \"format\": \"s\",\r\n
+    \         \"label\": \"\",\r\n          \"logBase\": 1,\r\n          \"max\":
+    null,\r\n          \"min\": null,\r\n          \"show\": true\r\n        },\r\n
+    \       {\r\n          \"format\": \"short\",\r\n          \"logBase\": 1,\r\n
+    \         \"max\": null,\r\n          \"min\": null,\r\n          \"show\": true\r\n
+    \       }\r\n      ],\r\n      \"yaxis\": {\r\n        \"align\": false,\r\n        \"alignLevel\":
+    null\r\n      }\r\n    },\r\n    {\r\n      \"aliasColors\": {},\r\n      \"bars\":
+    false,\r\n      \"dashLength\": 10,\r\n      \"dashes\": false,\r\n      \"datasource\":
+    \"Prometheus\",\r\n      \"fill\": 1,\r\n      \"gridPos\": {\r\n        \"h\":
+    7,\r\n        \"w\": 12,\r\n        \"x\": 12,\r\n        \"y\": 15\r\n      },\r\n
+    \     \"id\": 39,\r\n      \"legend\": {\r\n        \"avg\": false,\r\n        \"current\":
+    false,\r\n        \"max\": false,\r\n        \"min\": false,\r\n        \"show\":
+    true,\r\n        \"total\": false,\r\n        \"values\": false\r\n      },\r\n
+    \     \"lines\": true,\r\n      \"linewidth\": 1,\r\n      \"links\": [],\r\n
+    \     \"nullPointMode\": \"null\",\r\n      \"options\": {},\r\n      \"percentage\":
+    false,\r\n      \"pointradius\": 5,\r\n      \"points\": false,\r\n      \"renderer\":
+    \"flot\",\r\n      \"seriesOverrides\": [],\r\n      \"spaceLength\": 10,\r\n
+    \     \"stack\": true,\r\n      \"steppedLine\": false,\r\n      \"targets\":
+    [\r\n        {\r\n          \"expr\": \"rate(prometheus_rule_group_iterations_missed_total{job=\\\"prometheus\\\"}[5m])\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"intervalFactor\": 2,\r\n
+    \         \"legendFormat\": \"missed\",\r\n          \"refId\": \"B\",\r\n          \"step\":
+    10\r\n        },\r\n        {\r\n          \"expr\": \"rate(prometheus_rule_group_iterations_total{job=\\\"prometheus\\\"}[5m])\",\r\n
+    \         \"format\": \"time_series\",\r\n          \"intervalFactor\": 2,\r\n
+    \         \"legendFormat\": \"iterations\",\r\n          \"refId\": \"A\",\r\n
+    \         \"step\": 10\r\n        }\r\n      ],\r\n      \"thresholds\": [],\r\n
+    \     \"timeFrom\": null,\r\n      \"timeRegions\": [],\r\n      \"timeShift\":
+    null,\r\n      \"title\": \"Rule Group Eval Activity\",\r\n      \"tooltip\":
+    {\r\n        \"shared\": true,\r\n        \"sort\": 0,\r\n        \"value_type\":
+    \"individual\"\r\n      },\r\n      \"type\": \"graph\",\r\n      \"xaxis\": {\r\n
+    \       \"buckets\": null,\r\n        \"mode\": \"time\",\r\n        \"name\":
+    null,\r\n        \"show\": true,\r\n        \"values\": []\r\n      },\r\n      \"yaxes\":
+    [\r\n        {\r\n          \"format\": \"short\",\r\n          \"label\": null,\r\n
+    \         \"logBase\": 1,\r\n          \"max\": null,\r\n          \"min\": null,\r\n
+    \         \"show\": true\r\n        },\r\n        {\r\n          \"format\": \"short\",\r\n
+    \         \"label\": null,\r\n          \"logBase\": 1,\r\n          \"max\":
+    null,\r\n          \"min\": null,\r\n          \"show\": true\r\n        }\r\n
+    \     ],\r\n      \"yaxis\": {\r\n        \"align\": false,\r\n        \"alignLevel\":
+    null\r\n      }\r\n    },\r\n    {\r\n      \"content\": \"<div>\\n  <div style=\\\"position:
+    absolute; top: 0, left: 0\\\">\\n    <a href=\\\"https://linkerd.io\\\" target=\\\"_blank\\\"><img
+    src=\\\"https://linkerd.io/images/identity/svg/linkerd_primary_color_white.svg\\\"
+    style=\\\"height: 30px;\\\"></a>\\n  </div>\\n  <div id=\\\"version\\\" style=\\\"position:
+    absolute; top: 0; right: 0; font-size: 15px\\\">\\n  </div>\\n</div>\\n<script
+    type=\\\"text/javascript\\\">\\nvar localReqURL =\\n  window.location.href.substring(\\n
+    \   0,\\n    window.location.href.indexOf(\\n    \\\"/grafana/\\\"\\n    )\\n
+    \ )+'/overview';\\n\\nfetch(localReqURL, {\\n  credentials: 'include',\\n  headers:
+    {\\n    \\\"Content-Type\\\": \\\"text/html; charset=utf-8\\\",\\n  },\\n})\\n.then(response
+    => response.text())\\n.then(text => (new window.DOMParser()).parseFromString(text,
+    \\\"text/html\\\"))\\n.then(html => {\\n  var main = html.getElementById('main');\\n
+    \ var localVersion = main.getAttribute(\\\"data-release-version\\\");\\n  var
+    versionElem = document.getElementById('version');\\n\\n  var channel;\\n  var
+    parts = localVersion.split(\\\"-\\\", 2);\\n  if (parts.length === 2) {\\n    channel
+    = parts[0];\\n    versionElem.innerHTML += 'Running Linkerd ' + parts[1] + ' ('
+    + parts[0] + ')' + '.<br>';\\n  } else {\\n    versionElem.innerHTML += 'Running
+    Linkerd ' + localVersion + '.<br>';\\n  }\\n  var uuid = main.getAttribute(\\\"data-uuid\\\");\\n\\n
+    \ fetch('https://versioncheck.linkerd.io/version.json?version='+localVersion+'&uuid='+uuid+'&source=grafana',
+    {\\n    credentials: 'include',\\n    headers: {\\n      \\\"Content-Type\\\":
+    \\\"application/json; charset=utf-8\\\",\\n    },\\n  })\\n  .then(response =>
+    response.json())\\n  .then(json => {\\n    if (!channel || !json[channel]) {\\n
+    \     versionElem.innerHTML += 'Version check failed.'\\n    } else if (json[channel]
+    === localVersion) {\\n      versionElem.innerHTML += 'Linkerd is up to date.';\\n
+    \   } else {\\n      parts = json[channel].split(\\\"-\\\", 2);\\n      if (parts.length
+    === 2) {\\n        versionElem.innerHTML += \\\"A new \\\"+parts[0]+\\\" version
+    (\\\"+parts[1]+\\\") is available.\\\"\\n      } else {\\n        versionElem.innerHTML
+    += \\\"A new version (\\\"+json[channel]+\\\") is available.\\\"\\n      }\\n
+    \     versionElem.innerHTML += \\\" <a href='https://versioncheck.linkerd.io/update'
+    target='_blank'>Update now</a>.\\\";\\n    }\\n  });\\n});\\n</script>\",\r\n
+    \     \"gridPos\": {\r\n        \"h\": 3,\r\n        \"w\": 24,\r\n        \"x\":
+    0,\r\n        \"y\": 22\r\n      },\r\n      \"height\": \"1px\",\r\n      \"id\":
+    171,\r\n      \"links\": [],\r\n      \"mode\": \"html\",\r\n      \"options\":
+    {},\r\n      \"title\": \"\",\r\n      \"transparent\": true,\r\n      \"type\":
+    \"text\"\r\n    }\r\n  ],\r\n  \"refresh\": \"1m\",\r\n  \"revision\": \"1.0\",\r\n
+    \ \"schemaVersion\": 18,\r\n  \"style\": \"dark\",\r\n  \"tags\": [\r\n    \"prometheus\"\r\n
+    \ ],\r\n  \"templating\": {\r\n    \"list\": []\r\n  },\r\n  \"time\": {\r\n    \"from\":
+    \"now-1h\",\r\n    \"to\": \"now\"\r\n  },\r\n  \"timepicker\": {\r\n    \"now\":
+    true,\r\n    \"refresh_intervals\": [\r\n      \"5s\",\r\n      \"10s\",\r\n      \"30s\",\r\n
+    \     \"1m\",\r\n      \"5m\",\r\n      \"15m\",\r\n      \"30m\",\r\n      \"1h\",\r\n
+    \     \"2h\",\r\n      \"1d\"\r\n    ],\r\n    \"time_options\": [\r\n      \"5m\",\r\n
+    \     \"15m\",\r\n      \"1h\",\r\n      \"6h\",\r\n      \"12h\",\r\n      \"24h\",\r\n
+    \     \"2d\",\r\n      \"7d\",\r\n      \"30d\"\r\n    ]\r\n  },\r\n  \"timezone\":
+    \"browser\",\r\n  \"title\": \"Prometheus 2.0 Stats\",\r\n  \"uid\": \"prometheus\",\r\n
+    \ \"version\": 1\r\n}\r\n"

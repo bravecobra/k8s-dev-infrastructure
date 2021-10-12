@@ -181,23 +181,45 @@ endif
 .prometheus: .init
 	@helm upgrade --install --wait prometheus prometheus-community/kube-prometheus-stack -n prometheus --version ${prometheus_helm_version} -f ./src/shell/prometheus/prometheus-values.yaml
 ifeq ($(INSTALL_ARGOCD),true)
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/argocd-grafana-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/argocd/argocd-grafana-dashboard.yaml
 endif
 ifeq ($(INSTALL_JAEGER),true)
 	@kubectl apply -f ./src/shell/prometheus/crds/jaeger-monitor.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/jaeger-grafana-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/jaeger/jaeger-grafana-dashboard.yaml
 endif
 ifeq ($(INSTALL_LOKI),true)
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/loki-monitor-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/loki-promtail-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/loki/loki-monitor-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/loki/loki-promtail-dashboard.yaml
 endif
 	@kubectl apply -f ./src/shell/prometheus/crds/traefik-monitor.yaml
 	@kubectl apply -f ./src/shell/prometheus/crds/traefik-rules.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/traefik-grafana-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/traefik/traefik-grafana-dashboard.yaml
+
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-authority-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-cronjob-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-daemonset-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-deployment-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-grafana-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-health-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-job-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-kubernetes-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-multicluster-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-namespace-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-pod-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-prometheus-benchmark-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-prometheus-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-replicaset-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-replicationcontroller-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-route-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-service-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-statefulset-dashboard.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-top-line-dashboard.yaml
 
 .linkerd_viz: .init
 	@helm upgrade --install --wait linkerd-viz linkerd/linkerd-viz -n linkerd --version ${linkerd_viz_version} -f ./src/shell/linkerd/linkerd-viz-values.yaml
 	@kubectl apply -f ./src/shell/linkerd/crds/ingress.yaml
+
+
 ifeq ($(INSTALL_JAEGER),true)
 	@helm upgrade --install --wait linkerd-jaeger linkerd/linkerd-jaeger -n linkerd  --version ${linkerd_jaeger_version} -f ./src/shell/linkerd/linkerd-jaeger-values.yaml
 	@kubectl apply -f ./src/shell/linkerd/crds/ingress.yaml

@@ -2,7 +2,9 @@
 
 dashboard:
   enforcedHostRegexp: "^linkerd\\.infrastructure\\.k8s\\.local$"
-# prometheusUrl: "http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090"
-# prometheus:
+prometheusUrl: http://prometheus-kube-prometheus-prometheus.prometheus:9090
+prometheus:
+  enabled: false
+# grafana:
 #   enabled: false
 jaegerUrl: jaeger-query.jaeger:16686
