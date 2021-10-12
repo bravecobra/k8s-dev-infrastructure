@@ -195,26 +195,6 @@ endif
 	@kubectl apply -f ./src/shell/prometheus/crds/traefik-rules.yaml
 	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/traefik/traefik-grafana-dashboard.yaml
 
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-authority-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-cronjob-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-daemonset-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-deployment-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-grafana-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-health-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-job-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-kubernetes-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-multicluster-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-namespace-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-pod-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-prometheus-benchmark-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-prometheus-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-replicaset-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-replicationcontroller-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-route-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-service-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-statefulset-dashboard.yaml
-	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/linkerd/linkerd-top-line-dashboard.yaml
-
 .linkerd_viz: .init
 	@helm upgrade --install --wait linkerd-viz linkerd/linkerd-viz -n linkerd --version ${linkerd_viz_version} -f ./src/shell/linkerd/linkerd-viz-values.yaml
 	@kubectl apply -f ./src/shell/linkerd/crds/ingress.yaml
