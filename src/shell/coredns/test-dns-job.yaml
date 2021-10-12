@@ -8,6 +8,6 @@ spec:
       containers:
         - name: dns
           image: anubhavmishra/tiny-tools
-          command: ['dig', 'consul.service.datacenter1.consul']
+          command: ['dig', 'prometheus-grafana.prometheus.svc.cluster.local']
       restartPolicy: Never
   backoffLimit: 4

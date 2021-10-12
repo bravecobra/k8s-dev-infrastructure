@@ -90,11 +90,3 @@ tls:
       defaultCertificate:
         certFile: /certs/tls.crt
         keyFile: /certs/tls.key
-
-# consul:
-#   enabled: true
-#   endpoint: "consul-consul-server:8500"
-#   datacenter: datacenter1
-#   watch: true
-#   exposedByDefault: true
-#   prefix: traefik
