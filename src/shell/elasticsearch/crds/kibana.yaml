@@ -18,12 +18,7 @@ spec:
   #   elasticsearch.username: elastic
   #   elasticsearch.ssl.verificationMode: none
   podTemplate:
-    metadata:
-      annotations:
-        consul.hashicorp.com/connect-service: "elastic-kb"
-        consul.hashicorp.com/connect-inject: "true"
-        consul.hashicorp.com/connect-service-port: "http"
-        # consul.hashicorp.com/connect-service-upstreams: "elastic-es:9200"
+
     spec:
       automountServiceAccountToken: true
       serviceAccount: elastic-kb

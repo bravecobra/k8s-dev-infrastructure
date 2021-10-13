@@ -1,7 +1,15 @@
+# Override of : https://github.com/bravecobra/identityserver4.admin-helm/blob/develop/src/identityserver4admin/values.yaml
+
 seed:
-  defaultAdmin:
-    password: Password_123
-    email: your.email@gmail.com
+  seedidentity:
+    enabled: true
+    defaultSeed: true
+    defaultAdmin:
+      password: Pa$$word123
+      email: your-admin@email.com
+  seedserverdata:
+    enabled: true
+    defaultSeed: true
 
 certificates:
   certManager:
@@ -20,8 +28,7 @@ admin:
     type: ClusterIP
     port: 443
   podAnnotations:
-      "consul.hashicorp.com/connect-inject": "true"
-      "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-admin"
+      "linkerd.io/inject": "enabled"
   ingress:
     enabled: true
     annotations:
@@ -50,8 +57,7 @@ identity:
     type: ClusterIP
     port: 443
   podAnnotations:
-      "consul.hashicorp.com/connect-inject": "true"
-      "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-identity"
+      "linkerd.io/inject": "enabled"
   ingress:
     enabled: true
     annotations:
@@ -81,8 +87,7 @@ api:
     type: ClusterIP
     port: 443
   podAnnotations:
-      "consul.hashicorp.com/connect-inject": "true"
-      "consul.hashicorp.com/connect-service": "identityserver4-identityserver4admin-api"
+      "linkerd.io/inject": "enabled"
   ingress:
     enabled: true
     annotations:
@@ -101,3 +106,7 @@ api:
     - secretName: traefik-cert
       hosts:
         - api.login.k8s.local
+mssql:
+  enabled: false
+  auth:
+    password: Toughpass1!

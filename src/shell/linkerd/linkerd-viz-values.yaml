@@ -1,0 +1,10 @@
+# Override of: https://github.com/linkerd/linkerd2/blob/main/viz/charts/linkerd-viz/values.yaml
+
+dashboard:
+  enforcedHostRegexp: "^linkerd\\.infrastructure\\.k8s\\.local$"
+prometheusUrl: http://prometheus-kube-prometheus-prometheus.prometheus:9090
+prometheus:
+  enabled: false
+# grafana:
+#   enabled: false
+jaegerUrl: jaeger-query.jaeger:16686

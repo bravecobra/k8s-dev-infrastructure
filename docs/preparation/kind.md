@@ -4,8 +4,17 @@
 
 Following the [quick-start](https://kind.sigs.k8s.io/docs/user/quick-start/), installing `kind` in fairly straightforward.
 
+On Windows:
+
 ```Powershell
 choco install kind
+```
+
+On linux:
+
+```bash
+curl -sL https://run.linkerd.io/install | sh
+export PATH=$PATH:~/.linkerd2/bin
 ```
 
 ### Creating a 3-node k8s-cluster
@@ -38,4 +47,11 @@ When using WSL (Windows Subsystem for Linux), you need to copy the context confi
 
 ```powershell
 cp /mnt/c/users/$(whoami)/.kube/config ~/.kube/config
+```
+
+The same commands have been added to the `makefile` to simplify the creation of the cluster.
+
+```bash
+make -f ./src/shell/Makefile create_cluster_wsl
+make -f ./src/shell/Makefile clean
 ```

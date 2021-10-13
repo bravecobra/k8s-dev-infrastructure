@@ -8,7 +8,7 @@ Using proven opensource software projects, this repo builds a coherent dev envir
 | Tracing      | jaeger        | X-Ray               | AppInsights            |        |
 | Metrics      | prometheus    | CloudWatch          |                        |        |
 | Dashboards   | grafana       | CloudWatch          |                        |        |
-| Service Mesh | consul        | AppMesh             |                        |        |
+| Service Mesh | linkerd       | AppMesh             |                        |        |
 | Ingress      | traefik       | CloudFront          |                        |        |
 | Secrets      | vault         | SSM                 | Azure Vault            |        |
 | Certificates | cert-manager  | Certificate Manager | management certificate |        |

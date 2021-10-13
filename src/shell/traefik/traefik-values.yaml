@@ -1,22 +1,33 @@
+# Override of: https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+
 dashboard:
   enabled: true
   domain: traefik.infrastructure.k8s.local
-# deployment:
-#   podAnnotations:
-#     "consul.hashicorp.com/connect-inject": "true"
-#     "consul.hashicorp.com/connect-service-port": "8000"
-#     "consul.hashicorp.com/transparent-proxy": "true"
 additionalArguments:
   - "--metrics.prometheus=true"
   - "--tracing.jaeger=true"
-  - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.jaeger.svc.cluster.local:5778/sampling"
-  - "--tracing.jaeger.localAgentHostPort=jaeger-agent.jaeger.svc.cluster.local:6831"
+  - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.jaeger:5778/sampling"
+  - "--tracing.jaeger.localAgentHostPort=jaeger-agent.jaeger:6831"
   - "--serversTransport.insecureSkipVerify=true"
   - "--providers.kubernetesingress=true"
   - "--providers.kubernetesingress.ingressendpoint"
   - "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.2"
+  #- "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.5"
   - "--entryPoints.streaming.address=:6831/udp"
+  - "--entryPoints.metrics.address=:9100"
 
+entryPoints:
+  metrics:
+    address: ":9100"
+
+deployment:
+  labels:
+    app: traefik
+  podLabels:
+    app: traefik
+metrics:
+  prometheus:
+    entryPoint: metrics
 logs:
   access:
     enabled: true
@@ -68,6 +79,7 @@ service:
   #   externalTrafficPolicy: Cluster
   # clusterIP: 172.18.0.2
   externalIPs: [
+    #172.18.0.5
     172.18.0.2
   ]
 
@@ -80,11 +92,3 @@ tls:
       defaultCertificate:
         certFile: /certs/tls.crt
         keyFile: /certs/tls.key
-
-# consul:
-#   enabled: true
-#   endpoint: "consul-consul-server:8500"
-#   datacenter: datacenter1
-#   watch: true
-#   exposedByDefault: true
-#   prefix: traefik

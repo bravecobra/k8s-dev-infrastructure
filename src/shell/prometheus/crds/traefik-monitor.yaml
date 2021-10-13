@@ -11,11 +11,10 @@ spec:
   jobLabel: traefik-metrics
   selector:
     matchLabels:
-      app.kubernetes.io/instance: traefik
-      app.kubernetes.io/name: traefik-dashboard
+      app: traefik
   namespaceSelector:
     matchNames:
     - traefik
   endpoints:
-  - port: traefik
+  - port: metrics
     path: /metrics

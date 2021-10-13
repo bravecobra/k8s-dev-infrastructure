@@ -14,7 +14,7 @@ spec:
   - name: Traefik
     rules:
     - alert: TooManyRequest
-      expr: avg(traefik_entrypoint_open_connections{job="traefik-dashboard",namespace="default"})
+      expr: avg(traefik_entrypoint_open_connections{job="traefik",namespace="default"})
         > 5
       for: 1m
       labels:

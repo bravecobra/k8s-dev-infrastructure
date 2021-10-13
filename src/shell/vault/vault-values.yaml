@@ -1,4 +1,4 @@
-
+# Override of https://github.com/hashicorp/vault-helm/blob/master/values.yaml
 global:
   enabled: true
 ui:
@@ -11,8 +11,6 @@ server:
     enabled: true
     # Set VAULT_DEV_ROOT_TOKEN_ID value
     devRootToken: "root"
-  annotations:
-    "consul.hashicorp.com/connect-inject": "true"
   ingress:
       enabled: true
       hosts:
@@ -30,6 +28,7 @@ server:
       annotations: |
         traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
         traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+        linkerd.io/inject: enabled
   # ha:
   #   enabled: true
   #   replicas: 1

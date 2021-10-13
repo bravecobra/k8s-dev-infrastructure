@@ -1,9 +1,4 @@
-agent:
-  podAnnotations:
-      "consul.hashicorp.com/connect-inject": "true"
-query:
-  podAnnotations:
-      "consul.hashicorp.com/connect-inject": "true"
+# Override of : https://github.com/jaegertracing/helm-charts/blob/main/charts/jaeger-operator/values.yaml
 # rbac:
 #   create: true
 #   clusterRole: true
