@@ -12,6 +12,7 @@ additionalArguments:
   - "--providers.kubernetesingress=true"
   - "--providers.kubernetesingress.ingressendpoint"
   - "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.2"
+  #- "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.5"
   - "--entryPoints.streaming.address=:6831/udp"
   - "--entryPoints.metrics.address=:9100"
 
@@ -78,6 +79,7 @@ service:
   #   externalTrafficPolicy: Cluster
   # clusterIP: 172.18.0.2
   externalIPs: [
+    #172.18.0.5
     172.18.0.2
   ]
 

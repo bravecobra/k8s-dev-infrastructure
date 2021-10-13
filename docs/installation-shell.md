@@ -24,7 +24,7 @@ On linux edit your `/etc/hosts` file as root.
 127.0.0.1 k8s.local infrastructure.k8s.local traefik.infrastructure.k8s.local
 127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local grafana.infrastructure.k8s.local
 # 127.0.0.1 seq.infrastructure.k8s.local
-127.0.0.1 consul.infrastructure.k8s.local vault.infrastructure.k8s.local
+127.0.0.1 vault.infrastructure.k8s.local
 127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
 127.0.0.1 login.k8s.local admin.login.k8s.local api.login.k8s.local
 127.0.0.1 argo.k8s.local

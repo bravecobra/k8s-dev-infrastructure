@@ -71,6 +71,7 @@ create_cluster:
 # 	@echo Adjusting fs.inotify.max_user_watches
 #	@sudo sysctl fs.inotify.max_user_watches=524288
 #	@sudo sysctl fs.inotify.max_user_instances=512
+# You might need use the above command(s) to fix an error happening on a node when running promtail: Too many open files
 
 delete_cluster:
 	@kind delete cluster --name devinfra
