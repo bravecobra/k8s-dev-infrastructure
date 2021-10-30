@@ -194,7 +194,9 @@ ifeq ($(INSTALL_LOKI),true)
 endif
 	@kubectl apply -f ./src/shell/prometheus/crds/traefik-monitor.yaml
 	@kubectl apply -f ./src/shell/prometheus/crds/traefik-rules.yaml
+	@kubectl apply -f ./src/shell/prometheus/crds/prometheus-cert.yaml
 	@kubectl apply -f ./src/shell/prometheus/crds/dashboards/traefik/traefik-grafana-dashboard.yaml
+
 
 .linkerd_viz: .init
 	@helm upgrade --install --wait linkerd-viz linkerd/linkerd-viz -n linkerd --version ${linkerd_viz_version} -f ./src/shell/linkerd/linkerd-viz-values.yaml
@@ -228,6 +230,7 @@ endif
 	@kubectl get configmap coredns -n kube-system -o yaml > ./src/shell/coredns/coredns-orig.yaml
 	@if ! grep -q "identityserver4" ./src/shell/coredns/coredns-orig.yaml; then cat ./src/shell/coredns/coredns-orig.yaml | sed -e 's/ready/rewrite name login.k8s.local identityserver4-identity.identityserver4.svc.cluster.local\n        rewrite name admin.login.k8s.local identityserver4-admin.identityserver4.svc.cluster.local\n        ready/g' > ./src/shell/coredns/coredns-patched.yaml; kubectl apply -f ./src/shell/coredns/coredns-patched.yaml; fi;
 	@helm upgrade --install --wait identityserver4 identityserver4admin/identityserver4admin -n identityserver4 --version ${identityserver4admin_helm_version} -f ./src/shell/identityserver4-admin/identityserver4admin-values.yaml
+	@kubectl apply -f ./src/shell/identityserver4-admin/crds/identity-cert.yaml
 
 .argocd: .init
 	helm upgrade --install --wait argocd argo/argo-cd -n argocd --version ${argocd_helm_version}  -f ./src/shell/argocd/argo-values.yaml

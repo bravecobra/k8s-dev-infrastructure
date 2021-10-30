@@ -34,8 +34,6 @@ admin:
     annotations:
       traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
       traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
     hosts:
       - host: admin.login.k8s.local
         paths:
@@ -44,7 +42,7 @@ admin:
             serviceName: identityserver4-admin
             servicePort: 443
     tls:
-    - secretName: traefik-cert
+    - secretName: identity-cert
       hosts:
         - admin.login.k8s.local
 identity:
@@ -63,8 +61,6 @@ identity:
     annotations:
       traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
       traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
     hosts:
       - host: login.k8s.local
         paths:
@@ -73,7 +69,7 @@ identity:
             serviceName: identityserver4-identity
             servicePort: 443
     tls:
-    - secretName: traefik-cert
+    - secretName: identity-cert
       hosts:
         - login.k8s.local
 api:
@@ -93,8 +89,6 @@ api:
     annotations:
       traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
       traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
     hosts:
       - host: api.login.k8s.local
         paths:
@@ -103,7 +97,7 @@ api:
             serviceName: identityserver4-api
             servicePort: 443
     tls:
-    - secretName: traefik-cert
+    - secretName: identity-cert
       hosts:
         - api.login.k8s.local
 mssql:
