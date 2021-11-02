@@ -1,0 +1,12 @@
+# Override of: https://github.com/grafana/loki/blob/main/production/helm/promtail/values.yaml
+config:
+  lokiAddress: http://loki.loki.svc.cluster.local:3100/loki/api/v1/push
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "http-metrics"
+
+serviceMonitor:
+  enabled: true
+  labels:
+    release: "prometheus"

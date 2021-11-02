@@ -1,0 +1,94 @@
+# Override of: https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+
+dashboard:
+  enabled: true
+  domain: traefik.infrastructure.${domain-name}
+additionalArguments:
+  - "--metrics.prometheus=true"
+  - "--tracing.jaeger=true"
+  - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.jaeger:5778/sampling"
+  - "--tracing.jaeger.localAgentHostPort=jaeger-agent.jaeger:6831"
+  - "--serversTransport.insecureSkipVerify=true"
+  - "--providers.kubernetesingress=true"
+  - "--providers.kubernetesingress.ingressendpoint"
+  - "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.2"
+  #- "--providers.kubernetesingress.ingressendpoint.ip=172.18.0.5"
+  - "--entryPoints.streaming.address=:6831/udp"
+  - "--entryPoints.metrics.address=:9100"
+
+entryPoints:
+  metrics:
+    address: ":9100"
+
+deployment:
+  labels:
+    app: traefik
+  podLabels:
+    app: traefik
+metrics:
+  prometheus:
+    entryPoint: metrics
+logs:
+  access:
+    enabled: true
+    format: json
+  general:
+    format: json
+    level: INFO
+
+kubernetes:
+  namespaces:
+    - default
+    - kube-system
+
+ports:
+  websecure:
+    tls:
+      enabled: true
+
+volumes:
+  - name: traefik-cert
+    mountPath: "/certs"
+    type: secret
+
+ingressClass:
+#   # true is not unit-testable yet, pending https://github.com/rancher/helm-unittest/pull/12
+  enabled: true
+  isDefaultClass: true
+#   # Use to force a networking.k8s.io API Version for certain CI/CD applications. E.g. "v1beta1"
+  fallbackApiVersion: "v1beta1"
+
+ingressRoute:
+  dashboard:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+providers:
+  kubernetesCRD:
+    enabled: true
+    namespaces: []
+  kubernetesIngress:
+    enabled: true
+    namespaces: []
+
+service:
+  enabled: true
+  type: ClusterIP
+  spec:
+  #   externalTrafficPolicy: Cluster
+  # clusterIP: 172.18.0.2
+  externalIPs: [
+    #172.18.0.5
+    172.18.0.2
+  ]
+
+tls:
+  certificates:
+    - certFile: /certs/tls.crt
+      keyFile: /certs/tls.key
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/tls.crt
+        keyFile: /certs/tls.key

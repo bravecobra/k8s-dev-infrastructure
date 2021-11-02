@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-cert
+  namespace: traefik
+spec:
+  secretName: traefik-cert
+  issuerRef:
+    name: selfsigned-ca-issuer
+    kind: ClusterIssuer
+  commonName: traefik-cert
+  dnsNames:
+  - ${domain-name}
+  - '*.${domain-name}'
+  - '*.infrastructure.${domain-name}'
+  - '*.login.${domain-name}'

@@ -1,0 +1,12 @@
+# Override of: https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
+
+podAnnotations:
+  "linkerd.io/inject": "enabled"
+
+tracing:
+  jaegerAgentHost: jaeger-agent.jaeger.svc.cluster.local
+
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: "prometheus"

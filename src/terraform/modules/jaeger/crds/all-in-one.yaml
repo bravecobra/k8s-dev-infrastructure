@@ -1,0 +1,27 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger
+  namespace: jaeger
+spec:
+  annotations:
+    "linkerd.io/inject": "enabled"
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+    hosts:
+      - jaeger.infrastructure.${domain-name}
+    path: /
+    pathType: Prefix
+    tls:
+      - secretName: jaeger-cert
+        hosts:
+        - jaeger.infrastructure.${domain-name}
+  allInOne:
+    options:
+      query:
+        base-path: /jaeger
+      log-level:  "debug"
+      memory.max-traces: 100000
