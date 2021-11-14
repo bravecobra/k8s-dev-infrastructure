@@ -48,7 +48,7 @@ module "loki" {
   helm_release_loki     = var.loki_helm_version
   helm_release_promtail = var.promtail_helm_version
   depends_on = [
-    module.jaeger
+    module.prometheus
   ]
 }
 
