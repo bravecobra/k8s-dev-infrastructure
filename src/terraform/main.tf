@@ -1,4 +1,5 @@
 module "metrics" {
+  count        = var.install_metrics == true ? 1 : 0
   source       = "./modules/metrics"
   helm_release = var.metrics_helm_version
 }
@@ -8,7 +9,7 @@ module "certmanager" {
   source       = "./modules/cert-manager"
   helm_release = var.cert_manager_helm_version
   depends_on = [
-    module.metrics
+    //module.metrics
   ]
 }
 
@@ -71,7 +72,8 @@ module "prometheus" {
   metrics_argocd = var.install_argocd
   domain-name    = var.domain-name
   depends_on = [
-    module.jaeger
+    module.jaeger,
+    module.linkerd
   ]
 }
 

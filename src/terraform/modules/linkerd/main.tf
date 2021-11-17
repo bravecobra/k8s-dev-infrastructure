@@ -67,6 +67,8 @@ output "ca-cert" {
   value       = data.local_file.ca-cert.content
 }
 
+#TODO forward to local prometheus if install_prometheus is true
+
 resource "helm_release" "linkerd" {
   name          = "linkerd"
   chart         = "linkerd2"
@@ -93,7 +95,6 @@ resource "helm_release" "linkerd" {
 
   depends_on = [
     null_resource.fetch_ca,
-    //time_sleep.wait_x_seconds
   ]
 }
 
@@ -126,6 +127,8 @@ resource "kubectl_manifest" "linkerd-viz-ingress" {
   ]
   yaml_body = templatefile("${path.module}/ingress.yaml", {domain-name = var.domain-name})
 }
+
+# TODO only install jaeger in install_jaeger is enabled
 
 resource "helm_release" "linkerd-jaeger" {
   name          = "linkerd-jaeger"

@@ -3,6 +3,7 @@ domain-name          = "k8s.local"
 ingress-ip           = "172.18.0.2"
 
 //metrics
+install_metrics      = true
 metrics_helm_version = "5.10.4"
 
 //cert-manager

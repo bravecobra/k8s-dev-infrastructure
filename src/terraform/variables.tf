@@ -11,6 +11,10 @@ variable "ingress-ip" {
 }
 
 //metrics
+variable "install_metrics" {
+  type    = bool
+  default = false
+}
 variable "metrics_helm_version" {
   type = string
 }

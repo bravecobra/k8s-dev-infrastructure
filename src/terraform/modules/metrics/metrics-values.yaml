@@ -6,3 +6,15 @@ extraArgs:
   kubelet-preferred-address-types: InternalIP
 apiService:
   create: true
+service:
+  resources:
+    ## Example:
+    limits:
+       cpu: 250m
+       memory: 256Mi
+    # limits: {}
+    ## Examples:
+    requests:
+       cpu: 250m
+       memory: 256Mi
+    # requests: {}
