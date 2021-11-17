@@ -30,7 +30,7 @@ resource "random_integer" "port" {
 
 resource "local_file" "cluster-config" {
   for_each = toset(var.k3d-cluster-name)
-  content     = templatefile("${path.module}/${each.key}.yaml.tmpl", {
+  content     = templatefile("${path.module}/${each.key}-template.yaml", {
     cluster-name = each.key,
     server-node-count = var.server-node-count,
     worker-node-count = var.worker-node-count,
