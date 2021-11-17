@@ -1,3 +1,20 @@
+resource "docker_network" "kind_network" {
+  name = "kind"
+  driver = "bridge"
+  ipv6 = true
+  ipam_config {
+      subnet = "fc00:f853:ccd:e793::/64"
+  }
+  ipam_config {
+      subnet = "172.19.0.0/16"
+      gateway = "172.19.0.1"
+  }
+  options = {
+    "com.docker.network.bridge.enable_ip_masquerade "= "true"
+    "com.docker.network.driver.mtu" = "1500"
+  }
+}
+
 resource "kind_cluster" "devinfra-cluster" {
   name           = var.cluster-name
   wait_for_ready = true
@@ -14,6 +31,8 @@ resource "kind_cluster" "devinfra-cluster" {
     networking {
       ip_family          = "ipv4"
       api_server_address = "127.0.0.1"
+      service_subnet     = "172.19.0.0/16"
+      pod_subnet         = "172.19.0.0/16"
     }
     node {
       role = "control-plane"
@@ -49,6 +68,9 @@ resource "kind_cluster" "devinfra-cluster" {
     //   role = "worker"
     // }
   }
+  depends_on = [
+    docker_network.kind_network
+  ]
 }
 
 locals {
