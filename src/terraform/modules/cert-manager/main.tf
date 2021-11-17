@@ -1,16 +1,9 @@
-resource "kubernetes_namespace" "cert-manager" {
-  metadata {
-    name = "cert-manager"
-  }
-}
-
-
 resource "helm_release" "cert-manager" {
   name = "cert-manager"
 
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
-  namespace  = "cert-manager"
+  namespace  = var.namespace
   version    = var.helm_release
   // wait       = true
   // wait_for_jobs = true
@@ -18,10 +11,6 @@ resource "helm_release" "cert-manager" {
     name  = "installCRDs"
     value = "true"
   }
-
-  depends_on = [
-    kubernetes_namespace.cert-manager
-  ]
 }
 
 resource "kubernetes_secret" "ca-key-pair" {

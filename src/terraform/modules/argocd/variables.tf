@@ -10,3 +10,8 @@ variable "domain-name" {
 variable "install_dashboards" {
   type = bool
 }
+
+variable "namespace" {
+  description = "Namespace"
+  default     = "argocd"
+}

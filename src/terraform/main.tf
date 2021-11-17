@@ -9,7 +9,7 @@ module "certmanager" {
   source       = "./modules/cert-manager"
   helm_release = var.cert_manager_helm_version
   depends_on = [
-    //module.metrics
+    kubernetes_namespace.cert-manager,
   ]
 }
 
@@ -19,7 +19,8 @@ module "linkerd" {
   helm_release = var.linkerd_helm_version
   domain-name  = var.domain-name
   depends_on = [
-    module.certmanager
+    module.certmanager,
+    kubernetes_namespace.linkerd
   ]
 }
 
@@ -29,7 +30,8 @@ module "traefik" {
   helm_release = var.traefik_helm_version
   domain-name  = var.domain-name
   depends_on = [
-    module.linkerd
+    module.linkerd,
+    kubernetes_namespace.traefik
   ]
 }
 
@@ -39,7 +41,8 @@ module "jaeger" {
   helm_release = var.jaeger_helm_version
   domain-name  = var.domain-name
   depends_on = [
-    module.linkerd
+    module.linkerd,
+    kubernetes_namespace.jaeger
   ]
 }
 
@@ -49,7 +52,8 @@ module "loki" {
   helm_release_loki     = var.loki_helm_version
   helm_release_promtail = var.promtail_helm_version
   depends_on = [
-    module.prometheus
+    module.prometheus,
+    kubernetes_namespace.loki
   ]
 }
 
@@ -59,7 +63,8 @@ module "argocd" {
   helm_release = var.argocd_helm_version
   domain-name  = var.domain-name
   depends_on = [
-    module.jaeger
+    module.jaeger,
+    kubernetes_namespace.argocd
   ]
 }
 
@@ -73,7 +78,8 @@ module "prometheus" {
   domain-name    = var.domain-name
   depends_on = [
     module.jaeger,
-    module.linkerd
+    module.linkerd,
+    kubernetes_namespace.prometheus
   ]
 }
 
@@ -86,7 +92,8 @@ module "elasticsearch" {
   install_kibana        = var.install_kibana
   domain-name           = var.domain-name
   depends_on = [
-    module.jaeger
+    module.jaeger,
+    kubernetes_namespace.elasticsearch
   ]
 }
 
@@ -96,7 +103,8 @@ module "vault" {
   helm_release = var.vault_helm_version
   domain-name    = var.domain-name
   depends_on = [
-    module.jaeger
+    module.jaeger,
+    kubernetes_namespace.vault
   ]
 }
 
@@ -117,6 +125,7 @@ module "identityserver4" {
   domain-name        = var.domain-name
   depends_on = [
     module.jaeger,
-    module.coredns
+    module.coredns,
+    kubernetes_namespace.identityserver4
   ]
 }

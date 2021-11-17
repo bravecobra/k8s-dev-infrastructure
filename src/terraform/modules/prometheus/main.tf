@@ -1,19 +1,9 @@
-resource "kubernetes_namespace" "prometheus" {
-  metadata {
-    name = "prometheus"
-    annotations = {
-      "kubernetes.io/description" = "Prometheus"
-      "linkerd.io/inject"         = "enabled"
-    }
-  }
-}
-
 resource "helm_release" "prometheus" {
   name          = "prometheus"
   repository    = "https://prometheus-community.github.io/helm-charts"
   chart         = "kube-prometheus-stack"
   version       = var.helm_release
-  namespace     = kubernetes_namespace.prometheus.metadata.0.name
+  namespace     = var.namespace
   wait          = true
   wait_for_jobs = true
   values = [

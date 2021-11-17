@@ -16,3 +16,8 @@ variable "install_elasticsearch" {
 variable "domain-name" {
   description = "Domain Name"
 }
+
+variable "namespace" {
+  description = "Namespace"
+  default     = "elasticsearch"
+}

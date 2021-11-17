@@ -1,19 +1,11 @@
-resource "kubernetes_namespace" "elasticsearch" {
-  metadata {
-    name = "elasticsearch"
-    annotations = {
-      "kubernetes.io/description" = "ElasticSearch"
-      "linkerd.io/inject"         = "enabled"
-    }
-  }
-}
+
 
 resource "helm_release" "elasticsearch" {
   name          = "elastic-operator"
   chart         = "eck-operator"
   repository    = "https://helm.elastic.co"
   version       = var.helm_release
-  namespace     = kubernetes_namespace.elasticsearch.metadata.0.name
+  namespace     = var.namespace
   wait          = true
   wait_for_jobs = true
   values = [

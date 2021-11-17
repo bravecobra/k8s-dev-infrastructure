@@ -1,7 +1,7 @@
 data "kubernetes_secret" "grafana-secret" {
   metadata {
     name      = "prometheus-grafana"
-    namespace = kubernetes_namespace.prometheus.metadata.0.name
+    namespace = var.namespace
   }
   depends_on = [
     helm_release.prometheus

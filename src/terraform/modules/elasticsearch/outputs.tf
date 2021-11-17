@@ -8,7 +8,7 @@ resource "time_sleep" "wait_x_seconds" {
 data "kubernetes_secret" "elastic-secret" {
   metadata {
     name      = "elastic-es-es-elastic-user"
-    namespace = kubernetes_namespace.elasticsearch.metadata.0.name
+    namespace = var.namespace
   }
   depends_on = [
     time_sleep.wait_x_seconds

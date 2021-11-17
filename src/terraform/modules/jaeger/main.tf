@@ -1,19 +1,9 @@
-resource "kubernetes_namespace" "jaeger" {
-  metadata {
-    name = "jaeger"
-    annotations = {
-      "kubernetes.io/description" = "Jaeger"
-      "linkerd.io/inject"         = "enabled"
-    }
-  }
-}
-
 resource "helm_release" "jaeger" {
   name       = "jaeger"
   chart      = "jaeger-operator"
   repository = "https://jaegertracing.github.io/helm-charts"
   version    = var.helm_release
-  namespace  = kubernetes_namespace.jaeger.metadata.0.name
+  namespace  = var.namespace
   values = [
     "${file("${path.module}/jaeger-values.yaml")}"
   ]
@@ -47,6 +37,7 @@ resource "kubectl_manifest" "jaeger_dashboard" {
     helm_release.jaeger
   ]
 }
+
 resource "kubectl_manifest" "upd-ingress" {
   yaml_body = file("${path.module}/crds/udp-ingress.yaml")
   depends_on = [

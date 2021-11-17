@@ -21,3 +21,9 @@ variable "tracing_controlplane" {
 variable "domain-name" {
   description = "Domain Name"
 }
+
+variable "namespace" {
+  description = "Namespace"
+  default     = "linkerd"
+}
+

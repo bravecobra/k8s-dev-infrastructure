@@ -1,24 +1,11 @@
-resource "kubernetes_namespace" "traefik" {
-  metadata {
-    name = "traefik"
-    annotations = {
-      "kubernetes.io/description" = "Traefik"
-      "linkerd.io/inject"         = "enabled"
-    }
-  }
-}
-
 resource "kubectl_manifest" "traefik-cert" {
-  depends_on = [
-    kubernetes_namespace.traefik
-  ]
   yaml_body = templatefile("${path.module}/traefik-cert.yaml", {domain-name = var.domain-name})
 }
 
 
 resource "helm_release" "traefik" {
   name       = "traefik"
-  namespace  = kubernetes_namespace.traefik.metadata.0.name
+  namespace  = var.namespace
   repository = "https://helm.traefik.io/traefik"
   chart      = "traefik"
   version    = var.helm_release

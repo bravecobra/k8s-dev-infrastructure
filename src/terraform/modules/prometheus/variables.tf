@@ -21,3 +21,8 @@ variable "metrics_loki" {
 variable "domain-name" {
   description = "Domain Name"
 }
+
+variable "namespace" {
+  description = "Namespace"
+  default     = "prometheus"
+}

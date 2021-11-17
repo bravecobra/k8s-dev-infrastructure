@@ -1,43 +1,16 @@
-resource "kubernetes_namespace" "linkerd" {
-  metadata {
-    name = "linkerd"
-    annotations = {
-      "kubernetes.io/description"   = "Linkerd"
-      "linkerd.io/inject"           = "disabled"
-      "linkerd.io/control-plane-ns" = "linkerd"
-      "linkerd.io/is-control-plane" = "true"
-    }
-    labels = {
-      "config.linkerd.io/admission-webhooks" = "disabled"
-    }
-  }
-}
-
 resource "kubectl_manifest" "linkerd-cert" {
-  depends_on = [
-    kubernetes_namespace.linkerd
-  ]
   yaml_body = file("${path.module}/linkerd-cert.yaml")
 }
 
 resource "kubectl_manifest" "linkerd-identity-cert" {
-  depends_on = [
-    kubernetes_namespace.linkerd
-  ]
   yaml_body = file("${path.module}/linkerd-identity-cert.yaml")
 }
 
 resource "kubectl_manifest" "linkerd-trust-anchor-cert" {
-  depends_on = [
-    kubernetes_namespace.linkerd
-  ]
   yaml_body = file("${path.module}/linkerd-trust-anchor-cert.yaml")
 }
 
 resource "kubectl_manifest" "linkerd-trust-anchor-issuer" {
-  depends_on = [
-    kubernetes_namespace.linkerd
-  ]
   yaml_body = file("${path.module}/linkerd-trust-anchor-issuer.yaml")
 }
 
@@ -62,17 +35,12 @@ data "local_file" "ca-cert" {
   depends_on = [null_resource.fetch_ca]
 }
 
-output "ca-cert" {
-  description = "CA certificate"
-  value       = data.local_file.ca-cert.content
-}
-
 #TODO forward to local prometheus if install_prometheus is true
 
 resource "helm_release" "linkerd" {
   name          = "linkerd"
   chart         = "linkerd2"
-  namespace     = "linkerd"
+  namespace     = var.namespace
   repository    = "https://helm.linkerd.io/stable"
   version       = var.helm_release
   wait          = true
@@ -101,7 +69,7 @@ resource "helm_release" "linkerd" {
 resource "helm_release" "linkerd-viz" {
   name          = "linkerd-viz"
   chart         = "linkerd-viz"
-  namespace     = "linkerd"
+  namespace     = var.namespace
   version       = var.helm_release
   repository    = "https://helm.linkerd.io/stable"
   wait          = true
@@ -133,7 +101,7 @@ resource "kubectl_manifest" "linkerd-viz-ingress" {
 resource "helm_release" "linkerd-jaeger" {
   name          = "linkerd-jaeger"
   chart         = "linkerd-jaeger"
-  namespace     = "linkerd"
+  namespace     = var.namespace
   version       = var.helm_release
   repository    = "https://helm.linkerd.io/stable"
   wait          = true

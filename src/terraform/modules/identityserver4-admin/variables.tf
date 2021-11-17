@@ -11,3 +11,8 @@ variable "mssql_helm_release" {
 variable "domain-name" {
   type    = string
 }
+
+variable "namespace" {
+  description = "Namespace"
+  default     = "identityserver4admin"
+}

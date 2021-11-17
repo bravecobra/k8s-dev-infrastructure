@@ -6,3 +6,8 @@ variable "helm_release" {
 variable "domain-name" {
   description = "Domain Name"
 }
+
+variable "namespace" {
+  description = "Namespace"
+  default     = "vault"
+}

@@ -1,19 +1,9 @@
-resource "kubernetes_namespace" "vault" {
-  metadata {
-    name = "vault"
-    annotations = {
-      "kubernetes.io/description" = "Vault"
-      "linkerd.io/inject"         = "enabled"
-    }
-  }
-}
-
 resource "helm_release" "vault" {
   name       = "vault"
   chart      = "vault"
   repository = "https://helm.releases.hashicorp.com"
   version    = var.helm_release
-  namespace  = kubernetes_namespace.vault.metadata.0.name
+  namespace  = var.namespace
   wait       = true
   wait_for_jobs = true
   values = [
