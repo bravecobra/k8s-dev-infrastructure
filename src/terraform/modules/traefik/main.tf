@@ -10,7 +10,11 @@ resource "helm_release" "traefik" {
   chart      = "traefik"
   version    = var.helm_release
   values = [
-    templatefile("${path.module}/traefik-values.yaml", {domain-name = var.domain-name})
+    templatefile("${path.module}/traefik-values.yaml", {
+      domain-name = var.domain-name,
+      loadbalancer-ip = var.loadbalancer-ip
+      node-ips = var.node-ips
+    })
   ]
   depends_on = [
     kubectl_manifest.traefik-cert

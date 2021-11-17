@@ -33,6 +33,8 @@ module "traefik" {
   helm_release = var.traefik_helm_version
   domain-name  = var.domain-name
   install_dashboards    = var.install_prometheus
+  loadbalancer-ip       = var.loadbalancer-ip
+  node-ips              = var.node-ips
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik

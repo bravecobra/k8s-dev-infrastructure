@@ -6,9 +6,18 @@ variable "domain-name" {
   type = string
 }
 
-variable "ingress-ip" {
+variable "loadbalancer-ip" {
   type = string
+  default = "172.19.0.2"
 }
+
+variable "node-ips" {
+  type = list
+  default = [
+    "172.19.0.2"
+  ]
+}
+
 
 //metrics
 variable "install_metrics" {

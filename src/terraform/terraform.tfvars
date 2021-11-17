@@ -1,6 +1,11 @@
-cluster-context-name = "kind-devinfra"
+cluster-context-name = "k3d-devinfra"
 domain-name          = "k8s.local"
-ingress-ip           = "172.18.0.2"
+loadbalancer-ip           = "172.19.0.1"
+node-ips = [
+    "172.19.0.2",
+    "172.19.0.3",
+    "172.19.0.4"
+]
 
 //metrics
 install_metrics      = true
