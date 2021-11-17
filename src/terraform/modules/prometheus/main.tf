@@ -29,38 +29,6 @@ resource "kubectl_manifest" "jaeger_monitor" {
   ]
 }
 
-resource "kubectl_manifest" "jaeger_dashboard" {
-  count     = var.metrics_jaeger ? 1 : 0
-  yaml_body = file("${path.module}/crds/dashboards/jaeger/jaeger-grafana-dashboard.yaml")
-  depends_on = [
-    helm_release.prometheus
-  ]
-}
-
-resource "kubectl_manifest" "loki_dashboard" {
-  count     = var.metrics_loki ? 1 : 0
-  yaml_body = file("${path.module}/crds/dashboards/loki/loki-monitor-dashboard.yaml")
-  depends_on = [
-    helm_release.prometheus
-  ]
-}
-
-resource "kubectl_manifest" "argocd_dashboard" {
-  count     = var.metrics_argocd ? 1 : 0
-  yaml_body = file("${path.module}/crds/dashboards/argocd/argocd-grafana-dashboard.yaml")
-  depends_on = [
-    helm_release.prometheus
-  ]
-}
-
-resource "kubectl_manifest" "promtail_dashboard" {
-  count     = var.metrics_loki ? 1 : 0
-  yaml_body = file("${path.module}/crds/dashboards/loki/loki-promtail-dashboard.yaml")
-  depends_on = [
-    helm_release.prometheus
-  ]
-}
-
 resource "kubectl_manifest" "traefik-monitor" {
   yaml_body = file("${path.module}/crds/traefik-monitor.yaml")
   depends_on = [
@@ -82,9 +50,4 @@ resource "kubectl_manifest" "prometheus-cert" {
   ]
 }
 
-resource "kubectl_manifest" "traefik_dashboard" {
-  yaml_body = file("${path.module}/crds/dashboards/traefik/traefik-grafana-dashboard.yaml")
-  depends_on = [
-    helm_release.prometheus
-  ]
-}
+

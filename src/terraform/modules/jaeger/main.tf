@@ -40,6 +40,13 @@ resource "kubectl_manifest" "jaeger-cert" {
   ]
 }
 
+resource "kubectl_manifest" "jaeger_dashboard" {
+  count     = var.install_dashboards ? 1 : 0
+  yaml_body = file("${path.module}/dashboards/jaeger/jaeger-grafana-dashboard.yaml")
+  depends_on = [
+    helm_release.jaeger
+  ]
+}
 resource "kubectl_manifest" "upd-ingress" {
   yaml_body = file("${path.module}/crds/udp-ingress.yaml")
   depends_on = [

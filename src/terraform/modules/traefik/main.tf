@@ -57,3 +57,11 @@ resource "kubectl_manifest" "traefik-metrics-service" {
   ]
   yaml_body = file("${path.module}/traefik-metrics-service.yaml")
 }
+
+resource "kubectl_manifest" "traefik_dashboard" {
+  count        = var.install_dashboards ? 1 : 0
+  yaml_body = file("${path.module}/dashboards/traefik/traefik-grafana-dashboard.yaml")
+  depends_on = [
+    helm_release.traefik
+  ]
+}

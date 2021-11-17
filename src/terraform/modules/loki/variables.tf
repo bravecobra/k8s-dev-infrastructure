@@ -6,4 +6,7 @@ variable "helm_release_loki" {
 variable "helm_release_promtail" {
   description = "Helm Release Promtail"
   default     = "3.8.1"
+variable "install_dashboards" {
+  type = bool
+}
 }

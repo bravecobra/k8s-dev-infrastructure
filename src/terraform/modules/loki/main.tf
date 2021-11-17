@@ -31,7 +31,19 @@ resource "helm_release" "promtail" {
   values = [
     "${file("${path.module}/promtail-values.yaml")}"
   ]
+
+resource "kubectl_manifest" "promtail_dashboard" {
+  count     = var.install_dashboards ? 1 : 0
+  yaml_body = file("${path.module}/dashboards/loki/loki-promtail-dashboard.yaml")
   depends_on = [
-    kubernetes_namespace.loki
+    helm_release.promtail
+  ]
+}
+
+resource "kubectl_manifest" "loki_dashboard" {
+  count     = var.install_dashboards ? 1 : 0
+  yaml_body = file("${path.module}/dashboards/loki/loki-monitor-dashboard.yaml")
+  depends_on = [
+    helm_release.loki
   ]
 }

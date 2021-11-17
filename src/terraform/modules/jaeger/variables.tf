@@ -6,3 +6,7 @@ variable "helm_release" {
 variable "domain-name" {
   description = "Domain Name"
 }
+
+variable "install_dashboards" {
+  type = bool
+}
