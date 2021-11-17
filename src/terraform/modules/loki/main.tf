@@ -5,7 +5,7 @@ resource "helm_release" "loki" {
   repository = "https://grafana.github.io/helm-charts"
   version    = var.helm_release_loki
   values = [
-    "${file("${path.module}/loki-values.yaml")}"
+    templatefile("${path.module}/loki-values.yaml", { tracing = var.tracing_enabled })
   ]
 }
 
@@ -18,6 +18,7 @@ resource "helm_release" "promtail" {
   values = [
     "${file("${path.module}/promtail-values.yaml")}"
   ]
+}
 
 resource "kubectl_manifest" "promtail_dashboard" {
   count     = var.install_dashboards ? 1 : 0

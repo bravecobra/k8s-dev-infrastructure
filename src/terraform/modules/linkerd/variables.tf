@@ -18,6 +18,16 @@ variable "tracing_controlplane" {
   default = false
 }
 
+variable "tracing_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "metrics_external" {
+  type    = bool
+  default = true
+}
+
 variable "domain-name" {
   description = "Domain Name"
 }

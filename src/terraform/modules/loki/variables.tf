@@ -16,3 +16,7 @@ variable "namespace" {
   description = "Namespace"
   default     = "loki"
 }
+
+variable "tracing_enabled" {
+  type = bool
+}

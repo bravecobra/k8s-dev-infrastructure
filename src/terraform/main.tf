@@ -18,6 +18,9 @@ module "linkerd" {
   source       = "./modules/linkerd"
   helm_release = var.linkerd_helm_version
   domain-name  = var.domain-name
+  tracing_enabled = var.install_jaeger
+  tracing_dataplane = var.install_jaeger
+  metrics_external = var.install_prometheus
   depends_on = [
     module.certmanager,
     kubernetes_namespace.linkerd
@@ -29,6 +32,7 @@ module "traefik" {
   source       = "./modules/traefik"
   helm_release = var.traefik_helm_version
   domain-name  = var.domain-name
+  install_dashboards    = var.install_prometheus
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -40,6 +44,7 @@ module "jaeger" {
   source       = "./modules/jaeger"
   helm_release = var.jaeger_helm_version
   domain-name  = var.domain-name
+  install_dashboards    = var.install_prometheus
   depends_on = [
     module.linkerd,
     kubernetes_namespace.jaeger
@@ -51,6 +56,8 @@ module "loki" {
   source                = "./modules/loki"
   helm_release_loki     = var.loki_helm_version
   helm_release_promtail = var.promtail_helm_version
+  install_dashboards    = var.install_prometheus
+  tracing_enabled       = var.install_jaeger
   depends_on = [
     module.prometheus,
     kubernetes_namespace.loki
@@ -62,6 +69,7 @@ module "argocd" {
   source       = "./modules/argocd"
   helm_release = var.argocd_helm_version
   domain-name  = var.domain-name
+  install_dashboards    = var.install_prometheus
   depends_on = [
     module.jaeger,
     kubernetes_namespace.argocd
