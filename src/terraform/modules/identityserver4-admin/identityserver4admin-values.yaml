@@ -1,0 +1,106 @@
+# Override of : https://github.com/bravecobra/identityserver4.admin-helm/blob/develop/src/identityserver4admin/values.yaml
+
+seed:
+  seedidentity:
+    enabled: true
+    defaultSeed: true
+    defaultAdmin:
+      password: Pa$$word123
+      email: your-admin@email.com
+  seedserverdata:
+    enabled: true
+    defaultSeed: true
+
+certificates:
+  certManager:
+    enabled: true
+    issuerRef:
+      name: selfsigned-ca-issuer
+      kind: ClusterIssuer
+
+admin:
+  protocol: https
+  domainName: admin.login.${domain-name}
+  ssl:
+    enabled: true
+    secretName: identityserver4-cert-admin
+  service:
+    type: ClusterIP
+    port: 443
+  podAnnotations:
+      "linkerd.io/inject": "enabled"
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+    hosts:
+      - host: admin.login.${domain-name}
+        paths:
+        - path: /
+          backend:
+            serviceName: identityserver4-admin
+            servicePort: 443
+    tls:
+    - secretName: identity-cert
+      hosts:
+        - admin.login.${domain-name}
+identity:
+  protocol: https
+  domainName: login.${domain-name}
+  ssl:
+    enabled: true
+    secretName: identityserver4-cert-identity
+  service:
+    type: ClusterIP
+    port: 443
+  podAnnotations:
+      "linkerd.io/inject": "enabled"
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+    hosts:
+      - host: login.${domain-name}
+        paths:
+        - path: /
+          backend:
+            serviceName: identityserver4-identity
+            servicePort: 443
+    tls:
+    - secretName: identity-cert
+      hosts:
+        - login.${domain-name}
+api:
+  enabled: true
+  protocol: https
+  domainName: api.login.${domain-name}
+  ssl:
+    enabled: true
+    secretName: identityserver4-cert-api
+  service:
+    type: ClusterIP
+    port: 443
+  podAnnotations:
+      "linkerd.io/inject": "enabled"
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+    hosts:
+      - host: api.login.${domain-name}
+        paths:
+        - path: /
+          backend:
+            serviceName: identityserver4-api
+            servicePort: 443
+    tls:
+    - secretName: identity-cert
+      hosts:
+        - api.login.${domain-name}
+mssql:
+  enabled: false
+  auth:
+    password: Toughpass1!

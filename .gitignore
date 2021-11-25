@@ -87,3 +87,5 @@ cacerts.yaml
 .terraform.lock.hcl
 charts/
 coredns-*.yaml
+src/clusters/kind/devinfra-config
+src/clusters/k3d/k3s-devinfra.yaml

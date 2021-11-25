@@ -11,8 +11,10 @@ nav:
           - Docker desktop: './preparation/docker-desktop.md'
           - Minikube: './preparation/minikube.md'
           - Kind: './preparation/kind.md'
+          - K3D: './preparation/k3d.md'
         - Testing Ingress: './preparation/test-ingress-controller.md'
       - Install:
+        - Terraform: './installation-terraform.md'
         - Shell: './installation-shell.md'
         - ArgoCD: './installation-argocd.md'
     - About:

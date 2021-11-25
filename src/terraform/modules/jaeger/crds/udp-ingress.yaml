@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteUDP
+metadata:
+  name: jaegeragentudp
+  namespace: jaeger
+
+spec:
+  entryPoints:                  # [1]
+    - streaming
+  routes:                       # [2]
+  - services:                   # [3]
+    - name: jaeger-agent        # [4]
+      port: 6831                # [5]

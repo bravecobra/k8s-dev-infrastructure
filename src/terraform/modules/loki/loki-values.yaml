@@ -1,0 +1,14 @@
+# Override of: https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
+
+podAnnotations:
+  "linkerd.io/inject": "enabled"
+
+# eslint-disable-next-line
+#%{ if tracing == true  }
+tracing:
+  jaegerAgentHost: jaeger-agent.jaeger.svc.cluster.local
+#%{ endif}
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: "prometheus"

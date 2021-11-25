@@ -17,6 +17,16 @@ curl -sL https://run.linkerd.io/install | sh
 export PATH=$PATH:~/.linkerd2/bin
 ```
 
+### Creating a cluster with terraform
+
+Edit `terraform.tfvars` to your needs. Then run `terraform apply` to create the cluster.
+
+```shell
+cd ./src/clusters/kind
+terraform init
+terraform apply --auto-approve
+```
+
 ### Creating a 3-node k8s-cluster
 
 An example of running a multi-node cluster on docker can be done with `kind`. There are some restrictions with Windows. The provided config `./src/clusters/kind/config-devinfra.yaml` provides a 3-node cluster. There is also a `traefik` ingress test setup to verify your networking configuration.

@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: identity-cert
+  namespace: identityserver4
+spec:
+  secretName: identity-cert
+  issuerRef:
+    name: selfsigned-ca-issuer
+    kind: ClusterIssuer
+  commonName: identity-cert
+  dnsNames:
+  - 'login.${domain-name}'
+  - 'admin.login.${domain-name}'
+  - 'api.login.${domain-name}'
