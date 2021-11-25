@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD046 -->
 # Installation
 
 ## Prerequisites
@@ -8,11 +9,12 @@ Check you have all the [cli tools](./preparation/cli.md) installed and that you 
 kubectl cluster-info --context <your cluster name>
 ```
 
-> When you created your local cluster on windows and now running WSL, copy your windows context to your WSL installation.
+!!!Note
+    When you created your local cluster on windows and now running WSL, copy your windows context to your WSL installation.
 
-```bash
-cp /mnt/c/users/<your username>/.kube/config ~/.kube/config
-```
+    ```bash
+    cp /mnt/c/users/<your username>/.kube/config ~/.kube/config
+    ```
 
 ## Update Local DNS
 
@@ -22,8 +24,8 @@ On Linux edit your `/etc/hosts` file as root.
 
 ```text
 127.0.0.1 k8s.local infrastructure.k8s.local traefik.infrastructure.k8s.local
-127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local grafana.infrastructure.k8s.local
-# 127.0.0.1 seq.infrastructure.k8s.local
+127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local
+127.0.0.1 grafana.infrastructure.k8s.local
 127.0.0.1 vault.infrastructure.k8s.local
 127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
 127.0.0.1 login.k8s.local admin.login.k8s.local api.login.k8s.local
@@ -33,22 +35,23 @@ On Linux edit your `/etc/hosts` file as root.
 
 ## Installer
 
-### Linux/WSL
+=== "Linux/WSL"
 
-Next run the installer in a Linux/WSL shell:
+    Next run the installer in a Linux/WSL shell:
 
-```bash
-cd src/terraform
-./generate-certificate.sh
-terraform init
-terraform apply -auto-approve
-```
+    ```bash
+    helm repo update
+    cd src/terraform
+    ./generate-certificate.sh
+    terraform init
+    terraform apply -auto-approve
+    ```
 
-### Windows
+=== "Windows"
 
-```bash
-cd src/terraform
-./generate-certificate.ps1
-terraform init
-terraform apply -auto-approve
-```
+    ```bash
+    cd src/terraform
+    ./generate-certificate.ps1
+    terraform init
+    terraform apply -auto-approve
+    ```

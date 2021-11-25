@@ -1,6 +1,8 @@
 site_name: K8S Dev Infrastructure
 theme:
   name: material
+  features:
+    - content.tabs.link
 nav:
     - Home: 'index.md'
     - Introduction: 'introduction.md'
@@ -15,7 +17,6 @@ nav:
         - Testing Ingress: './preparation/test-ingress-controller.md'
       - Install:
         - Terraform: './installation-terraform.md'
-        - Shell: './installation-shell.md'
         - ArgoCD: './installation-argocd.md'
     - About:
         - 'License': 'license.md'
@@ -23,4 +24,7 @@ nav:
 dev_addr: '0.0.0.0:8080'
 
 markdown_extensions:
-  - pymdownx.tabbed
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true

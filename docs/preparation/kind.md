@@ -1,23 +1,25 @@
+<!-- markdownlint-disable MD046 -->
 # KinD
 
 ## KinD installation
 
-Following the [quick-start](https://kind.sigs.k8s.io/docs/user/quick-start/), installing `kind` in fairly straightforward.
+Following the [quick-start](https://kind.sigs.k8s.io/docs/user/quick-start/), installing `kind` is fairly straightforward.
 
-On Windows:
+=== "Windows"
 
-```Powershell
-choco install kind
-```
+    ```Powershell
+    choco install kind
+    ```
 
-On linux:
+=== "Linux"
 
-```bash
-curl -sL https://run.linkerd.io/install | sh
-export PATH=$PATH:~/.linkerd2/bin
-```
+    ```bash
+    curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+    chmod +x ./kind
+    mv ./kind /some-dir-in-your-PATH/kind
+    ```
 
-### Creating a cluster with terraform
+### Creating a cluster with `terraform`
 
 Edit `terraform.tfvars` to your needs. Then run `terraform apply` to create the cluster.
 
@@ -25,6 +27,12 @@ Edit `terraform.tfvars` to your needs. Then run `terraform apply` to create the 
 cd ./src/clusters/kind
 terraform init
 terraform apply --auto-approve
+```
+
+Verify with
+
+```hell
+kubectl cluster-info --context kind-devinfra
 ```
 
 ### Creating a 3-node k8s-cluster
@@ -57,11 +65,4 @@ When using WSL (Windows Subsystem for Linux), you need to copy the context confi
 
 ```powershell
 cp /mnt/c/users/$(whoami)/.kube/config ~/.kube/config
-```
-
-The same commands have been added to the `makefile` to simplify the creation of the cluster.
-
-```bash
-make -f ./src/shell/Makefile create_cluster_wsl
-make -f ./src/shell/Makefile clean
 ```
