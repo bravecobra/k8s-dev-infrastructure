@@ -1,8 +1,5 @@
 # Override of : https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
 
-prometheus-node-exporter:
-  hostRootFsMount: false
-
 kubeApiServer:
   enabled: true
   tlsConfig:
@@ -23,6 +20,11 @@ prometheus:
     podMetadata:
       annotations:
         "linkerd.io/inject": "enabled"
+    resources:
+      requests:
+        memory: 200Mi
+      limits:
+        memory: 400Mi
     additionalScrapeConfigs:
       #  Required for: https://grafana.com/grafana/dashboards/315
       - job_name: 'kubernetes-nodes-cadvisor'
