@@ -14,5 +14,5 @@ variable "domain-name" {
 
 variable "namespace" {
   description = "Namespace"
-  default     = "identityserver4admin"
+  default     = "identityserver4"
 }

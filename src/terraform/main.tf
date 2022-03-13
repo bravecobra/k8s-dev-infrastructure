@@ -1,3 +1,7 @@
+resource "kubectl_manifest" "notify_watchers" {
+  yaml_body = file("./notify-watcher.yaml")
+}
+
 module "metrics" {
   count        = var.install_metrics == true ? 1 : 0
   source       = "./modules/metrics"

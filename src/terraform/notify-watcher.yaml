@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: more-fs-watchers
+  namespace: kube-system
+  labels:
+    app: more-fs-watchers
+    k8s-app: more-fs-watchers
+spec:
+  selector:
+    matchLabels:
+      k8s-app: more-fs-watchers
+  template:
+    metadata:
+      labels:
+        name: more-fs-watchers
+        k8s-app: more-fs-watchers
+      annotations:
+        seccomp.security.alpha.kubernetes.io/defaultProfileName: runtime/default
+        apparmor.security.beta.kubernetes.io/defaultProfileName: runtime/default
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      initContainers:
+        - name: sysctl
+          image: alpine:3
+          env:
+            # Each inotify watch consumes kernel memory, and existing container memory
+            # limits do not account for this. While you can set an arbitrary limit here,
+            # note that permitting large numbers of watches may result in performance
+            # degradation and out-of-memory errors. The required memory per watcher is
+            # platform-dependent and defined as INOTIFY_WATCH_COST in fs/notify:
+            # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/notify/inotify/inotify_user.c
+            #
+            # The default in this file is 10 million watchers per user.
+            - name: "USER_WATCHES_MAX"
+              value: "10485760"
+          command:
+            - sysctl
+            - -w
+            - fs.inotify.max_user_watches=$(USER_WATCHES_MAX)
+            - fs.inotify.max_user_instances=$(USER_WATCHES_MAX)
+          resources:
+            requests:
+              cpu: 10m
+              memory: 1Mi
+            limits:
+              cpu: 100m
+              memory: 5Mi
+          securityContext:
+            # We need to run as root in a privileged container to modify
+            # /proc/sys on the host (for sysctl)
+            runAsUser: 0
+            privileged: true
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      containers:
+        - name: pause
+          image: k8s.gcr.io/pause:3.5
+          command:
+            - /pause
+          resources:
+            requests:
+              cpu: 10m
+              memory: 1Mi
+            limits:
+              cpu: 100m
+              memory: 5Mi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65535
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      terminationGracePeriodSeconds: 5
