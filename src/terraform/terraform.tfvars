@@ -9,11 +9,11 @@ node-ips = [
 
 //metrics
 install_metrics      = true
-metrics_helm_version = "5.10.14"
+metrics_helm_version = "5.11.3"
 
 //cert-manager
 install_cert_manager      = true
-cert_manager_helm_version = "v1.6.1"
+cert_manager_helm_version = "v1.7.1"
 
 //linkerd
 install_linkerd      = true
@@ -21,29 +21,29 @@ linkerd_helm_version = "2.11.1"
 
 //traefik
 install_traefik      = true
-traefik_helm_version = "10.9.1"
+traefik_helm_version = "10.15.0"
 
 //jaeger
 install_jaeger      = true
-jaeger_helm_version = "2.27.1"
+jaeger_helm_version = "2.29.0"
 
 //loki
 install_loki          = true
-loki_helm_version     = "2.9.1"
-promtail_helm_version = "3.10.0"
+loki_helm_version     = "2.10.1"
+promtail_helm_version = "3.11.0"
 
 //prometheus
 install_prometheus      = true
-prometheus_helm_version = "30.1.0"
+prometheus_helm_version = "33.2.1"
 
 //argocd
 install_argocd      = false
-argocd_helm_version = "3.31.0"
+argocd_helm_version = "3.35.4"
 
 //elasticsearch
 install_elasticsearch      = false
 install_kibana             = false
-elasticsearch_helm_version = "1.9.1"
+elasticsearch_helm_version = "2.1.0"
 
 //vault
 install_vault      = false
