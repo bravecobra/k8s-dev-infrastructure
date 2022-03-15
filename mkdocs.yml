@@ -17,7 +17,6 @@ nav:
         - Testing Ingress: './preparation/test-ingress-controller.md'
       - Install:
         - Terraform: './installation-terraform.md'
-        - ArgoCD: './installation-argocd.md'
     - About:
         - 'License': 'license.md'
         - 'Release Notes': 'release-notes.md'
