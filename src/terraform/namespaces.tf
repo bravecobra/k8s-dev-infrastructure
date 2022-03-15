@@ -10,7 +10,7 @@ resource "kubernetes_namespace" "argocd" {
 }
 
 resource "kubernetes_namespace" "cert-manager" {
-    count = var.install_metrics ? 1 : 0
+    count = var.install_cert_manager ? 1 : 0
   metadata {
     name = "cert-manager"
   }
