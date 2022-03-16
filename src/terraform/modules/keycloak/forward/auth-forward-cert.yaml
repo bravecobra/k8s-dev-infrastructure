@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: auth-forward-cert
+  namespace: keycloak
+spec:
+  secretName: auth-forward-cert
+  issuerRef:
+    name: selfsigned-ca-issuer
+    kind: ClusterIssuer
+  commonName: auth-forward-cert
+  dnsNames:
+  - 'auth.k8s.local'

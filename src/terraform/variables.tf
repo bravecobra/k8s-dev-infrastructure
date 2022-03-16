@@ -129,3 +129,21 @@ variable "install_vault" {
 variable "vault_helm_version" {
   type = string
 }
+
+variable "install_keycloak" {
+  type    = bool
+  default = true
+}
+
+variable "keycloak_helm_version" {
+  type = string
+}
+
+variable "install_whoami" {
+  type    = bool
+  default = false
+}
+
+variable "whoami_helm_version" {
+  type = string
+}

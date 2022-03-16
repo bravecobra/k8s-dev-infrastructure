@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik-forward-auth-deployment
+  namespace: keycloak
+spec:
+  selector:
+    matchLabels:
+      app: traefik-forward-auth
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: traefik-forward-auth
+    spec:
+      containers:
+      - name: traefik-forward-auth
+        image: thomseddon/traefik-forward-auth:latest
+        ports:
+          - name: http
+            containerPort: 4181
+            protocol: TCP
+        volumeMounts:
+          - name: certs
+            mountPath: /etc/ssl/certs/ca.crt
+            subPath: ca.crt
+            readOnly: true
+          - name: certs
+            mountPath: /etc/ssl/certs/tls.crt
+            subPath: tls.crt
+            readOnly: true
+          - name: certs
+            mountPath: /etc/ssl/certs/tls.key
+            subPath: tls.key
+            readOnly: true
+        env:
+        - name: CONFIG
+          value: "/config"
+        - name: DEFAULT_PROVIDER
+          value: "oidc"
+        - name: DEFAULT_ACTION
+          value: "auth"
+        - name: PROVIDERS_OIDC_ISSUER_URL
+          value: "https://login.k8s.local/auth/realms/k8slocal"
+        - name: PROVIDERS_OIDC_CLIENT_ID
+          value: "traefik-forward-auth"
+        - name: PROVIDERS_OIDC_CLIENT_SECRET
+          value: "MS8UIocPolXerZAVfvOgDwg7YPvjHo22"
+        - name: "SECRET"
+          value: "SomeRandomSecret"
+        - name: "INSECURE_COOKIE"
+          value: "false"
+        - name: "AUTH_HOST"
+          value: "auth.k8s.local"
+        - name: "URL_PATH"
+          value: "/_oauth"
+        - name: "COOKIE_DOMAIN"
+          value: "k8s.local"
+        - name: "COOKIE_NAME"
+          value: "_forward_auth"
+        - name: "CSRF_COOKIE_NAME"
+          value: "_forward_auth_csrf"
+        - name: "LOG_LEVEL"
+          value: "debug"
+        - name: "LIFETIME"
+          value: "43200"
+      volumes:
+        - name: certs
+          secret:
+            secretName: keycloak-cert
+            items:
+            - key: ca.crt
+              path: ca.crt
+            - key: tls.crt
+              path: tls.crt
+            - key: tls.key
+              path: tls.key

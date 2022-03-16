@@ -10,14 +10,14 @@ resource "kubernetes_namespace" "argocd" {
 }
 
 resource "kubernetes_namespace" "cert-manager" {
-    count = var.install_cert_manager ? 1 : 0
+  count = var.install_cert_manager ? 1 : 0
   metadata {
     name = "cert-manager"
   }
 }
 
 resource "kubernetes_namespace" "elasticsearch" {
-    count = var.install_elasticsearch ? 1 : 0
+  count = var.install_elasticsearch ? 1 : 0
   metadata {
     name = "elasticsearch"
     annotations = {
@@ -28,7 +28,7 @@ resource "kubernetes_namespace" "elasticsearch" {
 }
 
 resource "kubernetes_namespace" "identityserver4" {
-    count = var.install_identityserver4admin ? 1 : 0
+  count = var.install_identityserver4admin ? 1 : 0
   metadata {
     name = "identityserver4"
     annotations = {
@@ -39,7 +39,7 @@ resource "kubernetes_namespace" "identityserver4" {
 }
 
 resource "kubernetes_namespace" "jaeger" {
-    count = var.install_jaeger ? 1 : 0
+  count = var.install_jaeger ? 1 : 0
   metadata {
     name = "jaeger"
     annotations = {
@@ -50,7 +50,7 @@ resource "kubernetes_namespace" "jaeger" {
 }
 
 resource "kubernetes_namespace" "linkerd" {
-    count = var.install_linkerd ? 1 : 0
+  count = var.install_linkerd ? 1 : 0
   metadata {
     name = "linkerd"
     annotations = {
@@ -66,7 +66,7 @@ resource "kubernetes_namespace" "linkerd" {
 }
 
 resource "kubernetes_namespace" "loki" {
-    count = var.install_loki ? 1 : 0
+  count = var.install_loki ? 1 : 0
   metadata {
     name = "loki"
     annotations = {
@@ -77,7 +77,7 @@ resource "kubernetes_namespace" "loki" {
 }
 
 resource "kubernetes_namespace" "prometheus" {
-    count = var.install_prometheus ? 1 : 0
+  count = var.install_prometheus ? 1 : 0
   metadata {
     name = "prometheus"
     annotations = {
@@ -88,7 +88,7 @@ resource "kubernetes_namespace" "prometheus" {
 }
 
 resource "kubernetes_namespace" "traefik" {
-    count = var.install_traefik ? 1 : 0
+  count = var.install_traefik ? 1 : 0
   metadata {
     name = "traefik"
     annotations = {
@@ -99,11 +99,33 @@ resource "kubernetes_namespace" "traefik" {
 }
 
 resource "kubernetes_namespace" "vault" {
-    count = var.install_vault ? 1 : 0
+  count = var.install_vault ? 1 : 0
   metadata {
     name = "vault"
     annotations = {
       "kubernetes.io/description" = "Vault"
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
+
+resource "kubernetes_namespace" "keycloak" {
+  count = var.install_keycloak ? 1 : 0
+  metadata {
+    name = "keycloak"
+    annotations = {
+      "kubernetes.io/description" = "keycloak"
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
+
+resource "kubernetes_namespace" "whoami" {
+  count = var.install_whoami ? 1 : 0
+  metadata {
+    name = "whoami"
+    annotations = {
+      "kubernetes.io/description" = "whoami"
       "linkerd.io/inject"         = "enabled"
     }
   }

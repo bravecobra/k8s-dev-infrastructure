@@ -53,3 +53,11 @@ vault_helm_version = "0.19.0"
 install_identityserver4admin      = false
 identityserver4admin_helm_version = "0.5.2"
 mssql_helm_version                = "0.1.0"
+
+//keycloak
+install_keycloak      = false
+keycloak_helm_version = "17.0.2"
+
+//whoami
+install_whoami      = false
+whoami_helm_version = "2.5.5"

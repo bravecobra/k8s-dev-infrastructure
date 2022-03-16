@@ -143,3 +143,25 @@ module "identityserver4" {
     kubernetes_namespace.identityserver4
   ]
 }
+
+module "keycloak" {
+  count              = var.install_keycloak == true ? 1 : 0
+  source             = "./modules/keycloak"
+  helm_release       = var.keycloak_helm_version
+  domain-name        = var.domain-name
+  depends_on = [
+    module.coredns,
+    kubernetes_namespace.keycloak
+  ]
+}
+
+module "whoami" {
+  count              = var.install_whoami == true ? 1 : 0
+  source             = "./modules/whoami"
+  helm_release       = var.whoami_helm_version
+  domain-name        = var.domain-name
+  depends_on = [
+    module.coredns,
+    kubernetes_namespace.whoami
+  ]
+}
