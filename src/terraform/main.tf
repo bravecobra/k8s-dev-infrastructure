@@ -2,6 +2,11 @@ resource "kubectl_manifest" "notify_watchers" {
   yaml_body = file("./notify-watcher.yaml")
 }
 
+locals {
+  patch_coredns = var.install_identityserver4admin || var.install_keycloak
+}
+
+
 module "metrics" {
   count        = var.install_metrics == true ? 1 : 0
   source       = "./modules/metrics"
@@ -123,7 +128,7 @@ module "vault" {
 }
 
 module "coredns" {
-  count              = var.install_identityserver4admin == true ? 1 : 0
+  count              = local.patch_coredns == true ? 1 : 0
   source             = "./modules/coredns"
   domain-name        = var.domain-name
   depends_on = [
