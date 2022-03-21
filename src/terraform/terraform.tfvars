@@ -57,6 +57,7 @@ mssql_helm_version                = "0.1.0"
 //keycloak
 install_keycloak      = false
 keycloak_helm_version = "17.0.2"
+forward_client_secret = "MS8UIocPolXerZAVfvOgDwg7YPvjHo22"
 
 //whoami
 install_whoami      = false

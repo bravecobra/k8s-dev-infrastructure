@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: traefik-forward-auth-deployment
-  namespace: keycloak
+  namespace: ${namespace}
 spec:
   selector:
     matchLabels:
@@ -41,21 +41,27 @@ spec:
         - name: DEFAULT_ACTION
           value: "auth"
         - name: PROVIDERS_OIDC_ISSUER_URL
-          value: "https://login.k8s.local/auth/realms/k8slocal"
+          value: "https://login.${domain-name}/auth/realms/k8slocal"
         - name: PROVIDERS_OIDC_CLIENT_ID
-          value: "traefik-forward-auth"
+          valueFrom:
+            secretKeyRef:
+              name: forward-auth-secret
+              key: forward_client_id
         - name: PROVIDERS_OIDC_CLIENT_SECRET
-          value: "MS8UIocPolXerZAVfvOgDwg7YPvjHo22"
+          valueFrom:
+            secretKeyRef:
+              name: forward-auth-secret
+              key: forward_client_secret
         - name: "SECRET"
           value: "SomeRandomSecret"
         - name: "INSECURE_COOKIE"
           value: "false"
         - name: "AUTH_HOST"
-          value: "auth.k8s.local"
+          value: "auth.${domain-name}"
         - name: "URL_PATH"
           value: "/_oauth"
         - name: "COOKIE_DOMAIN"
-          value: "k8s.local"
+          value: "${domain-name}"
         - name: "COOKIE_NAME"
           value: "_forward_auth"
         - name: "CSRF_COOKIE_NAME"

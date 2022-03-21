@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: auth-forward-cert
-  namespace: keycloak
+  namespace: ${namespace}
 spec:
   secretName: auth-forward-cert
   issuerRef:
@@ -10,4 +10,4 @@ spec:
     kind: ClusterIssuer
   commonName: auth-forward-cert
   dnsNames:
-  - 'auth.k8s.local'
+  - 'auth.${domain-name}'

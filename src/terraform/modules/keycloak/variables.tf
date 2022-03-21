@@ -13,7 +13,7 @@ variable "domain-name" {
 
 variable "init_keycloak_user"{
     type = string
-    default = "keycloak"
+    default = "admin"
 }
 
 variable "init_keycloak_password"{
@@ -24,4 +24,13 @@ variable "init_keycloak_password"{
 variable "namespace" {
   description = "Namespace"
   default     = "keycloak"
+}
+
+variable "forward_client_id" {
+  type = string
+  default = "traefik-forward-auth"
+}
+
+variable "forward_client_secret" {
+  type = string
 }

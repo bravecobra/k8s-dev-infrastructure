@@ -139,6 +139,11 @@ variable "keycloak_helm_version" {
   type = string
 }
 
+variable "forward_client_secret" {
+  type = string
+  default = ""
+}
+
 variable "install_whoami" {
   type    = bool
   default = false

@@ -154,6 +154,7 @@ module "keycloak" {
   source             = "./modules/keycloak"
   helm_release       = var.keycloak_helm_version
   domain-name        = var.domain-name
+  forward_client_secret = var.forward_client_secret
   depends_on = [
     module.coredns,
     kubernetes_namespace.keycloak
