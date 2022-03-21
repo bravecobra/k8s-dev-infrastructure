@@ -59,7 +59,8 @@ resource "kubectl_manifest" "auth-forward-deployment" {
     client_secret = var.forward_client_secret
   })
   depends_on = [
-    helm_release.keycloak
+    helm_release.keycloak,
+    kubectl_manifest.keycloak-cert,
   ]
 }
 
