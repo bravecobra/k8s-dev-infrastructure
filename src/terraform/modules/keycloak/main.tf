@@ -1,9 +1,9 @@
 resource "kubectl_manifest" "keycloak-cert" {
-  yaml_body = templatefile("${path.module}/crds/keycloak-cert.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/keycloak-cert.yaml", {domain-name = var.domain-name})
 }
 
 resource "kubectl_manifest" "keycloak-admin-secret" {
-  yaml_body = templatefile("${path.module}/crds/keycloak-admin-secret.yaml", {
+  yaml_body = templatefile("${path.module}/templates/keycloak-admin-secret.yaml", {
     username = base64encode(var.init_keycloak_user),
     password = base64encode(var.init_keycloak_password),
     namespace = var.namespace
@@ -11,7 +11,7 @@ resource "kubectl_manifest" "keycloak-admin-secret" {
 }
 
 resource "kubectl_manifest" "keycloak-forward-auth-secret" {
-  yaml_body = templatefile("${path.module}/crds/keycloak-forward-auth-secret.yaml", {
+  yaml_body = templatefile("${path.module}/templates/keycloak-forward-auth-secret.yaml", {
     forward_client_id = base64encode(var.forward_client_id),
     forward_client_secret = base64encode(var.forward_client_secret),
     namespace = var.namespace
@@ -19,13 +19,13 @@ resource "kubectl_manifest" "keycloak-forward-auth-secret" {
 }
 
 locals {
-  realm-content = replace(replace(file("${path.module}/crds/custom-realm.json"),
+  realm-content = replace(replace(file("${path.module}/templates/custom-realm.json"),
     "**********", var.forward_client_secret),
     "{{domain}}", var.domain-name)
 }
 
 resource "kubectl_manifest" "custom_realm" {
-  yaml_body = templatefile("${path.module}/crds/custom-realm-secret.yaml", {
+  yaml_body = templatefile("${path.module}/templates/custom-realm-secret.yaml", {
      realmcontent = base64encode(local.realm-content),
      namespace = var.namespace
    })
