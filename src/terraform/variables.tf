@@ -121,6 +121,20 @@ variable "mssql_helm_version" {
   type = string
 }
 
+//seq
+variable "install_seq" {
+  type    = bool
+  default = true
+}
+
+variable "seq_helm_version" {
+  type = string
+}
+
+variable "fluent_helm_version" {
+  type = string
+}
+
 //vault
 variable "install_vault" {
   type    = bool
