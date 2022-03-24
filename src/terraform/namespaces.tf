@@ -108,3 +108,14 @@ resource "kubernetes_namespace" "vault" {
     }
   }
 }
+
+resource "kubernetes_namespace" "seq" {
+  count = var.install_seq ? 1 : 0
+  metadata {
+    name = "seq"
+    annotations = {
+      "kubernetes.io/description" = "seq"
+      "linkerd.io/inject"         = "true"
+    }
+  }
+}

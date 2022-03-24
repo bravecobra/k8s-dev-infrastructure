@@ -5,7 +5,7 @@ dashboard:
   domain: traefik.infrastructure.${domain-name}
 additionalArguments:
   - "--metrics.prometheus=true"
-  - "--tracing.jaeger=true"
+  # - "--tracing.jaeger=true"
   - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.jaeger:5778/sampling"
   - "--tracing.jaeger.localAgentHostPort=jaeger-agent.jaeger:6831"
   - "--serversTransport.insecureSkipVerify=true"

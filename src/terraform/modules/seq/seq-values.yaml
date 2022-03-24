@@ -1,0 +1,23 @@
+# config.yaml
+gelf:
+  enabled: true
+
+resources:
+  limits:
+    memory: 4Gi
+
+ingress:
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+  tls:
+    - secretName: seq-cert
+      hosts:
+      - seq.infrastructure.${domain-name}
+ui:
+  ingress:
+    enabled: true
+    path: /
+    hosts:
+      - seq.infrastructure.${domain-name}
+    pathType: Prefix
