@@ -109,6 +109,16 @@ resource "kubernetes_namespace" "vault" {
   }
 }
 
+resource "kubernetes_namespace" "seq" {
+  count = var.install_seq ? 1 : 0
+  metadata {
+    name = "seq"
+    annotations = {
+      "kubernetes.io/description" = "seq"
+      "linkerd.io/inject"         = "true"
+    }
+  }
+}
 resource "kubernetes_namespace" "keycloak" {
   count = var.install_keycloak ? 1 : 0
   metadata {
@@ -129,4 +139,5 @@ resource "kubernetes_namespace" "whoami" {
       "linkerd.io/inject"         = "enabled"
     }
   }
+}
 }

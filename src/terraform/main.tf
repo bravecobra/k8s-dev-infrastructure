@@ -148,6 +148,18 @@ module "identityserver4" {
     kubernetes_namespace.identityserver4
   ]
 }
+module "seq" {
+  count              = var.install_seq == true ? 1 : 0
+  source             = "./modules/seq"
+  helm_release       = var.seq_helm_version
+  fluent_helm_release = var.fluent_helm_version
+  domain-name        = var.domain-name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.seq
+  ]
+}
 
 module "keycloak" {
   count              = var.install_keycloak == true ? 1 : 0
@@ -170,4 +182,5 @@ module "whoami" {
     module.coredns,
     kubernetes_namespace.whoami
   ]
+}
 }

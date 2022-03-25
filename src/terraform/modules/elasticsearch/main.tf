@@ -1,4 +1,9 @@
-
+resource "kubectl_manifest" "es-cert" {
+  yaml_body = templatefile("${path.module}/crds/es-cert.yaml", {
+    domain-name = var.domain-name,
+    namespace = var.namespace
+    })
+}
 
 resource "helm_release" "elasticsearch" {
   name          = "elastic-operator"

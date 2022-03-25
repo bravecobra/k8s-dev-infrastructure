@@ -1,3 +1,10 @@
+resource "kubectl_manifest" "vault-cert" {
+  yaml_body = templatefile("${path.module}/templates/vault-cert.yaml", {
+    domain-name = var.domain-name
+    namespace = var.namespace
+  })
+}
+
 resource "helm_release" "vault" {
   name       = "vault"
   chart      = "vault"
@@ -12,7 +19,7 @@ resource "helm_release" "vault" {
 }
 
 resource "kubectl_manifest" "vault-auth-serviceaccount" {
-  yaml_body = file("${path.module}/crds/vault-auth-serviceaccount.yaml")
+  yaml_body = file("${path.module}/templates/vault-auth-serviceaccount.yaml")
   depends_on = [
     helm_release.vault
   ]

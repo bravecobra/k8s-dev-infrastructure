@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: jaeger-cert
-  namespace: ${namespace}
+  name: vault-cert
+  namespace: jaeger
 spec:
-  secretName: jaeger-cert
+  secretName: vault-cert
   issuerRef:
     name: selfsigned-ca-issuer
     kind: ClusterIssuer
-  commonName: jaeger-cert
+  commonName: vault-cert
   dnsNames:
-  - 'jaeger.infrastructure.${domain-name}'
+  - 'vault.infrastructure.${domain-name}'

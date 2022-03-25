@@ -8,7 +8,7 @@ node-ips = [
 ]
 
 //metrics
-install_metrics      = true
+install_metrics      = false
 metrics_helm_version = "5.11.3"
 
 //cert-manager
@@ -28,12 +28,12 @@ install_jaeger      = true
 jaeger_helm_version = "2.29.0"
 
 //loki
-install_loki          = true
+install_loki          = false
 loki_helm_version     = "2.10.1"
 promtail_helm_version = "3.11.0"
 
 //prometheus
-install_prometheus      = true
+install_prometheus      = false
 prometheus_helm_version = "33.2.1"
 
 //argocd
@@ -54,6 +54,10 @@ install_identityserver4admin      = false
 identityserver4admin_helm_version = "0.5.2"
 mssql_helm_version                = "0.1.0"
 
+//seq
+install_seq = true
+seq_helm_version = "2022.1.7311-pre"
+fluent_helm_version = "0.19.21"
 //keycloak
 install_keycloak      = false
 keycloak_helm_version = "17.0.2"
