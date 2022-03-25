@@ -148,6 +148,7 @@ module "identityserver4" {
     kubernetes_namespace.identityserver4
   ]
 }
+
 module "seq" {
   count              = var.install_seq == true ? 1 : 0
   source             = "./modules/seq"
@@ -182,5 +183,4 @@ module "whoami" {
     module.coredns,
     kubernetes_namespace.whoami
   ]
-}
 }

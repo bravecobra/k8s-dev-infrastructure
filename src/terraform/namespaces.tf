@@ -119,6 +119,7 @@ resource "kubernetes_namespace" "seq" {
     }
   }
 }
+
 resource "kubernetes_namespace" "keycloak" {
   count = var.install_keycloak ? 1 : 0
   metadata {
@@ -139,5 +140,4 @@ resource "kubernetes_namespace" "whoami" {
       "linkerd.io/inject"         = "enabled"
     }
   }
-}
 }
