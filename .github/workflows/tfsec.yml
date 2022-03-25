@@ -1,38 +1,28 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: tfsec
-
 on:
   push:
-    branches: [ develop ]
+    branches:
+      - develop
+      - master
   pull_request:
-    branches: [ develop ]  
-  schedule:
-    - cron: '44 21 * * 5'
-
 jobs:
   tfsec:
-    name: Run tfsec sarif report
+    name: tfsec sarif report
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
 
     steps:
       - name: Clone repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
 
-      - name: Run tfsec
-        uses: tfsec/tfsec-sarif-action@9a83b5c3524f825c020e356335855741fd02745f
+      - name: tfsec
+        uses: aquasecurity/tfsec-sarif-action@v0.1.0
         with:
-          sarif_file: tfsec.sarif         
+          sarif_file: tfsec.sarif
+          working_directory: ./src/terraform
+          tfvars_file: ./src/terraform/terraform.tfvars
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v1
         with:
           # Path to SARIF file relative to the root of the repository
-          sarif_file: tfsec.sarif  
+          sarif_file: tfsec.sarif
