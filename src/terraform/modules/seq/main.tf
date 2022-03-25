@@ -1,5 +1,8 @@
 resource "kubectl_manifest" "seq-cert" {
-  yaml_body = templatefile("${path.module}/templates/seq-cert.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/seq-cert.yaml", {
+    domain-name = var.domain-name
+    namespace = var.namespace
+  })
 }
 
 resource "helm_release" "seq" {

@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: seq-cert
-  namespace: seq
+  name: vault-cert
+  namespace: jaeger
 spec:
-  secretName: seq-cert
+  secretName: vault-cert
   issuerRef:
     name: selfsigned-ca-issuer
     kind: ClusterIssuer
-  commonName: seq-cert
+  commonName: vault-cert
   dnsNames:
-  - 'seq.infrastructure.${domain-name}'
+  - 'vault.infrastructure.${domain-name}'

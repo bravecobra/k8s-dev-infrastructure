@@ -1,17 +1,17 @@
 resource "kubectl_manifest" "linkerd-cert" {
-  yaml_body = file("${path.module}/linkerd-cert.yaml")
+  yaml_body = file("${path.module}/templates/linkerd-cert.yaml")
 }
 
 resource "kubectl_manifest" "linkerd-identity-cert" {
-  yaml_body = file("${path.module}/linkerd-identity-cert.yaml")
+  yaml_body = file("${path.module}/templates/linkerd-identity-cert.yaml")
 }
 
 resource "kubectl_manifest" "linkerd-trust-anchor-cert" {
-  yaml_body = file("${path.module}/linkerd-trust-anchor-cert.yaml")
+  yaml_body = file("${path.module}/templates/linkerd-trust-anchor-cert.yaml")
 }
 
 resource "kubectl_manifest" "linkerd-trust-anchor-issuer" {
-  yaml_body = file("${path.module}/linkerd-trust-anchor-issuer.yaml")
+  yaml_body = file("${path.module}/templates/linkerd-trust-anchor-issuer.yaml")
 }
 
 resource "time_sleep" "wait_x_seconds" {

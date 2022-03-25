@@ -24,7 +24,10 @@ resource "kubectl_manifest" "admin-service" {
 }
 
 resource "kubectl_manifest" "jaeger-cert" {
-  yaml_body = templatefile("${path.module}/crds/jaeger-cert.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/crds/jaeger-cert.yaml", {
+    domain-name = var.domain-name,
+    namespace = var.namespace
+  })
   depends_on = [
     helm_release.jaeger
   ]
