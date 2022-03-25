@@ -18,8 +18,8 @@ jobs:
         uses: aquasecurity/tfsec-sarif-action@v0.1.0
         with:
           sarif_file: tfsec.sarif
-          working_directory: ./src/terraform
-          tfvars_file: ./src/terraform/terraform.tfvars
+          working_directory: src/terraform
+          tfvars_file: src/terraform/terraform.tfvars
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v1
