@@ -22,8 +22,9 @@ jobs:
         uses: tfsec/tfsec-sarif-action@main
         with:
           sarif_file: tfsec.sarif
-          working_directory: ./src/terraform/
+          working_directory: src/terraform
           tfvars_file: ./src/terraform/terraform.tfvars
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v1
