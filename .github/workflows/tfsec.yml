@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: tfsec
-        uses: dansanabria/tfsec-sarif-action@fix-typo-url
+        uses: dansanabria/tfsec-sarif-action@fix-url-typo
         with:
           tfsec_version: v1.8.0
           sarif_file: tfsec.sarif
