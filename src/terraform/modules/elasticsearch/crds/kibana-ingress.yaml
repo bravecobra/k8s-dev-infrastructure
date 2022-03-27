@@ -19,6 +19,6 @@ spec:
                 port:
                   number: 5601
   tls:
-  - secretName: traefik-cert
+  - secretName: es-cert
     hosts:
     - kibana.infrastructure.${domain-name}
