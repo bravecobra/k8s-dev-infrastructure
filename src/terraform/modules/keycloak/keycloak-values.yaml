@@ -1,5 +1,6 @@
 # https://github.com/codecentric/helm-charts/blob/master/charts/keycloak/values.yaml
 
+%{ if include_forward == true }
 extraVolumes: |
   - name: realm-secret
     secret:
@@ -9,6 +10,7 @@ extraVolumeMounts: |
   - name: realm-secret
     mountPath: "/realm/"
     readOnly: true
+%{ endif }
 
 extraEnv: |
   - name: KEYCLOAK_LOGLEVEL
@@ -19,8 +21,10 @@ extraEnv: |
     value: "${init_keycloak_user}"
   - name: KEYCLOAK_PASSWORD
     value: "${init_keycloak_password}"
+%{ if include_forward == true }
   - name: KEYCLOAK_IMPORT
     value: /realm/realm-export.json
+%{ endif }
 
 service:
   httpsPort: 443

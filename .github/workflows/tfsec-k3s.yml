@@ -1,4 +1,4 @@
-name: tfsec
+name: tfsec-k3s
 on:
   push:
     branches:
@@ -23,8 +23,8 @@ jobs:
         with:
           tfsec_version: v1.8.0
           sarif_file: tfsec.sarif
-          working_directory: src/terraform
-          tfvars_file: tests/terraform.tfvars
+          working_directory: src/cluster/k3d
+          tfvars_file: src/cluster/k3d/terraform.tfvars
           tfsec_args: --debug
 
       - name: Output SARIF file

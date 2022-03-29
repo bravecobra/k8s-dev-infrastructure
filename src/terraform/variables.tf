@@ -153,9 +153,8 @@ variable "keycloak_helm_version" {
   type = string
 }
 
-variable "forward_client_secret" {
-  type = string
-  default = ""
+variable "keycloak_include_domainrealm" {
+  type = bool
 }
 
 variable "install_whoami" {

@@ -7,18 +7,9 @@ variable "domain-name" {
   description = "Domain Name"
 }
 
-// variable "install_dashboards" {
-//   type = bool
-// }
-
 variable "init_keycloak_user"{
     type = string
     default = "admin"
-}
-
-variable "init_keycloak_password"{
-    type = string
-    default = "Pa55w0rd"
 }
 
 variable "namespace" {
@@ -31,6 +22,7 @@ variable "forward_client_id" {
   default = "traefik-forward-auth"
 }
 
-variable "forward_client_secret" {
-  type = string
+variable "include_domainrealm" {
+  type = bool
+  default = false
 }
