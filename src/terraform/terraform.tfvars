@@ -58,6 +58,7 @@ mssql_helm_version                = "0.1.0"
 install_seq = true
 seq_helm_version = "2022.1.7311-pre"
 fluent_helm_version = "0.19.21"
+
 //keycloak
 install_keycloak      = false
 keycloak_helm_version = "17.0.2"

@@ -24,7 +24,7 @@ jobs:
           tfsec_version: v1.8.0
           sarif_file: tfsec.sarif
           working_directory: src/terraform
-          tfvars_file: tests/terraform.tfvars
+          tfvars_file: src/tests/terraform.tfvars
           tfsec_args: --debug
 
       - name: Output SARIF file

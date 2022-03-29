@@ -23,8 +23,8 @@ jobs:
         with:
           tfsec_version: v1.8.0
           sarif_file: tfsec.sarif
-          working_directory: src/cluster/k3d
-          tfvars_file: src/cluster/k3d/terraform.tfvars
+          working_directory: src/clusters/k3d
+          tfvars_file: src/clusters/k3d/terraform.tfvars
           tfsec_args: --debug
 
       - name: Output SARIF file
