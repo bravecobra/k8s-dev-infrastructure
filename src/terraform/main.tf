@@ -2,6 +2,11 @@ resource "kubectl_manifest" "notify_watchers" {
   yaml_body = file("./notify-watcher.yaml")
 }
 
+locals {
+  patch_coredns = var.install_identityserver4admin || var.install_keycloak
+}
+
+
 module "metrics" {
   count        = var.install_metrics == true ? 1 : 0
   source       = "./modules/metrics"
@@ -123,7 +128,7 @@ module "vault" {
 }
 
 module "coredns" {
-  count              = var.install_identityserver4admin == true ? 1 : 0
+  count              = local.patch_coredns == true ? 1 : 0
   source             = "./modules/coredns"
   domain-name        = var.domain-name
   depends_on = [
@@ -143,6 +148,7 @@ module "identityserver4" {
     kubernetes_namespace.identityserver4
   ]
 }
+
 module "seq" {
   count              = var.install_seq == true ? 1 : 0
   source             = "./modules/seq"
@@ -153,5 +159,29 @@ module "seq" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.seq
+  ]
+}
+
+module "keycloak" {
+  count              = var.install_keycloak == true ? 1 : 0
+  source             = "./modules/keycloak"
+  helm_release       = var.keycloak_helm_version
+  domain-name        = var.domain-name
+  //forward_client_secret = var.forward_client_secret
+  include_domainrealm = var.keycloak_include_domainrealm
+  depends_on = [
+    module.coredns,
+    kubernetes_namespace.keycloak
+  ]
+}
+
+module "whoami" {
+  count              = var.install_whoami == true ? 1 : 0
+  source             = "./modules/whoami"
+  helm_release       = var.whoami_helm_version
+  domain-name        = var.domain-name
+  depends_on = [
+    module.coredns,
+    kubernetes_namespace.whoami
   ]
 }

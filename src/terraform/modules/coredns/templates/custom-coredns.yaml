@@ -1,0 +1,13 @@
+# rewrite name login.${domain-name} traefik.traefik.svc.cluster.local
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  keycloak.server: |
+    ${domain-name}:53 {
+      rewrite name login.${domain-name} traefik.traefik.svc.cluster.local
+      rewrite name admin.login.${domain-name} traefik.traefik.svc.cluster.local
+      forward . 127.0.0.1:53
+    }

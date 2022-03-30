@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: keycloakforwardauth
+spec:
+  forwardAuth:
+    address: http://traefik-forward-auth.${namespace}.svc.cluster.local:4181/auth
+    trustForwardHeader: true
+    authResponseHeaders:
+      - Authorization
+      - X-Auth-User
+      - X-Secret
+      - X-Forwarded-User
+      - X-WebAuth-User
+    tls:
+      insecureSkipVerify: true

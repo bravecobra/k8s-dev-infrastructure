@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-forward-auth
+  namespace: ${namespace}
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    #traefik.ingress.kubernetes.io/router.middlewares: default-keycloakforwardauth@kubernetescrd
+spec:
+  rules:
+    - host: auth.${domain-name}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik-forward-auth
+                port:
+                  number: 4181
+  tls:
+  - secretName: auth-forward-cert
+    hosts:
+    - auth.${domain-name}

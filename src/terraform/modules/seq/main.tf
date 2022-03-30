@@ -32,5 +32,8 @@ resource "helm_release" "fluent" {
         FLUENT_GELF_PROTOCOL = "tcp",
     }),
   ]
+  depends_on = [
+    helm_release.seq
+  ]
 }
 

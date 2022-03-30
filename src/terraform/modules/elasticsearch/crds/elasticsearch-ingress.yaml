@@ -19,6 +19,6 @@ spec:
                 port:
                   number: 9200
   tls:
-  - secretName: traefik-cert
+  - secretName: es-cert
     hosts:
     - es.infrastructure.${domain-name}

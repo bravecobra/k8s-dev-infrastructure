@@ -1,0 +1,51 @@
+# https://github.com/codecentric/helm-charts/blob/master/charts/keycloak/values.yaml
+
+%{ if include_forward == true }
+extraVolumes: |
+  - name: realm-secret
+    secret:
+      secretName: realm-secret
+
+extraVolumeMounts: |
+  - name: realm-secret
+    mountPath: "/realm/"
+    readOnly: true
+%{ endif }
+
+extraEnv: |
+  - name: KEYCLOAK_LOGLEVEL
+    value: INFO
+  - name: PROXY_ADDRESS_FORWARDING
+    value: "true"
+  - name: KEYCLOAK_USER
+    value: "${init_keycloak_user}"
+  - name: KEYCLOAK_PASSWORD
+    value: "${init_keycloak_password}"
+%{ if include_forward == true }
+  - name: KEYCLOAK_IMPORT
+    value: /realm/realm-export.json
+%{ endif }
+
+service:
+  httpsPort: 443
+
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+  labels: {}
+  rules:
+    -
+      # Ingress host
+      host: login.${domain-name}
+      # Paths for the host
+      paths:
+        - path: /
+          pathType: Prefix
+  # TLS configuration
+  tls:
+    - hosts:
+        - keycloak.${domain-name}
+        - login.${domain-name}
+      secretName: keycloak-cert

@@ -8,7 +8,7 @@ node-ips = [
 ]
 
 //metrics
-install_metrics      = false
+install_metrics      = true
 metrics_helm_version = "5.11.3"
 
 //cert-manager
@@ -28,29 +28,29 @@ install_jaeger      = true
 jaeger_helm_version = "2.29.0"
 
 //loki
-install_loki          = false
+install_loki          = true
 loki_helm_version     = "2.10.1"
 promtail_helm_version = "3.11.0"
 
 //prometheus
-install_prometheus      = false
+install_prometheus      = true
 prometheus_helm_version = "33.2.1"
 
 //argocd
-install_argocd      = false
+install_argocd      = true
 argocd_helm_version = "3.35.4"
 
 //elasticsearch
-install_elasticsearch      = false
-install_kibana             = false
+install_elasticsearch      = true
+install_kibana             = true
 elasticsearch_helm_version = "2.1.0"
 
 //vault
-install_vault      = false
+install_vault      = true
 vault_helm_version = "0.19.0"
 
 //identityserver4-admin
-install_identityserver4admin      = false
+install_identityserver4admin      = true
 identityserver4admin_helm_version = "0.5.2"
 mssql_helm_version                = "0.1.0"
 
@@ -60,10 +60,10 @@ seq_helm_version = "2022.1.7311-pre"
 fluent_helm_version = "0.19.21"
 
 //keycloak
-install_keycloak      = false
+install_keycloak      = true
 keycloak_helm_version = "17.0.2"
-keycloak_include_domainrealm = true
+forward_client_secret = "MS8UIocPolXerZAVfvOgDwg7YPvjHo22"
 
 //whoami
-install_whoami      = false
+install_whoami      = true
 whoami_helm_version = "2.5.5"

@@ -33,3 +33,9 @@ output "argocd-password" {
   value       = join("", module.argocd[*].password)
   sensitive   = true
 }
+
+output "keycloak-password" {
+  description = "Keycloak Initial Admin password"
+  value       = join("", module.keycloak[*].keycloak-password)
+  sensitive   = true
+}
