@@ -11,8 +11,16 @@ prometheusOperator:
     patch:
       podAnnotations:
         linkerd.io/inject: disabled
+  # serviceMonitor:
+  #   selfMonitor: false
+
+# alertmanager:
+#   serviceMonitor:
+#     selfMonitor: false
 
 prometheus:
+  # serviceMonitor:
+  #   selfMonitor: false
   prometheusSpec:
     scrapeInterval: "10s"
     scrapeTimeout: "10s"
@@ -22,9 +30,12 @@ prometheus:
         "linkerd.io/inject": "enabled"
     resources:
       requests:
+        cpu: 250m
         memory: 200Mi
       limits:
+        cpu: 500m
         memory: 400Mi
+    retention: 2h
     additionalScrapeConfigs:
 
       - job_name: 'linkerd-controller'
@@ -161,3 +172,41 @@ grafana:
   - grafana-piechart-panel
   - digrich-bubblechart-panel
   - grafana-clock-panel
+
+# prometheus-node-exporter:
+#   prometheus:
+#     monitor:
+#       enabled: false
+
+# kubeControllerManager:
+#   serviceMonitor:
+#     enabled: true
+
+# coreDns:
+#   serviceMonitor:
+#     enabled: false
+
+# kubeDns:
+#   serviceMonitor:
+#     enabled: false
+
+# kubeScheduler:
+#   serviceMonitor:
+#     enabled: false
+
+# kubeProxy:
+#   serviceMonitor:
+#     enabled: false
+
+# kube-state-metrics:
+#   prometheus:
+#     serviceMonitor:
+#       enabled: false
+
+# kubelet:
+#   serviceMonitor:
+#     probes: false
+
+# kubeEtcd:
+#   serviceMonitor:
+#     enabled: false
