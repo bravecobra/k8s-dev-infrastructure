@@ -5,6 +5,12 @@ resource "kubectl_manifest" "vault-cert" {
   })
 }
 
+resource "random_password" "init_password" {
+  length           = 8
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
 resource "helm_release" "vault" {
   name       = "vault"
   chart      = "vault"
@@ -14,7 +20,12 @@ resource "helm_release" "vault" {
   wait       = true
   wait_for_jobs = true
   values = [
-    templatefile("${path.module}/vault-values.yaml", {domain-name = var.domain-name})
+    templatefile("${path.module}/vault-values.yaml", {
+      domain-name = var.domain-name,
+      vaultDevRootToken = random_password.init_password.result})
+  ]
+  depends_on = [
+    random_password.init_password
   ]
 }
 
