@@ -25,28 +25,28 @@ resource "helm_release" "prometheus" {
 
 resource "kubectl_manifest" "jaeger_monitor" {
   count     = var.metrics_jaeger ? 1 : 0
-  yaml_body = file("${path.module}/crds/jaeger-monitor.yaml")
+  yaml_body = file("${path.module}/templates/jaeger-monitor.yaml")
   depends_on = [
     helm_release.prometheus
   ]
 }
 
 resource "kubectl_manifest" "traefik-monitor" {
-  yaml_body = file("${path.module}/crds/traefik-monitor.yaml")
+  yaml_body = file("${path.module}/templates/traefik-monitor.yaml")
   depends_on = [
     helm_release.prometheus
   ]
 }
 
 resource "kubectl_manifest" "traefik-rules" {
-  yaml_body = file("${path.module}/crds/traefik-rules.yaml")
+  yaml_body = file("${path.module}/templates/traefik-rules.yaml")
   depends_on = [
     helm_release.prometheus
   ]
 }
 
 resource "kubectl_manifest" "prometheus-cert" {
-  yaml_body = templatefile("${path.module}/crds/prometheus-cert.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/prometheus-cert.yaml", {domain-name = var.domain-name})
   depends_on = [
     helm_release.prometheus
   ]

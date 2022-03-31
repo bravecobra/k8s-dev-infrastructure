@@ -30,7 +30,9 @@ resource "helm_release" "vault" {
 }
 
 resource "kubectl_manifest" "vault-auth-serviceaccount" {
-  yaml_body = file("${path.module}/templates/vault-auth-serviceaccount.yaml")
+  yaml_body = templatefile("${path.module}/templates/vault-auth-serviceaccount.yaml", {
+    namespace = var.namespace
+  })
   depends_on = [
     helm_release.vault
   ]

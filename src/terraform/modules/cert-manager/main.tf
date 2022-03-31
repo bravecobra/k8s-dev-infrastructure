@@ -38,5 +38,5 @@ resource "kubectl_manifest" "cluster-issuer" {
   depends_on = [
     time_sleep.wait_10_seconds
   ]
-  yaml_body = file("${path.module}/cluster-issuer.yaml")
+  yaml_body = file("${path.module}/templates/cluster-issuer.yaml")
 }

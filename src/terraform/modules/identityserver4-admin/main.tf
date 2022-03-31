@@ -28,5 +28,5 @@ resource "helm_release" "identityserver4" {
 }
 
 resource "kubectl_manifest" "identity-cert" {
-  yaml_body = templatefile("${path.module}/crds/identity-cert.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/identity-cert.yaml", {domain-name = var.domain-name})
 }

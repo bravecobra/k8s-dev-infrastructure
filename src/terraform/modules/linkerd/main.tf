@@ -89,14 +89,14 @@ resource "kubectl_manifest" "linkerd-viz-ingress-secret" {
   depends_on = [
     helm_release.linkerd-viz
   ]
-  yaml_body = file("${path.module}/ingress-secret.yaml")
+  yaml_body = file("${path.module}/templates/ingress-secret.yaml")
 }
 
 resource "kubectl_manifest" "linkerd-viz-ingress" {
   depends_on = [
     helm_release.linkerd-viz
   ]
-  yaml_body = templatefile("${path.module}/ingress.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/ingress.yaml", {domain-name = var.domain-name})
 }
 
 # TODO only install jaeger in install_jaeger is enabled

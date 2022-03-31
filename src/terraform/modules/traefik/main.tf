@@ -1,5 +1,5 @@
 resource "kubectl_manifest" "traefik-cert" {
-  yaml_body = templatefile("${path.module}/traefik-cert.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/traefik-cert.yaml", {domain-name = var.domain-name})
 }
 
 
@@ -25,28 +25,28 @@ resource "kubectl_manifest" "cert-store" {
   depends_on = [
     helm_release.traefik
   ]
-  yaml_body = file("${path.module}/cert-store.yaml")
+  yaml_body = file("${path.module}/templates/cert-store.yaml")
 }
 
 resource "kubectl_manifest" "dashboard" {
   depends_on = [
     helm_release.traefik
   ]
-  yaml_body = templatefile("${path.module}/dashboard.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/dashboard.yaml", {domain-name = var.domain-name})
 }
 
 resource "kubectl_manifest" "http-redirect-middleware" {
   depends_on = [
     helm_release.traefik
   ]
-  yaml_body = file("${path.module}/http-redirect-middleware.yaml")
+  yaml_body = file("${path.module}/templates/http-redirect-middleware.yaml")
 }
 
 resource "kubectl_manifest" "traefik-metrics-service" {
   depends_on = [
     helm_release.traefik
   ]
-  yaml_body = file("${path.module}/traefik-metrics-service.yaml")
+  yaml_body = file("${path.module}/templates/traefik-metrics-service.yaml")
 }
 
 resource "kubectl_manifest" "traefik_dashboard" {
