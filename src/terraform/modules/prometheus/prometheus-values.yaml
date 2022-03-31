@@ -123,6 +123,9 @@ prometheus:
         - prometheus.infrastructure.${domain-name}
 
 grafana:
+  # serviceMonitor:
+  #   enabled: false
+  adminPassword: ${grafana_password}
   defaultDashboardsEnabled: true
   sidecar:
     dashboards:
