@@ -10,7 +10,7 @@ server:
   dev:
     enabled: true
     # Set VAULT_DEV_ROOT_TOKEN_ID value
-    devRootToken: "root"
+    devRootToken: ${vaultDevRootToken}
   ingress:
       enabled: true
       hosts:
