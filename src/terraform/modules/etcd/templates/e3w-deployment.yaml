@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e3w
+  namespace: ${namespace}
+spec:
+  selector:
+    matchLabels:
+      app: e3w
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: e3w
+    spec:
+      containers:
+      - name: e3w
+        image: soyking/e3w:latest
+        ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP
+        volumeMounts:
+          - name: config
+            mountPath: /app/conf
+        env:
+      volumes:
+        - name: config
+          configMap:
+            name: e3w-config
+
+

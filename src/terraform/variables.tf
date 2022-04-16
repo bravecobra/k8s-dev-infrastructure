@@ -165,3 +165,12 @@ variable "install_whoami" {
 variable "whoami_helm_version" {
   type = string
 }
+
+variable "install_etcd" {
+  type    = bool
+  default = false
+}
+
+variable "etcd_helm_version" {
+  type = string
+}

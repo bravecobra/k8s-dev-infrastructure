@@ -67,3 +67,7 @@ keycloak_include_domainrealm = true
 //whoami
 install_whoami      = false
 whoami_helm_version = "2.5.5"
+
+//etcd
+install_etcd      = false
+etcd_helm_version = "7.0.1"
