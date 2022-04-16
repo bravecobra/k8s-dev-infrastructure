@@ -35,8 +35,6 @@ data "local_file" "ca-cert" {
   depends_on = [null_resource.fetch_ca]
 }
 
-#TODO forward to local prometheus if install_prometheus is true
-
 resource "helm_release" "linkerd" {
   name          = "linkerd"
   chart         = "linkerd2"
