@@ -1,0 +1,39 @@
+# https://github.com/bitnami/charts/blob/master/bitnami/etcd/values.yaml
+
+networkPolicy:
+  ## @param networkPolicy.enabled Enable creation of NetworkPolicy resources
+  ##
+  enabled: false
+  ## @param networkPolicy.allowExternal Don't require client label for connections
+  ## When set to false, only pods with the correct client label will have network access to the ports
+  ## etcd is listening on. When true, etcd will accept connections from any source
+  ## (with the correct destination port).
+  ##
+  allowExternal: true
+  # extraIngress:
+  #   - ports:
+  #       - port: 2379
+  #     from:
+  #       - podSelector:
+  #           - matchLabels:
+  #               - role: frontend
+  #       - podSelector:
+  #           - matchExpressions:
+  #               - key: role
+  #                 operator: In
+  #                 values:
+  #                   - frontend
+auth:
+  ## Role-based access control parameters
+  ## ref: https://etcd.io/docs/current/op-guide/authentication/
+  ##
+  rbac:
+    ## @param auth.rbac.create Switch to enable RBAC authentication
+    ##
+    create: true
+    ## @param auth.rbac.allowNoneAuthentication Allow to use etcd without configuring RBAC authentication
+    ##
+    allowNoneAuthentication: true
+    ## @param auth.rbac.rootPassword Root user password. The root user is always `root`
+    ##
+    rootPassword: "${password}"

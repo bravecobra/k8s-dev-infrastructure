@@ -83,6 +83,7 @@ module "argocd" {
   install_dashboards    = var.install_prometheus
   depends_on = [
     module.jaeger,
+    module.linkerd,
     kubernetes_namespace.argocd
   ]
 }
@@ -112,6 +113,7 @@ module "elasticsearch" {
   domain-name           = var.domain-name
   depends_on = [
     module.jaeger,
+    module.linkerd,
     kubernetes_namespace.elasticsearch
   ]
 }
@@ -183,5 +185,17 @@ module "whoami" {
   depends_on = [
     module.coredns,
     kubernetes_namespace.whoami
+  ]
+}
+
+module "etcd" {
+  count              = var.install_etcd == true ? 1 : 0
+  source             = "./modules/etcd"
+  helm_release       = var.etcd_helm_version
+  domain-name        = var.domain-name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.etcd
   ]
 }

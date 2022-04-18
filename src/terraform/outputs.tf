@@ -39,3 +39,9 @@ output "keycloak-password" {
   value       = join("", module.keycloak[*].keycloak-password)
   sensitive   = true
 }
+
+output "etcd-password" {
+  description = "Etcd Initial Admin password"
+  value       = join("", module.etcd[*].etcd-password)
+  sensitive   = true
+}

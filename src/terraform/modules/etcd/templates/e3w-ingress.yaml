@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: e3w
+  namespace: ${namespace}
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    #traefik.ingress.kubernetes.io/router.middlewares: default-keycloakforwardauth@kubernetescrd
+spec:
+  rules:
+    - host: etcd.infrastructure.${domain-name}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: e3w
+                port:
+                  number: 80
+  tls:
+  - secretName: etcd-cert
+    hosts:
+    - etcd.infrastructure.${domain-name}
