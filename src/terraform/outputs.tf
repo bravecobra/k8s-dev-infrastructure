@@ -45,3 +45,9 @@ output "minio-password" {
   value       = join("", module.minio[*].minio-password)
   sensitive   = true
 }
+
+output "etcd-password" {
+  description = "Etcd Initial Admin password"
+  value       = join("", module.etcd[*].etcd-password)
+  sensitive   = true
+}

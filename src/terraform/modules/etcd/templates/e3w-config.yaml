@@ -1,0 +1,21 @@
+# rewrite name login.${domain-name} traefik.traefik.svc.cluster.local
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: e3w-config
+  namespace: ${namespace}
+data:
+  config.default.ini: |
+    [app]
+    port=80
+    auth=false
+
+    [etcd]
+    root_key=e3w_test
+    dir_value=
+    addr=etcd.${namespace}.svc.cluster.local:2379
+    username=root
+    password=${password}
+    cert_file=
+    key_file=
+    ca_file=

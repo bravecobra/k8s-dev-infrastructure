@@ -115,7 +115,7 @@ resource "kubernetes_namespace" "seq" {
     name = "seq"
     annotations = {
       "kubernetes.io/description" = "seq"
-      "linkerd.io/inject"         = "true"
+      "linkerd.io/inject"         = "enabled"
     }
   }
 }
@@ -141,6 +141,18 @@ resource "kubernetes_namespace" "whoami" {
     }
   }
 }
+
+resource "kubernetes_namespace" "etcd" {
+  count = var.install_etcd ? 1 : 0
+  metadata {
+    name = "etcd"
+    annotations = {
+      "kubernetes.io/description" = "etcd"
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
+
 
 resource "kubernetes_namespace" "minio" {
   count = var.install_minio ? 1 : 0

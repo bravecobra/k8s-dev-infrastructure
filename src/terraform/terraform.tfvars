@@ -68,6 +68,10 @@ keycloak_include_domainrealm = true
 install_whoami      = false
 whoami_helm_version = "2.5.5"
 
+//etcd
+install_etcd      = false
+etcd_helm_version = "7.0.1"
+
 //minio
 install_minio      = false
 minio_helm_version = "3.6.6"
