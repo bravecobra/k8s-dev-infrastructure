@@ -9,5 +9,6 @@ data:
     ${domain-name}:53 {
       rewrite name login.${domain-name} traefik.traefik.svc.cluster.local
       rewrite name admin.login.${domain-name} traefik.traefik.svc.cluster.local
+      rewrite name minio.infrastructure.${domain-name} minio.minio.svc.cluster.local
       forward . 127.0.0.1:53
     }

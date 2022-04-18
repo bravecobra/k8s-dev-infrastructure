@@ -18,6 +18,16 @@ variable "metrics_loki" {
   default = true
 }
 
+variable "metrics_minio" {
+  type    = bool
+  default = false
+}
+
+variable "metrics_linkerd" {
+  type    = bool
+  default = false
+}
+
 variable "domain-name" {
   description = "Domain Name"
 }

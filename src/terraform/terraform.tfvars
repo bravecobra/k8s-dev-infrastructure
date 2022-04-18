@@ -16,7 +16,7 @@ install_cert_manager      = true
 cert_manager_helm_version = "v1.7.1"
 
 //linkerd
-install_linkerd      = true
+install_linkerd      = false
 linkerd_helm_version = "2.11.1"
 
 //traefik
@@ -24,7 +24,7 @@ install_traefik      = true
 traefik_helm_version = "10.15.0"
 
 //jaeger
-install_jaeger      = true
+install_jaeger      = false
 jaeger_helm_version = "2.29.0"
 
 //loki
@@ -55,7 +55,7 @@ identityserver4admin_helm_version = "0.5.2"
 mssql_helm_version                = "0.1.0"
 
 //seq
-install_seq = true
+install_seq = false
 seq_helm_version = "2022.1.7311-pre"
 fluent_helm_version = "0.19.21"
 
@@ -71,3 +71,7 @@ whoami_helm_version = "2.5.5"
 //etcd
 install_etcd      = false
 etcd_helm_version = "7.0.1"
+
+//minio
+install_minio      = false
+minio_helm_version = "3.6.6"

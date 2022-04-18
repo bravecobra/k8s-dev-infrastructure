@@ -174,3 +174,12 @@ variable "install_etcd" {
 variable "etcd_helm_version" {
   type = string
 }
+
+variable "install_minio" {
+  type    = bool
+  default = false
+}
+
+variable "minio_helm_version" {
+  type = string
+}

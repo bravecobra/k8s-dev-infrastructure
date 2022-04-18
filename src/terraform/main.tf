@@ -3,7 +3,7 @@ resource "kubectl_manifest" "notify_watchers" {
 }
 
 locals {
-  patch_coredns = var.install_identityserver4admin || var.install_keycloak
+  patch_coredns = var.install_identityserver4admin || var.install_keycloak || var.install_minio
 }
 
 
@@ -95,6 +95,8 @@ module "prometheus" {
   metrics_jaeger = var.install_jaeger
   metrics_loki   = var.install_loki
   metrics_argocd = var.install_argocd
+  metrics_minio  = var.install_minio
+  metrics_linkerd = var.install_linkerd
   domain-name    = var.domain-name
   depends_on = [
     module.jaeger,
@@ -185,6 +187,18 @@ module "whoami" {
   depends_on = [
     module.coredns,
     kubernetes_namespace.whoami
+  ]
+}
+
+module "minio" {
+  count              = var.install_minio == true ? 1 : 0
+  source             = "./modules/minio"
+  helm_release       = var.minio_helm_version
+  domain-name        = var.domain-name
+  metrics            = var.install_prometheus
+  depends_on = [
+    module.coredns,
+    kubernetes_namespace.minio
   ]
 }
 

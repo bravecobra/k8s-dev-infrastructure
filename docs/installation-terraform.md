@@ -23,14 +23,20 @@ On Windows, open `C:\Windows\system32\drivers\etc\hosts` in an editor as `Admini
 On Linux edit your `/etc/hosts` file as root.
 
 ```text
-127.0.0.1 k8s.local infrastructure.k8s.local traefik.infrastructure.k8s.local
-127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local
+
+127.0.0.1 k8s.local infrastructure.k8s.local traefik.infrastructure.k8s.local traefik.k8s.local
+127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local seq.infrastructure.k8s.local
 127.0.0.1 grafana.infrastructure.k8s.local
-127.0.0.1 vault.infrastructure.k8s.local
+127.0.0.1 consul.infrastructure.k8s.local vault.infrastructure.k8s.local
 127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
 127.0.0.1 login.k8s.local admin.login.k8s.local api.login.k8s.local
+127.0.0.1 app1.k8s.local api.app1.k8s.local
 127.0.0.1 argo.k8s.local
 127.0.0.1 linkerd.infrastructure.k8s.local
+127.0.0.1 whoami1.k8s.local whoami2.k8s.local
+127.0.0.1 keycloak.k8s.local auth.k8s.local
+127.0.0.1 etcd.infrastructure.k8s.local
+127.0.0.1 minio.infrastructure.k8s.local console.minio.infrastructure.k8s.local
 ```
 
 ## Installer

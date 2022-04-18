@@ -37,7 +37,7 @@ prometheus:
         memory: 400Mi
     retention: 2h
     additionalScrapeConfigs:
-
+#%{ if metrics_linkerd == true }
       - job_name: 'linkerd-controller'
         kubernetes_sd_configs:
         - role: pod
@@ -118,7 +118,14 @@ prometheus:
         # Copy tmp labels into real labels
         - action: labelmap
           regex: __tmp_pod_label_(.+)
-
+#%{ endif }
+#%{ if metrics_minio == true }
+      - job_name: minio-job
+        metrics_path: /minio/v2/metrics/cluster
+        scheme: http
+        static_configs:
+        - targets: ['minio.minio.svc.cluster.local:9000']
+#%{ endif }
   ingress:
     enabled: true
     annotations:
@@ -161,6 +168,7 @@ grafana:
       - secretName: prometheus-cert
         hosts:
         - grafana.infrastructure.${domain-name}
+#%{ if metrics_loki == true }
   additionalDataSources:
     - name: Loki
       access: proxy
@@ -168,6 +176,7 @@ grafana:
       type: loki
       url: http://loki.loki.svc.cluster.local:3100
       version: 1
+#%{ endif }
   plugins:
   - grafana-piechart-panel
   - digrich-bubblechart-panel

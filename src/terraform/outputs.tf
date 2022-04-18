@@ -40,6 +40,12 @@ output "keycloak-password" {
   sensitive   = true
 }
 
+output "minio-password" {
+  description = "Minio Initial root password"
+  value       = join("", module.minio[*].minio-password)
+  sensitive   = true
+}
+
 output "etcd-password" {
   description = "Etcd Initial Admin password"
   value       = join("", module.etcd[*].etcd-password)

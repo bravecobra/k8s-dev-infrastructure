@@ -15,7 +15,10 @@ resource "helm_release" "prometheus" {
   values = [
     templatefile("${path.module}/prometheus-values.yaml", {
       domain-name = var.domain-name,
-      grafana_password = random_password.init_password.result
+      grafana_password = random_password.init_password.result,
+      metrics_linkerd  = var.metrics_linkerd,
+      metrics_minio    = var.metrics_minio,
+      metrics_loki     = var.metrics_loki,
     })
   ]
   depends_on = [
