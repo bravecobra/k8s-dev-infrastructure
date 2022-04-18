@@ -165,3 +165,12 @@ variable "install_whoami" {
 variable "whoami_helm_version" {
   type = string
 }
+
+variable "install_minio" {
+  type    = bool
+  default = false
+}
+
+variable "minio_helm_version" {
+  type = string
+}

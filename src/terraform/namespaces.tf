@@ -141,3 +141,14 @@ resource "kubernetes_namespace" "whoami" {
     }
   }
 }
+
+resource "kubernetes_namespace" "minio" {
+  count = var.install_minio ? 1 : 0
+  metadata {
+    name = "minio"
+    annotations = {
+      "kubernetes.io/description" = "minio"
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}

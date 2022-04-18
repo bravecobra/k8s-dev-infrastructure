@@ -39,3 +39,9 @@ output "keycloak-password" {
   value       = join("", module.keycloak[*].keycloak-password)
   sensitive   = true
 }
+
+output "minio-password" {
+  description = "Minio Initial root password"
+  value       = join("", module.minio[*].minio-password)
+  sensitive   = true
+}
