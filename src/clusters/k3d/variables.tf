@@ -42,7 +42,7 @@ variable "k3d-cluster-ip" {
   type    = string
 }
 
-variable "expose_azurite_ports" {
+variable "expose_azurite" {
   type = bool
   default = false
 }

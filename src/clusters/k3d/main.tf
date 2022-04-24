@@ -38,7 +38,8 @@ resource "local_file" "cluster-config" {
     cluster-domain = var.k3d-cluster-domain,
     cluster-ip = var.k3d-cluster-ip,
     cluster-port = var.k3d-cluster-port,
-    network = docker_network.k3d_network.name
+    network = docker_network.k3d_network.name,
+    expose_azurite = var.expose_azurite
   })
 
   filename = "${path.module}/k3s-${var.cluster-name}.yaml"
