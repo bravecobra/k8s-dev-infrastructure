@@ -17,15 +17,27 @@ token: superSecretToken # same as `--token superSecretToken`
 #       - server:0
 #       - agent:*
 ports:
-  - port: 80:80 # same as `--port '8080:80@loadbalancer'`
+  - port: 80:80 # same as `--port '80:80@loadbalancer'`
     nodeFilters:
       - loadbalancer
-  - port: 443:443 # same as `--port '8080:80@loadbalancer'`
+  - port: 443:443 # same as `--port '443:443@loadbalancer'`
     nodeFilters:
       - loadbalancer
-  - port: 8100:8100 # same as `--port '8080:80@loadbalancer'`
+  - port: 8100:8100 # same as `--port '8100:8100@loadbalancer'`
     nodeFilters:
       - loadbalancer
+#%{ if expose_azurite == true }
+  - port: 10000:10000 # same as `--port '10000:10000@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+  - port: 10001:10001 # same as `--port '10001:10001@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+  - port: 10002:10002 # same as `--port '10002:10002@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
 # env:
 #   - envVar: bar=baz # same as `--env 'bar=baz@server:0'`
 #     nodeFilters:

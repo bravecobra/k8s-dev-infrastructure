@@ -183,3 +183,8 @@ variable "install_minio" {
 variable "minio_helm_version" {
   type = string
 }
+
+variable "install_azurite" {
+  type    = bool
+  default = false
+}

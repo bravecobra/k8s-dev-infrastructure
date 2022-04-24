@@ -4,7 +4,7 @@ dashboard:
   enabled: true
   domain: traefik.infrastructure.${domain-name}
 additionalArguments:
-  - "--metrics.prometheus=true"
+  - "--metrics.prometheus=${use_metrics}"
   # - "--tracing.jaeger=true"
   - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.jaeger:5778/sampling"
   - "--tracing.jaeger.localAgentHostPort=jaeger-agent.jaeger:6831"
@@ -14,10 +14,23 @@ additionalArguments:
   - "--providers.kubernetesingress.ingressendpoint.ip=${loadbalancer-ip}"
   - "--entryPoints.streaming.address=:6831/udp"
   - "--entryPoints.metrics.address=:9100"
+#%{ if expose_azurite == true }
+  - "--entryPoints.azuriteblobs.address=:10000"
+  - "--entryPoints.azuritequeues.address=:10001"
+  - "--entryPoints.azuritetables.address=:10002"
+#%{ endif }
 
 entryPoints:
   metrics:
     address: ":9100"
+#%{ if expose_azurite == true }
+  azuriteblobs:
+    address: ":10000"
+  azuritequeues:
+    address: ":10001"
+  azuritetables:
+    address: ":10002"
+#%{ endif }
 
 deployment:
   labels:
@@ -44,7 +57,17 @@ ports:
   websecure:
     tls:
       enabled: true
-
+#%{ if expose_azurite == true }
+  azuriteblobs:
+    port: 10000
+    expose: true
+  azuritequeues:
+    port: 10001
+    expose: true
+  azuritetables:
+    port: 10002
+    expose: true
+#%{ endif }
 volumes:
   - name: traefik-cert
     mountPath: "/certs"

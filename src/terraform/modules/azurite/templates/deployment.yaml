@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storage-azurite-deployment
+  namespace: ${namespace}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: backend
+      app: storage-azurite
+  template:
+    metadata:
+      labels:
+        tier: backend
+        app: storage-azurite
+    spec:
+      containers:
+      - name: storage-azurite-container
+        image: mcr.microsoft.com/azurestorage-azurite
+        ports:
+        - containerPort: 10000
+        - containerPort: 10001
+        - containerPort: 10002

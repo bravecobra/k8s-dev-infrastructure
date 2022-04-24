@@ -13,7 +13,9 @@ resource "helm_release" "traefik" {
     templatefile("${path.module}/traefik-values.yaml", {
       domain-name = var.domain-name,
       loadbalancer-ip = var.loadbalancer-ip
-      node-ips = var.node-ips
+      node-ips = var.node-ips,
+      use_metrics = var.use_metrics
+      expose_azurite = var.expose_azurite
     })
   ]
   depends_on = [

@@ -44,6 +44,8 @@ module "traefik" {
   install_dashboards    = var.install_prometheus
   loadbalancer-ip       = var.loadbalancer-ip
   node-ips              = var.node-ips
+  use_metrics           = var.install_prometheus
+  expose_azurite        = var.install_azurite
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -211,5 +213,16 @@ module "etcd" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.etcd
+  ]
+}
+
+module "azurite" {
+  count              = var.install_azurite == true ? 1 : 0
+  source             = "./modules/azurite"
+  domain-name        = var.domain-name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.azurite
   ]
 }
