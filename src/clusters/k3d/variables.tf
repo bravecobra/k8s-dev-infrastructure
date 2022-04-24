@@ -41,3 +41,8 @@ variable "k3d-cluster-ip" {
   default = "0.0.0.0"
   type    = string
 }
+
+variable "expose_azurite" {
+  type = bool
+  default = false
+}

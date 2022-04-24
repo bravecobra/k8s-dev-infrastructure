@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: azuriteblobs
+  namespace: azurite
+spec:
+  entryPoints:
+    - azuriteblobs
+  routes:
+  - kind: Rule
+    match: PathPrefix(`/`)
+    services:
+    - name: storage-azurite
+      port: 10000

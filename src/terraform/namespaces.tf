@@ -164,3 +164,14 @@ resource "kubernetes_namespace" "minio" {
     }
   }
 }
+
+resource "kubernetes_namespace" "azurite" {
+  count = var.install_azurite ? 1 : 0
+  metadata {
+    name = "azurite"
+    annotations = {
+      "kubernetes.io/description" = "azurite"
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}

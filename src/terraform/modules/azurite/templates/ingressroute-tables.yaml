@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: azuritetables
+  namespace: azurite
+spec:
+  entryPoints:
+    - azuritetables
+  routes:
+  - kind: Rule
+    match: PathPrefix(`/`)
+    services:
+    - name: storage-azurite
+      port: 10002

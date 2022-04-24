@@ -13,7 +13,7 @@ metrics_helm_version = "5.11.3"
 
 //cert-manager
 install_cert_manager      = true
-cert_manager_helm_version = "v1.7.1"
+cert_manager_helm_version = "v1.8.0"
 
 //linkerd
 install_linkerd      = false
@@ -75,3 +75,5 @@ etcd_helm_version = "7.0.1"
 //minio
 install_minio      = false
 minio_helm_version = "3.6.6"
+
+install_azurite    = false

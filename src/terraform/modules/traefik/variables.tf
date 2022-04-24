@@ -27,3 +27,13 @@ variable "namespace" {
   description = "Namespace"
   default     = "traefik"
 }
+
+variable "use_metrics" {
+  type = bool
+  default = false
+}
+
+variable "expose_azurite" {
+  type = bool
+  default = false
+}
