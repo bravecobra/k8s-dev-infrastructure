@@ -1,5 +1,5 @@
 resource "kubectl_manifest" "notify_watchers" {
-  yaml_body = file("./notify-watcher.yaml")
+  yaml_body = file("./templates/notify-watcher.yaml")
 }
 
 locals {
