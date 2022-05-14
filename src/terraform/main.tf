@@ -45,6 +45,7 @@ module "traefik" {
   loadbalancer-ip       = var.loadbalancer-ip
   node-ips              = var.node-ips
   use_metrics           = var.install_prometheus
+  use_tracing           = var.install_jaeger
   expose_azurite        = var.install_azurite
   depends_on = [
     module.linkerd,

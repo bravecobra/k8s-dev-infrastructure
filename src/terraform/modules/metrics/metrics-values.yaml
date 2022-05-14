@@ -1,9 +1,9 @@
 # Override of : https://github.com/bitnami/charts/blob/master/bitnami/metrics-server/values.yaml
 podLabels: {}
 podAnnotations: {}
-extraArgs:
-  kubelet-insecure-tls: true
-  kubelet-preferred-address-types: InternalIP
+# extraArgs:
+#   - --kubelet-insecure-tls: true
+#   - --kubelet-preferred-address-types: InternalIP
 apiService:
   create: true
 service:

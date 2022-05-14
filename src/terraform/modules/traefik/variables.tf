@@ -33,6 +33,11 @@ variable "use_metrics" {
   default = false
 }
 
+variable "use_tracing" {
+  type = bool
+  default = false
+}
+
 variable "expose_azurite" {
   type = bool
   default = false

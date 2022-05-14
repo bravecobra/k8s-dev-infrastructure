@@ -15,6 +15,7 @@ resource "helm_release" "traefik" {
       loadbalancer-ip = var.loadbalancer-ip
       node-ips = var.node-ips,
       use_metrics = var.use_metrics
+      use_tracing = var.use_tracing
       expose_azurite = var.expose_azurite
     })
   ]
@@ -45,10 +46,11 @@ resource "kubectl_manifest" "http-redirect-middleware" {
 }
 
 resource "kubectl_manifest" "traefik-metrics-service" {
+  count        = var.use_metrics ? 1 : 0
+  yaml_body = file("${path.module}/templates/traefik-metrics-service.yaml")
   depends_on = [
     helm_release.traefik
   ]
-  yaml_body = file("${path.module}/templates/traefik-metrics-service.yaml")
 }
 
 resource "kubectl_manifest" "traefik_dashboard" {
