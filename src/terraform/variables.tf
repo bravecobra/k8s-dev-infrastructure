@@ -188,3 +188,12 @@ variable "install_azurite" {
   type    = bool
   default = false
 }
+
+variable "install_rabbitmq" {
+  type    = bool
+  default = false
+}
+
+variable "rabbitmq_helm_version" {
+  type = string
+}

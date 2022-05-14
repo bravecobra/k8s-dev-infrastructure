@@ -227,3 +227,15 @@ module "azurite" {
     kubernetes_namespace.azurite
   ]
 }
+
+module "rabbitmq" {
+  count              = var.install_rabbitmq == true ? 1 : 0
+  source             = "./modules/rabbitmq"
+  domain-name        = var.domain-name
+  helm_release       = var.rabbitmq_helm_version
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.rabbitmq
+  ]
+}
