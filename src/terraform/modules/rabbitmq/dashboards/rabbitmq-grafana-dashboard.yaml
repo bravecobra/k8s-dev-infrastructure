@@ -1,0 +1,2086 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-dashboard
+  namespace: rabbitmq
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    k8s-sidecar-target-directory: /tmp/dashboards/Infrastructure
+data:
+  rabbitmq-dashboard.json: "{\r\n    \"annotations\": {\r\n      \"list\": [\r\n        {\r\n
+    \         \"builtIn\": 1,\r\n          \"datasource\": \"-- Grafana --\",\r\n
+    \         \"enable\": true,\r\n          \"hide\": true,\r\n          \"iconColor\":
+    \"rgba(0, 211, 255, 1)\",\r\n          \"name\": \"Annotations & Alerts\",\r\n
+    \         \"target\": {\r\n            \"limit\": 100,\r\n            \"matchAny\":
+    false,\r\n            \"tags\": [],\r\n            \"type\": \"dashboard\"\r\n
+    \         },\r\n          \"type\": \"dashboard\"\r\n        }\r\n      ]\r\n
+    \   },\r\n    \"description\": \"A new RabbitMQ Management Overview\",\r\n    \"editable\":
+    true,\r\n    \"fiscalYearStartMonth\": 0,\r\n    \"gnetId\": 10991,\r\n    \"graphTooltip\":
+    1,\r\n    \"id\": 31,\r\n    \"iteration\": 1652569996589,\r\n    \"links\": [\r\n
+    \     {\r\n        \"icon\": \"doc\",\r\n        \"tags\": [],\r\n        \"targetBlank\":
+    true,\r\n        \"title\": \"Monitoring with Prometheus & Grafana\",\r\n        \"tooltip\":
+    \"\",\r\n        \"type\": \"link\",\r\n        \"url\": \"https://www.rabbitmq.com/prometheus.html\"\r\n
+    \     }\r\n    ],\r\n    \"liveNow\": false,\r\n    \"panels\": [\r\n      {\r\n
+    \       \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n          \"uid\":
+    \"prometheus\"\r\n        },\r\n        \"description\": \"\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"color\": {\r\n              \"mode\":
+    \"thresholds\"\r\n            },\r\n            \"mappings\": [\r\n              {\r\n
+    \               \"options\": {\r\n                  \"match\": \"null\",\r\n                  \"result\":
+    {\r\n                    \"text\": \"N/A\"\r\n                  }\r\n                },\r\n
+    \               \"type\": \"special\"\r\n              }\r\n            ],\r\n
+    \           \"thresholds\": {\r\n              \"mode\": \"absolute\",\r\n              \"steps\":
+    [\r\n                {\r\n                  \"color\": \"#37872D\",\r\n                  \"value\":
+    null\r\n                },\r\n                {\r\n                  \"color\":
+    \"#1F60C4\",\r\n                  \"value\": 10000\r\n                },\r\n                {\r\n
+    \                 \"color\": \"#C4162A\",\r\n                  \"value\": 100000\r\n
+    \               }\r\n              ]\r\n            },\r\n            \"unit\":
+    \"short\"\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"id\":
+    64,\r\n        \"links\": [],\r\n        \"maxDataPoints\": 100,\r\n        \"options\":
+    {\r\n          \"colorMode\": \"background\",\r\n          \"graphMode\": \"area\",\r\n
+    \         \"justifyMode\": \"auto\",\r\n          \"orientation\": \"horizontal\",\r\n
+    \         \"reduceOptions\": {\r\n            \"calcs\": [\r\n              \"lastNotNull\"\r\n
+    \           ],\r\n            \"fields\": \"\",\r\n            \"values\": false\r\n
+    \         },\r\n          \"textMode\": \"auto\"\r\n        },\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rabbitmq_queue_messages_ready
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"hide\": false,\r\n            \"instant\": false,\r\n            \"interval\":
+    \"\",\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\": \"\",\r\n
+    \           \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"title\":
+    \"Ready messages\",\r\n        \"type\": \"stat\"\r\n      },\r\n      {\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"\",\r\n        \"fieldConfig\": {\r\n
+    \         \"defaults\": {\r\n            \"color\": {\r\n              \"mode\":
+    \"thresholds\"\r\n            },\r\n            \"mappings\": [\r\n              {\r\n
+    \               \"options\": {\r\n                  \"match\": \"null\",\r\n                  \"result\":
+    {\r\n                    \"text\": \"N/A\"\r\n                  }\r\n                },\r\n
+    \               \"type\": \"special\"\r\n              }\r\n            ],\r\n
+    \           \"thresholds\": {\r\n              \"mode\": \"absolute\",\r\n              \"steps\":
+    [\r\n                {\r\n                  \"color\": \"#C4162A\",\r\n                  \"value\":
+    null\r\n                },\r\n                {\r\n                  \"color\":
+    \"#1F60C4\",\r\n                  \"value\": -1\r\n                },\r\n                {\r\n
+    \                 \"color\": \"#37872D\",\r\n                  \"value\": 50\r\n
+    \               }\r\n              ]\r\n            },\r\n            \"unit\":
+    \"short\"\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"gridPos\":
+    {\r\n          \"h\": 3,\r\n          \"w\": 6,\r\n          \"x\": 6,\r\n          \"y\":
+    0\r\n        },\r\n        \"id\": 62,\r\n        \"links\": [],\r\n        \"maxDataPoints\":
+    100,\r\n        \"options\": {\r\n          \"colorMode\": \"background\",\r\n
+    \         \"graphMode\": \"area\",\r\n          \"justifyMode\": \"auto\",\r\n
+    \         \"orientation\": \"horizontal\",\r\n          \"reduceOptions\": {\r\n
+    \           \"calcs\": [\r\n              \"lastNotNull\"\r\n            ],\r\n
+    \           \"fields\": \"\",\r\n            \"values\": false\r\n          },\r\n
+    \         \"textMode\": \"auto\"\r\n        },\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channel_messages_published_total[60s])
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"interval\": \"\",\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"\",\r\n            \"refId\": \"A\"\r\n
+    \         }\r\n        ],\r\n        \"title\": \"Incoming messages / s\",\r\n
+    \       \"type\": \"stat\"\r\n      },\r\n      {\r\n        \"datasource\": {\r\n
+    \         \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n        },\r\n
+    \       \"description\": \"\",\r\n        \"fieldConfig\": {\r\n          \"defaults\":
+    {\r\n            \"color\": {\r\n              \"mode\": \"thresholds\"\r\n            },\r\n
+    \           \"mappings\": [\r\n              {\r\n                \"options\":
+    {\r\n                  \"match\": \"null\",\r\n                  \"result\": {\r\n
+    \                   \"text\": \"N/A\"\r\n                  }\r\n                },\r\n
+    \               \"type\": \"special\"\r\n              }\r\n            ],\r\n
+    \           \"thresholds\": {\r\n              \"mode\": \"absolute\",\r\n              \"steps\":
+    [\r\n                {\r\n                  \"color\": \"#C4162A\",\r\n                  \"value\":
+    null\r\n                },\r\n                {\r\n                  \"color\":
+    \"#1F60C4\",\r\n                  \"value\": 0\r\n                },\r\n                {\r\n
+    \                 \"color\": \"#37872D\",\r\n                  \"value\": 10\r\n
+    \               }\r\n              ]\r\n            },\r\n            \"unit\":
+    \"none\"\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"gridPos\":
+    {\r\n          \"h\": 3,\r\n          \"w\": 4,\r\n          \"x\": 12,\r\n          \"y\":
+    0\r\n        },\r\n        \"id\": 66,\r\n        \"links\": [],\r\n        \"maxDataPoints\":
+    100,\r\n        \"options\": {\r\n          \"colorMode\": \"background\",\r\n
+    \         \"graphMode\": \"area\",\r\n          \"justifyMode\": \"auto\",\r\n
+    \         \"orientation\": \"horizontal\",\r\n          \"reduceOptions\": {\r\n
+    \           \"calcs\": [\r\n              \"lastNotNull\"\r\n            ],\r\n
+    \           \"fields\": \"\",\r\n            \"values\": false\r\n          },\r\n
+    \         \"textMode\": \"auto\"\r\n        },\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rabbitmq_channels
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) - sum(rabbitmq_channel_consumers * on(instance)
+    group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"title\":
+    \"Publishers\",\r\n        \"type\": \"stat\"\r\n      },\r\n      {\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"\",\r\n        \"fieldConfig\": {\r\n
+    \         \"defaults\": {\r\n            \"color\": {\r\n              \"mode\":
+    \"thresholds\"\r\n            },\r\n            \"mappings\": [\r\n              {\r\n
+    \               \"options\": {\r\n                  \"match\": \"null\",\r\n                  \"result\":
+    {\r\n                    \"text\": \"N/A\"\r\n                  }\r\n                },\r\n
+    \               \"type\": \"special\"\r\n              }\r\n            ],\r\n
+    \           \"thresholds\": {\r\n              \"mode\": \"absolute\",\r\n              \"steps\":
+    [\r\n                {\r\n                  \"color\": \"#C4162A\",\r\n                  \"value\":
+    null\r\n                },\r\n                {\r\n                  \"color\":
+    \"#1F60C4\",\r\n                  \"value\": 0\r\n                },\r\n                {\r\n
+    \                 \"color\": \"#37872D\",\r\n                  \"value\": 10\r\n
+    \               }\r\n              ]\r\n            },\r\n            \"unit\":
+    \"none\"\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"gridPos\":
+    {\r\n          \"h\": 3,\r\n          \"w\": 4,\r\n          \"x\": 16,\r\n          \"y\":
+    0\r\n        },\r\n        \"id\": 37,\r\n        \"links\": [],\r\n        \"maxDataPoints\":
+    100,\r\n        \"options\": {\r\n          \"colorMode\": \"background\",\r\n
+    \         \"graphMode\": \"area\",\r\n          \"justifyMode\": \"auto\",\r\n
+    \         \"orientation\": \"horizontal\",\r\n          \"reduceOptions\": {\r\n
+    \           \"calcs\": [\r\n              \"lastNotNull\"\r\n            ],\r\n
+    \           \"fields\": \"\",\r\n            \"values\": false\r\n          },\r\n
+    \         \"textMode\": \"auto\"\r\n        },\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rabbitmq_connections
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"interval\": \"\",\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"\",\r\n            \"refId\": \"A\"\r\n
+    \         }\r\n        ],\r\n        \"title\": \"Connections\",\r\n        \"type\":
+    \"stat\"\r\n      },\r\n      {\r\n        \"datasource\": {\r\n          \"type\":
+    \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n        },\r\n        \"description\":
+    \"\",\r\n        \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"color\":
+    {\r\n              \"mode\": \"thresholds\"\r\n            },\r\n            \"mappings\":
+    [\r\n              {\r\n                \"options\": {\r\n                  \"match\":
+    \"null\",\r\n                  \"result\": {\r\n                    \"text\":
+    \"N/A\"\r\n                  }\r\n                },\r\n                \"type\":
+    \"special\"\r\n              }\r\n            ],\r\n            \"thresholds\":
+    {\r\n              \"mode\": \"absolute\",\r\n              \"steps\": [\r\n                {\r\n
+    \                 \"color\": \"#C4162A\",\r\n                  \"value\": null\r\n
+    \               },\r\n                {\r\n                  \"color\": \"#1F60C4\",\r\n
+    \                 \"value\": 0\r\n                },\r\n                {\r\n
+    \                 \"color\": \"#37872D\",\r\n                  \"value\": 10\r\n
+    \               }\r\n              ]\r\n            },\r\n            \"unit\":
+    \"none\"\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"gridPos\":
+    {\r\n          \"h\": 3,\r\n          \"w\": 4,\r\n          \"x\": 20,\r\n          \"y\":
+    0\r\n        },\r\n        \"id\": 40,\r\n        \"links\": [],\r\n        \"maxDataPoints\":
+    100,\r\n        \"options\": {\r\n          \"colorMode\": \"background\",\r\n
+    \         \"graphMode\": \"area\",\r\n          \"justifyMode\": \"auto\",\r\n
+    \         \"orientation\": \"horizontal\",\r\n          \"reduceOptions\": {\r\n
+    \           \"calcs\": [\r\n              \"lastNotNull\"\r\n            ],\r\n
+    \           \"fields\": \"\",\r\n            \"values\": false\r\n          },\r\n
+    \         \"textMode\": \"auto\"\r\n        },\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rabbitmq_queues
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"title\":
+    \"Queues\",\r\n        \"type\": \"stat\"\r\n      },\r\n      {\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"\",\r\n        \"fieldConfig\": {\r\n
+    \         \"defaults\": {\r\n            \"color\": {\r\n              \"mode\":
+    \"thresholds\"\r\n            },\r\n            \"mappings\": [\r\n              {\r\n
+    \               \"options\": {\r\n                  \"match\": \"null\",\r\n                  \"result\":
+    {\r\n                    \"text\": \"N/A\"\r\n                  }\r\n                },\r\n
+    \               \"type\": \"special\"\r\n              }\r\n            ],\r\n
+    \           \"thresholds\": {\r\n              \"mode\": \"absolute\",\r\n              \"steps\":
+    [\r\n                {\r\n                  \"color\": \"#37872D\",\r\n                  \"value\":
+    null\r\n                },\r\n                {\r\n                  \"color\":
+    \"#1F60C4\",\r\n                  \"value\": 100\r\n                },\r\n                {\r\n
+    \                 \"color\": \"#C4162A\",\r\n                  \"value\": 500\r\n
+    \               }\r\n              ]\r\n            },\r\n            \"unit\":
+    \"short\"\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"gridPos\":
+    {\r\n          \"h\": 3,\r\n          \"w\": 6,\r\n          \"x\": 0,\r\n          \"y\":
+    3\r\n        },\r\n        \"id\": 65,\r\n        \"links\": [],\r\n        \"maxDataPoints\":
+    100,\r\n        \"options\": {\r\n          \"colorMode\": \"background\",\r\n
+    \         \"graphMode\": \"area\",\r\n          \"justifyMode\": \"auto\",\r\n
+    \         \"orientation\": \"horizontal\",\r\n          \"reduceOptions\": {\r\n
+    \           \"calcs\": [\r\n              \"lastNotNull\"\r\n            ],\r\n
+    \           \"fields\": \"\",\r\n            \"values\": false\r\n          },\r\n
+    \         \"textMode\": \"auto\"\r\n        },\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rabbitmq_queue_messages_unacked
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"hide\": false,\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"\",\r\n            \"refId\": \"A\"\r\n
+    \         }\r\n        ],\r\n        \"title\": \"Unacknowledged messages\",\r\n
+    \       \"type\": \"stat\"\r\n      },\r\n      {\r\n        \"datasource\": {\r\n
+    \         \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n        },\r\n
+    \       \"description\": \"\",\r\n        \"fieldConfig\": {\r\n          \"defaults\":
+    {\r\n            \"color\": {\r\n              \"mode\": \"thresholds\"\r\n            },\r\n
+    \           \"mappings\": [\r\n              {\r\n                \"options\":
+    {\r\n                  \"match\": \"null\",\r\n                  \"result\": {\r\n
+    \                   \"text\": \"N/A\"\r\n                  }\r\n                },\r\n
+    \               \"type\": \"special\"\r\n              }\r\n            ],\r\n
+    \           \"thresholds\": {\r\n              \"mode\": \"absolute\",\r\n              \"steps\":
+    [\r\n                {\r\n                  \"color\": \"#C4162A\",\r\n                  \"value\":
+    null\r\n                },\r\n                {\r\n                  \"color\":
+    \"#1F60C4\",\r\n                  \"value\": -1\r\n                },\r\n                {\r\n
+    \                 \"color\": \"#37872D\",\r\n                  \"value\": 50\r\n
+    \               }\r\n              ]\r\n            },\r\n            \"unit\":
+    \"short\"\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"gridPos\":
+    {\r\n          \"h\": 3,\r\n          \"w\": 6,\r\n          \"x\": 6,\r\n          \"y\":
+    3\r\n        },\r\n        \"id\": 63,\r\n        \"links\": [],\r\n        \"maxDataPoints\":
+    100,\r\n        \"options\": {\r\n          \"colorMode\": \"background\",\r\n
+    \         \"graphMode\": \"area\",\r\n          \"justifyMode\": \"auto\",\r\n
+    \         \"orientation\": \"horizontal\",\r\n          \"reduceOptions\": {\r\n
+    \           \"calcs\": [\r\n              \"lastNotNull\"\r\n            ],\r\n
+    \           \"fields\": \"\",\r\n            \"values\": false\r\n          },\r\n
+    \         \"textMode\": \"auto\"\r\n        },\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channel_messages_redelivered_total[60s])
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) +\\nsum(rate(rabbitmq_channel_messages_delivered_total[60s])
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) +\\nsum(rate(rabbitmq_channel_messages_delivered_ack_total[60s])
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) +\\nsum(rate(rabbitmq_channel_get_total[60s]) *
+    on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) +\\nsum(rate(rabbitmq_channel_get_ack_total[60s])
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"hide\": false,\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"\",\r\n            \"refId\": \"A\"\r\n
+    \         }\r\n        ],\r\n        \"title\": \"Outgoing messages / s\",\r\n
+    \       \"type\": \"stat\"\r\n      },\r\n      {\r\n        \"datasource\": {\r\n
+    \         \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n        },\r\n
+    \       \"description\": \"\",\r\n        \"fieldConfig\": {\r\n          \"defaults\":
+    {\r\n            \"color\": {\r\n              \"mode\": \"thresholds\"\r\n            },\r\n
+    \           \"mappings\": [\r\n              {\r\n                \"options\":
+    {\r\n                  \"match\": \"null\",\r\n                  \"result\": {\r\n
+    \                   \"text\": \"N/A\"\r\n                  }\r\n                },\r\n
+    \               \"type\": \"special\"\r\n              }\r\n            ],\r\n
+    \           \"thresholds\": {\r\n              \"mode\": \"absolute\",\r\n              \"steps\":
+    [\r\n                {\r\n                  \"color\": \"#C4162A\",\r\n                  \"value\":
+    null\r\n                },\r\n                {\r\n                  \"color\":
+    \"#1F60C4\",\r\n                  \"value\": 0\r\n                },\r\n                {\r\n
+    \                 \"color\": \"#37872D\",\r\n                  \"value\": 10\r\n
+    \               }\r\n              ]\r\n            },\r\n            \"unit\":
+    \"none\"\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"gridPos\":
+    {\r\n          \"h\": 3,\r\n          \"w\": 4,\r\n          \"x\": 12,\r\n          \"y\":
+    3\r\n        },\r\n        \"id\": 41,\r\n        \"links\": [],\r\n        \"maxDataPoints\":
+    100,\r\n        \"options\": {\r\n          \"colorMode\": \"background\",\r\n
+    \         \"graphMode\": \"area\",\r\n          \"justifyMode\": \"auto\",\r\n
+    \         \"orientation\": \"horizontal\",\r\n          \"reduceOptions\": {\r\n
+    \           \"calcs\": [\r\n              \"lastNotNull\"\r\n            ],\r\n
+    \           \"fields\": \"\",\r\n            \"values\": false\r\n          },\r\n
+    \         \"textMode\": \"auto\"\r\n        },\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rabbitmq_channel_consumers
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"title\":
+    \"Consumers\",\r\n        \"type\": \"stat\"\r\n      },\r\n      {\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"\",\r\n        \"fieldConfig\": {\r\n
+    \         \"defaults\": {\r\n            \"color\": {\r\n              \"mode\":
+    \"thresholds\"\r\n            },\r\n            \"mappings\": [\r\n              {\r\n
+    \               \"options\": {\r\n                  \"match\": \"null\",\r\n                  \"result\":
+    {\r\n                    \"text\": \"N/A\"\r\n                  }\r\n                },\r\n
+    \               \"type\": \"special\"\r\n              }\r\n            ],\r\n
+    \           \"thresholds\": {\r\n              \"mode\": \"absolute\",\r\n              \"steps\":
+    [\r\n                {\r\n                  \"color\": \"#C4162A\",\r\n                  \"value\":
+    null\r\n                },\r\n                {\r\n                  \"color\":
+    \"#1F60C4\",\r\n                  \"value\": 0\r\n                },\r\n                {\r\n
+    \                 \"color\": \"#37872D\",\r\n                  \"value\": 10\r\n
+    \               }\r\n              ]\r\n            },\r\n            \"unit\":
+    \"none\"\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"gridPos\":
+    {\r\n          \"h\": 3,\r\n          \"w\": 4,\r\n          \"x\": 16,\r\n          \"y\":
+    3\r\n        },\r\n        \"id\": 38,\r\n        \"links\": [],\r\n        \"maxDataPoints\":
+    100,\r\n        \"options\": {\r\n          \"colorMode\": \"background\",\r\n
+    \         \"graphMode\": \"area\",\r\n          \"justifyMode\": \"auto\",\r\n
+    \         \"orientation\": \"horizontal\",\r\n          \"reduceOptions\": {\r\n
+    \           \"calcs\": [\r\n              \"lastNotNull\"\r\n            ],\r\n
+    \           \"fields\": \"\",\r\n            \"values\": false\r\n          },\r\n
+    \         \"textMode\": \"auto\"\r\n        },\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rabbitmq_channels
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"title\":
+    \"Channels\",\r\n        \"type\": \"stat\"\r\n      },\r\n      {\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"\",\r\n        \"fieldConfig\": {\r\n
+    \         \"defaults\": {\r\n            \"color\": {\r\n              \"mode\":
+    \"thresholds\"\r\n            },\r\n            \"mappings\": [\r\n              {\r\n
+    \               \"options\": {\r\n                  \"match\": \"null\",\r\n                  \"result\":
+    {\r\n                    \"text\": \"N/A\"\r\n                  }\r\n                },\r\n
+    \               \"type\": \"special\"\r\n              }\r\n            ],\r\n
+    \           \"thresholds\": {\r\n              \"mode\": \"absolute\",\r\n              \"steps\":
+    [\r\n                {\r\n                  \"color\": \"#1F60C4\",\r\n                  \"value\":
+    null\r\n                },\r\n                {\r\n                  \"color\":
+    \"#37872D\",\r\n                  \"value\": 3\r\n                },\r\n                {\r\n
+    \                 \"color\": \"#C4162A\",\r\n                  \"value\": 8\r\n
+    \               }\r\n              ]\r\n            },\r\n            \"unit\":
+    \"none\"\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"gridPos\":
+    {\r\n          \"h\": 3,\r\n          \"w\": 4,\r\n          \"x\": 20,\r\n          \"y\":
+    3\r\n        },\r\n        \"id\": 67,\r\n        \"links\": [],\r\n        \"maxDataPoints\":
+    100,\r\n        \"options\": {\r\n          \"colorMode\": \"background\",\r\n
+    \         \"graphMode\": \"area\",\r\n          \"justifyMode\": \"auto\",\r\n
+    \         \"orientation\": \"horizontal\",\r\n          \"reduceOptions\": {\r\n
+    \           \"calcs\": [\r\n              \"lastNotNull\"\r\n            ],\r\n
+    \           \"fields\": \"\",\r\n            \"values\": false\r\n          },\r\n
+    \         \"textMode\": \"auto\"\r\n        },\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rabbitmq_build_info
+    * on(instance) group_left(rabbitmq_cluster) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"title\":
+    \"Nodes\",\r\n        \"type\": \"stat\"\r\n      },\r\n      {\r\n        \"collapsed\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"gridPos\": {\r\n
+    \         \"h\": 1,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    6\r\n        },\r\n        \"id\": 4,\r\n        \"panels\": [],\r\n        \"title\":
+    \"NODES\",\r\n        \"type\": \"row\"\r\n      },\r\n      {\r\n        \"columns\":
+    [],\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n          \"uid\":
+    \"prometheus\"\r\n        },\r\n        \"fontSize\": \"100%\",\r\n        \"gridPos\":
+    {\r\n          \"h\": 4,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    7\r\n        },\r\n        \"id\": 69,\r\n        \"links\": [],\r\n        \"scroll\":
+    true,\r\n        \"showHeader\": true,\r\n        \"sort\": {\r\n          \"col\":
+    8,\r\n          \"desc\": false\r\n        },\r\n        \"styles\": [\r\n          {\r\n
+    \           \"alias\": \"Erlang/OTP\",\r\n            \"align\": \"auto\",\r\n
+    \           \"colors\": [\r\n              \"rgba(50, 172, 45, 0.97)\",\r\n              \"rgba(237,
+    129, 40, 0.89)\",\r\n              \"rgba(245, 54, 54, 0.9)\"\r\n            ],\r\n
+    \           \"dateFormat\": \"YYYY-MM-DD HH:mm:ss\",\r\n            \"link\":
+    false,\r\n            \"mappingType\": 1,\r\n            \"pattern\": \"erlang_version\",\r\n
+    \           \"thresholds\": [\r\n              \"\"\r\n            ],\r\n            \"type\":
+    \"string\",\r\n            \"unit\": \"none\"\r\n          },\r\n          {\r\n
+    \           \"alias\": \"RabbitMQ\",\r\n            \"align\": \"auto\",\r\n            \"colors\":
+    [\r\n              \"rgba(245, 54, 54, 0.9)\",\r\n              \"rgba(237, 129,
+    40, 0.89)\",\r\n              \"rgba(50, 172, 45, 0.97)\"\r\n            ],\r\n
+    \           \"dateFormat\": \"YYYY-MM-DD HH:mm:ss\",\r\n            \"decimals\":
+    2,\r\n            \"link\": false,\r\n            \"mappingType\": 1,\r\n            \"pattern\":
+    \"rabbitmq_version\",\r\n            \"thresholds\": [\r\n              \"\"\r\n
+    \           ],\r\n            \"type\": \"string\",\r\n            \"unit\": \"none\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"Host\",\r\n            \"align\":
+    \"auto\",\r\n            \"colors\": [\r\n              \"rgba(245, 54, 54, 0.9)\",\r\n
+    \             \"rgba(237, 129, 40, 0.89)\",\r\n              \"rgba(50, 172, 45,
+    0.97)\"\r\n            ],\r\n            \"dateFormat\": \"YYYY-MM-DD HH:mm:ss\",\r\n
+    \           \"decimals\": 2,\r\n            \"link\": false,\r\n            \"mappingType\":
+    1,\r\n            \"pattern\": \"instance\",\r\n            \"preserveFormat\":
+    false,\r\n            \"thresholds\": [],\r\n            \"type\": \"string\",\r\n
+    \           \"unit\": \"short\",\r\n            \"valueMaps\": []\r\n          },\r\n
+    \         {\r\n            \"alias\": \"Node name\",\r\n            \"align\":
+    \"auto\",\r\n            \"colors\": [\r\n              \"rgba(245, 54, 54, 0.9)\",\r\n
+    \             \"rgba(237, 129, 40, 0.89)\",\r\n              \"rgba(50, 172, 45,
+    0.97)\"\r\n            ],\r\n            \"dateFormat\": \"YYYY-MM-DD HH:mm:ss\",\r\n
+    \           \"decimals\": 2,\r\n            \"link\": false,\r\n            \"mappingType\":
+    1,\r\n            \"pattern\": \"rabbitmq_node\",\r\n            \"thresholds\":
+    [\r\n              \"\"\r\n            ],\r\n            \"type\": \"string\",\r\n
+    \           \"unit\": \"short\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"\",\r\n            \"align\": \"auto\",\r\n            \"colors\": [\r\n              \"rgba(245,
+    54, 54, 0.9)\",\r\n              \"rgba(237, 129, 40, 0.89)\",\r\n              \"rgba(50,
+    172, 45, 0.97)\"\r\n            ],\r\n            \"dateFormat\": \"YYYY-MM-DD
+    HH:mm:ss\",\r\n            \"decimals\": 2,\r\n            \"mappingType\": 1,\r\n
+    \           \"pattern\": \"Time\",\r\n            \"thresholds\": [],\r\n            \"type\":
+    \"hidden\",\r\n            \"unit\": \"short\"\r\n          },\r\n          {\r\n
+    \           \"alias\": \"\",\r\n            \"align\": \"auto\",\r\n            \"colors\":
+    [\r\n              \"rgba(245, 54, 54, 0.9)\",\r\n              \"rgba(237, 129,
+    40, 0.89)\",\r\n              \"rgba(50, 172, 45, 0.97)\"\r\n            ],\r\n
+    \           \"dateFormat\": \"YYYY-MM-DD HH:mm:ss\",\r\n            \"decimals\":
+    2,\r\n            \"mappingType\": 1,\r\n            \"pattern\": \"Value\",\r\n
+    \           \"thresholds\": [],\r\n            \"type\": \"hidden\",\r\n            \"unit\":
+    \"short\"\r\n          },\r\n          {\r\n            \"alias\": \"\",\r\n            \"align\":
+    \"auto\",\r\n            \"colors\": [\r\n              \"rgba(245, 54, 54, 0.9)\",\r\n
+    \             \"rgba(237, 129, 40, 0.89)\",\r\n              \"rgba(50, 172, 45,
+    0.97)\"\r\n            ],\r\n            \"dateFormat\": \"YYYY-MM-DD HH:mm:ss\",\r\n
+    \           \"decimals\": 2,\r\n            \"mappingType\": 1,\r\n            \"pattern\":
+    \"job\",\r\n            \"thresholds\": [],\r\n            \"type\": \"hidden\",\r\n
+    \           \"unit\": \"short\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"Cluster\",\r\n            \"align\": \"auto\",\r\n            \"colors\": [\r\n
+    \             \"rgba(245, 54, 54, 0.9)\",\r\n              \"rgba(237, 129, 40,
+    0.89)\",\r\n              \"rgba(50, 172, 45, 0.97)\"\r\n            ],\r\n            \"dateFormat\":
+    \"YYYY-MM-DD HH:mm:ss\",\r\n            \"decimals\": 2,\r\n            \"mappingType\":
+    1,\r\n            \"pattern\": \"rabbitmq_cluster\",\r\n            \"thresholds\":
+    [],\r\n            \"type\": \"hidden\",\r\n            \"unit\": \"short\",\r\n
+    \           \"valueMaps\": []\r\n          },\r\n          {\r\n            \"alias\":
+    \"prometheus.erl\",\r\n            \"align\": \"auto\",\r\n            \"colors\":
+    [\r\n              \"rgba(245, 54, 54, 0.9)\",\r\n              \"rgba(237, 129,
+    40, 0.89)\",\r\n              \"rgba(50, 172, 45, 0.97)\"\r\n            ],\r\n
+    \           \"dateFormat\": \"YYYY-MM-DD HH:mm:ss\",\r\n            \"decimals\":
+    2,\r\n            \"mappingType\": 1,\r\n            \"pattern\": \"prometheus_client_version\",\r\n
+    \           \"thresholds\": [],\r\n            \"type\": \"string\",\r\n            \"unit\":
+    \"short\"\r\n          },\r\n          {\r\n            \"alias\": \"rabbitmq_prometheus\",\r\n
+    \           \"align\": \"auto\",\r\n            \"colors\": [\r\n              \"rgba(245,
+    54, 54, 0.9)\",\r\n              \"rgba(237, 129, 40, 0.89)\",\r\n              \"rgba(50,
+    172, 45, 0.97)\"\r\n            ],\r\n            \"dateFormat\": \"YYYY-MM-DD
+    HH:mm:ss\",\r\n            \"decimals\": 2,\r\n            \"mappingType\": 1,\r\n
+    \           \"pattern\": \"prometheus_plugin_version\",\r\n            \"thresholds\":
+    [],\r\n            \"type\": \"string\",\r\n            \"unit\": \"short\"\r\n
+    \         }\r\n        ],\r\n        \"targets\": [\r\n          {\r\n            \"expr\":
+    \"rabbitmq_build_info * on(instance) group_left(rabbitmq_cluster, rabbitmq_node)
+    rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\", namespace=\\\"$namespace\\\"}\",\r\n
+    \           \"format\": \"table\",\r\n            \"instant\": true,\r\n            \"intervalFactor\":
+    1,\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"transform\":
+    \"table\",\r\n        \"type\": \"table-old\"\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"If
+    the value is zero or less, the memory alarm will be triggered and all publishing
+    connections across all cluster nodes will be blocked.\\n\\nThis value can temporarily
+    go negative because the memory alarm is triggered with a slight delay.\\n\\nThe
+    kernel's view of the amount of memory used by the node can differ from what the
+    node itself can observe. This means that this value can be negative for a sustained
+    period of time.\\n\\nBy default nodes use resident set size (RSS) to compute how
+    much memory they use. This strategy can be changed (see the guides below).\\n\\n*
+    [Alarms](https://www.rabbitmq.com/alarms.html)\\n* [Memory Alarms](https://www.rabbitmq.com/memory.html)\\n*
+    [Reasoning About Memory Use](https://www.rabbitmq.com/memory-use.html)\\n* [Blocked
+    Connection Notifications](https://www.rabbitmq.com/connection-blocked.html)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    0,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    8,\r\n          \"w\": 12,\r\n          \"x\": 0,\r\n          \"y\": 11\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 7,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"(rabbitmq_resident_memory_limit_bytes
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) -\\n(rabbitmq_process_resident_memory_bytes * on(instance)
+    group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"{{rabbitmq_node}}\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n
+    \       \"thresholds\": [\r\n          {\r\n            \"colorMode\": \"warning\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"lt\",\r\n            \"value\": 536870912,\r\n            \"yaxis\": \"left\"\r\n
+    \         },\r\n          {\r\n            \"colorMode\": \"critical\",\r\n            \"fill\":
+    true,\r\n            \"line\": true,\r\n            \"op\": \"lt\",\r\n            \"value\":
+    0,\r\n            \"yaxis\": \"left\"\r\n          }\r\n        ],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Memory available before publishers blocked\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 1,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n
+    \         \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"decimals\": 1,\r\n            \"format\": \"bytes\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"This metric is reported for the partition
+    where the RabbitMQ data directory is stored.\\n\\nIf the value is zero or less,
+    the disk alarm will be triggered and all publishing connections across all cluster
+    nodes will be blocked.\\n\\nThis value can temporarily go negative because the
+    free disk space alarm is triggered with a slight delay.\\n\\n* [Alarms](https://www.rabbitmq.com/alarms.html)\\n*
+    [Disk Space Alarms](https://www.rabbitmq.com/disk-alarms.html)\\n* [Disk Space](https://www.rabbitmq.com/production-checklist.html#resource-limits-disk-space)\\n*
+    [Persistence Configuration](https://www.rabbitmq.com/persistence-conf.html)\\n*
+    [Blocked Connection Notifications](https://www.rabbitmq.com/connection-blocked.html)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    0,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    8,\r\n          \"w\": 8,\r\n          \"x\": 12,\r\n          \"y\": 11\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 8,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"rabbitmq_disk_space_available_bytes
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"{{rabbitmq_node}}\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n
+    \       \"thresholds\": [\r\n          {\r\n            \"colorMode\": \"critical\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"lt\",\r\n            \"value\": 1073741824,\r\n            \"yaxis\": \"left\"\r\n
+    \         },\r\n          {\r\n            \"colorMode\": \"warning\",\r\n            \"fill\":
+    true,\r\n            \"line\": true,\r\n            \"op\": \"lt\",\r\n            \"value\":
+    5368709120,\r\n            \"yaxis\": \"left\"\r\n          }\r\n        ],\r\n
+    \       \"timeRegions\": [],\r\n        \"title\": \"Disk space available before
+    publishers blocked\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n
+    \         \"sort\": 1,\r\n          \"value_type\": \"individual\"\r\n        },\r\n
+    \       \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\": \"time\",\r\n
+    \         \"show\": true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\":
+    [\r\n          {\r\n            \"decimals\": 1,\r\n            \"format\": \"bytes\",\r\n
+    \           \"logBase\": 1,\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"When
+    this value reaches zero, new connections will not be accepted and disk write operations
+    may fail.\\n\\nClient libraries, peer nodes and CLI tools will not be able to
+    connect when the node runs out of available file descriptors.\\n\\n* [Open File
+    Handles Limit](https://www.rabbitmq.com/production-checklist.html#resource-limits-file-handle-limit)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    0,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    4,\r\n          \"w\": 4,\r\n          \"x\": 20,\r\n          \"y\": 11\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 2,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#56A64B\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n            \"color\": \"#F2CC0C\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#3274D9\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n            \"color\": \"#A352CC\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FF780A\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n            \"color\": \"#96D98D\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFEE52\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n            \"color\": \"#8AB8FF\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#CA95E5\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFB357\"\r\n
+    \         }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    false,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"(rabbitmq_process_max_fds * on(instance) group_left(rabbitmq_cluster,
+    rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) -\\n(rabbitmq_process_open_fds * on(instance) group_left(rabbitmq_cluster,
+    rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"{{rabbitmq_node}}\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n
+    \       \"thresholds\": [\r\n          {\r\n            \"colorMode\": \"critical\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"lt\",\r\n            \"value\": 500,\r\n            \"yaxis\": \"left\"\r\n
+    \         },\r\n          {\r\n            \"colorMode\": \"warning\",\r\n            \"fill\":
+    true,\r\n            \"line\": true,\r\n            \"op\": \"lt\",\r\n            \"value\":
+    1000,\r\n            \"yaxis\": \"left\"\r\n          }\r\n        ],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"File descriptors available\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 1,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    -1,\r\n            \"format\": \"none\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"When this value reaches zero, new connections
+    will not be accepted.\\n\\nClient libraries, peer nodes and CLI tools will not
+    be able to connect when the node runs out of available file descriptors.\\n\\n*
+    [Networking and RabbitMQ](https://www.rabbitmq.com/networking.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 0,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 4,\r\n          \"w\": 4,\r\n
+    \         \"x\": 20,\r\n          \"y\": 15\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 5,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"show\": false,\r\n          \"total\":
+    false,\r\n          \"values\": true\r\n        },\r\n        \"lines\": true,\r\n
+    \       \"linewidth\": 1,\r\n        \"links\": [],\r\n        \"nullPointMode\":
+    \"null\",\r\n        \"options\": {\r\n          \"alertThreshold\": true\r\n
+    \       },\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": false,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"(rabbitmq_process_max_tcp_sockets
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) -\\n(rabbitmq_process_open_tcp_sockets * on(instance)
+    group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"{{rabbitmq_node}}\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n
+    \       \"thresholds\": [\r\n          {\r\n            \"colorMode\": \"critical\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"lt\",\r\n            \"value\": 500,\r\n            \"yaxis\": \"left\"\r\n
+    \         },\r\n          {\r\n            \"colorMode\": \"warning\",\r\n            \"fill\":
+    true,\r\n            \"line\": true,\r\n            \"op\": \"lt\",\r\n            \"value\":
+    1000,\r\n            \"yaxis\": \"left\"\r\n          }\r\n        ],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"TCP sockets available\",\r\n        \"tooltip\": {\r\n
+    \         \"shared\": true,\r\n          \"sort\": 1,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    -1,\r\n            \"format\": \"none\",\r\n            \"logBase\": 1,\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n
+    \       \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n      },\r\n
+    \     {\r\n        \"collapsed\": false,\r\n        \"datasource\": {\r\n          \"type\":
+    \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n        },\r\n        \"gridPos\":
+    {\r\n          \"h\": 1,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    19\r\n        },\r\n        \"id\": 27,\r\n        \"panels\": [],\r\n        \"title\":
+    \"QUEUED MESSAGES\",\r\n        \"type\": \"row\"\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"Total
+    number of ready messages ready to be delivered to consumers.\\n\\nAim to keep
+    this value as low as possible. RabbitMQ behaves best when messages are flowing
+    through it. It's OK for publishers to occasionally outpace consumers, but the
+    expectation is that consumers will eventually process all ready messages.\\n\\nIf
+    this metric keeps increasing, your system will eventually run out of memory and/or
+    disk space. Consider using TTL or Queue Length Limit to prevent unbounded message
+    growth.\\n\\n* [Queues](https://www.rabbitmq.com/queues.html)\\n* [Consumers](https://www.rabbitmq.com/consumers.html)\\n*
+    [Queue Length Limit](https://www.rabbitmq.com/maxlength.html)\\n* [Time-To-Live
+    and Expiration](https://www.rabbitmq.com/ttl.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 12,\r\n
+    \         \"x\": 0,\r\n          \"y\": 20\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 9,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rabbitmq_queue_messages_ready
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Messages ready to be delivered to consumers\",\r\n
+    \       \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n
+    \         \"value_type\": \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n
+    \       \"xaxis\": {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n
+    \         \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"decimals\": 0,\r\n            \"format\": \"short\",\r\n            \"label\":
+    \"\",\r\n            \"logBase\": 1,\r\n            \"min\": \"0\",\r\n            \"show\":
+    true\r\n          },\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n
+    \       \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n      },\r\n
+    \     {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n        \"dashLength\":
+    10,\r\n        \"dashes\": false,\r\n        \"datasource\": {\r\n          \"type\":
+    \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n        },\r\n        \"description\":
+    \"The total number of messages that are either in-flight to consumers, currently
+    being processed by consumers or simply waiting for the consumer acknowledgements
+    to be processed by the queue. Until the queue processes the message acknowledgement,
+    the message will remain unacknowledged.\\n\\n* [Queues](https://www.rabbitmq.com/queues.html)\\n*
+    [Confirms and Acknowledgements](https://www.rabbitmq.com/confirms.html)\\n* [Consumer
+    Prefetch](https://www.rabbitmq.com/consumer-prefetch.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 12,\r\n
+    \         \"x\": 12,\r\n          \"y\": 20\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 19,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rabbitmq_queue_messages_unacked
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Messages pending consumer acknowledgement\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"collapsed\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"gridPos\": {\r\n
+    \         \"h\": 1,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    25\r\n        },\r\n        \"id\": 11,\r\n        \"panels\": [],\r\n        \"title\":
+    \"INCOMING MESSAGES\",\r\n        \"type\": \"row\"\r\n      },\r\n      {\r\n
+    \       \"aliasColors\": {},\r\n        \"bars\": false,\r\n        \"dashLength\":
+    10,\r\n        \"dashes\": false,\r\n        \"datasource\": {\r\n          \"type\":
+    \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n        },\r\n        \"description\":
+    \"The incoming message rate before any routing rules are applied.\\n\\nIf this
+    value is lower than the number of messages published to queues, it may indicate
+    that some messages are delivered to more than one queue.\\n\\nIf this value is
+    higher than the number of messages published to queues, messages cannot be routed
+    and will either be dropped or returned to publishers.\\n\\n* [Publishers](https://www.rabbitmq.com/publishers.html)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 12,\r\n          \"x\": 0,\r\n          \"y\": 26\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 13,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null as zero\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#56A64B\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n            \"color\": \"#F2CC0C\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#3274D9\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n            \"color\": \"#A352CC\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FF780A\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n            \"color\": \"#96D98D\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFEE52\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n            \"color\": \"#8AB8FF\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#CA95E5\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFB357\"\r\n
+    \         }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"sum(rate(rabbitmq_channel_messages_published_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Messages published / s\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of messages confirmed by the broker to publishers. Publishers must opt-in
+    to receive message confirmations.\\n\\nIf this metric is consistently at zero
+    it may suggest that publisher confirms are not used by clients. The safety of
+    published messages is likely to be at risk.\\n\\n* [Publisher Confirms](https://www.rabbitmq.com/confirms.html#publisher-confirms)\\n*
+    [Publisher Confirms and Data Safety](https://www.rabbitmq.com/publishers.html#data-safety)\\n*
+    [When Will Published Messages Be Confirmed by the Broker?](https://www.rabbitmq.com/confirms.html#when-publishes-are-confirmed)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 12,\r\n          \"x\": 12,\r\n          \"y\": 26\r\n
+    \       },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 18,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null as zero\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#56A64B\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n            \"color\": \"#F2CC0C\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#3274D9\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n            \"color\": \"#A352CC\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FF780A\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n            \"color\": \"#96D98D\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFEE52\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n            \"color\": \"#8AB8FF\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#CA95E5\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFB357\"\r\n
+    \         }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"sum(rate(rabbitmq_channel_messages_confirmed_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Messages confirmed to publishers / s\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of messages received from publishers and successfully routed to the master
+    queue replicas.\\n\\n* [Queues](https://www.rabbitmq.com/queues.html)\\n* [Publishers](https://www.rabbitmq.com/publishers.html)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 12,\r\n          \"x\": 0,\r\n          \"y\": 31\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 61,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null as zero\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#56A64B\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n            \"color\": \"#F2CC0C\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#3274D9\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n            \"color\": \"#A352CC\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FF780A\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n            \"color\": \"#96D98D\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFEE52\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n            \"color\": \"#8AB8FF\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#CA95E5\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFB357\"\r\n
+    \         }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"sum(rate(rabbitmq_queue_messages_published_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Messages routed to queues / s\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of messages received from publishers that have publisher confirms enabled
+    and the broker has not confirmed yet.\\n\\n* [Publishers](https://www.rabbitmq.com/publishers.html)\\n*
+    [Confirms and Acknowledgements](https://www.rabbitmq.com/confirms.html)\\n* [When
+    Will Published Messages Be Confirmed by the Broker?](https://www.rabbitmq.com/confirms.html#when-publishes-are-confirmed)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 12,\r\n          \"x\": 12,\r\n          \"y\": 31\r\n
+    \       },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 12,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#56A64B\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n            \"color\": \"#F2CC0C\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#3274D9\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n            \"color\": \"#A352CC\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FF780A\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n            \"color\": \"#96D98D\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFEE52\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n            \"color\": \"#8AB8FF\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#CA95E5\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFB357\"\r\n
+    \         }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"sum(rate(rabbitmq_channel_messages_unconfirmed[60s]) *
+    on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Messages unconfirmed to publishers / s\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of messages that cannot be routed and are dropped. \\n\\nAny value above
+    zero means message loss and likely suggests a routing problem on the publisher
+    end.\\n\\n* [Unroutable Message Handling](https://www.rabbitmq.com/publishers.html#unroutable)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 12,\r\n          \"x\": 0,\r\n          \"y\": 36\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 34,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null as zero\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/rabbit/\",\r\n            \"color\":
+    \"#C4162A\"\r\n          }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"sum(rate(rabbitmq_channel_messages_unroutable_dropped_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"critical\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 0,\r\n            \"yaxis\":
+    \"left\"\r\n          }\r\n        ],\r\n        \"timeRegions\": [],\r\n        \"title\":
+    \"Unroutable messages dropped / s\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 2,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\":
+    \"time\",\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": \"\",\r\n            \"logBase\": 1,\r\n            \"min\":
+    \"0\",\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"The rate of messages that cannot be routed
+    and are returned back to publishers.\\n\\nSustained values above zero may indicate
+    a routing problem on the publisher end.\\n\\n* [Unroutable Message Handling](https://www.rabbitmq.com/publishers.html#unroutable)\\n*
+    [When Will Published Messages Be Confirmed by the Broker?](https://www.rabbitmq.com/confirms.html#when-publishes-are-confirmed)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 12,\r\n          \"x\": 12,\r\n          \"y\": 36\r\n
+    \       },\r\n        \"hiddenSeries\": false,\r\n        \"id\": 16,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null as zero\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/rabbit/\",\r\n            \"color\":
+    \"#C4162A\"\r\n          }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"sum(rate(rabbitmq_channel_messages_unroutable_returned_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"critical\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 0,\r\n            \"yaxis\":
+    \"left\"\r\n          }\r\n        ],\r\n        \"timeRegions\": [],\r\n        \"title\":
+    \"Unroutable messages returned to publishers / s\",\r\n        \"tooltip\": {\r\n
+    \         \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\": 1,\r\n
+    \           \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"collapsed\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"gridPos\": {\r\n
+    \         \"h\": 1,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    41\r\n        },\r\n        \"id\": 29,\r\n        \"panels\": [],\r\n        \"title\":
+    \"OUTGOING MESSAGES\",\r\n        \"type\": \"row\"\r\n      },\r\n      {\r\n
+    \       \"aliasColors\": {},\r\n        \"bars\": false,\r\n        \"dashLength\":
+    10,\r\n        \"dashes\": false,\r\n        \"datasource\": {\r\n          \"type\":
+    \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n        },\r\n        \"description\":
+    \"The rate of messages delivered to consumers. It includes messages that have
+    been redelivered.\\n\\nThis metric does not include messages that have been fetched
+    by consumers using `basic.get` (consumed by polling).\\n\\n* [Consumers](https://www.rabbitmq.com/consumers.html)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 12,\r\n          \"x\": 0,\r\n          \"y\": 42\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 14,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null as zero\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#56A64B\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n            \"color\": \"#F2CC0C\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#3274D9\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n            \"color\": \"#A352CC\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FF780A\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n            \"color\": \"#96D98D\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFEE52\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n            \"color\": \"#8AB8FF\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#CA95E5\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFB357\"\r\n
+    \         }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"sum(\\n  (rate(rabbitmq_channel_messages_delivered_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) +\\n  (rate(rabbitmq_channel_messages_delivered_ack_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"})\\n) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Messages delivered / s\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of messages that have been redelivered to consumers. It includes messages
+    that have been requeued automatically and redelivered due to channel exceptions
+    or connection closures.\\n\\nHaving some redeliveries is expected, but if this
+    metric is consistently non-zero, it is worth investigating why.\\n\\n* [Negative
+    Acknowledgement and Requeuing of Deliveries](https://www.rabbitmq.com/confirms.html#consumer-nacks-requeue)\\n*
+    [Consumers](https://www.rabbitmq.com/consumers.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 12,\r\n
+    \         \"x\": 12,\r\n          \"y\": 42\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 15,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channel_messages_redelivered_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"warning\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 20,\r\n            \"yaxis\":
+    \"left\"\r\n          },\r\n          {\r\n            \"colorMode\": \"critical\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"gt\",\r\n            \"value\": 100,\r\n            \"yaxis\": \"left\"\r\n
+    \         }\r\n        ],\r\n        \"timeRegions\": [],\r\n        \"title\":
+    \"Messages redelivered / s\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 2,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\":
+    \"time\",\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": \"\",\r\n            \"logBase\": 1,\r\n            \"min\":
+    \"0\",\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"The rate of message deliveries to consumers
+    that use manual acknowledgement mode.\\n\\nWhen this mode is used, RabbitMQ waits
+    for consumers to acknowledge messages before more messages can be delivered.\\n\\nThis
+    is the safest way of consuming messages.\\n\\n* [Consumer Acknowledgements](https://www.rabbitmq.com/confirms.html)\\n*
+    [Consumer Prefetch](https://www.rabbitmq.com/consumer-prefetch.html)\\n* [Consumer
+    Acknowledgement Modes, Prefetch and Throughput](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch-throughput)\\n*
+    [Consumers](https://www.rabbitmq.com/consumers.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 12,\r\n
+    \         \"x\": 0,\r\n          \"y\": 47\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 20,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channel_messages_delivered_ack_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Messages delivered with manual ack / s\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of message deliveries to consumers that use automatic acknowledgement mode.\\n\\nWhen
+    this mode is used, RabbitMQ does not wait for consumers to acknowledge message
+    deliveries.\\n\\nThis mode is fire-and-forget and does not offer any delivery
+    safety guarantees. It tends to provide higher throughput and it may lead to consumer
+    overload  and higher consumer memory usage.\\n\\n* [Consumer Acknowledgement Modes,
+    Prefetch and Throughput](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch-throughput)\\n*
+    [Consumers](https://www.rabbitmq.com/consumers.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 12,\r\n
+    \         \"x\": 12,\r\n          \"y\": 47\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 21,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channel_messages_delivered_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Messages delivered auto ack / s\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of message acknowledgements coming from consumers that use manual acknowledgement
+    mode.\\n\\n* [Consumer Acknowledgements](https://www.rabbitmq.com/confirms.html)\\n*
+    [Consumer Prefetch](https://www.rabbitmq.com/consumer-prefetch.html)\\n* [Consumer
+    Acknowledgement Modes, Prefetch and Throughput](https://www.rabbitmq.com/confirms.html#channel-qos-prefetch-throughput)\\n*
+    [Consumers](https://www.rabbitmq.com/consumers.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 12,\r\n
+    \         \"x\": 0,\r\n          \"y\": 52\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 22,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channel_messages_acked_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Messages acknowledged / s\",\r\n        \"tooltip\":
+    {\r\n          \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"decimals\":
+    0,\r\n            \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of messages delivered to polling consumers that use automatic acknowledgement
+    mode.\\n\\nThe use of polling consumers is highly inefficient and therefore strongly
+    discouraged.\\n\\n* [Fetching individual messages](https://www.rabbitmq.com/consumers.html#fetching)\\n*
+    [Consumers](https://www.rabbitmq.com/consumers.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 12,\r\n
+    \         \"x\": 12,\r\n          \"y\": 52\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 24,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/rabbit/\",\r\n            \"color\": \"#C4162A\"\r\n          }\r\n        ],\r\n
+    \       \"spaceLength\": 10,\r\n        \"stack\": true,\r\n        \"steppedLine\":
+    false,\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channel_get_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"critical\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 0,\r\n            \"yaxis\":
+    \"left\"\r\n          }\r\n        ],\r\n        \"timeRegions\": [],\r\n        \"title\":
+    \"Polling operations with auto ack / s\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 2,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\":
+    \"time\",\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": \"\",\r\n            \"logBase\": 1,\r\n            \"min\":
+    \"0\",\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"The rate of polling consumer operations
+    that yield no result.\\n\\nAny value above zero means that RabbitMQ resources
+    are wasted by polling consumers.\\n\\nCompare this metric to the other polling
+    consumer metrics to see the inefficiency rate.\\n\\nThe use of polling consumers
+    is highly inefficient and therefore strongly discouraged.\\n\\n* [Fetching individual
+    messages](https://www.rabbitmq.com/consumers.html#fetching)\\n* [Consumers](https://www.rabbitmq.com/consumers.html)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 12,\r\n          \"x\": 0,\r\n          \"y\": 57\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 25,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"hideEmpty\": false,\r\n          \"max\": true,\r\n          \"min\":
+    true,\r\n          \"rightSide\": false,\r\n          \"show\": false,\r\n          \"total\":
+    false,\r\n          \"values\": true\r\n        },\r\n        \"lines\": true,\r\n
+    \       \"linewidth\": 1,\r\n        \"links\": [],\r\n        \"nullPointMode\":
+    \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\": true\r\n
+    \       },\r\n        \"percentage\": false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n
+    \       \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/rabbit/\",\r\n            \"color\": \"#C4162A\"\r\n          }\r\n        ],\r\n
+    \       \"spaceLength\": 10,\r\n        \"stack\": true,\r\n        \"steppedLine\":
+    false,\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channel_get_empty_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"critical\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 0,\r\n            \"yaxis\":
+    \"left\"\r\n          }\r\n        ],\r\n        \"timeRegions\": [],\r\n        \"title\":
+    \"Polling operations that yield no result / s\",\r\n        \"tooltip\": {\r\n
+    \         \"shared\": true,\r\n          \"sort\": 2,\r\n          \"value_type\":
+    \"individual\"\r\n        },\r\n        \"type\": \"graph\",\r\n        \"xaxis\":
+    {\r\n          \"mode\": \"time\",\r\n          \"show\": true,\r\n          \"values\":
+    []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\": 1,\r\n
+    \           \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of messages delivered to polling consumers that use manual acknowledgement
+    mode.\\n\\nThe use of polling consumers is highly inefficient and therefore strongly
+    discouraged.\\n\\n* [Fetching individual messages](https://www.rabbitmq.com/consumers.html#fetching)\\n*
+    [Consumers](https://www.rabbitmq.com/consumers.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 12,\r\n
+    \         \"x\": 12,\r\n          \"y\": 57\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 23,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/rabbit/\",\r\n            \"color\": \"#C4162A\"\r\n          }\r\n        ],\r\n
+    \       \"spaceLength\": 10,\r\n        \"stack\": true,\r\n        \"steppedLine\":
+    false,\r\n        \"targets\": [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channel_get_ack_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"critical\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 0,\r\n            \"yaxis\":
+    \"left\"\r\n          }\r\n        ],\r\n        \"timeRegions\": [],\r\n        \"title\":
+    \"Polling operations with manual ack / s\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 2,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\":
+    \"time\",\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": \"\",\r\n            \"logBase\": 1,\r\n            \"min\":
+    \"0\",\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n
+    \     },\r\n      {\r\n        \"collapsed\": false,\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"gridPos\": {\r\n          \"h\": 1,\r\n          \"w\":
+    24,\r\n          \"x\": 0,\r\n          \"y\": 62\r\n        },\r\n        \"id\":
+    53,\r\n        \"panels\": [],\r\n        \"title\": \"QUEUES\",\r\n        \"type\":
+    \"row\"\r\n      },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\":
+    false,\r\n        \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"Total number of queue masters  per node.
+    \\n\\nThis metric makes it easy to see sub-optimal queue distribution in a cluster.\\n\\n*
+    [Queue Masters, Data Locality](https://www.rabbitmq.com/ha.html#master-migration-data-locality)\\n*
+    [Queues](https://www.rabbitmq.com/queues.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 12,\r\n
+    \         \"x\": 0,\r\n          \"y\": 63\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 57,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"rabbitmq_queues * on(instance) group_left(rabbitmq_cluster,
+    rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"interval\": \"\",\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [],\r\n        \"timeRegions\":
+    [],\r\n        \"title\": \"Total queues\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 2,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\":
+    \"time\",\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"decimals\": -1,\r\n            \"format\":
+    \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\": 1,\r\n
+    \           \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of queue declarations performed by clients.\\n\\nLow sustained values above
+    zero are to be expected. High rates may be indicative of queue churn or high rates
+    of connection recovery. Confirm connection recovery rates by using the _Connections
+    opened_ metric.\\n\\n* [Queues](https://www.rabbitmq.com/queues.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 4,\r\n
+    \         \"x\": 12,\r\n          \"y\": 63\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 58,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_queues_declared_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"warning\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 2,\r\n            \"yaxis\":
+    \"left\"\r\n          },\r\n          {\r\n            \"colorMode\": \"critical\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"gt\",\r\n            \"value\": 10,\r\n            \"yaxis\": \"left\"\r\n          }\r\n
+    \       ],\r\n        \"timeRegions\": [],\r\n        \"title\": \"Queues declared
+    / s\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\":
+    2,\r\n          \"value_type\": \"individual\"\r\n        },\r\n        \"type\":
+    \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\": \"time\",\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of new queues created (as opposed to redeclarations).\\n\\nLow sustained
+    values above zero are to be expected. High rates may be indicative of queue churn
+    or high rates of connection recovery. Confirm connection recovery rates by using
+    the _Connections opened_ metric.\\n\\n* [Queues](https://www.rabbitmq.com/queues.html)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 4,\r\n          \"x\": 16,\r\n          \"y\": 63\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 60,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null as zero\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#56A64B\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n            \"color\": \"#F2CC0C\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#3274D9\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n            \"color\": \"#A352CC\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FF780A\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n            \"color\": \"#96D98D\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFEE52\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n            \"color\": \"#8AB8FF\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#CA95E5\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFB357\"\r\n
+    \         }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"sum(rate(rabbitmq_queues_created_total[60s]) * on(instance)
+    group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"warning\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 2,\r\n            \"yaxis\":
+    \"left\"\r\n          },\r\n          {\r\n            \"colorMode\": \"critical\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"gt\",\r\n            \"value\": 10,\r\n            \"yaxis\": \"left\"\r\n          }\r\n
+    \       ],\r\n        \"timeRegions\": [],\r\n        \"title\": \"Queues created
+    / s\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\":
+    2,\r\n          \"value_type\": \"individual\"\r\n        },\r\n        \"type\":
+    \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\": \"time\",\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of queues deleted.\\n\\nLow sustained values above zero are to be expected.
+    High rates may be indicative of queue churn or high rates of connection recovery.
+    Confirm connection recovery rates by using the _Connections opened_ metric.\\n\\n*
+    [Queues](https://www.rabbitmq.com/queues.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 4,\r\n
+    \         \"x\": 20,\r\n          \"y\": 63\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 59,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_queues_deleted_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"warning\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 2,\r\n            \"yaxis\":
+    \"left\"\r\n          },\r\n          {\r\n            \"colorMode\": \"critical\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"gt\",\r\n            \"value\": 10,\r\n            \"yaxis\": \"left\"\r\n          }\r\n
+    \       ],\r\n        \"timeRegions\": [],\r\n        \"title\": \"Queues deleted
+    / s\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\":
+    2,\r\n          \"value_type\": \"individual\"\r\n        },\r\n        \"type\":
+    \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\": \"time\",\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"collapsed\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"gridPos\": {\r\n
+    \         \"h\": 1,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    68\r\n        },\r\n        \"id\": 51,\r\n        \"panels\": [],\r\n        \"title\":
+    \"CHANNELS\",\r\n        \"type\": \"row\"\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"Total
+    number of channels on all currently opened connections.\\n\\nIf this metric grows
+    monotonically it is highly likely a channel leak in one of the applications. Confirm
+    channel leaks by using the _Channels opened_ and _Channels closed_ metrics.\\n\\n*
+    [Channel Leak](https://www.rabbitmq.com/channels.html#channel-leaks)\\n* [Channels](https://www.rabbitmq.com/channels.html)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 12,\r\n          \"x\": 0,\r\n          \"y\": 69\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 54,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null as zero\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#56A64B\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n            \"color\": \"#F2CC0C\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#3274D9\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n            \"color\": \"#A352CC\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FF780A\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n            \"color\": \"#96D98D\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFEE52\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n            \"color\": \"#8AB8FF\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#CA95E5\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFB357\"\r\n
+    \         }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"rabbitmq_channels * on(instance) group_left(rabbitmq_cluster,
+    rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"{{rabbitmq_node}}\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n
+    \       \"thresholds\": [],\r\n        \"timeRegions\": [],\r\n        \"title\":
+    \"Total channels\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n
+    \         \"sort\": 2,\r\n          \"value_type\": \"individual\"\r\n        },\r\n
+    \       \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\": \"time\",\r\n
+    \         \"show\": true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\":
+    [\r\n          {\r\n            \"decimals\": -1,\r\n            \"format\": \"short\",\r\n
+    \           \"label\": \"\",\r\n            \"logBase\": 1,\r\n            \"min\":
+    \"0\",\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"The rate of new channels opened by applications
+    across all connections. Channels are expected to be long-lived.\\n\\nLow sustained
+    values above zero are to be expected. High rates may be indicative of channel
+    churn or mass connection recovery. Confirm connection recovery rates by using
+    the _Connections opened_ metric.\\n\\n* [High Channel Churn](https://www.rabbitmq.com/channels.html#high-channel-churn)\\n*
+    [Channels](https://www.rabbitmq.com/channels.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 6,\r\n
+    \         \"x\": 12,\r\n          \"y\": 69\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 55,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channels_opened_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"warning\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 2,\r\n            \"yaxis\":
+    \"left\"\r\n          },\r\n          {\r\n            \"colorMode\": \"critical\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"gt\",\r\n            \"value\": 10,\r\n            \"yaxis\": \"left\"\r\n          }\r\n
+    \       ],\r\n        \"timeRegions\": [],\r\n        \"title\": \"Channels opened
+    / s\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\":
+    2,\r\n          \"value_type\": \"individual\"\r\n        },\r\n        \"type\":
+    \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\": \"time\",\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"The
+    rate of channels closed by applications across all connections. Channels are expected
+    to be long-lived.\\n\\nLow sustained values above zero are to be expected. High
+    rates may be indicative of channel churn or mass connection recovery. Confirm
+    connection recovery rates by using the _Connections opened_ metric.\\n\\n* [High
+    Channel Churn](https://www.rabbitmq.com/channels.html#high-channel-churn)\\n*
+    [Channels](https://www.rabbitmq.com/channels.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 6,\r\n
+    \         \"x\": 18,\r\n          \"y\": 69\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 56,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_channels_closed_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"warning\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 2,\r\n            \"yaxis\":
+    \"left\"\r\n          },\r\n          {\r\n            \"colorMode\": \"critical\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"gt\",\r\n            \"value\": 10,\r\n            \"yaxis\": \"left\"\r\n          }\r\n
+    \       ],\r\n        \"timeRegions\": [],\r\n        \"title\": \"Channels closed
+    / s\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\":
+    2,\r\n          \"value_type\": \"individual\"\r\n        },\r\n        \"type\":
+    \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\": \"time\",\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      },\r\n      {\r\n        \"collapsed\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"gridPos\": {\r\n
+    \         \"h\": 1,\r\n          \"w\": 24,\r\n          \"x\": 0,\r\n          \"y\":
+    74\r\n        },\r\n        \"id\": 46,\r\n        \"panels\": [],\r\n        \"title\":
+    \"CONNECTIONS\",\r\n        \"type\": \"row\"\r\n      },\r\n      {\r\n        \"aliasColors\":
+    {},\r\n        \"bars\": false,\r\n        \"dashLength\": 10,\r\n        \"dashes\":
+    false,\r\n        \"datasource\": {\r\n          \"type\": \"prometheus\",\r\n
+    \         \"uid\": \"prometheus\"\r\n        },\r\n        \"description\": \"Total
+    number of client connections.\\n\\nIf this metric grows monotonically it is highly
+    likely a connection leak in one of the applications. Confirm connection leaks
+    by using the _Connections opened_ and _Connections closed_ metrics.\\n\\n* [Connection
+    Leak](https://www.rabbitmq.com/connections.html#monitoring)\\n* [Connections](https://www.rabbitmq.com/connections.html)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 12,\r\n          \"x\": 0,\r\n          \"y\": 75\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 47,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null as zero\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#56A64B\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n            \"color\": \"#F2CC0C\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#3274D9\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n            \"color\": \"#A352CC\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FF780A\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n            \"color\": \"#96D98D\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFEE52\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n            \"color\": \"#8AB8FF\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#CA95E5\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFB357\"\r\n
+    \         }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"rabbitmq_connections * on(instance) group_left(rabbitmq_cluster,
+    rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}\",\r\n            \"format\": \"time_series\",\r\n
+    \           \"instant\": false,\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\":
+    \"{{rabbitmq_node}}\",\r\n            \"refId\": \"A\"\r\n          }\r\n        ],\r\n
+    \       \"thresholds\": [],\r\n        \"timeRegions\": [],\r\n        \"title\":
+    \"Total connections\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n
+    \         \"sort\": 2,\r\n          \"value_type\": \"individual\"\r\n        },\r\n
+    \       \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\": \"time\",\r\n
+    \         \"show\": true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\":
+    [\r\n          {\r\n            \"decimals\": -1,\r\n            \"format\": \"short\",\r\n
+    \           \"label\": \"\",\r\n            \"logBase\": 1,\r\n            \"min\":
+    \"0\",\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"The rate of new connections opened by
+    clients. Connections are expected to be long-lived.\\n\\nLow sustained values
+    above zero are to be expected. High rates may be indicative of connection churn
+    or mass connection recovery.\\n\\n* [Connection Leak](https://www.rabbitmq.com/connections.html#monitoring)\\n*
+    [Connections](https://www.rabbitmq.com/connections.html)\",\r\n        \"fieldConfig\":
+    {\r\n          \"defaults\": {\r\n            \"links\": []\r\n          },\r\n
+    \         \"overrides\": []\r\n        },\r\n        \"fill\": 10,\r\n        \"fillGradient\":
+    0,\r\n        \"gridPos\": {\r\n          \"h\": 5,\r\n          \"w\": 6,\r\n
+    \         \"x\": 12,\r\n          \"y\": 75\r\n        },\r\n        \"hiddenSeries\":
+    false,\r\n        \"id\": 48,\r\n        \"legend\": {\r\n          \"alignAsTable\":
+    true,\r\n          \"avg\": false,\r\n          \"current\": true,\r\n          \"max\":
+    true,\r\n          \"min\": true,\r\n          \"rightSide\": false,\r\n          \"show\":
+    false,\r\n          \"total\": false,\r\n          \"values\": true\r\n        },\r\n
+    \       \"lines\": true,\r\n        \"linewidth\": 1,\r\n        \"links\": [],\r\n
+    \       \"nullPointMode\": \"null as zero\",\r\n        \"options\": {\r\n          \"alertThreshold\":
+    true\r\n        },\r\n        \"percentage\": false,\r\n        \"pluginVersion\":
+    \"8.4.5\",\r\n        \"pointradius\": 2,\r\n        \"points\": false,\r\n        \"renderer\":
+    \"flot\",\r\n        \"seriesOverrides\": [\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n            \"color\": \"#56A64B\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#F2CC0C\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n            \"color\": \"#3274D9\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#A352CC\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FF780A\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#96D98D\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFEE52\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#8AB8FF\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n            \"color\": \"#CA95E5\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFB357\"\r\n          }\r\n        ],\r\n        \"spaceLength\":
+    10,\r\n        \"stack\": true,\r\n        \"steppedLine\": false,\r\n        \"targets\":
+    [\r\n          {\r\n            \"expr\": \"sum(rate(rabbitmq_connections_opened_total[60s])
+    * on(instance) group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"interval\":
+    \"\",\r\n            \"intervalFactor\": 1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n
+    \           \"refId\": \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\":
+    [\r\n          {\r\n            \"colorMode\": \"warning\",\r\n            \"fill\":
+    true,\r\n            \"line\": true,\r\n            \"op\": \"gt\",\r\n            \"value\":
+    2,\r\n            \"yaxis\": \"left\"\r\n          },\r\n          {\r\n            \"colorMode\":
+    \"critical\",\r\n            \"fill\": true,\r\n            \"line\": true,\r\n
+    \           \"op\": \"gt\",\r\n            \"value\": 10,\r\n            \"yaxis\":
+    \"left\"\r\n          }\r\n        ],\r\n        \"timeRegions\": [],\r\n        \"title\":
+    \"Connections opened / s\",\r\n        \"tooltip\": {\r\n          \"shared\":
+    true,\r\n          \"sort\": 2,\r\n          \"value_type\": \"individual\"\r\n
+    \       },\r\n        \"type\": \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\":
+    \"time\",\r\n          \"show\": true,\r\n          \"values\": []\r\n        },\r\n
+    \       \"yaxes\": [\r\n          {\r\n            \"format\": \"short\",\r\n
+    \           \"label\": \"\",\r\n            \"logBase\": 1,\r\n            \"min\":
+    \"0\",\r\n            \"show\": true\r\n          },\r\n          {\r\n            \"format\":
+    \"short\",\r\n            \"logBase\": 1,\r\n            \"show\": true\r\n          }\r\n
+    \       ],\r\n        \"yaxis\": {\r\n          \"align\": false\r\n        }\r\n
+    \     },\r\n      {\r\n        \"aliasColors\": {},\r\n        \"bars\": false,\r\n
+    \       \"dashLength\": 10,\r\n        \"dashes\": false,\r\n        \"datasource\":
+    {\r\n          \"type\": \"prometheus\",\r\n          \"uid\": \"prometheus\"\r\n
+    \       },\r\n        \"description\": \"The rate of connections closed. Connections
+    are expected to be long-lived.\\n\\nLow sustained values above zero are to be
+    expected. High rates may be indicative of connection churn or mass connection
+    recovery.\\n\\n* [Connections](https://www.rabbitmq.com/connections.html)\",\r\n
+    \       \"fieldConfig\": {\r\n          \"defaults\": {\r\n            \"links\":
+    []\r\n          },\r\n          \"overrides\": []\r\n        },\r\n        \"fill\":
+    10,\r\n        \"fillGradient\": 0,\r\n        \"gridPos\": {\r\n          \"h\":
+    5,\r\n          \"w\": 6,\r\n          \"x\": 18,\r\n          \"y\": 75\r\n        },\r\n
+    \       \"hiddenSeries\": false,\r\n        \"id\": 49,\r\n        \"legend\":
+    {\r\n          \"alignAsTable\": true,\r\n          \"avg\": false,\r\n          \"current\":
+    true,\r\n          \"max\": true,\r\n          \"min\": true,\r\n          \"rightSide\":
+    false,\r\n          \"show\": false,\r\n          \"total\": false,\r\n          \"values\":
+    true\r\n        },\r\n        \"lines\": true,\r\n        \"linewidth\": 1,\r\n
+    \       \"links\": [],\r\n        \"nullPointMode\": \"null as zero\",\r\n        \"options\":
+    {\r\n          \"alertThreshold\": true\r\n        },\r\n        \"percentage\":
+    false,\r\n        \"pluginVersion\": \"8.4.5\",\r\n        \"pointradius\": 2,\r\n
+    \       \"points\": false,\r\n        \"renderer\": \"flot\",\r\n        \"seriesOverrides\":
+    [\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?0(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#56A64B\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?1(\\\\b|\\\\.)/\",\r\n            \"color\": \"#F2CC0C\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?2(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#3274D9\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?3(\\\\b|\\\\.)/\",\r\n            \"color\": \"#A352CC\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?4(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FF780A\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?5(\\\\b|\\\\.)/\",\r\n            \"color\": \"#96D98D\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?6(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#FFEE52\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?7(\\\\b|\\\\.)/\",\r\n            \"color\": \"#8AB8FF\"\r\n
+    \         },\r\n          {\r\n            \"alias\": \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?8(\\\\b|\\\\.)/\",\r\n
+    \           \"color\": \"#CA95E5\"\r\n          },\r\n          {\r\n            \"alias\":
+    \"/^rabbit@[a-zA-Z\\\\.\\\\-]*?9(\\\\b|\\\\.)/\",\r\n            \"color\": \"#FFB357\"\r\n
+    \         }\r\n        ],\r\n        \"spaceLength\": 10,\r\n        \"stack\":
+    true,\r\n        \"steppedLine\": false,\r\n        \"targets\": [\r\n          {\r\n
+    \           \"expr\": \"sum(rate(rabbitmq_connections_closed_total[60s]) * on(instance)
+    group_left(rabbitmq_cluster, rabbitmq_node) rabbitmq_identity_info{rabbitmq_cluster=\\\"$rabbitmq_cluster\\\",
+    namespace=\\\"$namespace\\\"}) by(rabbitmq_node)\",\r\n            \"format\":
+    \"time_series\",\r\n            \"instant\": false,\r\n            \"intervalFactor\":
+    1,\r\n            \"legendFormat\": \"{{rabbitmq_node}}\",\r\n            \"refId\":
+    \"A\"\r\n          }\r\n        ],\r\n        \"thresholds\": [\r\n          {\r\n
+    \           \"colorMode\": \"warning\",\r\n            \"fill\": true,\r\n            \"line\":
+    true,\r\n            \"op\": \"gt\",\r\n            \"value\": 2,\r\n            \"yaxis\":
+    \"left\"\r\n          },\r\n          {\r\n            \"colorMode\": \"critical\",\r\n
+    \           \"fill\": true,\r\n            \"line\": true,\r\n            \"op\":
+    \"gt\",\r\n            \"value\": 10,\r\n            \"yaxis\": \"left\"\r\n          }\r\n
+    \       ],\r\n        \"timeRegions\": [],\r\n        \"title\": \"Connections
+    closed / s\",\r\n        \"tooltip\": {\r\n          \"shared\": true,\r\n          \"sort\":
+    2,\r\n          \"value_type\": \"individual\"\r\n        },\r\n        \"type\":
+    \"graph\",\r\n        \"xaxis\": {\r\n          \"mode\": \"time\",\r\n          \"show\":
+    true,\r\n          \"values\": []\r\n        },\r\n        \"yaxes\": [\r\n          {\r\n
+    \           \"format\": \"short\",\r\n            \"label\": \"\",\r\n            \"logBase\":
+    1,\r\n            \"min\": \"0\",\r\n            \"show\": true\r\n          },\r\n
+    \         {\r\n            \"format\": \"short\",\r\n            \"logBase\":
+    1,\r\n            \"show\": true\r\n          }\r\n        ],\r\n        \"yaxis\":
+    {\r\n          \"align\": false\r\n        }\r\n      }\r\n    ],\r\n    \"refresh\":
+    \"15s\",\r\n    \"schemaVersion\": 35,\r\n    \"style\": \"dark\",\r\n    \"tags\":
+    [\r\n      \"rabbitmq-prometheus\"\r\n    ],\r\n    \"templating\": {\r\n      \"list\":
+    [\r\n        {\r\n          \"current\": {\r\n            \"selected\": false,\r\n
+    \           \"text\": \"default\",\r\n            \"value\": \"default\"\r\n          },\r\n
+    \         \"datasource\": \"prometheus\",\r\n          \"hide\": 2,\r\n          \"includeAll\":
+    false,\r\n          \"label\": \"datasource\",\r\n          \"multi\": false,\r\n
+    \         \"name\": \"DS_PROMETHEUS\",\r\n          \"options\": [],\r\n          \"query\":
+    \"prometheus\",\r\n          \"refresh\": 1,\r\n          \"regex\": \"\",\r\n
+    \         \"skipUrlSync\": false,\r\n          \"type\": \"datasource\"\r\n        },\r\n
+    \       {\r\n          \"current\": {\r\n            \"selected\": false,\r\n
+    \           \"text\": \"rabbitmq\",\r\n            \"value\": \"rabbitmq\"\r\n
+    \         },\r\n          \"datasource\": {\r\n            \"type\": \"prometheus\",\r\n
+    \           \"uid\": \"prometheus\"\r\n          },\r\n          \"definition\":
+    \"label_values(rabbitmq_identity_info, namespace)\",\r\n          \"hide\": 0,\r\n
+    \         \"includeAll\": false,\r\n          \"label\": \"Namespace\",\r\n          \"multi\":
+    false,\r\n          \"name\": \"namespace\",\r\n          \"options\": [],\r\n
+    \         \"query\": {\r\n            \"query\": \"label_values(rabbitmq_identity_info,
+    namespace)\",\r\n            \"refId\": \"Prometheus-namespace-Variable-Query\"\r\n
+    \         },\r\n          \"refresh\": 2,\r\n          \"regex\": \"\",\r\n          \"skipUrlSync\":
+    false,\r\n          \"sort\": 1,\r\n          \"tagValuesQuery\": \"\",\r\n          \"tagsQuery\":
+    \"\",\r\n          \"type\": \"query\",\r\n          \"useTags\": false\r\n        },\r\n
+    \       {\r\n          \"current\": {\r\n            \"selected\": false,\r\n
+    \           \"text\": \"rabbitmq-cluster\",\r\n            \"value\": \"rabbitmq-cluster\"\r\n
+    \         },\r\n          \"datasource\": {\r\n            \"type\": \"prometheus\",\r\n
+    \           \"uid\": \"prometheus\"\r\n          },\r\n          \"definition\":
+    \"label_values(rabbitmq_identity_info{namespace=\\\"$namespace\\\"}, rabbitmq_cluster)\",\r\n
+    \         \"hide\": 0,\r\n          \"includeAll\": false,\r\n          \"label\":
+    \"RabbitMQ Cluster\",\r\n          \"multi\": false,\r\n          \"name\": \"rabbitmq_cluster\",\r\n
+    \         \"options\": [],\r\n          \"query\": {\r\n            \"query\":
+    \"label_values(rabbitmq_identity_info{namespace=\\\"$namespace\\\"}, rabbitmq_cluster)\",\r\n
+    \           \"refId\": \"Prometheus-rabbitmq_cluster-Variable-Query\"\r\n          },\r\n
+    \         \"refresh\": 2,\r\n          \"regex\": \"\",\r\n          \"skipUrlSync\":
+    false,\r\n          \"sort\": 1,\r\n          \"tagValuesQuery\": \"\",\r\n          \"tagsQuery\":
+    \"\",\r\n          \"type\": \"query\",\r\n          \"useTags\": false\r\n        }\r\n
+    \     ]\r\n    },\r\n    \"time\": {\r\n      \"from\": \"now-15m\",\r\n      \"to\":
+    \"now\"\r\n    },\r\n    \"timepicker\": {\r\n      \"refresh_intervals\": [\r\n
+    \       \"15s\",\r\n        \"30s\",\r\n        \"1m\",\r\n        \"5m\",\r\n
+    \       \"10m\"\r\n      ],\r\n      \"time_options\": [\r\n        \"5m\",\r\n
+    \       \"15m\",\r\n        \"1h\",\r\n        \"6h\",\r\n        \"12h\",\r\n
+    \       \"24h\",\r\n        \"2d\",\r\n        \"7d\",\r\n        \"30d\"\r\n
+    \     ]\r\n    },\r\n    \"timezone\": \"\",\r\n    \"title\": \"RabbitMQ-Overview\",\r\n
+    \   \"uid\": \"Kn5xm-gZk\",\r\n    \"version\": 1,\r\n    \"weekStart\": \"\"\r\n
+    \ }"

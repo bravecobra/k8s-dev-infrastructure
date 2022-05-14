@@ -10,3 +10,9 @@ variable "namespace" {
   description = "Namespace"
   default     = "rabbitmq"
 }
+
+variable "install_dashboards" {
+  type = bool
+  description = "Installs grafana dashboard"
+  default     = false
+}

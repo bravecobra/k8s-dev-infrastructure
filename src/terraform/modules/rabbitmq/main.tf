@@ -25,7 +25,7 @@ resource "kubectl_manifest" "rabbitmq-cluster" {
     namespace = var.namespace
   })
   depends_on = [
-    "kubectl_manifest.rabbitmq-cert",
+    kubectl_manifest.rabbitmq-cert,
   ]
 }
 
@@ -35,6 +35,14 @@ resource "kubectl_manifest" "rabbitmq-ingress" {
     namespace = var.namespace
   })
   depends_on = [
-    "kubectl_manifest.rabbitmq-cluster",
+    kubectl_manifest.rabbitmq-cluster,
+  ]
+}
+
+resource "kubectl_manifest" "rabbitmq_dashboard" {
+  count     = var.install_dashboards ? 1 : 0
+  yaml_body = file("${path.module}/dashboards/rabbitmq-grafana-dashboard.yaml")
+  depends_on = [
+    kubectl_manifest.rabbitmq-cluster,
   ]
 }

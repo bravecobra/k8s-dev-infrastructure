@@ -100,6 +100,7 @@ module "prometheus" {
   metrics_argocd = var.install_argocd
   metrics_minio  = var.install_minio
   metrics_linkerd = var.install_linkerd
+  metrics_rabbitmq = var.install_rabbitmq
   domain-name    = var.domain-name
   depends_on = [
     module.jaeger,
@@ -233,6 +234,7 @@ module "rabbitmq" {
   source             = "./modules/rabbitmq"
   domain-name        = var.domain-name
   helm_release       = var.rabbitmq_helm_version
+  install_dashboards    = var.install_prometheus
   depends_on = [
     module.coredns,
     module.linkerd,
