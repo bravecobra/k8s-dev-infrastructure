@@ -8,10 +8,11 @@ This repository contains a kubernetes dev infrastructure, providing both crosscu
 
 - Certificates (cert-manager)
 - Reverse proxy (traefik)
-- Logging (seq or loki)
+- Logging (seq/fluent or loki/promtail)
 - Metrics (prometheus)
 - Tracing (jaeger)
-- Service discovery (linkerd)
+- Service Mesh (linkerd)
+- Dashboards (grafana)
 
 ### Saas
 
@@ -20,4 +21,4 @@ This repository contains a kubernetes dev infrastructure, providing both crosscu
 - Identity Provider (IdentityServer4 or Keycloak)
 - Configuration management/KV (etcd)
 - ArgoCD (CI/CD)
-- Storage (Minio)
+- Storage (Minio/Azurite)
