@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rabbitmq-cluster
+  namespace: ${namespace}
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+spec:
+  rules:
+    - host: rabbitmq.infrastructure.${domain-name}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rabbitmq-cluster
+                namespace: ${namespace}
+                port:
+                  number: 15672
+  tls:
+  - secretName: rabbitmq-cert
+    hosts:
+    - rabbitmq.infrastructure.${domain-name}

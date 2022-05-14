@@ -100,6 +100,7 @@ module "prometheus" {
   metrics_argocd = var.install_argocd
   metrics_minio  = var.install_minio
   metrics_linkerd = var.install_linkerd
+  metrics_rabbitmq = var.install_rabbitmq
   domain-name    = var.domain-name
   depends_on = [
     module.jaeger,
@@ -225,5 +226,18 @@ module "azurite" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.azurite
+  ]
+}
+
+module "rabbitmq" {
+  count              = var.install_rabbitmq == true ? 1 : 0
+  source             = "./modules/rabbitmq"
+  domain-name        = var.domain-name
+  helm_release       = var.rabbitmq_helm_version
+  install_dashboards    = var.install_prometheus
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.rabbitmq
   ]
 }

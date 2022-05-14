@@ -48,8 +48,21 @@ resource "kubectl_manifest" "traefik-rules" {
   ]
 }
 
+resource "kubectl_manifest" "rabbitmq-monitor" {
+  count     = var.metrics_rabbitmq ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/rabbitmq-monitor.yaml", {
+    domain-name = var.domain-name
+    namespace = var.namespace
+  })
+  depends_on = [
+    helm_release.prometheus
+  ]
+}
+
 resource "kubectl_manifest" "prometheus-cert" {
-  yaml_body = templatefile("${path.module}/templates/prometheus-cert.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/prometheus-cert.yaml", {
+    domain-name = var.domain-name
+  })
   depends_on = [
     helm_release.prometheus
   ]

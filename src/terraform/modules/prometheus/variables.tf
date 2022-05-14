@@ -28,6 +28,11 @@ variable "metrics_linkerd" {
   default = false
 }
 
+variable "metrics_rabbitmq" {
+  type    = bool
+  default = false
+}
+
 variable "domain-name" {
   description = "Domain Name"
 }

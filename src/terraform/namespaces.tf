@@ -175,3 +175,14 @@ resource "kubernetes_namespace" "azurite" {
     }
   }
 }
+
+resource "kubernetes_namespace" "rabbitmq" {
+  count = var.install_rabbitmq ? 1 : 0
+  metadata {
+    name = "rabbitmq"
+    annotations = {
+      "kubernetes.io/description" = "rabbitmq"
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
