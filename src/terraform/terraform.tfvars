@@ -84,7 +84,7 @@ minio_helm_version = "3.6.6"
 install_azurite    = false
 
 //RabbitMQ
-install_rabbitmq      = true
+install_rabbitmq      = false
 rabbitmq_helm_version = "2.6.1"
 
 //-------------------------------------
