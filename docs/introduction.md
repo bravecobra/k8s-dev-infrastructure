@@ -17,3 +17,4 @@ Using proven opensource software projects, this repo builds a coherent dev envir
 | Appl Deployment | Saas | argocd                      | /                      | /                      |        |
 | Search          | Saas | elasticsearch               | Opensearch Service     | Elastic                |        |
 | Auth            | Saas | keycloak/identityserver4    | IAM                    | IAM                    |        |
+| Messaging       | Saas | rabbitmq                    | SNS/SQS                |                        |        |

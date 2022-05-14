@@ -22,3 +22,4 @@ This repository contains a kubernetes dev infrastructure, providing both crosscu
 - Configuration management/KV (etcd)
 - ArgoCD (CI/CD)
 - Storage (Minio/Azurite)
+- Messaging (RabbitMQ)
