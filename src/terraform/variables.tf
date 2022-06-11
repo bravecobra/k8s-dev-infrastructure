@@ -74,6 +74,7 @@ variable "install_jaeger" {
   default = true
 }
 
+
 //loki
 variable "install_loki" {
   type    = bool
@@ -129,7 +130,7 @@ variable "install_seq" {
 
 variable "expose_seq" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "seq_helm_version" {
