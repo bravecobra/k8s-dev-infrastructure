@@ -1,0 +1,38 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-collector
+  namespace: ${namespace}
+spec:
+  mode: deployment # This configuration is omittable.
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: "0.0.0.0:4317"
+          http:
+            endpoint: "0.0.0.0:4318"
+    processors:
+      batch:
+    extensions:
+      health_check:
+      pprof:
+      zpages:
+    exporters:
+      logging:
+        loglevel: debug
+      jaeger:
+        endpoint: "jaeger-collector.jaeger.svc.cluster.local:14250"
+        tls:
+          insecure: true
+    service:
+      extensions: [health_check,pprof,zpages]
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [jaeger]
+        metrics:
+          receivers: [otlp]
+          exporters: [logging]

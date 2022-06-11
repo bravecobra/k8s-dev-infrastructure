@@ -42,6 +42,17 @@ ports:
     nodeFilters:
       - loadbalancer
 #%{ endif }
+
+#%{ if expose_opentelemetry == true }
+  - port: 4317:4317 # same as `--port '4317:4317@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+  - port: 4318:4318 # same as `--port '4318:4318@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+
 # env:
 #   - envVar: bar=baz # same as `--env 'bar=baz@server:0'`
 #     nodeFilters:

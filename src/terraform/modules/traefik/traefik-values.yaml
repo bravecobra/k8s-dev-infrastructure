@@ -26,6 +26,10 @@ additionalArguments:
 #%{ if expose_seq == true }
   - "--entryPoints.seq-ingestion.address=:5341"
 #%{ endif }
+#%{ if expose_opentelemetry == true }
+  - "--entryPoints.otel-grpc.address=:4317"
+  - "--entryPoints.otel-http.address=:4318"
+#%{ endif }
 
 entryPoints:
 #%{ if use_metrics == true }
@@ -43,6 +47,12 @@ entryPoints:
 #%{ if expose_seq == true }
   seg-ingestion:
     address: ":5341"
+#%{ endif }
+#%{ if expose_opentelemetry == true }
+  otel-grpc:
+    address: ":4317"
+  otel-http:
+    address: ":4318"
 #%{ endif }
 
 deployment:
@@ -89,6 +99,14 @@ ports:
 #%{ if expose_seq == true }
   seq-ingestion:
     port: 5341
+    expose: true
+#%{ endif }
+#%{ if expose_opentelemetry == true }
+  otel-grpc:
+    port: 4317
+    expose: true
+  otel-http:
+    port: 4318
     expose: true
 #%{ endif }
 volumes:

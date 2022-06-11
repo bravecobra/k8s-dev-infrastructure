@@ -42,6 +42,7 @@ resource "local_file" "cluster-config" {
     expose_azurite      = var.expose_azurite,
     expose_seq          = var.expose_seq
     expose_jaeger       = var.expose_jaeger,
+    expose_opentelemetry = var.expose_opentelemetry,
     expose_prometheus   = var.expose_prometheus,
     expose_elasticsearch = var.expose_elasticsearch,
     expose_rabbitmq      = var.expose_rabbitmq

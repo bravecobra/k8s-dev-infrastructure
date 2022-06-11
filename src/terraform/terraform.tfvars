@@ -37,6 +37,11 @@ fluent_helm_version = "0.19.23"
 install_jaeger      = false
 jaeger_helm_version = "2.29.0"
 
+//opentelemetry
+install_opentelemetry      = true
+expose_opentelemetry        = true
+opentelemetry_helm_version = "0.7.0"
+
 //loki
 install_loki          = false
 loki_helm_version     = "2.11.1"

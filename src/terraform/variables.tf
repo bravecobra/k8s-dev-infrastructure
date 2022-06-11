@@ -74,6 +74,18 @@ variable "install_jaeger" {
   default = true
 }
 
+//opentelemetry
+variable "opentelemetry_helm_version" {
+  type = string
+}
+variable "install_opentelemetry" {
+  type    = bool
+  default = true
+}
+variable "expose_opentelemetry" {
+  type    = bool
+  default = true
+}
 
 //loki
 variable "install_loki" {

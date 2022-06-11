@@ -48,6 +48,7 @@ module "traefik" {
   use_tracing           = var.install_jaeger
   expose_azurite        = var.expose_azurite
   expose_seq            = var.expose_seq
+  expose_opentelemetry = var.expose_opentelemetry
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -63,6 +64,19 @@ module "jaeger" {
   depends_on = [
     module.linkerd,
     kubernetes_namespace.jaeger
+  ]
+}
+
+module "opentelemetry" {
+  count        = var.install_opentelemetry == true ? 1 : 0
+  source       = "./modules/opentelemetry"
+  helm_release = var.opentelemetry_helm_version
+  expose_ingestion = var.expose_opentelemetry
+  # domain-name  = var.domain-name
+  # install_dashboards    = var.install_prometheus
+  depends_on = [
+    module.linkerd,
+    kubernetes_namespace.opentelemetry
   ]
 }
 
