@@ -46,3 +46,24 @@ variable "expose_azurite" {
   type = bool
   default = false
 }
+
+variable "expose_jaeger" {
+  type = bool
+  default = false
+}
+variable "expose_prometheus" {
+  type = bool
+  default = false
+}
+variable "expose_seq" {
+  type = bool
+  default = false
+}
+variable "expose_elasticsearch" {
+  type = bool
+  default = false
+}
+variable "expose_rabbitmq" {
+  type = bool
+  default = false
+}

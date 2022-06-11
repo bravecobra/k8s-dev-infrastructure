@@ -29,6 +29,7 @@ traefik_helm_version = "10.19.4"
 
 //seq
 install_seq = true
+expose_seq  = false
 seq_helm_version = "2022.1.7449"
 fluent_helm_version = "0.19.23"
 
@@ -82,6 +83,7 @@ minio_helm_version = "3.6.6"
 
 //Azurite
 install_azurite    = false
+expose_azurite     = false
 
 //RabbitMQ
 install_rabbitmq      = false

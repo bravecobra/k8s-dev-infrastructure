@@ -37,3 +37,13 @@ resource "helm_release" "fluent" {
   ]
 }
 
+resource "kubectl_manifest" "seq_ingestion" {
+  count       = var.expose_ingestion ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/seq-ingestion-route.yaml", {
+      namespace = var.namespace,
+      domain-name = var.domain-name
+  })
+  depends_on = [
+      helm_release.seq
+  ]
+}

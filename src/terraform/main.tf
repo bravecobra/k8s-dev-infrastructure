@@ -46,7 +46,8 @@ module "traefik" {
   node-ips              = var.node-ips
   use_metrics           = var.install_prometheus
   use_tracing           = var.install_jaeger
-  expose_azurite        = var.install_azurite
+  expose_azurite        = var.expose_azurite
+  expose_seq            = var.expose_seq
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -163,6 +164,7 @@ module "seq" {
   helm_release       = var.seq_helm_version
   fluent_helm_release = var.fluent_helm_version
   domain-name        = var.domain-name
+  expose_ingestion   = var.expose_seq
   depends_on = [
     module.coredns,
     module.linkerd,

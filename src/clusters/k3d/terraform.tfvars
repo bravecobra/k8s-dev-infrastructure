@@ -9,4 +9,9 @@ k3d-cluster-ip      = "127.0.0.1"
 k3s-version         = "v1.23.5-k3s1"
 k3d-cluster-domain  = "k8s.local"
 
-expose_azurite      = false
+expose_azurite      = true
+expose_jaeger       = true
+expose_prometheus   = true
+expose_seq          = true
+expose_elastic      = false
+expose_rabbitmq      = false

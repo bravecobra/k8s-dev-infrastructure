@@ -14,3 +14,7 @@ variable "namespace" {
     description = "Namespace"
     default = "seq"
 }
+
+variable "expose_ingestion" {
+  type = bool
+}

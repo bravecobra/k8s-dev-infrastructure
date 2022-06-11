@@ -23,6 +23,9 @@ additionalArguments:
   - "--entryPoints.azuritequeues.address=:10001"
   - "--entryPoints.azuritetables.address=:10002"
 #%{ endif }
+#%{ if expose_seq == true }
+  - "--entryPoints.seq-ingestion.address=:5341"
+#%{ endif }
 
 entryPoints:
 #%{ if use_metrics == true }
@@ -36,6 +39,10 @@ entryPoints:
     address: ":10001"
   azuritetables:
     address: ":10002"
+#%{ endif }
+#%{ if expose_seq == true }
+  seg-ingestion:
+    address: ":5341"
 #%{ endif }
 
 deployment:
@@ -77,6 +84,11 @@ ports:
     expose: true
   azuritetables:
     port: 10002
+    expose: true
+#%{ endif }
+#%{ if expose_seq == true }
+  seq-ingestion:
+    port: 5341
     expose: true
 #%{ endif }
 volumes:

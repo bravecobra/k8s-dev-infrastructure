@@ -127,6 +127,11 @@ variable "install_seq" {
   default = true
 }
 
+variable "expose_seq" {
+  type    = bool
+  default = true
+}
+
 variable "seq_helm_version" {
   type = string
 }
@@ -185,6 +190,11 @@ variable "minio_helm_version" {
 }
 
 variable "install_azurite" {
+  type    = bool
+  default = false
+}
+
+variable "expose_azurite" {
   type    = bool
   default = false
 }

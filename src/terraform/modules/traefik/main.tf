@@ -17,6 +17,7 @@ resource "helm_release" "traefik" {
       use_metrics = var.use_metrics
       use_tracing = var.use_tracing
       expose_azurite = var.expose_azurite
+      expose_seq = var.expose_seq
     })
   ]
   depends_on = [

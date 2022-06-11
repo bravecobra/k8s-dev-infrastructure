@@ -42,3 +42,8 @@ variable "expose_azurite" {
   type = bool
   default = false
 }
+
+variable "expose_seq" {
+  type = bool
+  default = false
+}

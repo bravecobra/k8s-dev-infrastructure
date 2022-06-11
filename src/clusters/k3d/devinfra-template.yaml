@@ -37,7 +37,11 @@ ports:
     nodeFilters:
       - loadbalancer
 #%{ endif }
-
+#%{ if expose_seq == true }
+  - port: 5341:5341 # same as `--port '5341:5341@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
 # env:
 #   - envVar: bar=baz # same as `--env 'bar=baz@server:0'`
 #     nodeFilters:

@@ -32,14 +32,19 @@ resource "local_file" "cluster-config" {
   for_each = toset(var.k3d-cluster-name)
   content     = templatefile("${path.module}/${each.key}-template.yaml", {
     cluster-name = each.key,
-    server-node-count = var.server-node-count,
-    worker-node-count = var.worker-node-count,
-    k3s-version = var.k3s-version,
-    cluster-domain = var.k3d-cluster-domain,
-    cluster-ip = var.k3d-cluster-ip,
-    cluster-port = var.k3d-cluster-port,
-    network = docker_network.k3d_network.name,
-    expose_azurite = var.expose_azurite
+    server-node-count   = var.server-node-count,
+    worker-node-count   = var.worker-node-count,
+    k3s-version         = var.k3s-version,
+    cluster-domain      = var.k3d-cluster-domain,
+    cluster-ip          = var.k3d-cluster-ip,
+    cluster-port        = var.k3d-cluster-port,
+    network             = docker_network.k3d_network.name,
+    expose_azurite      = var.expose_azurite,
+    expose_seq          = var.expose_seq
+    expose_jaeger       = var.expose_jaeger,
+    expose_prometheus   = var.expose_prometheus,
+    expose_elasticsearch = var.expose_elasticsearch,
+    expose_rabbitmq      = var.expose_rabbitmq
   })
 
   filename = "${path.module}/k3s-${var.cluster-name}.yaml"
