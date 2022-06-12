@@ -9,13 +9,13 @@ locals {
 
 module "metrics" {
   count        = var.install_metrics == true ? 1 : 0
-  source       = "./modules/metrics"
+  source       = "./modules/monitoring/metrics/metrics"
   helm_release = var.metrics_helm_version
 }
 
 module "certmanager" {
   count        = var.install_cert_manager == true ? 1 : 0
-  source       = "./modules/cert-manager"
+  source       = "./modules/networking/cert-manager"
   helm_release = var.cert_manager_helm_version
   depends_on = [
     kubernetes_namespace.cert-manager,
@@ -24,7 +24,7 @@ module "certmanager" {
 
 module "linkerd" {
   count        = var.install_linkerd == true ? 1 : 0
-  source       = "./modules/linkerd"
+  source       = "./modules/networking/linkerd"
   helm_release = var.linkerd_helm_version
   domain-name  = var.domain-name
   tracing_enabled = var.install_jaeger
@@ -38,7 +38,7 @@ module "linkerd" {
 
 module "traefik" {
   count        = var.install_traefik == true ? 1 : 0
-  source       = "./modules/traefik"
+  source       = "./modules/networking/traefik"
   helm_release = var.traefik_helm_version
   domain-name  = var.domain-name
   install_dashboards    = var.install_prometheus
@@ -57,7 +57,7 @@ module "traefik" {
 
 module "jaeger" {
   count        = var.install_jaeger == true ? 1 : 0
-  source       = "./modules/jaeger"
+  source       = "./modules/monitoring/tracing/jaeger"
   helm_release = var.jaeger_helm_version
   domain-name  = var.domain-name
   install_dashboards    = var.install_prometheus
@@ -69,7 +69,7 @@ module "jaeger" {
 
 module "opentelemetry" {
   count        = var.install_opentelemetry == true ? 1 : 0
-  source       = "./modules/opentelemetry"
+  source       = "./modules/monitoring/ingestion/opentelemetry"
   helm_release = var.opentelemetry_helm_version
   expose_ingestion = var.expose_opentelemetry
   # domain-name  = var.domain-name
@@ -82,7 +82,7 @@ module "opentelemetry" {
 
 module "loki" {
   count                 = var.install_loki == true ? 1 : 0
-  source                = "./modules/loki"
+  source                = "./modules/monitoring/logging/loki"
   helm_release_loki     = var.loki_helm_version
   helm_release_promtail = var.promtail_helm_version
   install_dashboards    = var.install_prometheus
@@ -95,7 +95,7 @@ module "loki" {
 
 module "argocd" {
   count        = var.install_argocd == true ? 1 : 0
-  source       = "./modules/argocd"
+  source       = "./modules/services/deployment/argocd"
   helm_release = var.argocd_helm_version
   domain-name  = var.domain-name
   install_dashboards    = var.install_prometheus
@@ -108,7 +108,7 @@ module "argocd" {
 
 module "prometheus" {
   count          = var.install_prometheus == true ? 1 : 0
-  source         = "./modules/prometheus"
+  source         = "./modules/monitoring/metrics/prometheus"
   helm_release   = var.prometheus_helm_version
   metrics_jaeger = var.install_jaeger
   metrics_loki   = var.install_loki
@@ -127,7 +127,7 @@ module "prometheus" {
 
 module "elasticsearch" {
   count                 = var.install_elasticsearch == true ? 1 : 0
-  source                = "./modules/elasticsearch"
+  source                = "./modules/services/search/elasticsearch"
   helm_release          = var.elasticsearch_helm_version
   install_elasticsearch = var.install_elasticsearch
   install_kibana        = var.install_kibana
@@ -141,7 +141,7 @@ module "elasticsearch" {
 
 module "vault" {
   count        = var.install_vault == true ? 1 : 0
-  source       = "./modules/vault"
+  source       = "./modules/services/configuration/vault"
   helm_release = var.vault_helm_version
   domain-name    = var.domain-name
   depends_on = [
@@ -152,7 +152,7 @@ module "vault" {
 
 module "coredns" {
   count              = local.patch_coredns == true ? 1 : 0
-  source             = "./modules/coredns"
+  source             = "./modules/networking/coredns"
   domain-name        = var.domain-name
   depends_on = [
     module.jaeger
@@ -161,7 +161,7 @@ module "coredns" {
 
 module "identityserver4" {
   count              = var.install_identityserver4admin == true ? 1 : 0
-  source             = "./modules/identityserver4-admin"
+  source             = "./modules/services/auth/identityserver4-admin"
   helm_release       = var.identityserver4admin_helm_version
   mssql_helm_release = var.mssql_helm_version
   domain-name        = var.domain-name
@@ -174,7 +174,7 @@ module "identityserver4" {
 
 module "seq" {
   count              = var.install_seq == true ? 1 : 0
-  source             = "./modules/seq"
+  source             = "./modules/monitoring/logging/seq"
   helm_release       = var.seq_helm_version
   fluent_helm_release = var.fluent_helm_version
   domain-name        = var.domain-name
@@ -188,7 +188,7 @@ module "seq" {
 
 module "keycloak" {
   count              = var.install_keycloak == true ? 1 : 0
-  source             = "./modules/keycloak"
+  source             = "./modules/services/auth/keycloak"
   helm_release       = var.keycloak_helm_version
   domain-name        = var.domain-name
   //forward_client_secret = var.forward_client_secret
@@ -201,7 +201,7 @@ module "keycloak" {
 
 module "whoami" {
   count              = var.install_whoami == true ? 1 : 0
-  source             = "./modules/whoami"
+  source             = "./samples/whoami"
   helm_release       = var.whoami_helm_version
   domain-name        = var.domain-name
   depends_on = [
@@ -212,7 +212,7 @@ module "whoami" {
 
 module "minio" {
   count              = var.install_minio == true ? 1 : 0
-  source             = "./modules/minio"
+  source             = "./modules/services/storage/minio"
   helm_release       = var.minio_helm_version
   domain-name        = var.domain-name
   metrics            = var.install_prometheus
@@ -224,7 +224,7 @@ module "minio" {
 
 module "etcd" {
   count              = var.install_etcd == true ? 1 : 0
-  source             = "./modules/etcd"
+  source             = "./modules/services/configuration/etcd"
   helm_release       = var.etcd_helm_version
   domain-name        = var.domain-name
   depends_on = [
@@ -236,7 +236,7 @@ module "etcd" {
 
 module "azurite" {
   count              = var.install_azurite == true ? 1 : 0
-  source             = "./modules/azurite"
+  source             = "./modules/services/storage/azurite"
   domain-name        = var.domain-name
   depends_on = [
     module.coredns,
@@ -247,7 +247,7 @@ module "azurite" {
 
 module "rabbitmq" {
   count              = var.install_rabbitmq == true ? 1 : 0
-  source             = "./modules/rabbitmq"
+  source             = "./modules/services/messaging/rabbitmq"
   domain-name        = var.domain-name
   helm_release       = var.rabbitmq_helm_version
   install_dashboards    = var.install_prometheus
