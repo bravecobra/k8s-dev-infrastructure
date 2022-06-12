@@ -5,6 +5,14 @@ metadata:
   namespace: ${namespace}
 spec:
   mode: deployment # This configuration is omittable.
+  ports:
+    - name: otel-metrics
+      port: 8889
+  podAnnotations:
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8889"
+    prometheus.io/scrape: "true"
+    component: otel-connector
   config: |
     receivers:
       otlp:
@@ -26,6 +34,9 @@ spec:
         endpoint: "jaeger-collector.jaeger.svc.cluster.local:14250"
         tls:
           insecure: true
+      prometheus:
+        endpoint: 0.0.0.0:8889
+        namespace: "testapp"
     service:
       extensions: [health_check,pprof,zpages]
       pipelines:
@@ -34,5 +45,8 @@ spec:
           processors: [batch]
           exporters: [jaeger]
         metrics:
+          receivers: [otlp]
+          exporters: [prometheus,logging]
+        logs:
           receivers: [otlp]
           exporters: [logging]

@@ -26,6 +26,7 @@ ports:
   - port: 8100:8100 # same as `--port '8100:8100@loadbalancer'`
     nodeFilters:
       - loadbalancer
+
 #%{ if expose_azurite == true }
   - port: 10000:10000 # same as `--port '10000:10000@loadbalancer'`
     nodeFilters:
@@ -37,6 +38,7 @@ ports:
     nodeFilters:
       - loadbalancer
 #%{ endif }
+
 #%{ if expose_seq == true }
   - port: 5341:5341 # same as `--port '5341:5341@loadbalancer'`
     nodeFilters:

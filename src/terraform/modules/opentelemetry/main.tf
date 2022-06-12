@@ -23,7 +23,17 @@ resource "kubectl_manifest" "collector" {
 
 resource "kubectl_manifest" "otel-ingestion-http" {
   count       = var.expose_ingestion ? 1 : 0
-  yaml_body = templatefile("${path.module}/templates/otel-ingestion-route.yaml", {
+  yaml_body = templatefile("${path.module}/templates/otel-http-ingestion-route.yaml", {
+      namespace = var.namespace,
+  })
+  depends_on = [
+      helm_release.opentelemetry
+  ]
+}
+
+resource "kubectl_manifest" "otel-ingestion-grpc" {
+  count       = var.expose_ingestion ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/otel-grpc-ingestion-route.yaml", {
       namespace = var.namespace,
   })
   depends_on = [
