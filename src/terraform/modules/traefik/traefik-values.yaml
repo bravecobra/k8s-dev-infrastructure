@@ -84,7 +84,8 @@ ports:
       enabled: true
   metrics:
     port: 9100
-    expose: ${use_metrics}
+    expose : false
+    # expose: ${use_metrics}
 #%{ if expose_azurite == true }
   azuriteblobs:
     port: 10000
