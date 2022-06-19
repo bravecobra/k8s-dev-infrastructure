@@ -1,1 +1,6 @@
 # https://github.com/open-telemetry/opentelemetry-helm-charts/blob/main/charts/opentelemetry-operator/values.yaml
+
+manager:
+  collectorImage:
+    repository: otel/opentelemetry-collector-contrib
+    tag: latest

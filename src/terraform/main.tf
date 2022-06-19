@@ -106,6 +106,16 @@ module "argocd" {
   ]
 }
 
+module "tempo" {
+  count          = var.install_tempo == true ? 1 : 0
+  source         = "./modules/monitoring/tracing/tempo"
+  helm_release   = var.tempo_helm_version
+  depends_on = [
+    module.linkerd,
+    kubernetes_namespace.tempo
+  ]
+}
+
 module "prometheus" {
   count          = var.install_prometheus == true ? 1 : 0
   source         = "./modules/monitoring/metrics/prometheus"
@@ -116,6 +126,7 @@ module "prometheus" {
   metrics_minio  = var.install_minio
   metrics_linkerd = var.install_linkerd
   metrics_rabbitmq = var.install_rabbitmq
+  metrics_tempo  = var.install_tempo
   domain-name    = var.domain-name
   depends_on = [
     module.jaeger,

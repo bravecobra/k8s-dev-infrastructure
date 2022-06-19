@@ -182,6 +182,49 @@ grafana:
       type: loki
       url: http://loki.loki.svc.cluster.local:3100
       version: 1
+      editable: true
+      uid: loki
+#%{ if metrics_tempo == true }
+      jsonData:
+        derivedFields:
+        - datasourceUid: tempo
+          matcherRegex: '"traceid":"(\w+)"'
+          name: 'Trace ID'
+          url: '$$${__value.raw}'
+          urlDisplayLabel: "Trace ID"
+          internalLink: true
+#%{ endif }
+#%{ endif }
+#%{ if metrics_tempo == true }
+    - name: Tempo
+      type: tempo
+      access: proxy
+      orgId: 1
+      url: http://tempo.tempo.svc.cluster.local:3100
+      basicAuth: false
+      isDefault: false
+      version: 1
+      editable: true
+      apiVersion: 1
+      jsonData:
+        tracesToLogs:
+          datasourceUid: 'loki'
+          tags: ['Trace ID', 'instance', 'pod', 'namespace', 'app']
+          mappedTags: [{ key: 'service.name', value: 'app'}, { key: 'Trace ID', value: 'traceId' }, { key: 'Span ID', value: 'spanId' }]
+          mapTagNamesEnabled: true
+          spanStartTimeShift: '1h'
+          spanEndTimeShift: '1h'
+          filterByTraceID: true
+          filterBySpanID: false
+        serviceMap:
+          datasourceUid: prometheus
+      search:
+        hide: false
+      nodeGraph:
+        enabled: true
+      lokiSearch:
+        datasourceUid: 'loki'
+      uid: tempo
 #%{ endif }
   plugins:
   - grafana-piechart-panel

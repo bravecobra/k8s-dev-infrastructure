@@ -87,6 +87,17 @@ resource "kubernetes_namespace" "loki" {
   }
 }
 
+resource "kubernetes_namespace" "tempo" {
+  count = var.install_tempo ? 1 : 0
+  metadata {
+    name = "tempo"
+    annotations = {
+      "kubernetes.io/description" = "Tempo"
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
+
 resource "kubernetes_namespace" "prometheus" {
   count = var.install_prometheus ? 1 : 0
   metadata {

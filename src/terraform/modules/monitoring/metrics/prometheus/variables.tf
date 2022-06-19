@@ -18,6 +18,11 @@ variable "metrics_loki" {
   default = true
 }
 
+variable "metrics_tempo" {
+  type    = bool
+  default = true
+}
+
 variable "metrics_minio" {
   type    = bool
   default = false

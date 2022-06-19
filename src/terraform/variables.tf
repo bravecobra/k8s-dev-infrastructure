@@ -99,6 +99,15 @@ variable "promtail_helm_version" {
   type = string
 }
 
+//tempo
+variable "install_tempo" {
+  type    = bool
+  default = true
+}
+variable "tempo_helm_version" {
+  type = string
+}
+
 //argocd
 variable "install_argocd" {
   type    = bool

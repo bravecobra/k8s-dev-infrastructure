@@ -19,6 +19,7 @@ resource "helm_release" "prometheus" {
       metrics_linkerd  = var.metrics_linkerd,
       metrics_minio    = var.metrics_minio,
       metrics_loki     = var.metrics_loki,
+      metrics_tempo    = var.metrics_tempo,
     })
   ]
   depends_on = [
