@@ -52,3 +52,8 @@ variable "expose_opentelemetry" {
   type = bool
   default = false
 }
+
+variable "expose_loki" {
+  type = bool
+  default = false
+}

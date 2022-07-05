@@ -19,6 +19,7 @@ resource "helm_release" "traefik" {
       expose_azurite = var.expose_azurite
       expose_seq = var.expose_seq
       expose_opentelemetry = var.expose_opentelemetry
+      expose_loki = var.expose_loki
     })
   ]
   depends_on = [

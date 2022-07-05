@@ -48,7 +48,8 @@ module "traefik" {
   use_tracing           = var.install_jaeger
   expose_azurite        = var.expose_azurite
   expose_seq            = var.expose_seq
-  expose_opentelemetry = var.expose_opentelemetry
+  expose_opentelemetry  = var.expose_opentelemetry
+  expose_loki           = var.expose_loki
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -87,6 +88,7 @@ module "loki" {
   helm_release_promtail = var.promtail_helm_version
   install_dashboards    = var.install_prometheus
   tracing_enabled       = var.install_jaeger
+  expose_ingestion      = var.expose_loki
   depends_on = [
     module.prometheus,
     kubernetes_namespace.loki

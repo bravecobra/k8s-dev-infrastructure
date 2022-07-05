@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: loki
+  namespace: ${namespace}
+spec:
+  entryPoints:
+    - loki
+  routes:
+  - kind: Rule
+    match: PathPrefix(`/`)
+    services:
+    - name: loki
+      port: 3100

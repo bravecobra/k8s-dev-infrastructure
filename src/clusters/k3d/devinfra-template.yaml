@@ -45,6 +45,12 @@ ports:
       - loadbalancer
 #%{ endif }
 
+#%{ if expose_loki == true }
+  - port: 3100:3100 # same as `--port '3100:3100@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
 #%{ if expose_opentelemetry == true }
   - port: 4317:4317 # same as `--port '4317:4317@loadbalancer'`
     nodeFilters:

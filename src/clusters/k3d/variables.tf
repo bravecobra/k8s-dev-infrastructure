@@ -71,3 +71,8 @@ variable "expose_rabbitmq" {
   type = bool
   default = false
 }
+
+variable "expose_loki" {
+  type = bool
+  default = false
+}

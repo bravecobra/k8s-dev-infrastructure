@@ -30,6 +30,9 @@ additionalArguments:
   - "--entryPoints.otel-grpc.address=:4317"
   - "--entryPoints.otel-http.address=:4318"
 #%{ endif }
+#%{ if expose_opentelemetry == true }
+  - "--entryPoints.loki.address=:3100"
+#%{ endif }
 
 entryPoints:
 #%{ if use_metrics == true }
@@ -53,6 +56,10 @@ entryPoints:
     address: ":4317"
   otel-http:
     address: ":4318"
+#%{ endif }
+#%{ if expose_loki == true }
+  loki:
+    address: ":3100"
 #%{ endif }
 
 deployment:
@@ -108,6 +115,11 @@ ports:
     expose: true
   otel-http:
     port: 4318
+    expose: true
+#%{ endif }
+#%{ if expose_loki == true }
+  loki:
+    port: 3100
     expose: true
 #%{ endif }
 volumes:

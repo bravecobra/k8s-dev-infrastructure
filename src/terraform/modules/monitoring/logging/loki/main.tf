@@ -35,3 +35,13 @@ resource "kubectl_manifest" "loki_dashboard" {
     helm_release.loki
   ]
 }
+
+resource "kubectl_manifest" "loki_ingestion" {
+  count       = var.expose_ingestion ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/loki-ingestion-route.yaml", {
+      namespace = var.namespace
+  })
+  depends_on = [
+      helm_release.loki
+  ]
+}

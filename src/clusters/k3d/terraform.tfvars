@@ -16,3 +16,4 @@ expose_jaeger       = false
 expose_prometheus   = false
 expose_elasticsearch = false
 expose_rabbitmq      = false
+expose_loki         = true

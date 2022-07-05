@@ -98,6 +98,10 @@ variable "loki_helm_version" {
 variable "promtail_helm_version" {
   type = string
 }
+variable "expose_loki" {
+  type    = bool
+  default = true
+}
 
 //tempo
 variable "install_tempo" {

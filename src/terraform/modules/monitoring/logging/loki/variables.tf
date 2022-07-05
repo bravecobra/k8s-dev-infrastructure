@@ -20,3 +20,7 @@ variable "namespace" {
 variable "tracing_enabled" {
   type = bool
 }
+
+variable "expose_ingestion" {
+  type = bool
+}

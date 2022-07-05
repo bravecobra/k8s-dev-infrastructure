@@ -45,7 +45,8 @@ resource "local_file" "cluster-config" {
     expose_opentelemetry = var.expose_opentelemetry,
     expose_prometheus   = var.expose_prometheus,
     expose_elasticsearch = var.expose_elasticsearch,
-    expose_rabbitmq      = var.expose_rabbitmq
+    expose_rabbitmq      = var.expose_rabbitmq,
+    expose_loki         = var.expose_loki,
   })
 
   filename = "${path.module}/k3s-${var.cluster-name}.yaml"

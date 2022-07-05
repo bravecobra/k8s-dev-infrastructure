@@ -50,6 +50,7 @@ opentelemetry_helm_version = "0.7.0"
 install_loki          = true
 loki_helm_version     = "2.12.1"
 promtail_helm_version = "5.1.0"
+expose_loki = true
 
 //tempo
 install_tempo          = true
