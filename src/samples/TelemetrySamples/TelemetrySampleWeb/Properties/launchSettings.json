@@ -14,12 +14,12 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "publishAllPorts": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "Loki__Endpoint": "http://k8s.local:3100",
-        "Otlp__Endpoint": "http://k8s.local:4318"
-      }
+        "ASPNETCORE_URLS": "http://+:80"
+      },
+      "publishAllPorts": true,
+      "DockerfileRunArguments": "--add-host k8s.local:192.168.0.107"
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json"

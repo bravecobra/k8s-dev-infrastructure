@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Reflection;
 using OpenTelemetry;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Instrumentation.AspNetCore;
@@ -9,7 +10,6 @@ using OpenTelemetry.Trace;
 using Serilog;
 using Serilog.Core.Enrichers;
 using Serilog.Enrichers.Span;
-using Serilog.Sinks.Grafana.Loki;
 
 namespace TelemetrySampleWeb.Configuration
 {
@@ -31,7 +31,7 @@ namespace TelemetrySampleWeb.Configuration
                         instrumentationOptions.Enrich = Enrich;
                         instrumentationOptions.RecordException = true;
                     })
-                    .AddSource(configuration.GetValue<string>("ServiceName"));
+                    .AddSource(Assembly.GetEntryAssembly()?.GetName().Name);
                 var tracingExporter = configuration.GetValue<string>("UseTracingExporter").ToLowerInvariant();
                 switch (tracingExporter)
                 {
@@ -72,19 +72,22 @@ namespace TelemetrySampleWeb.Configuration
 
         private static void Enrich(Activity activity, string eventName, object obj)
         {
-            if (obj is HttpRequest request)
+            switch (obj)
             {
-                var context = request.HttpContext;
-                activity.AddTag("http.flavor", GetHttpFlavour(request.Protocol));
-                activity.AddTag("http.scheme", request.Scheme);
-                activity.AddTag("http.client_ip", context.Connection.RemoteIpAddress);
-                activity.AddTag("http.request_content_length", request.ContentLength);
-                activity.AddTag("http.request_content_type", request.ContentType);
-            }
-            else if (obj is HttpResponse response)
-            {
-                activity.AddTag("http.response_content_length", response.ContentLength);
-                activity.AddTag("http.response_content_type", response.ContentType);
+                case HttpRequest request:
+                {
+                    var context = request.HttpContext;
+                    activity.AddTag("http.flavor", GetHttpFlavour(request.Protocol));
+                    activity.AddTag("http.scheme", request.Scheme);
+                    activity.AddTag("http.client_ip", context.Connection.RemoteIpAddress);
+                    activity.AddTag("http.request_content_length", request.ContentLength);
+                    activity.AddTag("http.request_content_type", request.ContentType);
+                    break;
+                }
+                case HttpResponse response:
+                    activity.AddTag("http.response_content_length", response.ContentLength);
+                    activity.AddTag("http.response_content_type", response.ContentType);
+                    break;
             }
         }
 
@@ -106,15 +109,14 @@ namespace TelemetrySampleWeb.Configuration
             {
                 return "3.0";
             }
-
-            throw new InvalidOperationException($"Protocol {protocol} not recognised.");
+            else
+              throw new InvalidOperationException($"Protocol {protocol} not recognised.");
         }
 
-        public static WebApplicationBuilder AddCustomLogging(this WebApplicationBuilder builder, 
-            IConfiguration configuration, ResourceBuilder resourceBuilder)
+        public static WebApplicationBuilder AddCustomLogging(this WebApplicationBuilder builder, ResourceBuilder resourceBuilder)
         {
             builder.Logging.ClearProviders();
-            var logExporter = configuration.GetValue<string>("UseLogExporter").ToLowerInvariant();
+            var logExporter = builder.Configuration.GetValue<string>("UseLogExporter").ToLowerInvariant();
             switch (logExporter)
             {
                 case "loki":
@@ -129,9 +131,27 @@ namespace TelemetrySampleWeb.Configuration
                         //     filtrationLabels:new List<string>{"app"}
                         // )
                         .Enrich.FromLogContext()
-                        .Enrich.With(new PropertyEnricher("app", builder.Configuration.GetValue<string>("ServiceName")))
+                        .Enrich.With(new PropertyEnricher("app", Assembly.GetEntryAssembly()?.GetName().Name!))
+                        .Enrich.WithAssemblyInformationalVersion()
+                        .Enrich.WithAssemblyName()
+                        .Enrich.WithAssemblyVersion(true)
+                        .Enrich.WithEnvironmentName()
+                        .Enrich.WithEnvironmentUserName()
+                        //.Enrich.WithMachineName()
+                        .Enrich.WithProcessId()
+                        .Enrich.WithProcessName()
+                        .Enrich.WithMemoryUsage()
+                        .Enrich.WithThreadId()
+                        .Enrich.WithThreadName()
                         .Enrich.WithSpan(new SpanOptions
-                            { LogEventPropertiesNames = new SpanLogEventPropertiesNames { TraceId = "traceid" } }) //renamed to let it match with derived fields for OTEL
+                        {
+                            IncludeBaggage = true,
+                            IncludeTags = true,
+                            LogEventPropertiesNames = new SpanLogEventPropertiesNames
+                            {
+                                TraceId = "traceid"
+                            }
+                        }) //renamed to let it match with derived fields for OTEL
                         .CreateLogger();
                     builder.Logging.AddSerilog(logger);
                     break;
@@ -142,9 +162,23 @@ namespace TelemetrySampleWeb.Configuration
                         .ReadFrom.Configuration(builder.Configuration)
                         .WriteTo.Seq("http://localhost:5341")
                         .Enrich.FromLogContext()
-                        .Enrich.With(new PropertyEnricher("app", builder.Configuration.GetValue<string>("ServiceName")))
+                        .Enrich.With(new PropertyEnricher("app", Assembly.GetEntryAssembly()?.GetName().Name!))
+                        .Enrich.WithAssemblyInformationalVersion()
+                        .Enrich.WithAssemblyName()
+                        .Enrich.WithAssemblyVersion(true)
+                        .Enrich.WithEnvironmentName()
+                        .Enrich.WithEnvironmentUserName()
+                        //.Enrich.WithMachineName()
+                        .Enrich.WithProcessId()
+                        .Enrich.WithProcessName()
+                        .Enrich.WithMemoryUsage()
+                        .Enrich.WithThreadId()
+                        .Enrich.WithThreadName()
                         .Enrich.WithSpan(new SpanOptions
-                            { LogEventPropertiesNames = new SpanLogEventPropertiesNames { TraceId = "traceid" } })
+                            { LogEventPropertiesNames = new SpanLogEventPropertiesNames
+                            {
+                                TraceId = "traceid"
+                            } })
                         .CreateLogger();
                     builder.Logging.AddSerilog(logger);
                     break;
@@ -158,7 +192,7 @@ namespace TelemetrySampleWeb.Configuration
                         {
                             otlpOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
                             otlpOptions.Endpoint =
-                                new Uri(configuration.GetValue<string>("Otlp:Endpoint") + "/v1/logs");
+                                new Uri(builder.Configuration.GetValue<string>("Otlp:Endpoint") + "/v1/logs");
                             otlpOptions.ExportProcessorType = ExportProcessorType.Simple;
                         });
                     });
@@ -168,7 +202,7 @@ namespace TelemetrySampleWeb.Configuration
                         opt.ParseStateValues = true;
                         opt.IncludeFormattedMessage = true;
                     });
-                        break;
+                    break;
                 }
                 default:
                     builder.Logging.AddOpenTelemetry(options =>
@@ -184,7 +218,6 @@ namespace TelemetrySampleWeb.Configuration
                     });
                     break;
             }
-
             return builder;
         }
 
@@ -193,12 +226,9 @@ namespace TelemetrySampleWeb.Configuration
         {
             services.AddOpenTelemetryMetrics(options =>
             {
-                //var meter = new Meter("MyApplication");
-
                 options.SetResourceBuilder(resourceBuilder)
                     .AddHttpClientInstrumentation()
                     .AddAspNetCoreInstrumentation()
-                    .AddMeter("MyApplicationMetrics")
                     .AddMeter(MyApplicationMeterName);
 
                 var metricsExporter = configuration.GetValue<string>("UseMetricsExporter").ToLowerInvariant();

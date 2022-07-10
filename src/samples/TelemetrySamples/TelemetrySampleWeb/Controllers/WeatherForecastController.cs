@@ -49,7 +49,7 @@ namespace TelemetrySampleWeb.Controllers
             histogram.Record(stopwatch.ElapsedMilliseconds, tag: KeyValuePair.Create<string, object?>("Host", "google.com"));
 
             //Adding extra Activity/Span       
-            using (var activity = Telemetry.CreateActivitySource(_configuration).StartActivity(nameof(Get)))
+            using (var activity = ActivitySourceFactory.CreateActivitySource().StartActivity(nameof(Get)))
             {
                 activity?.SetTag("foo", "foo");
                 activity?.SetTag("bar", "bar");

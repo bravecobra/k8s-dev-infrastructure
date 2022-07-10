@@ -159,6 +159,7 @@ module "vault" {
   domain-name    = var.domain-name
   depends_on = [
     module.jaeger,
+    module.linkerd,
     kubernetes_namespace.vault
   ]
 }
@@ -181,6 +182,7 @@ module "identityserver4" {
   depends_on = [
     module.jaeger,
     module.coredns,
+    module.linkerd,
     kubernetes_namespace.identityserver4
   ]
 }
@@ -208,6 +210,7 @@ module "keycloak" {
   include_domainrealm = var.keycloak_include_domainrealm
   depends_on = [
     module.coredns,
+    module.linkerd,
     kubernetes_namespace.keycloak
   ]
 }
@@ -219,6 +222,7 @@ module "whoami" {
   domain-name        = var.domain-name
   depends_on = [
     module.coredns,
+    module.linkerd,
     kubernetes_namespace.whoami
   ]
 }
@@ -231,6 +235,7 @@ module "minio" {
   metrics            = var.install_prometheus
   depends_on = [
     module.coredns,
+    module.linkerd,
     kubernetes_namespace.minio
   ]
 }

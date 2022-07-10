@@ -5,39 +5,27 @@ namespace TelemetrySampleWeb.Configuration
 {
     public static class ResourceBuilderFactory
     {
-        public static ResourceBuilder CreateResourceBuilder(IConfiguration configuration)
+        public static ResourceBuilder CreateResourceBuilder(WebApplicationBuilder builder)
         {
-            var serviceName = configuration.GetValue<string>("ServiceName");
-            // OpenTelemetry
-            var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "unknown";
-            //var tracingExporter = configuration.GetValue<string>("UseTracingExporter").ToLowerInvariant();
+            var entryAssembly = Assembly.GetEntryAssembly();
+            var entryAssemblyName = entryAssembly?.GetName();
+            var versionAttribute = entryAssembly?.GetCustomAttributes(false)
+                .OfType<AssemblyInformationalVersionAttribute>()
+                .FirstOrDefault();
+            var serviceName = entryAssemblyName?.Name;
+            var serviceVersion = versionAttribute?.InformationalVersion ?? entryAssemblyName?.Version?.ToString();
+            var attributes = new Dictionary<string, object>
+            {
+                ["host.name"] = Environment.MachineName,
+                ["os.description"] = System.Runtime.InteropServices.RuntimeInformation.OSDescription,
+                ["deployment.environment"] = builder.Environment.EnvironmentName.ToLowerInvariant()
+            };
 
-            return ResourceBuilder.CreateDefault().AddService(serviceName, serviceVersion: assemblyVersion, serviceInstanceId: Environment.MachineName)
+            return ResourceBuilder.CreateDefault()
+                .AddService(serviceName, serviceVersion, serviceInstanceId: Environment.MachineName)
+                .AddAttributes(attributes)
                 .AddTelemetrySdk()
                 .AddEnvironmentVariableDetector();
-
-            // var resourceBuilder = tracingExporter switch
-            // {
-            //     "jaeger" => ResourceBuilder.CreateDefault()
-            //         .AddService(configuration.GetValue<string>("ServiceName"), serviceVersion: assemblyVersion, serviceInstanceId: Environment.MachineName)
-            //         .AddTelemetrySdk()
-            //         .AddEnvironmentVariableDetector(),
-            //     "zipkin" => ResourceBuilder.CreateDefault()
-            //         .AddService(configuration.GetValue<string>("ServiceName"), serviceVersion: assemblyVersion, serviceInstanceId: Environment.MachineName)
-            //         .AddTelemetrySdk()
-            //         .AddEnvironmentVariableDetector(),
-            //     "otlp" => ResourceBuilder.CreateDefault()
-            //         .AddService(configuration.GetValue<string>("ServiceName"), serviceVersion: assemblyVersion, serviceInstanceId: Environment.MachineName)
-            //         .AddTelemetrySdk()
-            //         .AddEnvironmentVariableDetector()
-            //     //.AddAttributes(new[] { new KeyValuePair<string, object>("app", "test-app") })
-            //     ,
-            //     _ => ResourceBuilder.CreateDefault()
-            //         .AddService(serviceName, serviceVersion: assemblyVersion, serviceInstanceId: Environment.MachineName)
-            //         .AddTelemetrySdk()
-            //         .AddEnvironmentVariableDetector(),
-            // };
-            // return resourceBuilder;
         }
     }
 }

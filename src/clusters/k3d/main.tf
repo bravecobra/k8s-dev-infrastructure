@@ -19,15 +19,6 @@ locals {
   is_windows = substr(pathexpand("~"), 0, 1) == "/" ? false : true
 }
 
-resource "random_integer" "port" {
-  min = 8000
-  max = 8099
-}
-
-// locals {
-//   host_lb_port = (var.k3d_host_lb_port != "" ? var.k3d_host_lb_port : random_integer.port.result)
-// }
-
 resource "local_file" "cluster-config" {
   for_each = toset(var.k3d-cluster-name)
   content     = templatefile("${path.module}/${each.key}-template.yaml", {
