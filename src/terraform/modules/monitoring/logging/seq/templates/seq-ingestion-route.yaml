@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: seq-ingestion
+  namespace: ${namespace}
+spec:
+  entryPoints:
+    - seq-ingestion
+  routes:
+  - kind: Rule
+    match: PathPrefix(`/`)
+    services:
+    - name: seq
+      port: 5341

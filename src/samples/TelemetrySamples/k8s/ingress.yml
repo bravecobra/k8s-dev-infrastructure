@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: app1
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - kind: Rule
+    match:  Host(`app1.k8s.local`)
+    services:
+    - name: telemetrysampleweb
+      port: 80
+  tls:
+    secretName: traefik-cert

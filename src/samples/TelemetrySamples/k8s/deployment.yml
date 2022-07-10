@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telemetrysampleweb
+  labels:
+    app: telemetrysampleweb
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: telemetrysampleweb
+  template:
+    metadata:
+      labels:
+        app: telemetrysampleweb
+    spec:
+      containers:
+      - name: telemetrysampleweb
+        image: registry.localhost:5000/telemetrysampleweb:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: Otlp__Endpoint
+          value: http://otel-collector-collector.opentelemetry.svc.cluster.local:4318
+        - name: Loki__Endpoint
+          value: http://loki.loki.svc.cluster.local:3100
+        - name: Serilog__WriteTo__0__Args__uri
+          value: http://loki.loki.svc.cluster.local:3100
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: "ASPNETCORE_FORWARDEDHEADERS_ENABLED"
+          value: "true"
+        - name: "PodIp"
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        # https://andrewlock.net/deploying-asp-net-core-applications-to-kubernetes-part-6-adding-health-checks-with-liveness-readiness-and-startup-probes/
+        # The liveness probe is what you might expect—it indicates whether the container is alive or not.
+        # If a container fails its liveness probe, Kubernetes will kill the pod and restart another.
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+        # As soon as the startup probe succeeds once it never runs again for the lifetime of that container.
+        # If the startup probe never succeeds, Kubernetes will eventually kill the container, and restart the pod.
+        startupProbe:
+          httpGet:
+            path: /health/startup
+            port: 80
+          failureThreshold: 30
+          periodSeconds: 10
+        # Readiness probes indicate whether your application is ready to handle requests.
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 80
+          successThreshold: 3

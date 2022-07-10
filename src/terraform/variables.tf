@@ -74,6 +74,19 @@ variable "install_jaeger" {
   default = true
 }
 
+//opentelemetry
+variable "opentelemetry_helm_version" {
+  type = string
+}
+variable "install_opentelemetry" {
+  type    = bool
+  default = true
+}
+variable "expose_opentelemetry" {
+  type    = bool
+  default = true
+}
+
 //loki
 variable "install_loki" {
   type    = bool
@@ -83,6 +96,19 @@ variable "loki_helm_version" {
   type = string
 }
 variable "promtail_helm_version" {
+  type = string
+}
+variable "expose_loki" {
+  type    = bool
+  default = true
+}
+
+//tempo
+variable "install_tempo" {
+  type    = bool
+  default = true
+}
+variable "tempo_helm_version" {
   type = string
 }
 
@@ -125,6 +151,11 @@ variable "mssql_helm_version" {
 variable "install_seq" {
   type    = bool
   default = true
+}
+
+variable "expose_seq" {
+  type    = bool
+  default = false
 }
 
 variable "seq_helm_version" {
@@ -185,6 +216,11 @@ variable "minio_helm_version" {
 }
 
 variable "install_azurite" {
+  type    = bool
+  default = false
+}
+
+variable "expose_azurite" {
   type    = bool
   default = false
 }

@@ -8,7 +8,7 @@ node-ips = [
 ]
 
 //-------------------------------------
-//Infrastructure
+// Networking
 //-------------------------------------
 
 //metrics
@@ -27,8 +27,13 @@ linkerd_helm_version = "2.11.2"
 install_traefik      = true
 traefik_helm_version = "10.19.4"
 
+//-------------------------------------
+// Monitoring
+//-------------------------------------
+
 //seq
-install_seq = true
+install_seq = false
+expose_seq  = false
 seq_helm_version = "2022.1.7449"
 fluent_helm_version = "0.19.23"
 
@@ -36,14 +41,24 @@ fluent_helm_version = "0.19.23"
 install_jaeger      = false
 jaeger_helm_version = "2.29.0"
 
+//opentelemetry
+install_opentelemetry      = true
+expose_opentelemetry        = true
+opentelemetry_helm_version = "0.7.0"
+
 //loki
-install_loki          = false
-loki_helm_version     = "2.11.1"
-promtail_helm_version = "4.2.0"
+install_loki          = true
+loki_helm_version     = "2.12.1"
+promtail_helm_version = "5.1.0"
+expose_loki = true
+
+//tempo
+install_tempo          = true
+tempo_helm_version     = "0.15.4"
 
 //prometheus
-install_prometheus      = false
-prometheus_helm_version = "34.10.0"
+install_prometheus      = true
+prometheus_helm_version = "36.0.2"
 
 //-------------------------------------
 //Saas
@@ -82,6 +97,7 @@ minio_helm_version = "3.6.6"
 
 //Azurite
 install_azurite    = false
+expose_azurite     = false
 
 //RabbitMQ
 install_rabbitmq      = false

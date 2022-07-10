@@ -49,6 +49,17 @@ resource "kubernetes_namespace" "jaeger" {
   }
 }
 
+resource "kubernetes_namespace" "opentelemetry" {
+  count = var.install_opentelemetry ? 1 : 0
+  metadata {
+    name = "opentelemetry"
+    annotations = {
+      "kubernetes.io/description" = "OpenTelemetry"
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
+
 resource "kubernetes_namespace" "linkerd" {
   count = var.install_linkerd ? 1 : 0
   metadata {
@@ -71,6 +82,17 @@ resource "kubernetes_namespace" "loki" {
     name = "loki"
     annotations = {
       "kubernetes.io/description" = "Loki"
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
+
+resource "kubernetes_namespace" "tempo" {
+  count = var.install_tempo ? 1 : 0
+  metadata {
+    name = "tempo"
+    annotations = {
+      "kubernetes.io/description" = "Tempo"
       "linkerd.io/inject"         = "enabled"
     }
   }

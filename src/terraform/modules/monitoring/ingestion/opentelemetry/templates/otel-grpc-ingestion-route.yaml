@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: otel-grpc
+  namespace: ${namespace}
+spec:
+  entryPoints:
+    - otel-grpc
+  routes:
+  - kind: Rule
+    match: PathPrefix(`/`)
+    services:
+    - name: otel-collector-collector
+      port: 4317
