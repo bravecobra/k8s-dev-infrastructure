@@ -149,7 +149,7 @@ prometheus:
 grafana:
   # serviceMonitor:
   #   enabled: false
-  adminPassword: ${grafana_password}
+  adminPassword: "${grafana_password}"
   defaultDashboardsEnabled: true
   sidecar:
     dashboards:
