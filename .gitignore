@@ -95,3 +95,4 @@ _ReSharper.Caches
 bin
 obj
 *.user
+.idea

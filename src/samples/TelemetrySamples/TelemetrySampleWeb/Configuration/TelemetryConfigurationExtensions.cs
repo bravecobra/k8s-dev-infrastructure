@@ -37,7 +37,6 @@ namespace TelemetrySampleWeb.Configuration
                 {
                     case "jaeger":
                         options.AddJaegerExporter();
-
                         services.Configure<JaegerExporterOptions>(configuration.GetSection("Jaeger"));
 
                         // Customize the HttpClient that will be used when JaegerExporter is configured for HTTP transport.

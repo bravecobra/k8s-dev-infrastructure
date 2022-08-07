@@ -30,6 +30,12 @@ spec:
           value: http://loki.loki.svc.cluster.local:3100
         - name: Serilog__WriteTo__0__Args__uri
           value: http://loki.loki.svc.cluster.local:3100
+        - name: UseTracingExporter
+          value: otlp
+        - name: UseMetricsExporter
+          value : otlp
+        - name : UseLogExporter
+          value: loki
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
         - name: "ASPNETCORE_FORWARDEDHEADERS_ENABLED"
