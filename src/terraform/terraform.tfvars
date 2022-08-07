@@ -57,8 +57,9 @@ promtail_helm_version = "6.2.2"
 install_tempo          = false
 tempo_helm_version     = "0.15.7"
 
-//prometheus
+//prometheus - grafana
 install_prometheus      = false
+install_grafana      = false
 prometheus_helm_version = "39.4.0"
 
 //-------------------------------------

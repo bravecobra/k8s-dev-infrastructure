@@ -16,6 +16,8 @@ resource "helm_release" "prometheus" {
     templatefile("${path.module}/prometheus-values.yaml", {
       domain-name = var.domain-name,
       grafana_password = random_password.init_password.result,
+      install_prometheus = var.install_prometheus,
+      install_grafana = var.install_grafana,
       metrics_linkerd  = var.metrics_linkerd,
       metrics_minio    = var.metrics_minio,
       metrics_loki     = var.metrics_loki,

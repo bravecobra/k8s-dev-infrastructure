@@ -99,7 +99,7 @@ resource "kubernetes_namespace" "tempo" {
 }
 
 resource "kubernetes_namespace" "prometheus" {
-  count = var.install_prometheus ? 1 : 0
+  count = var.install_prometheus || var.install_grafana ? 1 : 0
   metadata {
     name = "prometheus"
     annotations = {
