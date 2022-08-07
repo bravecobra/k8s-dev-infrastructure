@@ -5,8 +5,8 @@ ingress:
   enabled: true
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    #traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
-    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd,default-keycloakforwardauth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+    #traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd,default-keycloakforwardauth@kubernetescrd
   hosts:
     - host: whoami1.${domain-name}
       paths:

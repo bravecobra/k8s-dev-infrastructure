@@ -8,15 +8,17 @@ additionalArguments:
   - "--providers.kubernetesingress=true"
   - "--providers.kubernetesingress.ingressendpoint"
   - "--providers.kubernetesingress.ingressendpoint.ip=${loadbalancer-ip}"
-#%{ if use_metrics == true }
-  - "--metrics.prometheus=${use_metrics}"
-  - "--entryPoints.metrics.address=:9100"
-#%{ endif }
+# #%{ if use_metrics == true }
+#   - "--metrics.prometheus=${use_metrics}"
+#   - "--entryPoints.metrics.address=:9100"
+# #%{ endif }
 #%{ if use_tracing == true }
   - "--tracing.jaeger=true"
   - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.jaeger:5778/sampling"
   - "--tracing.jaeger.localAgentHostPort=jaeger-agent.jaeger:6831"
-  - "--entryPoints.streaming.address=:6831/udp"
+#%{ endif }
+#%{ if expose_jaeger == true }
+  - "--entryPoints.jaeger.address=:6831/udp"
 #%{ endif }
 #%{ if expose_azurite == true }
   - "--entryPoints.azuriteblobs.address=:10000"
@@ -30,15 +32,19 @@ additionalArguments:
   - "--entryPoints.otel-grpc.address=:4317"
   - "--entryPoints.otel-http.address=:4318"
 #%{ endif }
-#%{ if expose_opentelemetry == true }
+#%{ if expose_loki == true }
   - "--entryPoints.loki.address=:3100"
 #%{ endif }
+#%{ if expose_rabbitmq == true }
+  - "--entryPoints.rabbitmq.address=:5672"
+#%{ endif }
+
 
 entryPoints:
-#%{ if use_metrics == true }
-  metrics:
-    address: ":9100"
-#%{ endif }
+# #%{ if use_metrics == true }
+#   metrics:
+#     address: ":9100"
+# #%{ endif }
 #%{ if expose_azurite == true }
   azuriteblobs:
     address: ":10000"
@@ -60,6 +66,14 @@ entryPoints:
 #%{ if expose_loki == true }
   loki:
     address: ":3100"
+#%{ endif }
+#%{ if expose_rabbitmq == true }
+  rabbitmq:
+    address: ":5672"
+#%{ endif }
+#%{ if expose_jaeger == true }
+  jaeger:
+    address: ":6831"
 #%{ endif }
 
 deployment:
@@ -86,12 +100,17 @@ kubernetes:
     - kube-system
 
 ports:
+  traefik:
+    port: 9999
+    expose: false
+    exposedPort: 9999
+    protocol: TCP
   websecure:
     tls:
       enabled: true
-  metrics:
-    port: 9100
-    expose : false
+  # metrics:
+  #   port: 9100
+  #   expose : false
     # expose: ${use_metrics}
 #%{ if expose_azurite == true }
   azuriteblobs:
@@ -122,6 +141,17 @@ ports:
     port: 3100
     expose: true
 #%{ endif }
+#%{ if expose_rabbitmq == true }
+  rabbitmq:
+    port: 5672
+    expose: true
+#%{ endif }
+#%{ if expose_jaeger == true }
+  jaeger:
+    port: 6831
+    expose: true
+#%{ endif }
+
 volumes:
   - name: traefik-cert
     mountPath: "/certs"

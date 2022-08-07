@@ -50,6 +50,8 @@ module "traefik" {
   expose_seq            = var.expose_seq
   expose_opentelemetry  = var.expose_opentelemetry
   expose_loki           = var.expose_loki
+  expose_jaeger         = var.expose_jaeger
+  expose_rabbitmq       = var.expose_rabbitmq
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik

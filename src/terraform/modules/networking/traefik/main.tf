@@ -11,15 +11,17 @@ resource "helm_release" "traefik" {
   version    = var.helm_release
   values = [
     templatefile("${path.module}/traefik-values.yaml", {
-      domain-name = var.domain-name,
+      domain-name = var.domain-name
       loadbalancer-ip = var.loadbalancer-ip
-      node-ips = var.node-ips,
+      node-ips = var.node-ips
       use_metrics = var.use_metrics
       use_tracing = var.use_tracing
       expose_azurite = var.expose_azurite
       expose_seq = var.expose_seq
       expose_opentelemetry = var.expose_opentelemetry
       expose_loki = var.expose_loki
+      expose_rabbitmq = var.expose_rabbitmq
+      expose_jaeger = var.expose_jaeger
     })
   ]
   depends_on = [

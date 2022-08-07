@@ -50,7 +50,7 @@ variable "traefik_helm_version" {
 //linkerd
 variable "install_linkerd" {
   type    = bool
-  default = true
+  default = false
 }
 variable "linkerd_helm_version" {
   type = string
@@ -62,8 +62,12 @@ variable "prometheus_helm_version" {
 }
 variable "install_prometheus" {
   type    = bool
-  default = true
+  default = false
 }
+# variable "expose_prometheus" {
+#   type    = bool
+#   default = false
+# }
 
 //jaeger
 variable "jaeger_helm_version" {
@@ -71,7 +75,11 @@ variable "jaeger_helm_version" {
 }
 variable "install_jaeger" {
   type    = bool
-  default = true
+  default = false
+}
+variable "expose_jaeger" {
+  type    = bool
+  default = false
 }
 
 //opentelemetry
@@ -80,17 +88,17 @@ variable "opentelemetry_helm_version" {
 }
 variable "install_opentelemetry" {
   type    = bool
-  default = true
+  default = false
 }
 variable "expose_opentelemetry" {
   type    = bool
-  default = true
+  default = false
 }
 
 //loki
 variable "install_loki" {
   type    = bool
-  default = true
+  default = false
 }
 variable "loki_helm_version" {
   type = string
@@ -100,7 +108,7 @@ variable "promtail_helm_version" {
 }
 variable "expose_loki" {
   type    = bool
-  default = true
+  default = false
 }
 
 //tempo
@@ -133,6 +141,10 @@ variable "install_kibana" {
 variable "elasticsearch_helm_version" {
   type = string
 }
+
+# variable "expose_elasticsearch" {
+#   type = bool
+# }
 
 //identityserver4-admin
 variable "install_identityserver4admin" {
@@ -211,6 +223,11 @@ variable "install_minio" {
   default = false
 }
 
+# variable "expose_minio" {
+#   type    = bool
+#   default = false
+# }
+
 variable "minio_helm_version" {
   type = string
 }
@@ -226,6 +243,11 @@ variable "expose_azurite" {
 }
 
 variable "install_rabbitmq" {
+  type    = bool
+  default = false
+}
+
+variable "expose_rabbitmq" {
   type    = bool
   default = false
 }
