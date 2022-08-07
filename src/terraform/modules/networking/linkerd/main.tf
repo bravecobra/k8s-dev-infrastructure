@@ -23,7 +23,7 @@ resource "time_sleep" "wait_x_seconds" {
 
 resource "null_resource" "fetch_ca" {
   provisioner "local-exec" {
-    command = "kubectl get secret linkerd-identity-issuer -n linkerd -o jsonpath=\"{.data.tls\\.crt}\" | base64 -d > ./modules/linkerd/ca.crt"
+    command = "kubectl get secret linkerd-identity-issuer -n linkerd -o jsonpath=\"{.data.tls\\.crt}\" | base64 -d > ./modules/networking/linkerd/ca.crt"
   }
   depends_on = [
     time_sleep.wait_x_seconds
