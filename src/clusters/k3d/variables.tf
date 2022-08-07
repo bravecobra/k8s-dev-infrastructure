@@ -3,17 +3,17 @@ variable "cluster-name" {
 }
 
 variable "server-node-count" {
-  type = number
+  type    = number
   default = 1
 }
 
 variable "worker-node-count" {
-  type = number
+  type    = number
   default = 0
 }
 
 variable "install_private_registry" {
-  type = bool
+  type    = bool
   default = true
 }
 
@@ -29,7 +29,7 @@ variable "k3d-cluster-name" {
 }
 
 variable "k3d-cluster-domain" {
-  type    = string
+  type = string
 }
 
 variable "k3d-cluster-port" {
@@ -43,6 +43,36 @@ variable "k3d-cluster-ip" {
 }
 
 variable "expose_azurite" {
-  type = bool
+  type    = bool
+  default = false
+}
+variable "expose_seq" {
+  type    = bool
+  default = false
+}
+variable "expose_opentelemetry" {
+  type    = bool
+  default = false
+}
+
+variable "expose_jaeger" {
+  type    = bool
+  default = false
+}
+# variable "expose_prometheus" {
+#   type    = bool
+#   default = false
+# }
+# variable "expose_elasticsearch" {
+#   type    = bool
+#   default = false
+# }
+variable "expose_rabbitmq" {
+  type    = bool
+  default = false
+}
+
+variable "expose_loki" {
+  type    = bool
   default = false
 }

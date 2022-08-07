@@ -2,9 +2,9 @@ terraform {
   required_version = ">= 1.0"
   required_providers {
     docker = {
-        source  = "kreuzwerker/docker"
-        version = "~> 2.15.0"
-        configuration_aliases = [ docker.docker-windows ]
+      source                = "kreuzwerker/docker"
+      version               = "~> 2.16.0"
+      configuration_aliases = [docker.docker-windows]
     }
   }
 }

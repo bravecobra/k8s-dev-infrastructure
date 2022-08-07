@@ -26,6 +26,7 @@ ports:
   - port: 8100:8100 # same as `--port '8100:8100@loadbalancer'`
     nodeFilters:
       - loadbalancer
+
 #%{ if expose_azurite == true }
   - port: 10000:10000 # same as `--port '10000:10000@loadbalancer'`
     nodeFilters:
@@ -34,6 +35,42 @@ ports:
     nodeFilters:
       - loadbalancer
   - port: 10002:10002 # same as `--port '10002:10002@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+#%{ if expose_seq == true }
+  - port: 5341:5341 # same as `--port '5341:5341@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+#%{ if expose_opentelemetry == true }
+  - port: 4317:4317 # same as `--port '4317:4317@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+  - port: 4318:4318 # same as `--port '4318:4318@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+#%{ if expose_jaeger == true }
+  - port: 6831:6831 # same as `--port '6831:6831@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+  - port: 6832:6832 # same as `--port '6832:6832@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+#%{ if expose_rabbitmq == true }
+  - port: 5672:5672 # same as `--port '5672:5672@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+#%{ if expose_loki == true }
+  - port: 3100:3100 # same as `--port '3100:3100@loadbalancer'`
     nodeFilters:
       - loadbalancer
 #%{ endif }
