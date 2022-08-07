@@ -6,7 +6,7 @@ metadata:
 
 spec:
   entryPoints:                  # [1]
-    - streaming
+    - jaeger
   routes:                       # [2]
   - services:                   # [3]
     - name: jaeger-agent        # [4]
