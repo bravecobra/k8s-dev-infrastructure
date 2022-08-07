@@ -121,9 +121,11 @@ module "tempo" {
 }
 
 module "prometheus" {
-  count          = var.install_prometheus == true ? 1 : 0
+  count          = var.install_prometheus == true || var.install_grafana == true ? 1 : 0
   source         = "./modules/monitoring/metrics/prometheus"
   helm_release   = var.prometheus_helm_version
+  install_prometheus =  var.install_prometheus
+  install_grafana = var.install_grafana
   metrics_jaeger = var.install_jaeger
   metrics_loki   = var.install_loki
   metrics_argocd = var.install_argocd

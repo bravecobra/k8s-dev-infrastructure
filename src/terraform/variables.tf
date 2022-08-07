@@ -64,6 +64,13 @@ variable "install_prometheus" {
   type    = bool
   default = false
 }
+
+//grafana
+variable "install_grafana" {
+  type    = bool
+  default = false
+}
+
 # variable "expose_prometheus" {
 #   type    = bool
 #   default = false

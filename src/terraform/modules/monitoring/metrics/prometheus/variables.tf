@@ -46,3 +46,12 @@ variable "namespace" {
   description = "Namespace"
   default     = "prometheus"
 }
+
+variable "install_prometheus" {
+  type    = bool
+  default = false
+}
+variable "install_grafana" {
+  type    = bool
+  default = false
+}

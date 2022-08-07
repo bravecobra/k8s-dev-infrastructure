@@ -14,11 +14,22 @@ prometheusOperator:
   # serviceMonitor:
   #   selfMonitor: false
 
-# alertmanager:
+alertmanager:
+  enabled: ${install_prometheus}
+
+nodeExporter:
+  enabled: ${install_prometheus}
+
+kubeStateMetrics:
+  enabled: ${install_prometheus}
 #   serviceMonitor:
 #     selfMonitor: false
 
+defaultRules:
+  create: ${install_prometheus}
+
 prometheus:
+  enabled: ${install_prometheus}
   # serviceMonitor:
   #   selfMonitor: false
   prometheusSpec:
@@ -147,10 +158,11 @@ prometheus:
         - prometheus.infrastructure.${domain-name}
 
 grafana:
+  enabled: ${install_grafana}
   # serviceMonitor:
   #   enabled: false
   adminPassword: "${grafana_password}"
-  defaultDashboardsEnabled: true
+  defaultDashboardsEnabled: ${install_prometheus}
   sidecar:
     dashboards:
       searchNamespace: ALL
@@ -161,6 +173,8 @@ grafana:
         foldersFromFilesStructure: true
       annotations:
         k8s-sidecar-target-directory: /tmp/dashboards/Infrastructure/Kubernetes
+    datasources:
+      defaultDatasourceEnabled: ${install_prometheus}
   ingress:
     enabled: true
     annotations:
