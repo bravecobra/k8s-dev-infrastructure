@@ -30,7 +30,7 @@ jobs:
           # The key of the SonarQube project
           sonarProjectKey: bravecobra_k8s-dev-infrastructure_dotnet
           # The name of the SonarQube project
-          # sonarProjectName:  k8s-dev-infrastructure
+          sonarProjectName:  k8s-dev-infrastructure_dotnet
           # The name of the SonarQube organization in SonarCloud. For hosted SonarQube, skip this setting.
           sonarOrganization: bravecobra
           dotnetBuildArguments: ./src/samples/TelemetrySamples/
