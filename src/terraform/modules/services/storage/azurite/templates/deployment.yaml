@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: storage-azurite-container
-        image: mcr.microsoft.com/azurestorage-azurite
+        image: mcr.microsoft.com/azurestorage-azurite:${version}
         ports:
         - containerPort: 10000
         - containerPort: 10001

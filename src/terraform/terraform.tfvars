@@ -100,6 +100,7 @@ minio_helm_version = "4.0.10"
 //Azurite
 install_azurite    = false
 expose_azurite     = false
+azurite_version    = "latest"
 
 //RabbitMQ
 install_rabbitmq      = false
