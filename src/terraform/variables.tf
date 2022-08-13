@@ -249,6 +249,10 @@ variable "expose_azurite" {
   default = false
 }
 
+variable "azurite_version" {
+  type = string
+}
+
 variable "install_rabbitmq" {
   type    = bool
   default = false

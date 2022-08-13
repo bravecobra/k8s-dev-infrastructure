@@ -260,6 +260,7 @@ module "azurite" {
   count              = var.install_azurite == true ? 1 : 0
   source             = "./modules/services/storage/azurite"
   domain-name        = var.domain-name
+  azurite_version            = var.azurite_version
   depends_on = [
     module.coredns,
     module.linkerd,

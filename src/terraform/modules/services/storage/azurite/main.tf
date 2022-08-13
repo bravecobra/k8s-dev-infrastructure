@@ -1,7 +1,8 @@
 resource "kubectl_manifest" "azurite_deployment" {
   yaml_body = templatefile("${path.module}/templates/deployment.yaml", {
     namespace = var.namespace,
-    domain-name = var.domain-name
+    domain-name = var.domain-name,
+    version = var.azurite_version
   })
   depends_on = [
   ]
