@@ -266,3 +266,17 @@ variable "expose_rabbitmq" {
 variable "rabbitmq_helm_version" {
   type = string
 }
+
+variable "install_localstack" {
+  type    = bool
+  default = false
+}
+
+# variable "expose_localstack" {
+#   type    = bool
+#   default = false
+# }
+
+variable "localstack_helm_version" {
+  type = string
+}

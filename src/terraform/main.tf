@@ -280,3 +280,16 @@ module "rabbitmq" {
     kubernetes_namespace.rabbitmq
   ]
 }
+
+module "localstack" {
+  count              = var.install_localstack == true ? 1 : 0
+  source             = "./modules/services/cloud/localstack"
+  domain-name        = var.domain-name
+  helm_release       = var.localstack_helm_version
+  namespace          = kubernetes_namespace.localstack[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.localstack
+  ]
+}

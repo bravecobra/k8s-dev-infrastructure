@@ -107,6 +107,11 @@ install_rabbitmq      = false
 expose_rabbitmq       = false
 rabbitmq_helm_version = "2.6.11"
 
+//Localstack
+install_localstack      = false
+# expose_localstack       = false
+localstack_helm_version = "0.4.1"
+
 //-------------------------------------
 //Examples
 //-------------------------------------

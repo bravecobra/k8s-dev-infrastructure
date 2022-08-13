@@ -208,3 +208,14 @@ resource "kubernetes_namespace" "rabbitmq" {
     }
   }
 }
+
+resource "kubernetes_namespace" "localstack" {
+  count = var.install_localstack ? 1 : 0
+  metadata {
+    name = "localstack"
+    annotations = {
+      "kubernetes.io/description" = "localstack"
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
