@@ -179,7 +179,7 @@ module "coredns" {
 
 module "identityserver4" {
   count              = var.install_identityserver4admin == true ? 1 : 0
-  source             = "./modules/services/auth/identityserver4-admin"
+  source             = "./modules/services/security/auth/identityserver4-admin"
   helm_release       = var.identityserver4admin_helm_version
   mssql_helm_release = var.mssql_helm_version
   domain-name        = var.domain-name
@@ -207,7 +207,7 @@ module "seq" {
 
 module "keycloak" {
   count              = var.install_keycloak == true ? 1 : 0
-  source             = "./modules/services/auth/keycloak"
+  source             = "./modules/services/security/auth/keycloak"
   helm_release       = var.keycloak_helm_version
   domain-name        = var.domain-name
   //forward_client_secret = var.forward_client_secret
