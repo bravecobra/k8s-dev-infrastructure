@@ -17,19 +17,21 @@ module "certmanager" {
   count        = var.install_cert_manager == true ? 1 : 0
   source       = "./modules/networking/cert-manager"
   helm_release = var.cert_manager_helm_version
+  namespace    = kubernetes_namespace.cert-manager[0].metadata[0].name
   depends_on = [
     kubernetes_namespace.cert-manager,
   ]
 }
 
 module "linkerd" {
-  count        = var.install_linkerd == true ? 1 : 0
-  source       = "./modules/networking/linkerd"
-  helm_release = var.linkerd_helm_version
-  domain-name  = var.domain-name
-  tracing_enabled = var.install_jaeger
+  count             = var.install_linkerd == true ? 1 : 0
+  source            = "./modules/networking/linkerd"
+  helm_release      = var.linkerd_helm_version
+  domain-name       = var.domain-name
+  namespace         = kubernetes_namespace.linkerd[0].metadata[0].name
+  tracing_enabled   = var.install_jaeger
   tracing_dataplane = var.install_jaeger
-  metrics_external = var.install_prometheus
+  metrics_external  = var.install_prometheus
   depends_on = [
     module.certmanager,
     kubernetes_namespace.linkerd
@@ -37,21 +39,22 @@ module "linkerd" {
 }
 
 module "traefik" {
-  count        = var.install_traefik == true ? 1 : 0
-  source       = "./modules/networking/traefik"
-  helm_release = var.traefik_helm_version
-  domain-name  = var.domain-name
-  install_dashboards    = var.install_prometheus
-  loadbalancer-ip       = var.loadbalancer-ip
-  node-ips              = var.node-ips
-  use_metrics           = var.install_prometheus
-  use_tracing           = var.install_jaeger
-  expose_azurite        = var.expose_azurite
-  expose_seq            = var.expose_seq
-  expose_opentelemetry  = var.expose_opentelemetry
-  expose_loki           = var.expose_loki
-  expose_jaeger         = var.expose_jaeger
-  expose_rabbitmq       = var.expose_rabbitmq
+  count                = var.install_traefik == true ? 1 : 0
+  source               = "./modules/networking/traefik"
+  helm_release         = var.traefik_helm_version
+  domain-name          = var.domain-name
+  namespace            = kubernetes_namespace.traefik[0].metadata[0].name
+  install_dashboards   = var.install_prometheus
+  loadbalancer-ip      = var.loadbalancer-ip
+  node-ips             = var.node-ips
+  use_metrics          = var.install_prometheus
+  use_tracing          = var.install_jaeger
+  expose_azurite       = var.expose_azurite
+  expose_seq           = var.expose_seq
+  expose_opentelemetry = var.expose_opentelemetry
+  expose_loki          = var.expose_loki
+  expose_jaeger        = var.expose_jaeger
+  expose_rabbitmq      = var.expose_rabbitmq
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -59,11 +62,12 @@ module "traefik" {
 }
 
 module "jaeger" {
-  count        = var.install_jaeger == true ? 1 : 0
-  source       = "./modules/monitoring/tracing/jaeger"
-  helm_release = var.jaeger_helm_version
-  domain-name  = var.domain-name
-  install_dashboards    = var.install_prometheus
+  count              = var.install_jaeger == true ? 1 : 0
+  source             = "./modules/monitoring/tracing/jaeger"
+  helm_release       = var.jaeger_helm_version
+  domain-name        = var.domain-name
+  install_dashboards = var.install_prometheus
+  namespace          = kubernetes_namespace.jaeger[0].metadata[0].name
   depends_on = [
     module.linkerd,
     kubernetes_namespace.jaeger
@@ -71,10 +75,11 @@ module "jaeger" {
 }
 
 module "opentelemetry" {
-  count        = var.install_opentelemetry == true ? 1 : 0
-  source       = "./modules/monitoring/ingestion/opentelemetry"
-  helm_release = var.opentelemetry_helm_version
+  count            = var.install_opentelemetry == true ? 1 : 0
+  source           = "./modules/monitoring/ingestion/opentelemetry"
+  helm_release     = var.opentelemetry_helm_version
   expose_ingestion = var.expose_opentelemetry
+  namespace        = kubernetes_namespace.opentelemetry[0].metadata[0].name
   # domain-name  = var.domain-name
   # install_dashboards    = var.install_prometheus
   depends_on = [
@@ -91,6 +96,7 @@ module "loki" {
   install_dashboards    = var.install_prometheus
   tracing_enabled       = var.install_jaeger
   expose_ingestion      = var.expose_loki
+  namespace             = kubernetes_namespace.loki[0].metadata[0].name
   depends_on = [
     module.prometheus,
     kubernetes_namespace.loki
@@ -98,11 +104,12 @@ module "loki" {
 }
 
 module "argocd" {
-  count        = var.install_argocd == true ? 1 : 0
-  source       = "./modules/services/deployment/argocd"
-  helm_release = var.argocd_helm_version
-  domain-name  = var.domain-name
-  install_dashboards    = var.install_prometheus
+  count              = var.install_argocd == true ? 1 : 0
+  source             = "./modules/services/deployment/argocd"
+  helm_release       = var.argocd_helm_version
+  domain-name        = var.domain-name
+  install_dashboards = var.install_prometheus
+  namespace          = kubernetes_namespace.argocd[0].metadata[0].name
   depends_on = [
     module.jaeger,
     module.linkerd,
@@ -111,9 +118,10 @@ module "argocd" {
 }
 
 module "tempo" {
-  count          = var.install_tempo == true ? 1 : 0
-  source         = "./modules/monitoring/tracing/tempo"
-  helm_release   = var.tempo_helm_version
+  count        = var.install_tempo == true ? 1 : 0
+  source       = "./modules/monitoring/tracing/tempo"
+  helm_release = var.tempo_helm_version
+  namespace    = kubernetes_namespace.tempo[0].metadata[0].name
   depends_on = [
     module.linkerd,
     kubernetes_namespace.tempo
@@ -121,19 +129,20 @@ module "tempo" {
 }
 
 module "prometheus" {
-  count          = var.install_prometheus == true || var.install_grafana == true ? 1 : 0
-  source         = "./modules/monitoring/metrics/prometheus"
-  helm_release   = var.prometheus_helm_version
-  install_prometheus =  var.install_prometheus
-  install_grafana = var.install_grafana
-  metrics_jaeger = var.install_jaeger
-  metrics_loki   = var.install_loki
-  metrics_argocd = var.install_argocd
-  metrics_minio  = var.install_minio
-  metrics_linkerd = var.install_linkerd
-  metrics_rabbitmq = var.install_rabbitmq
-  metrics_tempo  = var.install_tempo
-  domain-name    = var.domain-name
+  count              = var.install_prometheus == true || var.install_grafana == true ? 1 : 0
+  source             = "./modules/monitoring/metrics/prometheus"
+  helm_release       = var.prometheus_helm_version
+  install_prometheus = var.install_prometheus
+  install_grafana    = var.install_grafana
+  metrics_jaeger     = var.install_jaeger
+  metrics_loki       = var.install_loki
+  metrics_argocd     = var.install_argocd
+  metrics_minio      = var.install_minio
+  metrics_linkerd    = var.install_linkerd
+  metrics_rabbitmq   = var.install_rabbitmq
+  metrics_tempo      = var.install_tempo
+  domain-name        = var.domain-name
+  namespace          = kubernetes_namespace.prometheus[0].metadata[0].name
   depends_on = [
     module.jaeger,
     module.linkerd,
@@ -149,6 +158,7 @@ module "elasticsearch" {
   install_elasticsearch = var.install_elasticsearch
   install_kibana        = var.install_kibana
   domain-name           = var.domain-name
+  namespace             = kubernetes_namespace.elasticsearch[0].metadata[0].name
   depends_on = [
     module.jaeger,
     module.linkerd,
@@ -160,7 +170,8 @@ module "vault" {
   count        = var.install_vault == true ? 1 : 0
   source       = "./modules/services/configuration/vault"
   helm_release = var.vault_helm_version
-  domain-name    = var.domain-name
+  domain-name  = var.domain-name
+  namespace    = kubernetes_namespace.vault[0].metadata[0].name
   depends_on = [
     module.jaeger,
     module.linkerd,
@@ -169,9 +180,9 @@ module "vault" {
 }
 
 module "coredns" {
-  count              = local.patch_coredns == true ? 1 : 0
-  source             = "./modules/networking/coredns"
-  domain-name        = var.domain-name
+  count       = local.patch_coredns == true ? 1 : 0
+  source      = "./modules/networking/coredns"
+  domain-name = var.domain-name
   depends_on = [
     module.jaeger
   ]
@@ -183,6 +194,7 @@ module "identityserver4" {
   helm_release       = var.identityserver4admin_helm_version
   mssql_helm_release = var.mssql_helm_version
   domain-name        = var.domain-name
+  namespace          = kubernetes_namespace.identityserver4[0].metadata[0].name
   depends_on = [
     module.jaeger,
     module.coredns,
@@ -192,12 +204,13 @@ module "identityserver4" {
 }
 
 module "seq" {
-  count              = var.install_seq == true ? 1 : 0
-  source             = "./modules/monitoring/logging/seq"
-  helm_release       = var.seq_helm_version
+  count               = var.install_seq == true ? 1 : 0
+  source              = "./modules/monitoring/logging/seq"
+  helm_release        = var.seq_helm_version
   fluent_helm_release = var.fluent_helm_version
-  domain-name        = var.domain-name
-  expose_ingestion   = var.expose_seq
+  domain-name         = var.domain-name
+  expose_ingestion    = var.expose_seq
+  namespace           = kubernetes_namespace.seq[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
@@ -206,10 +219,11 @@ module "seq" {
 }
 
 module "keycloak" {
-  count              = var.install_keycloak == true ? 1 : 0
-  source             = "./modules/services/security/auth/keycloak"
-  helm_release       = var.keycloak_helm_version
-  domain-name        = var.domain-name
+  count        = var.install_keycloak == true ? 1 : 0
+  source       = "./modules/services/security/auth/keycloak"
+  helm_release = var.keycloak_helm_version
+  domain-name  = var.domain-name
+  namespace    = kubernetes_namespace.keycloak[0].metadata[0].name
   //forward_client_secret = var.forward_client_secret
   include_domainrealm = var.keycloak_include_domainrealm
   depends_on = [
@@ -220,10 +234,11 @@ module "keycloak" {
 }
 
 module "whoami" {
-  count              = var.install_whoami == true ? 1 : 0
-  source             = "./samples/whoami"
-  helm_release       = var.whoami_helm_version
-  domain-name        = var.domain-name
+  count        = var.install_whoami == true ? 1 : 0
+  source       = "./samples/whoami"
+  helm_release = var.whoami_helm_version
+  domain-name  = var.domain-name
+  namespace    = kubernetes_namespace.whoami[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
@@ -232,11 +247,12 @@ module "whoami" {
 }
 
 module "minio" {
-  count              = var.install_minio == true ? 1 : 0
-  source             = "./modules/services/storage/minio"
-  helm_release       = var.minio_helm_version
-  domain-name        = var.domain-name
-  metrics            = var.install_prometheus
+  count        = var.install_minio == true ? 1 : 0
+  source       = "./modules/services/storage/minio"
+  helm_release = var.minio_helm_version
+  domain-name  = var.domain-name
+  metrics      = var.install_prometheus
+  namespace    = kubernetes_namespace.minio[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
@@ -245,10 +261,11 @@ module "minio" {
 }
 
 module "etcd" {
-  count              = var.install_etcd == true ? 1 : 0
-  source             = "./modules/services/configuration/etcd"
-  helm_release       = var.etcd_helm_version
-  domain-name        = var.domain-name
+  count        = var.install_etcd == true ? 1 : 0
+  source       = "./modules/services/configuration/etcd"
+  helm_release = var.etcd_helm_version
+  domain-name  = var.domain-name
+  namespace    = kubernetes_namespace.etcd[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
@@ -257,10 +274,11 @@ module "etcd" {
 }
 
 module "azurite" {
-  count              = var.install_azurite == true ? 1 : 0
-  source             = "./modules/services/storage/azurite"
-  domain-name        = var.domain-name
-  azurite_version            = var.azurite_version
+  count           = var.install_azurite == true ? 1 : 0
+  source          = "./modules/services/storage/azurite"
+  domain-name     = var.domain-name
+  azurite_version = var.azurite_version
+  namespace       = kubernetes_namespace.azurite[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
@@ -273,7 +291,8 @@ module "rabbitmq" {
   source             = "./modules/services/messaging/rabbitmq"
   domain-name        = var.domain-name
   helm_release       = var.rabbitmq_helm_version
-  install_dashboards    = var.install_prometheus
+  install_dashboards = var.install_prometheus
+  namespace          = kubernetes_namespace.rabbitmq[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
@@ -282,11 +301,11 @@ module "rabbitmq" {
 }
 
 module "localstack" {
-  count              = var.install_localstack == true ? 1 : 0
-  source             = "./modules/services/cloud/localstack"
-  domain-name        = var.domain-name
-  helm_release       = var.localstack_helm_version
-  namespace          = kubernetes_namespace.localstack[0].metadata[0].name
+  count        = var.install_localstack == true ? 1 : 0
+  source       = "./modules/services/cloud/localstack"
+  domain-name  = var.domain-name
+  helm_release = var.localstack_helm_version
+  namespace    = kubernetes_namespace.localstack[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,

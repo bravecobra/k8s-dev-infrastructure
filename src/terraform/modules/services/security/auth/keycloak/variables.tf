@@ -14,7 +14,6 @@ variable "init_keycloak_user"{
 
 variable "namespace" {
   description = "Namespace"
-  default     = "keycloak"
 }
 
 variable "forward_client_id" {
