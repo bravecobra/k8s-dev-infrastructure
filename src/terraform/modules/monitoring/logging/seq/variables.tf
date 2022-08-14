@@ -12,7 +12,6 @@ variable "domain-name" {
 
 variable "namespace" {
     description = "Namespace"
-    default = "seq"
 }
 
 variable "expose_ingestion" {

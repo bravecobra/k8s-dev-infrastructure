@@ -14,7 +14,6 @@ variable "install_dashboards" {
 
 variable "namespace" {
   description = "Namespace"
-  default     = "loki"
 }
 
 variable "tracing_enabled" {

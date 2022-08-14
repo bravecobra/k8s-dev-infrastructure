@@ -8,7 +8,6 @@ variable "domain-name" {
 
 variable "namespace" {
     description = "Namespace"
-    default = "minio"
 }
 
 variable "metrics" {
