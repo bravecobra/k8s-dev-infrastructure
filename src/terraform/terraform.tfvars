@@ -112,6 +112,11 @@ install_localstack      = false
 # expose_localstack       = false
 localstack_helm_version = "0.4.1"
 
+//fluxcd
+install_fluxcd      = false
+fluxcd_helm_version = "1.0.0"
+fluxcd_namespace = "flux-system"
+
 //-------------------------------------
 //Examples
 //-------------------------------------

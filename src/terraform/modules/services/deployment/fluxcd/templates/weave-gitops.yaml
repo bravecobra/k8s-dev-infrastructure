@@ -1,0 +1,19 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ww-gitops
+  namespace: ${namespace}
+spec:
+  chart:
+    spec:
+      chart: weave-gitops
+      sourceRef:
+        kind: HelmRepository
+        name: ww-gitops
+  interval: 1m0s
+  values:
+    adminUser:
+      create: true
+      username: admin
+      passwordHash: $2a$10$Z9eBH5SCQNWztDJQPrPMEutKm/j4BKqpO6DkagiUO0FNCFU5wfVea
+      # password is admin

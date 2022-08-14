@@ -372,11 +372,6 @@ variable "install_localstack" {
   default = false
 }
 
-# variable "expose_localstack" {
-#   type    = bool
-#   default = false
-# }
-
 variable "localstack_helm_version" {
   type = string
 }
@@ -385,3 +380,19 @@ variable "localstack_namespace" {
   type    = string
   default = "localstack"
 }
+
+#fluxcd
+variable "fluxcd_namespace" {
+  type    = string
+  default = "flux-system"
+}
+
+variable "install_fluxcd" {
+  type = bool
+  default = false
+}
+
+variable "fluxcd_helm_version" {
+  type = string
+}
+
