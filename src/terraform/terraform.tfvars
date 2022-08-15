@@ -1,10 +1,10 @@
 cluster-context-name = "k3d-devinfra"
 domain-name          = "k8s.local"
-loadbalancer-ip           = "172.19.0.6"
+loadbalancer-ip      = "172.19.0.6"
 node-ips = [
-    "172.19.0.2",
-    "172.19.0.3",
-    "172.19.0.4"
+  "172.19.0.2",
+  "172.19.0.3",
+  "172.19.0.4"
 ]
 
 //-------------------------------------
@@ -32,9 +32,9 @@ traefik_helm_version = "10.24.0"
 //-------------------------------------
 
 //seq
-install_seq = false
-expose_seq  = false
-seq_helm_version = "2022.1.7929"
+install_seq         = false
+expose_seq          = false
+seq_helm_version    = "2022.1.7929"
 fluent_helm_version = "0.20.4"
 
 //jaeger
@@ -44,7 +44,7 @@ jaeger_helm_version = "2.23.0"
 
 //opentelemetry (operator)
 install_opentelemetry      = false
-expose_opentelemetry        = false
+expose_opentelemetry       = false
 opentelemetry_helm_version = "0.10.1"
 
 //loki
@@ -54,12 +54,12 @@ loki_helm_version     = "2.13.3"
 promtail_helm_version = "6.2.2"
 
 //tempo
-install_tempo          = false
-tempo_helm_version     = "0.15.7"
+install_tempo      = false
+tempo_helm_version = "0.15.7"
 
 //prometheus - grafana
 install_prometheus      = false
-install_grafana      = false
+install_grafana         = false
 prometheus_helm_version = "39.4.0"
 
 //-------------------------------------
@@ -85,8 +85,8 @@ identityserver4admin_helm_version = "0.5.2"
 mssql_helm_version                = "0.1.0"
 
 //keycloak
-install_keycloak      = false
-keycloak_helm_version = "18.3.0"
+install_keycloak             = false
+keycloak_helm_version        = "18.3.0"
 keycloak_include_domainrealm = true
 
 //etcd
@@ -98,9 +98,9 @@ install_minio      = false
 minio_helm_version = "4.0.10"
 
 //Azurite
-install_azurite    = false
-expose_azurite     = false
-azurite_version    = "latest"
+install_azurite = false
+expose_azurite  = false
+azurite_version = "latest"
 
 //RabbitMQ
 install_rabbitmq      = false
@@ -108,14 +108,15 @@ expose_rabbitmq       = false
 rabbitmq_helm_version = "2.6.11"
 
 //Localstack
-install_localstack      = false
+install_localstack = false
 # expose_localstack       = false
 localstack_helm_version = "0.4.1"
 
 //fluxcd
-install_fluxcd      = false
-fluxcd_helm_version = "1.0.0"
-fluxcd_namespace = "flux-system"
+install_flux2                = true
+flux2_namespace              = "flux-system"
+flux2_github_repository_name = "flux-test2"
+flux2_github_repository_path = "cluster/k8s-local"
 
 //-------------------------------------
 //Examples

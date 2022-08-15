@@ -313,15 +313,14 @@ module "localstack" {
   ]
 }
 
-module "fluxcd" {
-  count        = var.install_fluxcd == true ? 1 : 0
-  source       = "./modules/services/deployment/fluxcd"
-  domain-name  = var.domain-name
-  helm_release = var.fluxcd_helm_version
-  namespace    = kubernetes_namespace.fluxcd[0].metadata[0].name
+module "flux2" {
+  count           = var.install_flux2 == true ? 1 : 0
+  source          = "./modules/services/deployment/flux2"
+  repository_name = var.flux2_github_repository_name
+  target_path     = var.flux2_github_repository_path
+  domain-name     = var.domain-name
   depends_on = [
     module.coredns,
     module.linkerd,
-    kubernetes_namespace.fluxcd
   ]
 }

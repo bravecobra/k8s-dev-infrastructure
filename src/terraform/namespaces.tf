@@ -219,20 +219,3 @@ resource "kubernetes_namespace" "localstack" {
     }
   }
 }
-
-resource "kubernetes_namespace" "fluxcd" {
-  count = var.install_fluxcd ? 1 : 0
-  metadata {
-    name = var.fluxcd_namespace
-    annotations = {
-      "kubernetes.io/description" = var.fluxcd_namespace
-      "linkerd.io/inject"         = "enabled"
-    }
-  }
-
-  lifecycle {
-    ignore_changes = [
-      metadata[0].labels,
-    ]
-  }
-}

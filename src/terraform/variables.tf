@@ -1,3 +1,7 @@
+locals {
+  envs = { for tuple in regexall("(.*)=(.*)", file(".env")) : tuple[0] => sensitive(tuple[1]) }
+}
+
 variable "cluster-context-name" {
   type = string
 }
@@ -381,18 +385,21 @@ variable "localstack_namespace" {
   default = "localstack"
 }
 
-#fluxcd
-variable "fluxcd_namespace" {
+#flux2
+variable "flux2_namespace" {
   type    = string
   default = "flux-system"
 }
 
-variable "install_fluxcd" {
-  type = bool
+variable "install_flux2" {
+  type    = bool
   default = false
 }
 
-variable "fluxcd_helm_version" {
+variable "flux2_github_repository_name" {
   type = string
 }
 
+variable "flux2_github_repository_path" {
+  type = string
+}

@@ -9,6 +9,14 @@ terraform {
       source  = "hashicorp/time"
       version = ">= 0.7.2"
     }
+    github = {
+      source  = "integrations/github"
+      version = ">= 4.5.2"
+    }
+    tls = {
+      source  = "hashicorp/tls"
+      version = "3.1.0"
+    }
   }
 }
 
@@ -22,4 +30,9 @@ provider "helm" {
     config_path    = "~/.kube/config"
     config_context = var.cluster-context-name
   }
+}
+
+provider "github" {
+  owner = local.envs["GITHUB_OWNER"]
+  token = local.envs["GITHUB_TOKEN"]
 }
