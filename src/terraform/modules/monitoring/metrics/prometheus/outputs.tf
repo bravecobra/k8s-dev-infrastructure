@@ -9,9 +9,9 @@ data "kubernetes_secret" "grafana-secret" {
 }
 
 output "admin-user" {
-  value = lookup(data.kubernetes_secret.grafana-secret.data, "admin-user")
+  value = var.install_grafana ? lookup(data.kubernetes_secret.grafana-secret.data, "admin-user"): null
 }
 
 output "admin-password" {
-  value = lookup(data.kubernetes_secret.grafana-secret.data, "admin-password")
+  value = var.install_grafana ? lookup(data.kubernetes_secret.grafana-secret.data, "admin-password"): null
 }
