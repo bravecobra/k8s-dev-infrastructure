@@ -396,10 +396,25 @@ variable "install_flux2" {
   default = false
 }
 
+variable "flux2_github_repository_create" {
+  type    = bool
+  default = false
+}
+
 variable "flux2_github_repository_name" {
   type = string
 }
 
 variable "flux2_github_repository_path" {
   type = string
+}
+
+variable "flux2_github_repository_visibility" {
+  type    = string
+  default = "private"
+}
+
+variable "flux2_github_repository_branch" {
+  type    = string
+  default = "master"
 }

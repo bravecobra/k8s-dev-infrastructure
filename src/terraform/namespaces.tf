@@ -219,3 +219,26 @@ resource "kubernetes_namespace" "localstack" {
     }
   }
 }
+
+resource "kubernetes_namespace" "flux_system" {
+  count = var.install_flux2 ? 1 : 0
+  metadata {
+    name = "flux-system"
+  }
+  lifecycle {
+    ignore_changes = [
+      metadata[0].labels,
+    ]
+  }
+}
+
+resource "null_resource" "flux_uninstall" {
+  count = var.install_flux2 ? 1 : 0
+  provisioner "local-exec" {
+    command = "flux uninstall -s --keep-namespace"
+    when    = destroy
+  }
+  depends_on = [
+    kubernetes_namespace.flux_system
+  ]
+}

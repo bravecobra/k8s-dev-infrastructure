@@ -1,4 +1,5 @@
 resource "kubectl_manifest" "notify_watchers" {
+  count     = var.install_identityserver4admin == true ? 1 : 0
   yaml_body = file("./templates/notify-watcher.yaml")
 }
 
@@ -314,13 +315,18 @@ module "localstack" {
 }
 
 module "flux2" {
-  count           = var.install_flux2 == true ? 1 : 0
-  source          = "./modules/services/deployment/flux2"
-  repository_name = var.flux2_github_repository_name
-  target_path     = var.flux2_github_repository_path
-  domain-name     = var.domain-name
+  count                 = var.install_flux2 == true ? 1 : 0
+  source                = "./modules/services/deployment/flux2"
+  repository_name       = var.flux2_github_repository_name
+  target_path           = var.flux2_github_repository_path
+  repository_create     = var.flux2_github_repository_create
+  repository_visibility = var.flux2_github_repository_visibility
+  branch                = var.flux2_github_repository_branch
+  domain-name           = var.domain-name
+  namespace             = kubernetes_namespace.flux_system[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
+    kubernetes_namespace.flux_system
   ]
 }

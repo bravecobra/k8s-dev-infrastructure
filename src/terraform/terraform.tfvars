@@ -113,10 +113,12 @@ install_localstack = false
 localstack_helm_version = "0.4.1"
 
 //fluxcd
-install_flux2                = true
-flux2_namespace              = "flux-system"
-flux2_github_repository_name = "flux-test2"
-flux2_github_repository_path = "cluster/k8s-local"
+install_flux2                      = true
+flux2_namespace                    = "flux-system"
+flux2_github_repository_create     = false #use an existing (private) empty github repository
+flux2_github_repository_name       = "k8s-flux-example" # name of the github repo
+flux2_github_repository_path       = "clusters/k8s-local" # path in the github repo where the flux config will be stored
+flux2_github_repository_visibility = "private"
 
 //-------------------------------------
 //Examples

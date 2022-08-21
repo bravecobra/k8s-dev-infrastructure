@@ -12,6 +12,11 @@ locals {
 #   description = "github token"
 # }
 
+variable "repository_create" {
+  type        = bool
+  default     = false
+}
+
 variable "repository_name" {
   type        = string
   description = "github repository name"
@@ -36,4 +41,8 @@ variable "target_path" {
 
 variable "domain-name" {
   type = string
+}
+
+variable "namespace" {
+  description = "Namespace"
 }
