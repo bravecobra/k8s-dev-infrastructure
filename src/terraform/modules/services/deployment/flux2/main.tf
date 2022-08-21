@@ -1,3 +1,18 @@
+# resource "helm_release" "fluxcd" {
+#   name       = "flux2"
+#   chart      = "flux2"
+#   repository = "https://fluxcd-community.github.io/helm-charts"
+#   version    = var.helm_release
+#   namespace  = var.namespace
+#   wait       = true
+#   wait_for_jobs = true
+#   values = [
+#     templatefile("${path.module}/flux-values.yaml", {
+#       domain-name = var.domain-name,
+#     })
+#   ]
+# }
+
 # Deploy key SSH
 locals {
   known_hosts = "github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg="
