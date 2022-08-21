@@ -6,8 +6,8 @@ resource "docker_network" "k3d_network" {
     subnet = "fc00:f853:ccd:e793::/64"
   }
   ipam_config {
-    subnet  = "172.19.0.0/16"
-    gateway = "172.19.0.1"
+    subnet  = var.k3d-network-subnet
+    gateway = var.k3d-network-gateway
   }
   options = {
     "com.docker.network.bridge.enable_ip_masquerade " = "true"
