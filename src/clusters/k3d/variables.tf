@@ -42,6 +42,16 @@ variable "k3d-cluster-ip" {
   type    = string
 }
 
+variable "k3d-network-subnet" {
+  default = "172.19.0.0/16"
+  type    = string
+}
+
+variable "k3d-network-gateway" {
+  default = "172.19.0.1"
+  type    = string
+}
+
 variable "expose_azurite" {
   type    = bool
   default = false
