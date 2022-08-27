@@ -25,18 +25,18 @@ resource "kubernetes_secret" "ca-key-pair" {
   type = "kubernetes.io/tls"
 }
 
-resource "time_sleep" "wait_10_seconds" {
+resource "time_sleep" "wait_x_seconds" {
   depends_on = [
     helm_release.cert-manager,
     kubernetes_secret.ca-key-pair
   ]
 
-  create_duration = "10s"
+  create_duration = "20s"
 }
 
 resource "kubectl_manifest" "cluster-issuer" {
   depends_on = [
-    time_sleep.wait_10_seconds
+    time_sleep.wait_x_seconds
   ]
   yaml_body = file("${path.module}/templates/cluster-issuer.yaml")
 }

@@ -1,13 +1,13 @@
 resource "docker_network" "kind_network" {
   name = "kind"
   driver = "bridge"
-  ipv6 = true
+  ipv6 = false
   ipam_config {
       subnet = "fc00:f853:ccd:e793::/64"
   }
   ipam_config {
-      subnet = "172.19.0.0/16"
-      gateway = "172.19.0.1"
+      subnet = var.kind-network-subnet
+      gateway = var.kind-network-gateway
   }
   options = {
     "com.docker.network.bridge.enable_ip_masquerade "= "true"
@@ -18,7 +18,7 @@ resource "docker_network" "kind_network" {
 resource "kind_cluster" "devinfra-cluster" {
   name           = var.cluster-name
   wait_for_ready = true
-
+  node_image = "kindest/node:${var.kind_version}"
   kind_config {
     kind        = "Cluster"
     api_version = "kind.x-k8s.io/v1alpha4"
@@ -31,8 +31,8 @@ resource "kind_cluster" "devinfra-cluster" {
     networking {
       ip_family          = "ipv4"
       api_server_address = "127.0.0.1"
-      service_subnet     = "172.19.0.0/16"
-      pod_subnet         = "172.19.0.0/16"
+      # service_subnet     = var.kind-network-subnet
+      # pod_subnet         = var.kind-network-subnet
     }
     node {
       role = "control-plane"
@@ -57,13 +57,79 @@ resource "kind_cluster" "devinfra-cluster" {
         protocol       = "tcp"
         listen_address = "127.0.0.1"
       }
+      # Azurite (kind doesn't seem to allow to publish port above 10k)
+      # extra_port_mappings {
+      #   host_port      = 10000
+      #   container_port = 10000
+      #   protocol       = "tcp"
+      #   listen_address = "127.0.0.1"
+      # }
+      # extra_port_mappings {
+      #   host_port      = 10001
+      #   container_port = 10001
+      #   protocol       = "tcp"
+      #   listen_address = "127.0.0.1"
+      # }
+      # extra_port_mappings {
+      #   host_port      = 10002
+      #   container_port = 10002
+      #   protocol       = "tcp"
+      #   listen_address = "127.0.0.1"
+      # }
+      # SEQ
+      extra_port_mappings {
+        host_port      = 5341
+        container_port = 5341
+        protocol       = "tcp"
+        listen_address = "127.0.0.1"
+      }
+      # Opentelemetry
+      extra_port_mappings {
+        host_port      = 4317
+        container_port = 4317
+        protocol       = "tcp"
+        listen_address = "127.0.0.1"
+      }
+      extra_port_mappings {
+        host_port      = 4318
+        container_port = 4318
+        protocol       = "tcp"
+        listen_address = "127.0.0.1"
+      }
+      # Jaeger
+      extra_port_mappings {
+        host_port      = 6831
+        container_port = 6831
+        protocol       = "tcp"
+        listen_address = "127.0.0.1"
+      }
+      extra_port_mappings {
+        host_port      = 6832
+        container_port = 6832
+        protocol       = "tcp"
+        listen_address = "127.0.0.1"
+      }
+      # RabbitMQ
+      extra_port_mappings {
+        host_port      = 5672
+        container_port = 5672
+        protocol       = "tcp"
+        listen_address = "127.0.0.1"
+      }
+      # Loki
+      extra_port_mappings {
+        host_port      = 3100
+        container_port = 3100
+        protocol       = "tcp"
+        listen_address = "127.0.0.1"
+      }
     }
-    // node {
-    //   role = "worker"
-    // }
-    // node {
-    //   role = "worker"
-    // }
+    node {
+      role = "worker"
+    }
+    node {
+      role = "worker"
+    }
     // node {
     //   role = "worker"
     // }
@@ -108,7 +174,7 @@ resource "time_sleep" "wait_x_seconds" {
   depends_on = [
     kind_cluster.devinfra-cluster
   ]
-  create_duration = "10s"
+  create_duration = "20s"
 }
 
 resource "kubectl_manifest" "config-registry" {
