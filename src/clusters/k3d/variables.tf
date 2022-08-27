@@ -86,3 +86,28 @@ variable "expose_loki" {
   type    = bool
   default = false
 }
+
+variable "expose_rds_mssql" {
+  type    = bool
+  default = false
+}
+
+variable "expose_rds_oracle" {
+  type    = bool
+  default = false
+}
+
+variable "expose_rds_mysql" {
+  type    = bool
+  default = false
+}
+
+variable "expose_rds_postgres" {
+  type    = bool
+  default = false
+}
+
+variable "expose_nosql_mongodb" {
+  type    = bool
+  default = false
+}

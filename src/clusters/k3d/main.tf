@@ -36,6 +36,11 @@ resource "local_file" "cluster-config" {
     expose_opentelemetry = var.expose_opentelemetry,
     expose_rabbitmq      = var.expose_rabbitmq,
     expose_loki          = var.expose_loki,
+    expose_rds_mssql     = var.expose_rds_mssql,
+    expose_rds_oracle    = var.expose_rds_oracle,
+    expose_rds_mysql     = var.expose_rds_mysql,
+    expose_rds_postgres  = var.expose_rds_postgres,
+    expose_nosql_mongodb = var.expose_nosql_mongodb,
   })
 
   filename = "${path.module}/k3s-${var.cluster-name}.yaml"
