@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: weave-gitops
+  namespace: flux-system
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+spec:
+  rules:
+    - host: flux.infrastructure.${domain-name}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ww-gitops-weave-gitops
+                port:
+                  number: 9001
+  tls:
+  - secretName: flux-cert
+    hosts:
+    - flux.infrastructure.${domain-name}

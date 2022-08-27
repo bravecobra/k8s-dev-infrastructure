@@ -1,3 +1,7 @@
+locals {
+  envs = { for tuple in regexall("(.*)=(.*)", file(".env")) : tuple[0] => sensitive(tuple[1]) }
+}
+
 variable "cluster-context-name" {
   type = string
 }
@@ -372,11 +376,6 @@ variable "install_localstack" {
   default = false
 }
 
-# variable "expose_localstack" {
-#   type    = bool
-#   default = false
-# }
-
 variable "localstack_helm_version" {
   type = string
 }
@@ -384,4 +383,38 @@ variable "localstack_helm_version" {
 variable "localstack_namespace" {
   type    = string
   default = "localstack"
+}
+
+#flux2
+variable "flux2_namespace" {
+  type    = string
+  default = "flux-system"
+}
+
+variable "install_flux2" {
+  type    = bool
+  default = false
+}
+
+variable "flux2_github_repository_create" {
+  type    = bool
+  default = false
+}
+
+variable "flux2_github_repository_name" {
+  type = string
+}
+
+variable "flux2_github_repository_path" {
+  type = string
+}
+
+variable "flux2_github_repository_visibility" {
+  type    = string
+  default = "private"
+}
+
+variable "flux2_github_repository_branch" {
+  type    = string
+  default = "master"
 }
