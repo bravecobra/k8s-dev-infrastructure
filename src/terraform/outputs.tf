@@ -51,3 +51,9 @@ output "etcd-password" {
   value       = join("", module.etcd[*].etcd-password)
   sensitive   = true
 }
+
+output "mysql-password" {
+  description = "Mysql password"
+  value       = join("", module.mysql[*].mysql-root-password)
+  sensitive   = true
+}

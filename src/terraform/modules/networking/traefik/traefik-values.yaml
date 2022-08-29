@@ -38,6 +38,9 @@ additionalArguments:
 #%{ if expose_rabbitmq == true }
   - "--entryPoints.rabbitmq.address=:5672"
 #%{ endif }
+#%{ if expose_mysql == true }
+  - "--entryPoints.mysql.address=:3306"
+#%{ endif }
 
 
 entryPoints:
@@ -74,6 +77,10 @@ entryPoints:
 #%{ if expose_jaeger == true }
   jaeger:
     address: ":6831"
+#%{ endif }
+#%{ if expose_mysql == true }
+  mysql:
+    address: ":3306"
 #%{ endif }
 
 deployment:
@@ -149,6 +156,11 @@ ports:
 #%{ if expose_jaeger == true }
   jaeger:
     port: 6831
+    expose: true
+#%{ endif }
+#%{ if expose_mysql == true }
+  mysql:
+    port: 3306
     expose: true
 #%{ endif }
 

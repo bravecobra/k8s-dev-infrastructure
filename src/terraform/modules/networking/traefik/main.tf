@@ -22,6 +22,7 @@ resource "helm_release" "traefik" {
       expose_loki = var.expose_loki
       expose_rabbitmq = var.expose_rabbitmq
       expose_jaeger = var.expose_jaeger
+      expose_mysql = var.expose_mysql
     })
   ]
   depends_on = [

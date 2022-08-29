@@ -82,3 +82,8 @@ variable "expose_rabbitmq" {
   type = bool
   default = false
 }
+
+variable "expose_mysql" {
+  type = bool
+  default = false
+}

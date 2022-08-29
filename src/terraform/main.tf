@@ -56,6 +56,7 @@ module "traefik" {
   expose_loki          = var.expose_loki
   expose_jaeger        = var.expose_jaeger
   expose_rabbitmq      = var.expose_rabbitmq
+  expose_mysql         = var.expose_mysql
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -328,5 +329,20 @@ module "flux2" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.flux_system
+  ]
+}
+
+module "mysql" {
+  count              = var.install_mysql == true ? 1 : 0
+  source             = "./modules/services/database/rds/mysql"
+  domain-name        = var.domain-name
+  helm_release       = var.mysql_helm_version
+  expose_mysql       = var.expose_mysql
+  # install_dashboards = var.install_prometheus
+  namespace          = kubernetes_namespace.mysql[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.mysql
   ]
 }

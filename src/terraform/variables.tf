@@ -418,3 +418,23 @@ variable "flux2_github_repository_branch" {
   type    = string
   default = "master"
 }
+
+# MySQL
+variable "install_mysql" {
+  type    = bool
+  default = false
+}
+
+variable "expose_mysql" {
+  type    = bool
+  default = false
+}
+
+variable "mysql_namespace" {
+  type    = string
+  default = "mysql"
+}
+
+variable "mysql_helm_version" {
+  type = string
+}

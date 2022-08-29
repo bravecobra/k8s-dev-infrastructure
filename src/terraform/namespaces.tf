@@ -242,3 +242,14 @@ resource "null_resource" "flux_uninstall" {
     kubernetes_namespace.flux_system
   ]
 }
+
+resource "kubernetes_namespace" "mysql" {
+  count = var.install_mysql ? 1 : 0
+  metadata {
+    name = var.mysql_namespace
+    annotations = {
+      "kubernetes.io/description" = var.mysql_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}

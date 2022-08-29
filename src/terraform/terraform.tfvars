@@ -121,6 +121,10 @@ flux2_github_repository_name       = "k8s-flux-example" # name of the github rep
 flux2_github_repository_path       = "clusters/k8s-local" # path in the github repo where the flux config will be stored
 flux2_github_repository_visibility = "private"
 
+//MySQL
+install_mysql      = false
+expose_mysql       = false
+mysql_helm_version = "9.3.1"
 //-------------------------------------
 //Examples
 //-------------------------------------
