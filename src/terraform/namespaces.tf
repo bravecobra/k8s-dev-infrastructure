@@ -253,3 +253,14 @@ resource "kubernetes_namespace" "mysql" {
     }
   }
 }
+
+resource "kubernetes_namespace" "postgres" {
+  count = var.install_postgres ? 1 : 0
+  metadata {
+    name = var.postgres_namespace
+    annotations = {
+      "kubernetes.io/description" = var.postgres_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}

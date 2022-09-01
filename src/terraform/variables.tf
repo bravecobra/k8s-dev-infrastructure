@@ -438,3 +438,23 @@ variable "mysql_namespace" {
 variable "mysql_helm_version" {
   type = string
 }
+
+# Postgres
+variable "install_postgres" {
+  type    = bool
+  default = false
+}
+
+variable "expose_postgres" {
+  type    = bool
+  default = false
+}
+
+variable "postgres_namespace" {
+  type    = string
+  default = "postgres"
+}
+
+variable "postgres_helm_version" {
+  type = string
+}

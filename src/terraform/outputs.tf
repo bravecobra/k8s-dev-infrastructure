@@ -57,3 +57,9 @@ output "mysql-password" {
   value       = join("", module.mysql[*].mysql-root-password)
   sensitive   = true
 }
+
+output "postgres-password" {
+  description = "Postgres password"
+  value       = join("", module.postgres[*].postgres-root-password)
+  sensitive   = true
+}

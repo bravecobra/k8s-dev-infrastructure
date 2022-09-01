@@ -57,6 +57,7 @@ module "traefik" {
   expose_jaeger        = var.expose_jaeger
   expose_rabbitmq      = var.expose_rabbitmq
   expose_mysql         = var.expose_mysql
+  expose_postgres      = var.expose_postgres
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -333,16 +334,31 @@ module "flux2" {
 }
 
 module "mysql" {
-  count              = var.install_mysql == true ? 1 : 0
-  source             = "./modules/services/database/rds/mysql"
-  domain-name        = var.domain-name
-  helm_release       = var.mysql_helm_version
-  expose_mysql       = var.expose_mysql
+  count        = var.install_mysql == true ? 1 : 0
+  source       = "./modules/services/database/rds/mysql"
+  domain-name  = var.domain-name
+  helm_release = var.mysql_helm_version
+  expose_mysql = var.expose_mysql
   # install_dashboards = var.install_prometheus
-  namespace          = kubernetes_namespace.mysql[0].metadata[0].name
+  namespace = kubernetes_namespace.mysql[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
     kubernetes_namespace.mysql
+  ]
+}
+
+module "postgres" {
+  count           = var.install_postgres == true ? 1 : 0
+  source          = "./modules/services/database/rds/postgres"
+  domain-name     = var.domain-name
+  helm_release    = var.postgres_helm_version
+  expose_postgres = var.expose_postgres
+  # install_dashboards = var.install_prometheus
+  namespace = kubernetes_namespace.postgres[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.postgres
   ]
 }

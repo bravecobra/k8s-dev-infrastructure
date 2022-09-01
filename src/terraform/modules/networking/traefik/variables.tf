@@ -87,3 +87,8 @@ variable "expose_mysql" {
   type = bool
   default = false
 }
+
+variable "expose_postgres" {
+  type = bool
+  default = false
+}

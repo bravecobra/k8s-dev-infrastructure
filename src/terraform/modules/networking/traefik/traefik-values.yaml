@@ -41,6 +41,9 @@ additionalArguments:
 #%{ if expose_mysql == true }
   - "--entryPoints.mysql.address=:3306"
 #%{ endif }
+#%{ if expose_postgres == true }
+  - "--entryPoints.postgres.address=:5432"
+#%{ endif }
 
 
 entryPoints:
@@ -81,6 +84,10 @@ entryPoints:
 #%{ if expose_mysql == true }
   mysql:
     address: ":3306"
+#%{ endif }
+#%{ if expose_postgres == true }
+  postgres:
+    address: ":5432"
 #%{ endif }
 
 deployment:
@@ -161,6 +168,11 @@ ports:
 #%{ if expose_mysql == true }
   mysql:
     port: 3306
+    expose: true
+#%{ endif }
+#%{ if expose_postgres == true }
+  postgres:
+    port: 5432
     expose: true
 #%{ endif }
 

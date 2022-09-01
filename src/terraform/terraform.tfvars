@@ -125,6 +125,11 @@ flux2_github_repository_visibility = "private"
 install_mysql      = false
 expose_mysql       = false
 mysql_helm_version = "9.3.1"
+
+//Postgres
+install_postgres      = true
+expose_postgres       = true
+postgres_helm_version = "11.8.1"
 //-------------------------------------
 //Examples
 //-------------------------------------
