@@ -216,7 +216,7 @@ variable "identityserver4admin_helm_version" {
   type = string
 }
 
-variable "mssql_helm_version" {
+variable "identityserver4admin_mssql_helm_version" {
   type = string
 }
 
@@ -456,5 +456,25 @@ variable "postgres_namespace" {
 }
 
 variable "postgres_helm_version" {
+  type = string
+}
+
+# mssql
+variable "install_mssql" {
+  type    = bool
+  default = false
+}
+
+variable "expose_mssql" {
+  type    = bool
+  default = false
+}
+
+variable "mssql_namespace" {
+  type    = string
+  default = "mssql"
+}
+
+variable "mssql_helm_version" {
   type = string
 }

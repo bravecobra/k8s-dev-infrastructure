@@ -82,7 +82,7 @@ vault_helm_version = "0.20.0"
 //identityserver4-admin
 install_identityserver4admin      = false
 identityserver4admin_helm_version = "0.5.2"
-mssql_helm_version                = "0.1.0"
+identityserver4admin_mssql_helm_version = "0.1.0"
 
 //keycloak
 install_keycloak             = false
@@ -127,9 +127,14 @@ expose_mysql       = false
 mysql_helm_version = "9.3.1"
 
 //Postgres
-install_postgres      = true
-expose_postgres       = true
+install_postgres      = false
+expose_postgres       = false
 postgres_helm_version = "11.8.1"
+
+//MSSQL
+install_mssql      = false
+expose_mssql       = false
+mssql_helm_version = "1.0.2"
 //-------------------------------------
 //Examples
 //-------------------------------------

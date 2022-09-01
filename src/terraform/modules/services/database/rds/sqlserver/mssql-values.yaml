@@ -1,0 +1,7 @@
+acceptEula:
+  value: "y"
+
+sapassword: ${mssqlPassword}
+
+persistence:
+  storageClass: "local-path"

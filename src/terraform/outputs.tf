@@ -63,3 +63,9 @@ output "postgres-password" {
   value       = join("", module.postgres[*].postgres-root-password)
   sensitive   = true
 }
+
+output "mssql-password" {
+  description = "MSSQL password"
+  value       = join("", module.mssql[*].mssql-root-password)
+  sensitive   = true
+}

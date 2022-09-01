@@ -92,3 +92,8 @@ variable "expose_postgres" {
   type = bool
   default = false
 }
+
+variable "expose_mssql" {
+  type = bool
+  default = false
+}

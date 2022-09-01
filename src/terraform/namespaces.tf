@@ -264,3 +264,14 @@ resource "kubernetes_namespace" "postgres" {
     }
   }
 }
+
+resource "kubernetes_namespace" "mssql" {
+  count = var.install_mssql ? 1 : 0
+  metadata {
+    name = var.mssql_namespace
+    annotations = {
+      "kubernetes.io/description" = var.mssql_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
