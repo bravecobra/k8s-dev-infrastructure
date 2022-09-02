@@ -340,7 +340,6 @@ module "mysql" {
   domain-name  = var.domain-name
   helm_release = var.mysql_helm_version
   expose_mysql = var.expose_mysql
-  # install_dashboards = var.install_prometheus
   namespace = kubernetes_namespace.mysql[0].metadata[0].name
   depends_on = [
     module.coredns,
@@ -355,7 +354,6 @@ module "postgres" {
   domain-name     = var.domain-name
   helm_release    = var.postgres_helm_version
   expose_postgres = var.expose_postgres
-  # install_dashboards = var.install_prometheus
   namespace = kubernetes_namespace.postgres[0].metadata[0].name
   depends_on = [
     module.coredns,
@@ -370,7 +368,6 @@ module "mssql" {
   domain-name  = var.domain-name
   helm_release = var.mssql_helm_version
   expose_mssql = var.expose_mssql
-  # install_dashboards = var.install_prometheus
   namespace = kubernetes_namespace.mssql[0].metadata[0].name
   depends_on = [
     module.coredns,
