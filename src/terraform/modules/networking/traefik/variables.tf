@@ -107,3 +107,7 @@ variable "expose_mongodb" {
   type = bool
   default = false
 }
+
+variable "cluster-type" {
+  type = string
+}

@@ -3,11 +3,23 @@ domain-name = "k8s.local"
 # k3s
 cluster-context-name = "k3d-devinfra"
 loadbalancer-ip      = "172.19.0.6"
+cluster-type         = "k3s"
 node-ips = [
   "172.19.0.2",
   "172.19.0.3",
   "172.19.0.4"
 ]
+
+# kind
+# cluster-context-name = "kind-devinfra"
+# cluster-type = "kind"
+# loadbalancer-ip      = "172.19.0.2"
+# node-ips = [
+#   "172.19.0.2",
+#   "172.19.0.3",
+#   "172.19.0.4"
+# ]
+
 
 # Rancher desktop
 # cluster-context-name = "rancher-desktop"

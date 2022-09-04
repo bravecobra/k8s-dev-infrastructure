@@ -240,7 +240,12 @@ providers:
 
 service:
   enabled: true
+#%{ if cluster-type == "k3s" }
   type: ClusterIP
+#%{ endif }
+#%{ if cluster-type == "kind" }
+  type: NodePort
+#%{ endif }
   spec:
   #   externalTrafficPolicy: Cluster
   # clusterIP: 172.18.0.2
@@ -259,3 +264,15 @@ tls:
       defaultCertificate:
         certFile: /certs/tls.crt
         keyFile: /certs/tls.key
+
+#%{ if cluster-type == "kind" }
+nodeSelector:
+  ingress-ready: 'true'
+tolerations:
+  - key: node-role.kubernetes.io/master
+    operator: Equal
+    effect: NoSchedule
+  - key: node-role.kubernetes.io/control-plane
+    operator: Equal
+    effect: NoSchedule
+#%{ endif }
