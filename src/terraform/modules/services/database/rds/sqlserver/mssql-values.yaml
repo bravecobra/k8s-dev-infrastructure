@@ -1,7 +1,7 @@
 acceptEula:
   value: "y"
 
-sapassword: ${mssqlPassword}
+sapassword: "${mssqlPassword}"
 
 persistence:
   storageClass: "local-path"
