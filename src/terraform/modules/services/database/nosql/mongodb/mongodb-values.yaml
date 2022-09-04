@@ -8,4 +8,4 @@ auth:
 
 persistence:
   storageClass: "local-path"
-  size: 8Gi
+  size: 1Gi
