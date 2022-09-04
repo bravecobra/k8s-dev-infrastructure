@@ -2,7 +2,6 @@ name: tfsec-k3s
 on:
   push:
     branches:
-      - develop
       - master
   pull_request:
 jobs:
