@@ -149,6 +149,11 @@ postgres_helm_version = "11.8.1"
 install_mssql      = false
 expose_mssql       = false
 mssql_helm_version = "1.0.2"
+
+//MSSQL
+install_mongodb      = false
+expose_mongodb       = false
+mongodb_helm_version = "13.1.2"
 //-------------------------------------
 //Examples
 //-------------------------------------

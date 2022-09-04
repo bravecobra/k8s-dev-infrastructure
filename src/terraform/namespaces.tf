@@ -286,3 +286,14 @@ resource "kubernetes_namespace" "mariadb" {
     }
   }
 }
+
+resource "kubernetes_namespace" "mongodb" {
+  count = var.install_mongodb ? 1 : 0
+  metadata {
+    name = var.mongodb_namespace
+    annotations = {
+      "kubernetes.io/description" = var.mongodb_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}

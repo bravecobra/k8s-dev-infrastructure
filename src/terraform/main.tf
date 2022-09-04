@@ -60,6 +60,7 @@ module "traefik" {
   expose_postgres      = var.expose_postgres
   expose_mssql         = var.expose_mssql
   expose_mariadb       = var.expose_mariadb
+  expose_mongodb       = var.expose_mongodb
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -388,5 +389,19 @@ module "mariadb" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.mariadb
+  ]
+}
+
+module "mongodb" {
+  count        = var.install_mongodb == true ? 1 : 0
+  source       = "./modules/services/database/nosql/mongodb"
+  domain-name  = var.domain-name
+  helm_release = var.mongodb_helm_version
+  expose_mongodb = var.expose_mongodb
+  namespace = kubernetes_namespace.mongodb[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.mongodb
   ]
 }

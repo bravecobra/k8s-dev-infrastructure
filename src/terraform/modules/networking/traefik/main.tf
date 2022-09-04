@@ -26,6 +26,7 @@ resource "helm_release" "traefik" {
       expose_postgres = var.expose_postgres
       expose_mssql = var.expose_mssql
       expose_mariadb = var.expose_mariadb
+      expose_mongodb = var.expose_mongodb
     })
   ]
   depends_on = [

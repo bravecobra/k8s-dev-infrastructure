@@ -50,6 +50,9 @@ additionalArguments:
 #%{ if expose_mariadb == true }
   - "--entryPoints.mariadb.address=:3307"
 #%{ endif }
+#%{ if expose_mongodb == true }
+  - "--entryPoints.mongodb.address=:27017"
+#%{ endif }
 
 
 entryPoints:
@@ -102,6 +105,10 @@ entryPoints:
 #%{ if expose_mssql == true }
   mssql:
     address: ":1433"
+#%{ endif }
+#%{ if expose_mongodb == true }
+  mongodb:
+    address: ":27017"
 #%{ endif }
 
 deployment:
@@ -197,6 +204,11 @@ ports:
 #%{ if expose_mssql == true }
   mssql:
     port: 1433
+    expose: true
+#%{ endif }
+#%{ if expose_mongodb == true }
+  mongodb:
+    port: 27017
     expose: true
 #%{ endif }
 

@@ -102,3 +102,8 @@ variable "expose_mariadb" {
   type = bool
   default = false
 }
+
+variable "expose_mongodb" {
+  type = bool
+  default = false
+}

@@ -75,3 +75,9 @@ output "mariadb-password" {
   value       = join("", module.mariadb[*].mariadb-root-password)
   sensitive   = true
 }
+
+output "mongodb-password" {
+  description = "MongoDB password"
+  value       = join("", module.mongodb[*].mongodb-root-password)
+  sensitive   = true
+}

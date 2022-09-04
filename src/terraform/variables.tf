@@ -498,3 +498,23 @@ variable "mssql_namespace" {
 variable "mssql_helm_version" {
   type = string
 }
+
+# mongodb
+variable "install_mongodb" {
+  type    = bool
+  default = false
+}
+
+variable "expose_mongodb" {
+  type    = bool
+  default = false
+}
+
+variable "mongodb_namespace" {
+  type    = string
+  default = "mongodb"
+}
+
+variable "mongodb_helm_version" {
+  type = string
+}
