@@ -38,6 +38,21 @@ additionalArguments:
 #%{ if expose_rabbitmq == true }
   - "--entryPoints.rabbitmq.address=:5672"
 #%{ endif }
+#%{ if expose_mysql == true }
+  - "--entryPoints.mysql.address=:3306"
+#%{ endif }
+#%{ if expose_postgres == true }
+  - "--entryPoints.postgres.address=:5432"
+#%{ endif }
+#%{ if expose_mssql == true }
+  - "--entryPoints.mssql.address=:1433"
+#%{ endif }
+#%{ if expose_mariadb == true }
+  - "--entryPoints.mariadb.address=:3307"
+#%{ endif }
+#%{ if expose_mongodb == true }
+  - "--entryPoints.mongodb.address=:27017"
+#%{ endif }
 
 
 entryPoints:
@@ -74,6 +89,26 @@ entryPoints:
 #%{ if expose_jaeger == true }
   jaeger:
     address: ":6831"
+#%{ endif }
+#%{ if expose_mysql == true }
+  mysql:
+    address: ":3306"
+#%{ endif }
+#%{ if expose_mariadb == true }
+  mariadb:
+    address: ":3307"
+#%{ endif }
+#%{ if expose_postgres == true }
+  postgres:
+    address: ":5432"
+#%{ endif }
+#%{ if expose_mssql == true }
+  mssql:
+    address: ":1433"
+#%{ endif }
+#%{ if expose_mongodb == true }
+  mongodb:
+    address: ":27017"
 #%{ endif }
 
 deployment:
@@ -149,6 +184,31 @@ ports:
 #%{ if expose_jaeger == true }
   jaeger:
     port: 6831
+    expose: true
+#%{ endif }
+#%{ if expose_mysql == true }
+  mysql:
+    port: 3306
+    expose: true
+#%{ endif }
+#%{ if expose_mariadb == true }
+  mariadb:
+    port: 3307
+    expose: true
+#%{ endif }
+#%{ if expose_postgres == true }
+  postgres:
+    port: 5432
+    expose: true
+#%{ endif }
+#%{ if expose_mssql == true }
+  mssql:
+    port: 1433
+    expose: true
+#%{ endif }
+#%{ if expose_mongodb == true }
+  mongodb:
+    port: 27017
     expose: true
 #%{ endif }
 

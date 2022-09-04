@@ -242,3 +242,58 @@ resource "null_resource" "flux_uninstall" {
     kubernetes_namespace.flux_system
   ]
 }
+
+resource "kubernetes_namespace" "mysql" {
+  count = var.install_mysql ? 1 : 0
+  metadata {
+    name = var.mysql_namespace
+    annotations = {
+      "kubernetes.io/description" = var.mysql_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
+
+resource "kubernetes_namespace" "postgres" {
+  count = var.install_postgres ? 1 : 0
+  metadata {
+    name = var.postgres_namespace
+    annotations = {
+      "kubernetes.io/description" = var.postgres_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
+
+resource "kubernetes_namespace" "mssql" {
+  count = var.install_mssql ? 1 : 0
+  metadata {
+    name = var.mssql_namespace
+    annotations = {
+      "kubernetes.io/description" = var.mssql_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
+
+resource "kubernetes_namespace" "mariadb" {
+  count = var.install_mariadb ? 1 : 0
+  metadata {
+    name = var.mariadb_namespace
+    annotations = {
+      "kubernetes.io/description" = var.mariadb_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
+
+resource "kubernetes_namespace" "mongodb" {
+  count = var.install_mongodb ? 1 : 0
+  metadata {
+    name = var.mongodb_namespace
+    annotations = {
+      "kubernetes.io/description" = var.mongodb_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}

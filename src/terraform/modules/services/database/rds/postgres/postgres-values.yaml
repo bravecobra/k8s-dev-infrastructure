@@ -1,0 +1,11 @@
+# https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
+
+global:
+  postgresql:
+    auth:
+      postgresPassword: ${postgresPassword}
+
+primary:
+  persistence:
+    storageClass: local-path
+    size: 1Gi

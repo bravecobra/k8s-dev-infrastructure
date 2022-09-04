@@ -216,7 +216,7 @@ variable "identityserver4admin_helm_version" {
   type = string
 }
 
-variable "mssql_helm_version" {
+variable "identityserver4admin_mssql_helm_version" {
   type = string
 }
 
@@ -417,4 +417,104 @@ variable "flux2_github_repository_visibility" {
 variable "flux2_github_repository_branch" {
   type    = string
   default = "master"
+}
+
+# MySQL
+variable "install_mysql" {
+  type    = bool
+  default = false
+}
+
+variable "expose_mysql" {
+  type    = bool
+  default = false
+}
+
+variable "mysql_namespace" {
+  type    = string
+  default = "mysql"
+}
+
+variable "mysql_helm_version" {
+  type = string
+}
+
+# Mariadb
+variable "install_mariadb" {
+  type    = bool
+  default = false
+}
+
+variable "expose_mariadb" {
+  type    = bool
+  default = false
+}
+
+variable "mariadb_namespace" {
+  type    = string
+  default = "mariadb"
+}
+
+variable "mariadb_helm_version" {
+  type = string
+}
+
+# Postgres
+variable "install_postgres" {
+  type    = bool
+  default = false
+}
+
+variable "expose_postgres" {
+  type    = bool
+  default = false
+}
+
+variable "postgres_namespace" {
+  type    = string
+  default = "postgres"
+}
+
+variable "postgres_helm_version" {
+  type = string
+}
+
+# mssql
+variable "install_mssql" {
+  type    = bool
+  default = false
+}
+
+variable "expose_mssql" {
+  type    = bool
+  default = false
+}
+
+variable "mssql_namespace" {
+  type    = string
+  default = "mssql"
+}
+
+variable "mssql_helm_version" {
+  type = string
+}
+
+# mongodb
+variable "install_mongodb" {
+  type    = bool
+  default = false
+}
+
+variable "expose_mongodb" {
+  type    = bool
+  default = false
+}
+
+variable "mongodb_namespace" {
+  type    = string
+  default = "mongodb"
+}
+
+variable "mongodb_helm_version" {
+  type = string
 }

@@ -1,11 +1,20 @@
+domain-name = "k8s.local"
+
+# k3s
 cluster-context-name = "k3d-devinfra"
-domain-name          = "k8s.local"
 loadbalancer-ip      = "172.19.0.6"
 node-ips = [
   "172.19.0.2",
   "172.19.0.3",
   "172.19.0.4"
 ]
+
+# Rancher desktop
+# cluster-context-name = "rancher-desktop"
+# loadbalancer-ip      = "172.25.179.43"
+# node-ips = [
+#   "172.25.179.43"
+# ]
 
 //-------------------------------------
 // Networking
@@ -80,9 +89,9 @@ install_vault      = false
 vault_helm_version = "0.20.0"
 
 //identityserver4-admin
-install_identityserver4admin      = false
-identityserver4admin_helm_version = "0.5.2"
-mssql_helm_version                = "0.1.0"
+install_identityserver4admin            = false
+identityserver4admin_helm_version       = "0.5.2"
+identityserver4admin_mssql_helm_version = "0.1.0"
 
 //keycloak
 install_keycloak             = false
@@ -116,11 +125,35 @@ localstack_helm_version = "0.4.1"
 ## Edit the .env file with a valid github username and token
 install_flux2                      = false
 flux2_namespace                    = "flux-system"
-flux2_github_repository_create     = true #use an existing (private) empty github repository
-flux2_github_repository_name       = "k8s-flux-example" # name of the github repo
+flux2_github_repository_create     = true                 #use an existing (private) empty github repository
+flux2_github_repository_name       = "k8s-flux-example"   # name of the github repo
 flux2_github_repository_path       = "clusters/k8s-local" # path in the github repo where the flux config will be stored
 flux2_github_repository_visibility = "private"
 
+//MySQL
+install_mysql      = false
+expose_mysql       = false
+mysql_helm_version = "9.3.1"
+
+//Mariadb
+install_mariadb      = false
+expose_mariadb       = false
+mariadb_helm_version = "11.2.2"
+
+//Postgres
+install_postgres      = false
+expose_postgres       = false
+postgres_helm_version = "11.8.1"
+
+//MSSQL
+install_mssql      = false
+expose_mssql       = false
+mssql_helm_version = "1.0.2"
+
+//MSSQL
+install_mongodb      = false
+expose_mongodb       = false
+mongodb_helm_version = "13.1.2"
 //-------------------------------------
 //Examples
 //-------------------------------------

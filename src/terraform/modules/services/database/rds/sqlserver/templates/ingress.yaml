@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: mssql
+  namespace: ${namespace}
+spec:
+  entryPoints:
+    - mssql
+  routes:
+  - kind: Rule
+    match: HostSNI(`*`)
+    services:
+    - name: mssqlserver-2022
+      port: 1433

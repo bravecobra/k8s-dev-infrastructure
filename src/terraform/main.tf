@@ -56,6 +56,11 @@ module "traefik" {
   expose_loki          = var.expose_loki
   expose_jaeger        = var.expose_jaeger
   expose_rabbitmq      = var.expose_rabbitmq
+  expose_mysql         = var.expose_mysql
+  expose_postgres      = var.expose_postgres
+  expose_mssql         = var.expose_mssql
+  expose_mariadb       = var.expose_mariadb
+  expose_mongodb       = var.expose_mongodb
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -193,7 +198,7 @@ module "identityserver4" {
   count              = var.install_identityserver4admin == true ? 1 : 0
   source             = "./modules/services/security/auth/identityserver4-admin"
   helm_release       = var.identityserver4admin_helm_version
-  mssql_helm_release = var.mssql_helm_version
+  mssql_helm_release = var.identityserver4admin_mssql_helm_version
   domain-name        = var.domain-name
   namespace          = kubernetes_namespace.identityserver4[0].metadata[0].name
   depends_on = [
@@ -328,5 +333,75 @@ module "flux2" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.flux_system
+  ]
+}
+
+module "mysql" {
+  count        = var.install_mysql == true ? 1 : 0
+  source       = "./modules/services/database/rds/mysql"
+  domain-name  = var.domain-name
+  helm_release = var.mysql_helm_version
+  expose_mysql = var.expose_mysql
+  namespace = kubernetes_namespace.mysql[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.mysql
+  ]
+}
+
+module "postgres" {
+  count           = var.install_postgres == true ? 1 : 0
+  source          = "./modules/services/database/rds/postgres"
+  domain-name     = var.domain-name
+  helm_release    = var.postgres_helm_version
+  expose_postgres = var.expose_postgres
+  namespace = kubernetes_namespace.postgres[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.postgres
+  ]
+}
+
+module "mssql" {
+  count        = var.install_mssql == true ? 1 : 0
+  source       = "./modules/services/database/rds/sqlserver"
+  domain-name  = var.domain-name
+  helm_release = var.mssql_helm_version
+  expose_mssql = var.expose_mssql
+  namespace = kubernetes_namespace.mssql[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.mssql
+  ]
+}
+
+module "mariadb" {
+  count        = var.install_mariadb == true ? 1 : 0
+  source       = "./modules/services/database/rds/mariadb"
+  domain-name  = var.domain-name
+  helm_release = var.mariadb_helm_version
+  expose_mariadb = var.expose_mariadb
+  namespace = kubernetes_namespace.mariadb[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.mariadb
+  ]
+}
+
+module "mongodb" {
+  count        = var.install_mongodb == true ? 1 : 0
+  source       = "./modules/services/database/nosql/mongodb"
+  domain-name  = var.domain-name
+  helm_release = var.mongodb_helm_version
+  expose_mongodb = var.expose_mongodb
+  namespace = kubernetes_namespace.mongodb[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.mongodb
   ]
 }

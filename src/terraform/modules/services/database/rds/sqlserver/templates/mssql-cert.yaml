@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mssql-cert
+  namespace: ${namespace}
+spec:
+  secretName: mssql-cert
+  issuerRef:
+    name: selfsigned-ca-issuer
+    kind: ClusterIssuer
+  commonName: mssql-cert
+  dnsNames:
+  - 'mssql.infrastructure.${domain-name}'
