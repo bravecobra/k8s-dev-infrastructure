@@ -130,9 +130,6 @@ resource "kind_cluster" "devinfra-cluster" {
     node {
       role = "worker"
     }
-    // node {
-    //   role = "worker"
-    // }
   }
   depends_on = [
     docker_network.kind_network
