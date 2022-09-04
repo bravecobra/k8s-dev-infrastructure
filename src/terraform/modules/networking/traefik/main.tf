@@ -14,6 +14,7 @@ resource "helm_release" "traefik" {
       domain-name = var.domain-name
       loadbalancer-ip = var.loadbalancer-ip
       node-ips = var.node-ips
+      cluster-type = var.cluster-type
       use_metrics = var.use_metrics
       use_tracing = var.use_tracing
       expose_azurite = var.expose_azurite

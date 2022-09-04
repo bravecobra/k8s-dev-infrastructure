@@ -22,6 +22,11 @@ variable "node-ips" {
   ]
 }
 
+variable "cluster-type"{
+  type = string
+  default = "k3s"
+}
+
 
 //metrics
 variable "install_metrics" {

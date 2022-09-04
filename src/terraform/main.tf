@@ -50,6 +50,7 @@ module "traefik" {
   node-ips             = var.node-ips
   use_metrics          = var.install_prometheus
   use_tracing          = var.install_jaeger
+  cluster-type         = var.cluster-type
   expose_azurite       = var.expose_azurite
   expose_seq           = var.expose_seq
   expose_opentelemetry = var.expose_opentelemetry
