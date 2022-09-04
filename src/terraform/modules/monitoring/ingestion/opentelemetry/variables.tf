@@ -5,11 +5,10 @@ variable "helm_release" {
 
 variable "namespace" {
     description = "Namespace"
-    default = "opentelemetry"
 }
 
 variable "expose_ingestion" {
-   description = "Namespace"
+   description = "Expose Ingestion"
    type = bool
    default = false
 }

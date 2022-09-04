@@ -8,7 +8,6 @@ variable "domain-name" {
 
 variable "namespace" {
   description = "Namespace"
-  default     = "rabbitmq"
 }
 
 variable "install_dashboards" {

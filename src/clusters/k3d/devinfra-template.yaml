@@ -75,6 +75,42 @@ ports:
       - loadbalancer
 #%{ endif }
 
+#%{ if expose_rds_mssql == true }
+  - port: 1433:1433 # same as `--port '1433:1433@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+#%{ if expose_rds_oracle == true }
+  - port: 1521:1521 # same as `--port '1521:1521@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+#%{ if expose_rds_mysql == true }
+  - port: 3306:3306 # same as `--port '3306:3306@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+#%{ if expose_rds_mysql == true }
+  - port: 3307:3307 # same as `--port '3306:3306@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+#%{ if expose_rds_postgres == true }
+  - port: 5432:5432 # same as `--port '5432:5432@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
+#%{ if expose_nosql_mongodb == true }
+  - port: 27017:27017 # same as `--port '27017:27017@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
 # env:
 #   - envVar: bar=baz # same as `--env 'bar=baz@server:0'`
 #     nodeFilters:

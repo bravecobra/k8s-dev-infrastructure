@@ -4,5 +4,9 @@ variable "domain-name" {
 
 variable "namespace" {
     description = "Namespace"
-    default = "azurite"
+}
+
+variable "azurite_version" {
+    description = "Version"
+    default = "latest"
 }

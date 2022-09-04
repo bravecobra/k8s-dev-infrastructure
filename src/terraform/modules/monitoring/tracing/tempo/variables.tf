@@ -5,5 +5,4 @@ variable "helm_release" {
 
 variable "namespace" {
   description = "Namespace"
-  default     = "tempo"
 }

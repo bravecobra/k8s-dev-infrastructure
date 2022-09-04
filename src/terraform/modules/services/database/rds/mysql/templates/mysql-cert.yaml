@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mysql-cert
+  namespace: ${namespace}
+spec:
+  secretName: mysql-cert
+  issuerRef:
+    name: selfsigned-ca-issuer
+    kind: ClusterIssuer
+  commonName: mysql-cert
+  dnsNames:
+  - 'mysql.infrastructure.${domain-name}'

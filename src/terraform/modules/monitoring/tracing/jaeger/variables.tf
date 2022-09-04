@@ -13,5 +13,4 @@ variable "install_dashboards" {
 
 variable "namespace" {
   description = "Namespace"
-  default     = "jaeger"
 }

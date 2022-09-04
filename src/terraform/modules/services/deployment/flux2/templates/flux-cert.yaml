@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: flux-cert
+  namespace: ${namespace}
+spec:
+  secretName: flux-cert
+  issuerRef:
+    name: selfsigned-ca-issuer
+    kind: ClusterIssuer
+  commonName: flux-cert
+  dnsNames:
+  - 'flux.infrastructure.${domain-name}'

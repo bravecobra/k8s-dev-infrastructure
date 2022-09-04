@@ -1,0 +1,11 @@
+# https://github.com/bitnami/charts/blob/master/bitnami/mongodb/values.yaml
+
+# clusterDomain: cluster.local
+architecture: "standalone"
+
+auth:
+  rootPassword: "${rootPassword}"
+
+persistence:
+  storageClass: "local-path"
+  size: 1Gi

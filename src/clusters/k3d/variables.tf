@@ -42,6 +42,16 @@ variable "k3d-cluster-ip" {
   type    = string
 }
 
+variable "k3d-network-subnet" {
+  default = "172.19.0.0/16"
+  type    = string
+}
+
+variable "k3d-network-gateway" {
+  default = "172.19.0.1"
+  type    = string
+}
+
 variable "expose_azurite" {
   type    = bool
   default = false
@@ -73,6 +83,36 @@ variable "expose_rabbitmq" {
 }
 
 variable "expose_loki" {
+  type    = bool
+  default = false
+}
+
+variable "expose_rds_mssql" {
+  type    = bool
+  default = false
+}
+
+variable "expose_rds_oracle" {
+  type    = bool
+  default = false
+}
+
+variable "expose_rds_mysql" {
+  type    = bool
+  default = false
+}
+
+variable "expose_rds_mariadb" {
+  type    = bool
+  default = false
+}
+
+variable "expose_rds_postgres" {
+  type    = bool
+  default = false
+}
+
+variable "expose_nosql_mongodb" {
   type    = bool
   default = false
 }

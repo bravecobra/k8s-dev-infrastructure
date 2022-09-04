@@ -1,0 +1,23 @@
+## https://github.com/localstack/helm-charts/blob/main/charts/localstack/values.yaml
+
+debug: ${debug}
+
+ingress:
+  enabled: true
+  annotations:
+    ingressClassName: traefik
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+  hosts:
+  - host: localstack.infrastructure.${domain-name}
+    paths:
+    - path: /
+      pathType: Prefix
+  tls:
+  - secretName: localstack-cert
+    hosts:
+     - localstack.infrastructure.${domain-name}
+
+service:
+  type: ClusterIP

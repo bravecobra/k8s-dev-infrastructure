@@ -82,3 +82,28 @@ variable "expose_rabbitmq" {
   type = bool
   default = false
 }
+
+variable "expose_mysql" {
+  type = bool
+  default = false
+}
+
+variable "expose_postgres" {
+  type = bool
+  default = false
+}
+
+variable "expose_mssql" {
+  type = bool
+  default = false
+}
+
+variable "expose_mariadb" {
+  type = bool
+  default = false
+}
+
+variable "expose_mongodb" {
+  type = bool
+  default = false
+}
