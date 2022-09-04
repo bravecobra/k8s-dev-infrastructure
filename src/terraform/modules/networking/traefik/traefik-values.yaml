@@ -47,6 +47,9 @@ additionalArguments:
 #%{ if expose_mssql == true }
   - "--entryPoints.mssql.address=:1433"
 #%{ endif }
+#%{ if expose_mariadb == true }
+  - "--entryPoints.mariadb.address=:3307"
+#%{ endif }
 
 
 entryPoints:
@@ -87,6 +90,10 @@ entryPoints:
 #%{ if expose_mysql == true }
   mysql:
     address: ":3306"
+#%{ endif }
+#%{ if expose_mariadb == true }
+  mariadb:
+    address: ":3307"
 #%{ endif }
 #%{ if expose_postgres == true }
   postgres:
@@ -175,6 +182,11 @@ ports:
 #%{ if expose_mysql == true }
   mysql:
     port: 3306
+    expose: true
+#%{ endif }
+#%{ if expose_mariadb == true }
+  mariadb:
+    port: 3307
     expose: true
 #%{ endif }
 #%{ if expose_postgres == true }

@@ -39,6 +39,7 @@ resource "local_file" "cluster-config" {
     expose_rds_mssql     = var.expose_rds_mssql,
     expose_rds_oracle    = var.expose_rds_oracle,
     expose_rds_mysql     = var.expose_rds_mysql,
+    expose_rds_mariadb   = var.expose_rds_mariadb,
     expose_rds_postgres  = var.expose_rds_postgres,
     expose_nosql_mongodb = var.expose_nosql_mongodb,
   })

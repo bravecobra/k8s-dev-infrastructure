@@ -1,0 +1,9 @@
+# https://github.com/bitnami/charts/blob/master/bitnami/mariadb/values.yaml
+
+auth:
+  rootPassword: "${rootPassword}"
+
+primary:
+  persistence:
+    storageClass: "local-path"
+    size: 1Gi

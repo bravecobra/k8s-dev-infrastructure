@@ -97,3 +97,8 @@ variable "expose_mssql" {
   type = bool
   default = false
 }
+
+variable "expose_mariadb" {
+  type = bool
+  default = false
+}

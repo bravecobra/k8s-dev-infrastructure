@@ -135,6 +135,11 @@ install_mysql      = false
 expose_mysql       = false
 mysql_helm_version = "9.3.1"
 
+//Mariadb
+install_mariadb      = false
+expose_mariadb       = false
+mariadb_helm_version = "11.2.2"
+
 //Postgres
 install_postgres      = false
 expose_postgres       = false

@@ -275,3 +275,14 @@ resource "kubernetes_namespace" "mssql" {
     }
   }
 }
+
+resource "kubernetes_namespace" "mariadb" {
+  count = var.install_mariadb ? 1 : 0
+  metadata {
+    name = var.mariadb_namespace
+    annotations = {
+      "kubernetes.io/description" = var.mariadb_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}

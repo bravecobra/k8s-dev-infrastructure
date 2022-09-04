@@ -102,6 +102,11 @@ variable "expose_rds_mysql" {
   default = false
 }
 
+variable "expose_rds_mariadb" {
+  type    = bool
+  default = false
+}
+
 variable "expose_rds_postgres" {
   type    = bool
   default = false

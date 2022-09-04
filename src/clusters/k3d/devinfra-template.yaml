@@ -93,6 +93,12 @@ ports:
       - loadbalancer
 #%{ endif }
 
+#%{ if expose_rds_mysql == true }
+  - port: 3307:3307 # same as `--port '3306:3306@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
 #%{ if expose_rds_postgres == true }
   - port: 5432:5432 # same as `--port '5432:5432@loadbalancer'`
     nodeFilters:

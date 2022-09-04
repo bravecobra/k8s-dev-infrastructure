@@ -439,6 +439,26 @@ variable "mysql_helm_version" {
   type = string
 }
 
+# Mariadb
+variable "install_mariadb" {
+  type    = bool
+  default = false
+}
+
+variable "expose_mariadb" {
+  type    = bool
+  default = false
+}
+
+variable "mariadb_namespace" {
+  type    = string
+  default = "mariadb"
+}
+
+variable "mariadb_helm_version" {
+  type = string
+}
+
 # Postgres
 variable "install_postgres" {
   type    = bool

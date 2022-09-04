@@ -20,5 +20,6 @@ expose_rabbitmq      = true # amqp
 expose_rds_mssql     = true
 expose_rds_oracle    = true
 expose_rds_mysql     = true
+expose_rds_mariadb   = true
 expose_rds_postgres  = true
 expose_nosql_mongodb = true

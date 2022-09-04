@@ -59,6 +59,7 @@ module "traefik" {
   expose_mysql         = var.expose_mysql
   expose_postgres      = var.expose_postgres
   expose_mssql         = var.expose_mssql
+  expose_mariadb       = var.expose_mariadb
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -373,5 +374,19 @@ module "mssql" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.mssql
+  ]
+}
+
+module "mariadb" {
+  count        = var.install_mariadb == true ? 1 : 0
+  source       = "./modules/services/database/rds/mariadb"
+  domain-name  = var.domain-name
+  helm_release = var.mariadb_helm_version
+  expose_mariadb = var.expose_mariadb
+  namespace = kubernetes_namespace.mariadb[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.mariadb
   ]
 }

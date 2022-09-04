@@ -69,3 +69,9 @@ output "mssql-password" {
   value       = join("", module.mssql[*].mssql-root-password)
   sensitive   = true
 }
+
+output "mariadb-password" {
+  description = "MariaDB password"
+  value       = join("", module.mariadb[*].mariadb-root-password)
+  sensitive   = true
+}
