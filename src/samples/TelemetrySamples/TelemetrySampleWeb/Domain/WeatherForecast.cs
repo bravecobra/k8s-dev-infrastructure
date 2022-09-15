@@ -1,4 +1,4 @@
-namespace TelemetrySampleWeb
+namespace TelemetrySampleWeb.Domain
 {
     public class WeatherForecast
     {
@@ -6,7 +6,7 @@ namespace TelemetrySampleWeb
 
         public int TemperatureC { get; set; }
 
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        private int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 
         public string? Summary { get; set; }
 

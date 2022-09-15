@@ -126,8 +126,6 @@ namespace TelemetrySampleWeb.Configuration
                         //.WriteTo.Console()
                         // .WriteTo.GrafanaLoki(builder.Configuration.GetValue<string>("Loki:Endpoint"), 
                         //     textFormatter: new LokiJsonTextFormatter(),
-                        //     filtrationMode:LokiLabelFiltrationMode.Include,
-                        //     filtrationLabels:new List<string>{"app"}
                         // )
                         .Enrich.FromLogContext()
                         .Enrich.With(new PropertyEnricher("app", Assembly.GetEntryAssembly()?.GetName().Name!))

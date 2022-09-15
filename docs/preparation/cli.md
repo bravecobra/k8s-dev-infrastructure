@@ -23,13 +23,13 @@ Install/download the CLIs.
     sudo apt-get install -y apt-transport-https ca-certificates curl wget libnss3-tools cl-base64
 
     # kind (if needed)
-    curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+    curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.15.0/kind-linux-amd64
     chmod +x ./kind
     mv ./kind /usr/local/bin/kind
 
     # mkcert (if needed)
-    wget -O mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
-    sudo mv mkcert-v1.4.3-linux-amd64 /usr/local/bin/mkcert
+    wget -O mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-linux-amd64
+    sudo mv mkcert-v1.4.4-linux-amd64 /usr/local/bin/mkcert
     sudo chmod +x /usr/local/bin/mkcert
 
     # kubctl
