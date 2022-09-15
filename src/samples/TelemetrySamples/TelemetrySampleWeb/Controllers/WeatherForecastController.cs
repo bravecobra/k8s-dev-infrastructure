@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using Microsoft.AspNetCore.Mvc;
 using TelemetrySampleWeb.Configuration;
+using TelemetrySampleWeb.Domain;
 
 namespace TelemetrySampleWeb.Controllers
 {
