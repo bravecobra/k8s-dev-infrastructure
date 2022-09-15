@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kafka-cert
+  namespace: ${namespace}
+spec:
+  secretName: kafka-cert
+  issuerRef:
+    name: selfsigned-ca-issuer
+    kind: ClusterIssuer
+  commonName: kafka-cert
+  dnsNames:
+  - 'kafka.infrastructure.${domain-name}'

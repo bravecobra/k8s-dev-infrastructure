@@ -82,6 +82,11 @@ variable "expose_rabbitmq" {
   default = false
 }
 
+variable "expose_kafka" {
+  type    = bool
+  default = false
+}
+
 variable "expose_loki" {
   type    = bool
   default = false

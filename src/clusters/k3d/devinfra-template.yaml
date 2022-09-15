@@ -117,6 +117,15 @@ ports:
       - loadbalancer
 #%{ endif }
 
+#%{ if expose_kafka == true }
+  - port: 9092:9092 # same as `--port '9092:9092@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+  - port: 2181:2181 # same as `--port '2181:2181@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
 # env:
 #   - envVar: bar=baz # same as `--env 'bar=baz@server:0'`
 #     nodeFilters:

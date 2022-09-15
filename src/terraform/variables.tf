@@ -379,6 +379,28 @@ variable "rabbitmq_namespace" {
 variable "rabbitmq_helm_version" {
   type = string
 }
+
+
+# kafka
+variable "install_kafka" {
+  type    = bool
+  default = false
+}
+
+variable "expose_kafka" {
+  type    = bool
+  default = false
+}
+
+variable "kafka_namespace" {
+  type    = string
+  default = "kafka"
+}
+
+variable "kafka_helm_version" {
+  type = string
+}
+
 # localstack
 variable "install_localstack" {
   type    = bool

@@ -319,3 +319,13 @@ resource "kubernetes_namespace" "redis" {
     }
   }
 }
+resource "kubernetes_namespace" "kafka" {
+  count = var.install_kafka ? 1 : 0
+  metadata {
+    name = var.kafka_namespace
+    annotations = {
+      "kubernetes.io/description" = var.kafka_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
