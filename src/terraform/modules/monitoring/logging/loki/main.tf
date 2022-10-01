@@ -10,6 +10,7 @@ resource "helm_release" "loki" {
 }
 
 resource "helm_release" "promtail" {
+  count     = var.install_promtail ? 1 : 0
   name       = "promtail"
   chart      = "promtail"
   namespace  = var.namespace
@@ -21,7 +22,7 @@ resource "helm_release" "promtail" {
 }
 
 resource "kubectl_manifest" "promtail_dashboard" {
-  count     = var.install_dashboards ? 1 : 0
+  count     = var.install_dashboards && var.install_promtail ? 1 : 0
   yaml_body = file("${path.module}/dashboards/loki/loki-promtail-dashboard.yaml")
   depends_on = [
     helm_release.promtail

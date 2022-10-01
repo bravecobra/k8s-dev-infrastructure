@@ -101,6 +101,7 @@ module "loki" {
   helm_release_loki     = var.loki_helm_version
   helm_release_promtail = var.promtail_helm_version
   install_dashboards    = var.install_prometheus
+  install_promtail      = var.install_promtail
   tracing_enabled       = var.install_jaeger
   expose_ingestion      = var.expose_loki
   namespace             = kubernetes_namespace.loki[0].metadata[0].name
