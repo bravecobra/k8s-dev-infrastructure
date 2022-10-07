@@ -149,6 +149,10 @@ variable "install_loki" {
 variable "loki_helm_version" {
   type = string
 }
+variable "install_promtail" {
+  type    = bool
+  default = false
+}
 variable "promtail_helm_version" {
   type = string
 }

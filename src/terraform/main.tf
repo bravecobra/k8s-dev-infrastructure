@@ -87,6 +87,8 @@ module "opentelemetry" {
   helm_release     = var.opentelemetry_helm_version
   expose_ingestion = var.expose_opentelemetry
   namespace        = kubernetes_namespace.opentelemetry[0].metadata[0].name
+  install_jaeger   = var.install_jaeger
+  install_loki     = var.install_loki
   # domain-name  = var.domain-name
   # install_dashboards    = var.install_prometheus
   depends_on = [
@@ -101,6 +103,7 @@ module "loki" {
   helm_release_loki     = var.loki_helm_version
   helm_release_promtail = var.promtail_helm_version
   install_dashboards    = var.install_prometheus
+  install_promtail      = var.install_promtail
   tracing_enabled       = var.install_jaeger
   expose_ingestion      = var.expose_loki
   namespace             = kubernetes_namespace.loki[0].metadata[0].name

@@ -12,6 +12,10 @@ variable "install_dashboards" {
   type = bool
 }
 
+variable "install_promtail" {
+  type = bool
+}
+
 variable "namespace" {
   description = "Namespace"
 }

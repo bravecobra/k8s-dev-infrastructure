@@ -37,6 +37,9 @@ On Linux edit your `/etc/hosts` file as root.
 127.0.0.1 keycloak.k8s.local auth.k8s.local
 127.0.0.1 etcd.infrastructure.k8s.local
 127.0.0.1 minio.infrastructure.k8s.local console.minio.infrastructure.k8s.local
+127.0.0.1 rabbitmq.infrastructure.k8s.local
+127.0.0.1 localstack.infrastructure.k8s.local
+127.0.0.1 flux.infrastructure.k8s.local
 ```
 
 ## Installer

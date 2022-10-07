@@ -188,8 +188,8 @@ grafana:
       - secretName: prometheus-cert
         hosts:
         - grafana.infrastructure.${domain-name}
-#%{ if metrics_loki == true }
   additionalDataSources:
+#%{ if metrics_loki == true }
     - name: Loki
       access: proxy
       orgId: 1
