@@ -1,5 +1,7 @@
 # Override of: https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
 
+auth_enabled: false
+
 podAnnotations:
   "linkerd.io/inject": "enabled"
 
@@ -8,7 +10,33 @@ podAnnotations:
 tracing:
   jaegerAgentHost: jaeger-agent.jaeger.svc.cluster.local
 #%{ endif}
-serviceMonitor:
-  enabled: true
-  additionalLabels:
-    release: "prometheus"
+monitoring:
+  selfMonitoring:
+    enabled: false
+    lokiCanary:
+      enabled: false
+  serviceMonitor:
+    enabled: false
+    additionalLabels:
+      release: "prometheus"
+
+loki:
+  auth_enabled: false
+  commonConfig:
+    replication_factor: 1
+    ring:
+      instance_addr: 127.0.0.1
+      kvstore:
+        store: inmemory
+  storage:
+    type: 'filesystem'
+  rulerConfig:
+    storage:
+      type: local
+
+# singleBinary:
+#   resources:
+#     requests:
+#       memory: "6Gi"
+#     limits:
+#       memory: "8Gi"
