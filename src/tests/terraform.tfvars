@@ -1,10 +1,10 @@
 cluster-context-name = "k3d-devinfra"
 domain-name          = "k8s.local"
-loadbalancer-ip           = "172.19.0.6"
+loadbalancer-ip      = "172.19.0.6"
 node-ips = [
-    "172.19.0.2",
-    "172.19.0.3",
-    "172.19.0.4"
+  "172.19.0.2",
+  "172.19.0.3",
+  "172.19.0.4"
 ]
 
 //metrics
@@ -55,8 +55,8 @@ identityserver4admin_helm_version = "0.5.2"
 mssql_helm_version                = "0.1.0"
 
 //seq
-install_seq = true
-seq_helm_version = "2022.1.7311-pre"
+install_seq         = true
+seq_helm_version    = "2022.1.7311-pre"
 fluent_helm_version = "0.19.21"
 
 //keycloak
