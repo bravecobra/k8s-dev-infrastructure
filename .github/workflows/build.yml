@@ -13,6 +13,13 @@ jobs:
         with:
           path: src
 
+      - name: Create temp files for terraform validation
+        run: |
+          mkdir src/certs/
+          touch src/certs/cacerts.crt
+          touch src/certs/cacerts.key
+          touch src/terraform/.env
+
       - name: terraform validate src-clusters-k3d
         uses: dflook/terraform-validate@v1
         with:
@@ -22,7 +29,6 @@ jobs:
         uses: dflook/terraform-validate@v1
         with:
           path: src/clusters/kind
-
 
       - name: terraform validate src-terraform
         uses: dflook/terraform-validate@v1
