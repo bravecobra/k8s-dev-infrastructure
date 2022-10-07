@@ -18,6 +18,8 @@ jobs:
           touch src/certs/cacerts.crt
           touch src/certs/cacerts.key
           touch src/terraform/.env
+          echo GITHUB_OWNER=somebody >> src/terraform/.env
+          echo GITHUB_TOKEN=sometoken >> src/terraform/.env
 
       - name: terraform validate src-clusters-k3d
         uses: dflook/terraform-validate@v1
