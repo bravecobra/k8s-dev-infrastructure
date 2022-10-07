@@ -13,8 +13,13 @@ resource "helm_release" "opentelemetry" {
 
 resource "kubectl_manifest" "collector" {
   yaml_body = templatefile("${path.module}/templates/collector.yaml", {
-    namespace = var.namespace
-    JAEGER_OTLP_ENDPOINT = "http://jaeger-collector.jaeger.svc.cluster.local:14267"
+    namespace = var.namespace,
+    configuration = indent(4, templatefile("${path.module}/templates/collector-config.yaml", {
+      install_jaeger = var.install_jaeger
+      jaeger_endpoint = "jaeger-collector.jaeger.svc.cluster.local:14250"
+      install_loki = var.install_loki
+      loki_endpoint = "http://loki.loki.svc.cluster.local:3100/loki/api/v1/push"
+    }))
   })
   depends_on = [
     helm_release.opentelemetry

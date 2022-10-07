@@ -4,11 +4,24 @@ variable "helm_release" {
 }
 
 variable "namespace" {
-    description = "Namespace"
+  description = "Namespace"
 }
 
 variable "expose_ingestion" {
-   description = "Expose Ingestion"
-   type = bool
-   default = false
+  description = "Expose Ingestion"
+  type = bool
+  default = false
+}
+
+
+variable "install_jaeger" {
+  description = "Install jaeger"
+  type = bool
+  default = false
+}
+
+variable "install_loki" {
+  description = "Install Loki"
+  type = bool
+  default = false
 }

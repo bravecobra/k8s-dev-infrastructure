@@ -1,0 +1,80 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: "0.0.0.0:4317"
+      http:
+        endpoint: "0.0.0.0:4318"
+processors:
+  batch:
+extensions:
+  health_check:
+  pprof:
+  zpages:
+exporters:
+  logging:
+    loglevel: debug
+#%{ if install_jaeger == true }
+  jaeger:
+    endpoint: "${jaeger_endpoint}"
+    tls:
+      insecure: true
+#%{ endif }
+  otlp:
+    endpoint: "tempo.tempo.svc.cluster.local:4317"
+    tls:
+      insecure: true
+#%{ if install_loki == true }
+  loki:
+    endpoint: "${loki_endpoint}"
+    format: json
+    labels:
+      attributes:
+        source: ""
+        severity: ""
+        "[Scope.1]:ConnectionId": "connectionId"
+        "[Scope.2]:RequestId": "requestId"
+        "[Scope.2]:RequestPath": "requestPath"
+        "[Scope.3]:ActionId": "actionId"
+        "[Scope.3]:ActionName": "actionName"
+        "[Scope.4]:Id": "id"
+        dotnet.ilogger.category: "dotnet_ilogger_category"
+      resource:
+        k8s.cluster.name: "k8s_cluster_name"
+        container.name: "container_name"
+        host.name: "hostname"
+        http.status_code: "http_status_code"
+        service.name: "app"
+        service.instance.id: "instance_id"
+        service.version: "service_version"
+        telemetry.sdk.language: "telemetry_sdk_language"
+        telemetry.sdk.name: "telemetry_sdk_name"
+        telemetry.sdk.version: "telemetry_sdk_version"
+#%{ endif }
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    namespace: "external"
+service:
+  extensions: [health_check,pprof,zpages]
+  telemetry:
+    logs:
+      level: "debug"
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+#%{ if install_jaeger == true }
+      exporters: [otlp,jaeger]
+#%{ else }
+      exporters: [otlp]
+#%{ endif }
+    metrics:
+      receivers: [otlp]
+      exporters: [prometheus]
+    logs:
+      receivers: [otlp]
+#%{ if install_loki == true }
+      exporters: [loki,logging]
+#%{ else }
+      exporters: [logging]
+#%{ endif }

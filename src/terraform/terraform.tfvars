@@ -46,7 +46,7 @@ linkerd_helm_version = "2.11.4"
 
 //traefik
 install_traefik      = true
-traefik_helm_version = "10.24.0"
+traefik_helm_version = "10.26.1"
 
 //-------------------------------------
 // Monitoring
@@ -66,22 +66,24 @@ jaeger_helm_version = "2.23.0"
 //opentelemetry (operator)
 install_opentelemetry      = false
 expose_opentelemetry       = false
-opentelemetry_helm_version = "0.10.1"
+opentelemetry_helm_version = "0.13.0"
 
 //loki
 install_loki          = false
 expose_loki           = false
-loki_helm_version     = "2.13.3"
+install_promtail      = true
+install_promtail      = false
+loki_helm_version     = "2.16.0"
 promtail_helm_version = "6.2.2"
 
 //tempo
 install_tempo      = false
-tempo_helm_version = "0.15.7"
+tempo_helm_version = "0.16.2"
 
 //prometheus - grafana
 install_prometheus      = false
 install_grafana         = false
-prometheus_helm_version = "39.4.0"
+prometheus_helm_version = "40.1.2"
 
 //-------------------------------------
 //Saas
