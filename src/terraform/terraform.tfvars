@@ -72,8 +72,6 @@ opentelemetry_helm_version = "0.13.0"
 install_loki          = false
 expose_loki           = false
 install_promtail      = false
-loki_helm_version     = "2.16.0"
-promtail_helm_version = "6.2.2"
 loki_helm_version     = "3.2.1"
 promtail_helm_version = "6.4.0"
 
