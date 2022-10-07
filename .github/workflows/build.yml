@@ -13,7 +13,18 @@ jobs:
         with:
           path: src
 
-      - name: terraform validate
+      - name: terraform validate src-clusters-k3d
         uses: dflook/terraform-validate@v1
         with:
-          path: src
+          path: src/clusters/k3d
+
+      - name: terraform validate src-clusters-kind
+        uses: dflook/terraform-validate@v1
+        with:
+          path: src/clusters/kind
+
+
+      - name: terraform validate src-terraform
+        uses: dflook/terraform-validate@v1
+        with:
+          path: src/terraform
