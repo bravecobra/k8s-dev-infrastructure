@@ -20,13 +20,13 @@ resource "helm_release" "identityserver4" {
   wait          = true
   wait_for_jobs = true
   values = [
-    templatefile("${path.module}/identityserver4admin-values.yaml", {domain-name = var.domain-name})
+    templatefile("${path.module}/identityserver4admin-values.yaml", { domain-name = var.domain-name })
   ]
   depends_on = [
     helm_release.mssql
-]
+  ]
 }
 
 resource "kubectl_manifest" "identity-cert" {
-  yaml_body = templatefile("${path.module}/templates/identity-cert.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/identity-cert.yaml", { domain-name = var.domain-name })
 }

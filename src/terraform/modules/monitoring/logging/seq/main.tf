@@ -1,7 +1,7 @@
 resource "kubectl_manifest" "seq-cert" {
   yaml_body = templatefile("${path.module}/templates/seq-cert.yaml", {
     domain-name = var.domain-name
-    namespace = var.namespace
+    namespace   = var.namespace
   })
 }
 
@@ -13,7 +13,7 @@ resource "helm_release" "seq" {
   namespace  = var.namespace
   values = [
     templatefile("${path.module}/seq-values.yaml", {
-        domain-name = var.domain-name
+      domain-name = var.domain-name
     }),
   ]
 }
@@ -26,10 +26,10 @@ resource "helm_release" "fluent" {
   namespace  = var.namespace
   values = [
     templatefile("${path.module}/fluent-values.yaml", {
-        namespace = var.namespace,
-        FLUENT_GELF_HOST = "seq.${var.namespace}.svc.cluster.local",
-        FLUENT_GELF_PORT = "12201",
-        FLUENT_GELF_PROTOCOL = "tcp",
+      namespace            = var.namespace,
+      FLUENT_GELF_HOST     = "seq.${var.namespace}.svc.cluster.local",
+      FLUENT_GELF_PORT     = "12201",
+      FLUENT_GELF_PROTOCOL = "tcp",
     }),
   ]
   depends_on = [
@@ -38,12 +38,12 @@ resource "helm_release" "fluent" {
 }
 
 resource "kubectl_manifest" "seq_ingestion" {
-  count       = var.expose_ingestion ? 1 : 0
+  count = var.expose_ingestion ? 1 : 0
   yaml_body = templatefile("${path.module}/templates/seq-ingestion-route.yaml", {
-      namespace = var.namespace,
-      domain-name = var.domain-name
+    namespace   = var.namespace,
+    domain-name = var.domain-name
   })
   depends_on = [
-      helm_release.seq
+    helm_release.seq
   ]
 }

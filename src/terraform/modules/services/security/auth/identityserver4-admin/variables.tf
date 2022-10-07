@@ -9,7 +9,7 @@ variable "mssql_helm_release" {
 }
 
 variable "domain-name" {
-  type    = string
+  type = string
 }
 
 variable "namespace" {

@@ -3,10 +3,10 @@ variable "domain-name" {
 }
 
 variable "namespace" {
-    description = "Namespace"
+  description = "Namespace"
 }
 
 variable "azurite_version" {
-    description = "Version"
-    default = "latest"
+  description = "Version"
+  default     = "latest"
 }

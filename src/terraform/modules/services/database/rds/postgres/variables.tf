@@ -1,5 +1,5 @@
 variable "helm_release" {
-  type    = string
+  type = string
 }
 
 variable "domain-name" {
@@ -11,6 +11,6 @@ variable "namespace" {
 }
 
 variable "expose_postgres" {
-  type = bool
+  type    = bool
   default = false
 }

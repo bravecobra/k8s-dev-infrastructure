@@ -5,7 +5,7 @@ resource "helm_release" "argocd" {
   version    = var.helm_release
   namespace  = var.namespace
   values = [
-    templatefile("${path.module}/argo-values.yaml", {domain-name = var.domain-name}),
+    templatefile("${path.module}/argo-values.yaml", { domain-name = var.domain-name }),
   ]
 }
 

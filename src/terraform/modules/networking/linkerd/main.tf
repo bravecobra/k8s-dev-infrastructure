@@ -74,7 +74,7 @@ resource "helm_release" "linkerd-viz" {
   wait_for_jobs = true
   values = [
     templatefile("${path.module}/linkerd-viz-values.yaml", {
-      tracing = var.tracing_enabled,
+      tracing          = var.tracing_enabled,
       metrics_external = var.metrics_external
     })
   ]
@@ -94,13 +94,13 @@ resource "kubectl_manifest" "linkerd-viz-ingress" {
   depends_on = [
     helm_release.linkerd-viz
   ]
-  yaml_body = templatefile("${path.module}/templates/ingress.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/ingress.yaml", { domain-name = var.domain-name })
 }
 
 # TODO only install jaeger in install_jaeger is enabled
 
 resource "helm_release" "linkerd-jaeger" {
-  count = var.tracing_enabled == true && (var.tracing_controlplane || var.tracing_dataplane) ? 1 : 0
+  count         = var.tracing_enabled == true && (var.tracing_controlplane || var.tracing_dataplane) ? 1 : 0
   name          = "linkerd-jaeger"
   chart         = "linkerd-jaeger"
   namespace     = var.namespace

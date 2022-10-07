@@ -4,7 +4,7 @@ variable "loadbalancer-ip" {
 }
 
 variable "node-ips" {
-  type    = list
+  type = list(any)
   default = [
     "172.19.0.2"
   ]
@@ -29,37 +29,37 @@ variable "namespace" {
 }
 
 variable "use_metrics" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "use_tracing" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "expose_azurite" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "expose_seq" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "expose_opentelemetry" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "expose_loki" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "expose_jaeger" {
-  type = bool
+  type    = bool
   default = false
 }
 
@@ -79,32 +79,32 @@ variable "expose_jaeger" {
 # }
 
 variable "expose_rabbitmq" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "expose_mysql" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "expose_postgres" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "expose_mssql" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "expose_mariadb" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "expose_mongodb" {
-  type = bool
+  type    = bool
   default = false
 }
 

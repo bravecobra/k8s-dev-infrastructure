@@ -1,5 +1,5 @@
 variable "helm_release" {
-  type    = string
+  type = string
 }
 
 variable "domain-name" {
@@ -11,7 +11,7 @@ variable "namespace" {
 }
 
 variable "install_dashboards" {
-  type = bool
+  type        = bool
   description = "Installs grafana dashboard"
   default     = false
 }
