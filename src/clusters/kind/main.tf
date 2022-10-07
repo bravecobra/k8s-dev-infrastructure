@@ -1,24 +1,24 @@
 resource "docker_network" "kind_network" {
-  name = "kind"
+  name   = "kind"
   driver = "bridge"
-  ipv6 = false
+  ipv6   = false
   ipam_config {
-      subnet = "fc00:f853:ccd:e793::/64"
+    subnet = "fc00:f853:ccd:e793::/64"
   }
   ipam_config {
-      subnet = var.kind-network-subnet
-      gateway = var.kind-network-gateway
+    subnet  = var.kind-network-subnet
+    gateway = var.kind-network-gateway
   }
   options = {
-    "com.docker.network.bridge.enable_ip_masquerade "= "true"
-    "com.docker.network.driver.mtu" = "1500"
+    "com.docker.network.bridge.enable_ip_masquerade " = "true"
+    "com.docker.network.driver.mtu"                   = "1500"
   }
 }
 
 resource "kind_cluster" "devinfra-cluster" {
   name           = var.cluster-name
   wait_for_ready = true
-  node_image = "kindest/node:${var.kind_version}"
+  node_image     = "kindest/node:${var.kind_version}"
   kind_config {
     kind        = "Cluster"
     api_version = "kind.x-k8s.io/v1alpha4"
@@ -145,7 +145,7 @@ data "docker_registry_image" "registry" {
 }
 
 resource "docker_image" "registry" {
-  count = var.install_private_registry ? 1 : 0
+  count         = var.install_private_registry ? 1 : 0
   name          = data.docker_registry_image.registry.name
   pull_triggers = [data.docker_registry_image.registry.sha256_digest]
 }
@@ -184,7 +184,7 @@ resource "kubectl_manifest" "config-registry" {
 }
 
 data "environment_variables" "wsl" {
-    filter = "WSL_DISTRO_NAME"
+  filter = "WSL_DISTRO_NAME"
 }
 
 resource "null_resource" "backup-kind-config" {
@@ -198,7 +198,7 @@ resource "null_resource" "backup-kind-config" {
 }
 
 resource "null_resource" "copy-kind-config" {
-    count = length(data.environment_variables.wsl.items) != 0 ? 1 : 0
+  count = length(data.environment_variables.wsl.items) != 0 ? 1 : 0
   provisioner "local-exec" {
     command = "whoami | xargs -i cp ~/.kube/config /mnt/c/users/'{}'/.kube/config"
   }

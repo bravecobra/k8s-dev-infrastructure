@@ -6,9 +6,9 @@ terraform {
       version = ">= 0.0.13"
     }
     docker = {
-      source  = "kreuzwerker/docker"
-      version = "~> 2.15.0"
-      configuration_aliases = [ docker.docker-windows ]
+      source                = "kreuzwerker/docker"
+      version               = "~> 2.15.0"
+      configuration_aliases = [docker.docker-windows]
     }
     environment = {
       source  = "EppO/environment"
