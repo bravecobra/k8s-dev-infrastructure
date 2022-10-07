@@ -9,26 +9,25 @@ server:
   affinity: ""
   dev:
     enabled: true
-    # Set VAULT_DEV_ROOT_TOKEN_ID value
-    devRootToken: ${vaultDevRootToken}
+    devRootToken: "${vaultDevRootToken}"
   ingress:
-      enabled: true
-      hosts:
-      - host: vault.infrastructure.${domain-name}
-        paths:
-          - /
-        passHostHeader: true
-        backend:
-          serviceName: vault-ui
-          servicePort: 8200
-      tls:
-        - hosts:
-          - vault.infrastructure.${domain-name}
-          secretName: vault-cert
-      annotations: |
-        traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-        traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
-        linkerd.io/inject: enabled
+    enabled: true
+    hosts:
+    - host: vault.infrastructure.${domain-name}
+      paths:
+        - /
+      passHostHeader: true
+      backend:
+        serviceName: vault-ui
+        servicePort: 8200
+    tls:
+      - hosts:
+        - vault.infrastructure.${domain-name}
+        secretName: vault-cert
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+      linkerd.io/inject: enabled
   # ha:
   #   enabled: true
   #   replicas: 1

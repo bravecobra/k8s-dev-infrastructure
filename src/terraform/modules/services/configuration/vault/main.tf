@@ -8,7 +8,7 @@ resource "kubectl_manifest" "vault-cert" {
 resource "random_password" "init_password" {
   length           = 8
   special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  override_special = "%&*()-_=+[]{}<>:?"
 }
 
 resource "helm_release" "vault" {

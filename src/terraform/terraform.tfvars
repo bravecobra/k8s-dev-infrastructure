@@ -34,7 +34,7 @@ node-ips = [
 
 //metrics
 install_metrics      = false
-metrics_helm_version = "6.0.10"
+metrics_helm_version = "6.2.0"
 
 //cert-manager
 install_cert_manager      = true
@@ -42,7 +42,7 @@ cert_manager_helm_version = "v1.9.1"
 
 //linkerd
 install_linkerd      = false
-linkerd_helm_version = "2.11.4"
+linkerd_helm_version = "2.11.5"
 
 //traefik
 install_traefik      = true
@@ -56,7 +56,7 @@ traefik_helm_version = "10.26.1"
 install_seq         = false
 expose_seq          = false
 seq_helm_version    = "2022.1.7929"
-fluent_helm_version = "0.20.4"
+fluent_helm_version = "0.20.8"
 
 //jaeger
 install_jaeger      = false
@@ -71,7 +71,6 @@ opentelemetry_helm_version = "0.13.0"
 //loki
 install_loki          = false
 expose_loki           = false
-install_promtail      = true
 install_promtail      = false
 loki_helm_version     = "2.16.0"
 promtail_helm_version = "6.2.2"
@@ -91,16 +90,16 @@ prometheus_helm_version = "40.1.2"
 
 //argocd
 install_argocd      = false
-argocd_helm_version = "4.10.5"
+argocd_helm_version = "5.5.6"
 
 //elasticsearch
 install_elasticsearch      = false
 install_kibana             = false
-elasticsearch_helm_version = "2.3.0"
+elasticsearch_helm_version = "2.4.0"
 
 //vault
 install_vault      = false
-vault_helm_version = "0.20.0"
+vault_helm_version = "0.22.0"
 
 //identityserver4-admin
 install_identityserver4admin            = false
@@ -114,11 +113,11 @@ keycloak_include_domainrealm = true
 
 //etcd
 install_etcd      = false
-etcd_helm_version = "8.3.7"
+etcd_helm_version = "8.5.5"
 
 //minio
 install_minio      = false
-minio_helm_version = "4.0.10"
+minio_helm_version = "4.0.15"
 
 //Azurite
 install_azurite = false
@@ -128,12 +127,12 @@ azurite_version = "latest"
 //RabbitMQ
 install_rabbitmq      = false
 expose_rabbitmq       = false
-rabbitmq_helm_version = "2.6.11"
+rabbitmq_helm_version = "3.0.0"
 
 //Localstack
 install_localstack = false
 # expose_localstack       = false
-localstack_helm_version = "0.4.1"
+localstack_helm_version = "0.4.2"
 
 //fluxcd
 ## Edit the .env file with a valid github username and token
@@ -147,27 +146,27 @@ flux2_github_repository_visibility = "private"
 //MySQL
 install_mysql      = false
 expose_mysql       = false
-mysql_helm_version = "9.3.1"
+mysql_helm_version = "9.3.4"
 
 //Mariadb
 install_mariadb      = false
 expose_mariadb       = false
-mariadb_helm_version = "11.2.2"
+mariadb_helm_version = "11.3.1"
 
 //Postgres
 install_postgres      = false
 expose_postgres       = false
-postgres_helm_version = "11.8.1"
+postgres_helm_version = "11.9.2"
 
 //MSSQL
 install_mssql      = false
 expose_mssql       = false
-mssql_helm_version = "1.0.2"
+mssql_helm_version = "1.1.0"
 
-//MSSQL
 install_mongodb      = false
 expose_mongodb       = false
-mongodb_helm_version = "13.1.2"
+//MongoDb
+mongodb_helm_version = "13.1.5"
 //-------------------------------------
 //Examples
 //-------------------------------------
