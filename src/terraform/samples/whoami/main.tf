@@ -6,14 +6,14 @@ resource "helm_release" "whoami" {
   namespace  = var.namespace
   values = [
     templatefile("${path.module}/whoami-values.yaml", {
-        domain-name = var.domain-name
+      domain-name = var.domain-name
     })
   ]
 }
 
 resource "kubectl_manifest" "whoami-cert" {
   yaml_body = templatefile("${path.module}/crds/whoami-cert.yaml", {
-      domain-name = var.domain-name,
-      namespace = var.namespace
+    domain-name = var.domain-name,
+    namespace   = var.namespace
   })
 }

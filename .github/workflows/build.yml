@@ -8,20 +8,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: terraform format cluster k3d
+      - name: terraform fmt
         uses: dflook/terraform-fmt-check@v1
         with:
-          path: src/clusters/k3d
-
-      - name: terraform format cluster k3d
-        uses: dflook/terraform-fmt-check@v1
-        with:
-          path: src/clusters/kind
-
-      - name: terraform format terraform
-        uses: dflook/terraform-fmt-check@v1
-        with:
-          path: src/terraform
+          path: src
 
       # - name: terraform validate
       #   uses: dflook/terraform-validate@v1
