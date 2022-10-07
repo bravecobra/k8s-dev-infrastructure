@@ -1,0 +1,29 @@
+on: [push]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate terraform
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: terraform format cluster k3d
+        uses: dflook/terraform-fmt-check@v1
+        with:
+          path: src/clusters/k3d
+
+      - name: terraform format cluster k3d
+        uses: dflook/terraform-fmt-check@v1
+        with:
+          path: src/clusters/kind
+
+      - name: terraform format terraform
+        uses: dflook/terraform-fmt-check@v1
+        with:
+          path: src/terraform
+
+      # - name: terraform validate
+      #   uses: dflook/terraform-validate@v1
+      #   with:
+      #     path: src/terraform
