@@ -1,8 +1,8 @@
 resource "kubectl_manifest" "es-cert" {
   yaml_body = templatefile("${path.module}/templates/es-cert.yaml", {
     domain-name = var.domain-name,
-    namespace = var.namespace
-    })
+    namespace   = var.namespace
+  })
 }
 
 resource "helm_release" "elasticsearch" {
@@ -36,7 +36,7 @@ resource "kubectl_manifest" "elasticsearch" {
 
 resource "kubectl_manifest" "elasticsearch-ingress" {
   count     = var.install_elasticsearch ? 1 : 0
-  yaml_body = templatefile("${path.module}/templates/elasticsearch-ingress.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/elasticsearch-ingress.yaml", { domain-name = var.domain-name })
   depends_on = [
     kubectl_manifest.elasticsearch
   ]
@@ -60,7 +60,7 @@ resource "kubectl_manifest" "kibana" {
 
 resource "kubectl_manifest" "kibana-ingress" {
   count     = var.install_kibana ? 1 : 0
-  yaml_body = templatefile("${path.module}/templates/kibana-ingress.yaml", {domain-name = var.domain-name})
+  yaml_body = templatefile("${path.module}/templates/kibana-ingress.yaml", { domain-name = var.domain-name })
   depends_on = [
     kubectl_manifest.kibana
   ]

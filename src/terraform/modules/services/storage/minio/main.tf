@@ -1,7 +1,7 @@
 resource "kubectl_manifest" "minio-cert" {
   yaml_body = templatefile("${path.module}/templates/minio-cert.yaml", {
     domain-name = var.domain-name
-    namespace = var.namespace
+    namespace   = var.namespace
   })
 }
 
@@ -17,13 +17,13 @@ resource "helm_release" "minio" {
   repository = "https://charts.min.io/"
   version    = var.helm_release
   namespace  = var.namespace
-  timeout = 150
+  timeout    = 150
   values = [
     templatefile("${path.module}/minio-values.yaml", {
-        domain-name = var.domain-name,
-        namespace = var.namespace,
-        init_password = random_password.init_password.result,
-        metrics_external = var.metrics,
+      domain-name      = var.domain-name,
+      namespace        = var.namespace,
+      init_password    = random_password.init_password.result,
+      metrics_external = var.metrics,
     }),
   ]
 }

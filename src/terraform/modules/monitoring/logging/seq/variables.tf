@@ -1,5 +1,5 @@
 variable "helm_release" {
-  type    = string
+  type = string
 }
 
 variable "fluent_helm_release" {
@@ -11,7 +11,7 @@ variable "domain-name" {
 }
 
 variable "namespace" {
-    description = "Namespace"
+  description = "Namespace"
 }
 
 variable "expose_ingestion" {

@@ -10,7 +10,7 @@ resource "helm_release" "loki" {
 }
 
 resource "helm_release" "promtail" {
-  count     = var.install_promtail ? 1 : 0
+  count      = var.install_promtail ? 1 : 0
   name       = "promtail"
   chart      = "promtail"
   namespace  = var.namespace
@@ -38,11 +38,11 @@ resource "kubectl_manifest" "loki_dashboard" {
 }
 
 resource "kubectl_manifest" "loki_ingestion" {
-  count       = var.expose_ingestion ? 1 : 0
+  count = var.expose_ingestion ? 1 : 0
   yaml_body = templatefile("${path.module}/templates/loki-ingestion-route.yaml", {
-      namespace = var.namespace
+    namespace = var.namespace
   })
   depends_on = [
-      helm_release.loki
+    helm_release.loki
   ]
 }

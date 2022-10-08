@@ -22,8 +22,8 @@ variable "node-ips" {
   ]
 }
 
-variable "cluster-type"{
-  type = string
+variable "cluster-type" {
+  type    = string
   default = "k3s"
 }
 

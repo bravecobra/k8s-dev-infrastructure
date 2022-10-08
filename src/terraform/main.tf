@@ -346,7 +346,7 @@ module "mysql" {
   domain-name  = var.domain-name
   helm_release = var.mysql_helm_version
   expose_mysql = var.expose_mysql
-  namespace = kubernetes_namespace.mysql[0].metadata[0].name
+  namespace    = kubernetes_namespace.mysql[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
@@ -360,7 +360,7 @@ module "postgres" {
   domain-name     = var.domain-name
   helm_release    = var.postgres_helm_version
   expose_postgres = var.expose_postgres
-  namespace = kubernetes_namespace.postgres[0].metadata[0].name
+  namespace       = kubernetes_namespace.postgres[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
@@ -374,7 +374,7 @@ module "mssql" {
   domain-name  = var.domain-name
   helm_release = var.mssql_helm_version
   expose_mssql = var.expose_mssql
-  namespace = kubernetes_namespace.mssql[0].metadata[0].name
+  namespace    = kubernetes_namespace.mssql[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
@@ -383,12 +383,12 @@ module "mssql" {
 }
 
 module "mariadb" {
-  count        = var.install_mariadb == true ? 1 : 0
-  source       = "./modules/services/database/rds/mariadb"
-  domain-name  = var.domain-name
-  helm_release = var.mariadb_helm_version
+  count          = var.install_mariadb == true ? 1 : 0
+  source         = "./modules/services/database/rds/mariadb"
+  domain-name    = var.domain-name
+  helm_release   = var.mariadb_helm_version
   expose_mariadb = var.expose_mariadb
-  namespace = kubernetes_namespace.mariadb[0].metadata[0].name
+  namespace      = kubernetes_namespace.mariadb[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
@@ -397,12 +397,12 @@ module "mariadb" {
 }
 
 module "mongodb" {
-  count        = var.install_mongodb == true ? 1 : 0
-  source       = "./modules/services/database/nosql/mongodb"
-  domain-name  = var.domain-name
-  helm_release = var.mongodb_helm_version
+  count          = var.install_mongodb == true ? 1 : 0
+  source         = "./modules/services/database/nosql/mongodb"
+  domain-name    = var.domain-name
+  helm_release   = var.mongodb_helm_version
   expose_mongodb = var.expose_mongodb
-  namespace = kubernetes_namespace.mongodb[0].metadata[0].name
+  namespace      = kubernetes_namespace.mongodb[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,

@@ -14,14 +14,14 @@ resource "helm_release" "prometheus" {
   wait_for_jobs = true
   values = [
     templatefile("${path.module}/prometheus-values.yaml", {
-      domain-name = var.domain-name,
-      grafana_password = random_password.init_password.result,
+      domain-name        = var.domain-name,
+      grafana_password   = random_password.init_password.result,
       install_prometheus = var.install_prometheus,
-      install_grafana = var.install_grafana,
-      metrics_linkerd  = var.metrics_linkerd,
-      metrics_minio    = var.metrics_minio,
-      metrics_loki     = var.metrics_loki,
-      metrics_tempo    = var.metrics_tempo,
+      install_grafana    = var.install_grafana,
+      metrics_linkerd    = var.metrics_linkerd,
+      metrics_minio      = var.metrics_minio,
+      metrics_loki       = var.metrics_loki,
+      metrics_tempo      = var.metrics_tempo,
     })
   ]
   depends_on = [
@@ -52,10 +52,10 @@ resource "kubectl_manifest" "traefik-rules" {
 }
 
 resource "kubectl_manifest" "rabbitmq-monitor" {
-  count     = var.metrics_rabbitmq ? 1 : 0
+  count = var.metrics_rabbitmq ? 1 : 0
   yaml_body = templatefile("${path.module}/templates/rabbitmq-monitor.yaml", {
     domain-name = var.domain-name
-    namespace = var.namespace
+    namespace   = var.namespace
   })
   depends_on = [
     helm_release.prometheus

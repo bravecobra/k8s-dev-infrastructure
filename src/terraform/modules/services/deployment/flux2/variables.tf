@@ -13,8 +13,8 @@ locals {
 # }
 
 variable "repository_create" {
-  type        = bool
-  default     = false
+  type    = bool
+  default = false
 }
 
 variable "repository_name" {

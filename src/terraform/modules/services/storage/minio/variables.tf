@@ -1,5 +1,5 @@
 variable "helm_release" {
-  type    = string
+  type = string
 }
 
 variable "domain-name" {
@@ -7,10 +7,10 @@ variable "domain-name" {
 }
 
 variable "namespace" {
-    description = "Namespace"
+  description = "Namespace"
 }
 
 variable "metrics" {
-    description = "Enable metrics"
-    default = "false"
+  description = "Enable metrics"
+  default     = "false"
 }

@@ -12,6 +12,6 @@ variable "namespace" {
 }
 
 variable "debug" {
-    type = bool
-    default = false
+  type    = bool
+  default = false
 }

@@ -1,0 +1,37 @@
+on: [push]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate terraform
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: terraform fmt
+        uses: dflook/terraform-fmt-check@v1
+        with:
+          path: src
+
+      - name: Create temp files for terraform validation
+        run: |
+          touch src/certs/cacerts.crt
+          touch src/certs/cacerts.key
+          touch src/terraform/.env
+          echo GITHUB_OWNER=somebody >> src/terraform/.env
+          echo GITHUB_TOKEN=sometoken >> src/terraform/.env
+
+      - name: terraform validate src-clusters-k3d
+        uses: dflook/terraform-validate@v1
+        with:
+          path: src/clusters/k3d
+
+      - name: terraform validate src-clusters-kind
+        uses: dflook/terraform-validate@v1
+        with:
+          path: src/clusters/kind
+
+      - name: terraform validate src-terraform
+        uses: dflook/terraform-validate@v1
+        with:
+          path: src/terraform

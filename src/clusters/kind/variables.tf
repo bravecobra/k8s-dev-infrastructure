@@ -3,17 +3,17 @@ variable "cluster-name" {
 }
 
 variable "worker-node-count" {
-  type = number
+  type    = number
   default = 0
 }
 
 variable "kind_version" {
   default = "v1.24.3"
-  type = string
+  type    = string
 }
 
 variable "install_private_registry" {
-  type = bool
+  type    = bool
   default = true
 }
 

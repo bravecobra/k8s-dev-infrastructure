@@ -1,7 +1,7 @@
 resource "kubectl_manifest" "rabbitmq-cert" {
   yaml_body = templatefile("${path.module}/templates/rabbitmq-cert.yaml", {
     domain-name = var.domain-name
-    namespace = var.namespace
+    namespace   = var.namespace
   })
 }
 
@@ -13,7 +13,7 @@ resource "helm_release" "rabbitmq-operator" {
   namespace  = var.namespace
   values = [
     templatefile("${path.module}/rabbitmq-values.yaml", {
-        domain-name = var.domain-name
+      domain-name = var.domain-name
     }),
   ]
 }
@@ -21,7 +21,7 @@ resource "helm_release" "rabbitmq-operator" {
 resource "kubectl_manifest" "rabbitmq-cluster" {
   yaml_body = templatefile("${path.module}/templates/rabbitmq-cluster.yaml", {
     domain-name = var.domain-name
-    namespace = var.namespace
+    namespace   = var.namespace
   })
   depends_on = [
     kubectl_manifest.rabbitmq-cert,
@@ -31,7 +31,7 @@ resource "kubectl_manifest" "rabbitmq-cluster" {
 resource "kubectl_manifest" "rabbitmq-ingress" {
   yaml_body = templatefile("${path.module}/templates/ingress.yaml", {
     domain-name = var.domain-name
-    namespace = var.namespace
+    namespace   = var.namespace
   })
   depends_on = [
     kubectl_manifest.rabbitmq-cluster,
@@ -41,7 +41,7 @@ resource "kubectl_manifest" "rabbitmq-ingress" {
 resource "kubectl_manifest" "rabbitmq-ingress-direct" {
   yaml_body = templatefile("${path.module}/templates/ingress-direct.yaml", {
     domain-name = var.domain-name
-    namespace = var.namespace
+    namespace   = var.namespace
   })
   depends_on = [
     kubectl_manifest.rabbitmq-cluster,
