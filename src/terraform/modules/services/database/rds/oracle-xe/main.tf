@@ -45,19 +45,19 @@ resource "random_password" "init_password" {
 }
 
 resource "kubernetes_secret" "admin-secret" {
-    metadata {
-        name = "xedb-admin-secret"
-        namespace = var.namespace
-    }
-    type = "Opaque"
-    data = {
-        oracle_pwd = random_password.init_password.result
-    }
+  metadata {
+    name      = "xedb-admin-secret"
+    namespace = var.namespace
+  }
+  type = "Opaque"
+  data = {
+    oracle_pwd = random_password.init_password.result
+  }
 }
 
 # Install Oracle XE
 resource "kubectl_manifest" "oracledb" {
-    yaml_body = templatefile("${path.module}/templates/oracle-xe.yaml", {
+  yaml_body = templatefile("${path.module}/templates/oracle-xe.yaml", {
     domain-name = var.domain-name
   })
 }

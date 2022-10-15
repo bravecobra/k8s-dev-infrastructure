@@ -4,12 +4,12 @@
 
 variable "domain-name" {
   description = "Domain Name"
-  type = string
+  type        = string
 }
 
 variable "namespace" {
   description = "Namespace"
-  type = string
+  type        = string
 }
 
 variable "expose_oracle" {
