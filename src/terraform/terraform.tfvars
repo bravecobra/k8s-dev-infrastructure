@@ -169,8 +169,8 @@ expose_mongodb       = false
 mongodb_helm_version = "13.1.5"
 
 //Oracle
-install_oracle = true
-expose_oracle  = true
+install_oracle = false
+expose_oracle  = false
 # mssql_helm_version = "1.1.0"
 
 //-------------------------------------
