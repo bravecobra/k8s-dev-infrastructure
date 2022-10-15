@@ -409,3 +409,18 @@ module "mongodb" {
     kubernetes_namespace.mongodb
   ]
 }
+
+module "oraclexe" {
+  count          = var.install_oracle == true ? 1 : 0
+  source         = "./modules/services/database/rds/oracle-xe"
+  domain-name    = var.domain-name
+  # helm_release   = var.mongodb_helm_version
+  expose_oracle = var.expose_oracle
+  namespace      = kubernetes_namespace.oracle[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    module.certmanager,
+    kubernetes_namespace.oracle
+  ]
+}

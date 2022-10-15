@@ -297,3 +297,14 @@ resource "kubernetes_namespace" "mongodb" {
     }
   }
 }
+
+resource "kubernetes_namespace" "oracle" {
+  count = var.install_oracle ? 1 : 0
+  metadata {
+    name = var.oracle_namespace
+    annotations = {
+      "kubernetes.io/description" = var.oracle_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
