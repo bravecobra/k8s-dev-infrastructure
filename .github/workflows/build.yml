@@ -20,6 +20,8 @@ jobs:
           touch src/terraform/.env
           echo GITHUB_OWNER=somebody >> src/terraform/.env
           echo GITHUB_TOKEN=sometoken >> src/terraform/.env
+          echo ORACLE_EMAIL=sometoken >> src/terraform/.env
+          echo ORACLE_PASSWORD=sometoken >> src/terraform/.env
 
       - name: terraform validate src-clusters-k3d
         uses: dflook/terraform-validate@v1
