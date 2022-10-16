@@ -3,7 +3,7 @@ locals {
 }
 
 # Oracle Operator
-resource "kubectl_manifest" "mymanifest" {
+resource "kubectl_manifest" "oracle_manifests" {
   for_each  = var.manifestfiles
   yaml_body = each.value
 }
@@ -49,7 +49,7 @@ resource "kubernetes_secret" "admin-secret" {
 //sleep here to let the operator settle??
 resource "time_sleep" "wait_x_seconds" {
   depends_on = [
-    kubectl_manifest.mymanifest,
+    kubectl_manifest.oracle_manifests,
     kubernetes_secret.admin-secret
   ]
 
