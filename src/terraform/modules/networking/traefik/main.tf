@@ -28,6 +28,7 @@ resource "helm_release" "traefik" {
       expose_mssql         = var.expose_mssql
       expose_mariadb       = var.expose_mariadb
       expose_mongodb       = var.expose_mongodb
+      expose_oracle        = var.expose_oracle
     })
   ]
   depends_on = [

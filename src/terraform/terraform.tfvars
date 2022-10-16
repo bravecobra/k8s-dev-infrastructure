@@ -163,10 +163,17 @@ install_mssql      = false
 expose_mssql       = false
 mssql_helm_version = "1.1.0"
 
-install_mongodb = false
-expose_mongodb  = false
 //MongoDb
+install_mongodb      = false
+expose_mongodb       = false
 mongodb_helm_version = "13.1.5"
+
+//Oracle
+install_oracle          = false
+expose_oracle           = false
+oracle_operator_version = "0.2.0"
+oracle_xe_version       = "21.3.0-xe"
+
 //-------------------------------------
 //Examples
 //-------------------------------------

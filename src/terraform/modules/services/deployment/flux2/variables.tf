@@ -2,16 +2,6 @@ locals {
   envs = { for tuple in regexall("(.*)=(.*)", file(".env")) : tuple[0] => sensitive(tuple[1]) }
 }
 
-# variable "github_owner" {
-#   type        = string
-#   description = "github owner"
-# }
-
-# variable "github_token" {
-#   type        = string
-#   description = "github token"
-# }
-
 variable "repository_create" {
   type    = bool
   default = false

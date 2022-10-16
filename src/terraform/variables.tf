@@ -527,3 +527,26 @@ variable "mongodb_namespace" {
 variable "mongodb_helm_version" {
   type = string
 }
+
+# oracle
+variable "install_oracle" {
+  type    = bool
+  default = false
+}
+
+variable "expose_oracle" {
+  type    = bool
+  default = false
+}
+
+variable "oracle_namespace" {
+  type    = string
+  default = "oracle"
+}
+
+variable "oracle_operator_version" {
+  type = string
+}
+variable "oracle_xe_version" {
+  type = string
+}

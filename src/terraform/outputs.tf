@@ -81,3 +81,9 @@ output "mongodb-password" {
   value       = join("", module.mongodb[*].mongodb-root-password)
   sensitive   = true
 }
+
+output "oracle-password" {
+  description = "Oracle password"
+  value       = join("", module.oraclexe[*].oracle-password)
+  sensitive   = true
+}
