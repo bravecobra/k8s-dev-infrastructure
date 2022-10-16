@@ -3,22 +3,13 @@ locals {
 }
 
 # Oracle Operator
-data "http" "manifestfile" {
-  url = "https://raw.githubusercontent.com/oracle/oracle-database-operator/main/oracle-database-operator.yaml"
+resource "kubectl_manifest" "mymanifest" {
+  for_each  = var.manifestfiles
+  yaml_body = each.value
 }
-
-data "kubectl_file_documents" "docs" {
-  content = data.http.manifestfile.response_body
-}
-
-# resource "kubectl_manifest" "mymanifest" {
-#   //for_each  = data.kubectl_file_documents.docs.manifests
-#   count     = length(data.kubectl_file_documents.docs.documents)
-#   yaml_body = element(data.kubectl_file_documents.docs.documents, count.index)
-# }
 
 # Install secret to pull images
-resource "kubernetes_secret" "example" {
+resource "kubernetes_secret" "oracle_repository_secret" {
   metadata {
     name = "oracle-container-registry-secret"
   }
@@ -55,9 +46,34 @@ resource "kubernetes_secret" "admin-secret" {
   }
 }
 
+//sleep here to let the operator settle??
+resource "time_sleep" "wait_x_seconds" {
+  depends_on = [
+    kubectl_manifest.mymanifest,
+    kubernetes_secret.admin-secret
+  ]
+
+  create_duration = "10s"
+}
+
 # Install Oracle XE
 resource "kubectl_manifest" "oracledb" {
   yaml_body = templatefile("${path.module}/templates/oracle-xe.yaml", {
-    domain-name = var.domain-name
+    domain-name    = var.domain-name
+    oracle_version = var.oracle_xe_version
   })
+  depends_on = [
+    time_sleep.wait_x_seconds
+  ]
 }
+
+# resource "kubectl_manifest" "mariadb-ingress" {
+#   count = var.expose_mariadb ? 1 : 0
+#   yaml_body = templatefile("${path.module}/templates/ingress.yaml", {
+#     domain-name = var.domain-name
+#     namespace   = var.namespace
+#   })
+#   depends_on = [
+#     helm_release.mariadb
+#   ]
+# }

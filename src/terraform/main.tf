@@ -62,6 +62,7 @@ module "traefik" {
   expose_mssql         = var.expose_mssql
   expose_mariadb       = var.expose_mariadb
   expose_mongodb       = var.expose_mongodb
+  expose_oracle        = var.expose_oracle
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -410,13 +411,26 @@ module "mongodb" {
   ]
 }
 
+data "http" "manifestfiles" {
+  //count = var.install_oracle == true ? 1 : 0
+  url   = "https://raw.githubusercontent.com/oracle/oracle-database-operator/${var.oracle_operator_version}/oracle-database-operator.yaml"
+}
+
+data "kubectl_file_documents" "oracle_manifests" {
+  //count   = var.install_oracle == true ? 1 : 0
+  content = data.http.manifestfiles.response_body
+}
+
 module "oraclexe" {
   count       = var.install_oracle == true ? 1 : 0
   source      = "./modules/services/database/rds/oracle-xe"
   domain-name = var.domain-name
   # helm_release   = var.mongodb_helm_version
-  expose_oracle = var.expose_oracle
-  namespace     = kubernetes_namespace.oracle[0].metadata[0].name
+  expose_oracle           = var.expose_oracle
+  oracle_operator_version = var.oracle_operator_version
+  oracle_xe_version       = var.oracle_xe_version
+  manifestfiles           = data.kubectl_file_documents.oracle_manifests.manifests
+  namespace               = kubernetes_namespace.oracle[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,

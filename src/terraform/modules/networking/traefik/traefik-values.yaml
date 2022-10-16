@@ -53,6 +53,9 @@ additionalArguments:
 #%{ if expose_mongodb == true }
   - "--entryPoints.mongodb.address=:27017"
 #%{ endif }
+#%{ if expose_oracle == true }
+  - "--entryPoints.oracle.address=:1521"
+#%{ endif }
 
 
 entryPoints:
@@ -109,6 +112,10 @@ entryPoints:
 #%{ if expose_mongodb == true }
   mongodb:
     address: ":27017"
+#%{ endif }
+#%{ if expose_oracle == true }
+  oracle:
+    address: ":1521"
 #%{ endif }
 
 deployment:
@@ -209,6 +216,11 @@ ports:
 #%{ if expose_mongodb == true }
   mongodb:
     port: 27017
+    expose: true
+#%{ endif }
+#%{ if expose_oracle == true }
+  oracle:
+    port: 1521
     expose: true
 #%{ endif }
 

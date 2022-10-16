@@ -108,6 +108,11 @@ variable "expose_mongodb" {
   default = false
 }
 
+variable "expose_oracle" {
+  type    = bool
+  default = false
+}
+
 variable "cluster-type" {
   type = string
 }

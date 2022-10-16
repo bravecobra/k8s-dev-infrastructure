@@ -6,7 +6,7 @@
 apiVersion: database.oracle.com/v1alpha1
 kind: SingleInstanceDatabase
 metadata:
-  name: xedb-sample
+  name: oraclexe
   namespace: oracle
 spec:
 
@@ -22,7 +22,7 @@ spec:
 
   ## Database image details
   image:
-    pullFrom: container-registry.oracle.com/database/express:latest
+    pullFrom: container-registry.oracle.com/database/express:${oracle_version}
     prebuiltDB: true
 
   ## size is the required minimum size of the persistent volume

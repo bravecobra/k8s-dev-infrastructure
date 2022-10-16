@@ -544,6 +544,9 @@ variable "oracle_namespace" {
   default = "oracle"
 }
 
-# variable "oracle_helm_version" {
-#   type = string
-# }
+variable "oracle_operator_version" {
+  type = string
+}
+variable "oracle_xe_version" {
+  type = string
+}
