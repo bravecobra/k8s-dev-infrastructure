@@ -67,9 +67,30 @@ resource "kubectl_manifest" "oracledb" {
   ]
 }
 
+resource "kubectl_manifest" "oracle-cert" {
+  yaml_body = templatefile("${path.module}/templates/oracle-cert.yaml", {
+    domain-name = var.domain-name,
+    namespace   = var.namespace
+  })
+  depends_on = [
+    kubectl_manifest.oracledb
+  ]
+}
+
 resource "kubectl_manifest" "oracle-ingress" {
   count = var.expose_oracle ? 1 : 0
   yaml_body = templatefile("${path.module}/templates/ingress.yaml", {
+    domain-name = var.domain-name
+    namespace   = var.namespace
+  })
+  depends_on = [
+    kubectl_manifest.oracledb
+  ]
+}
+
+resource "kubectl_manifest" "oracle-oem-ingress" {
+  count = var.expose_oracle ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/oem-ingressroute.yaml", {
     domain-name = var.domain-name
     namespace   = var.namespace
   })
