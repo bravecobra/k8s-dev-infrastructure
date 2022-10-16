@@ -67,13 +67,13 @@ resource "kubectl_manifest" "oracledb" {
   ]
 }
 
-# resource "kubectl_manifest" "mariadb-ingress" {
-#   count = var.expose_mariadb ? 1 : 0
-#   yaml_body = templatefile("${path.module}/templates/ingress.yaml", {
-#     domain-name = var.domain-name
-#     namespace   = var.namespace
-#   })
-#   depends_on = [
-#     helm_release.mariadb
-#   ]
-# }
+resource "kubectl_manifest" "oracle-ingress" {
+  count = var.expose_oracle ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/ingress.yaml", {
+    domain-name = var.domain-name
+    namespace   = var.namespace
+  })
+  depends_on = [
+    kubectl_manifest.oracledb
+  ]
+}

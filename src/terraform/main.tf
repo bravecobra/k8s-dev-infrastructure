@@ -413,7 +413,7 @@ module "mongodb" {
 
 data "http" "manifestfiles" {
   //count = var.install_oracle == true ? 1 : 0
-  url   = "https://raw.githubusercontent.com/oracle/oracle-database-operator/${var.oracle_operator_version}/oracle-database-operator.yaml"
+  url = "https://raw.githubusercontent.com/oracle/oracle-database-operator/${var.oracle_operator_version}/oracle-database-operator.yaml"
 }
 
 data "kubectl_file_documents" "oracle_manifests" {
