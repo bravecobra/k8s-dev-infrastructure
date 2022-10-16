@@ -169,8 +169,8 @@ expose_mongodb       = false
 mongodb_helm_version = "13.1.5"
 
 //Oracle
-install_oracle = false
-expose_oracle  = false
+install_oracle          = false
+expose_oracle           = false
 oracle_operator_version = "0.2.0"
 oracle_xe_version       = "21.3.0-xe"
 
