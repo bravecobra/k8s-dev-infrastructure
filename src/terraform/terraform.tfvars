@@ -66,14 +66,14 @@ jaeger_helm_version = "2.23.0"
 //opentelemetry (operator)
 install_opentelemetry      = false
 expose_opentelemetry       = false
-opentelemetry_helm_version = "0.13.0"
+opentelemetry_helm_version = "0.16.0"
 
 //loki
 install_loki          = false
 expose_loki           = false
 install_promtail      = false
 loki_helm_version     = "3.2.1"
-promtail_helm_version = "6.4.0"
+promtail_helm_version = "6.5.1"
 
 //tempo
 install_tempo      = false
@@ -82,7 +82,7 @@ tempo_helm_version = "0.16.2"
 //prometheus - grafana
 install_prometheus      = false
 install_grafana         = false
-prometheus_helm_version = "40.1.2"
+prometheus_helm_version = "41.5.1"
 
 //-------------------------------------
 //Saas
