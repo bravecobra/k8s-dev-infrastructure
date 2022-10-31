@@ -124,7 +124,7 @@ server:
           - /webhooks/6/clientConfig/caBundle
           - /webhooks/7/clientConfig/caBundle
   metrics:
-    enabled: true
+    enabled: ${install_prometheus}
     service:
       annotations: {}
       labels: {}
@@ -142,7 +142,7 @@ server:
 
 controller:
   metrics:
-    enabled: true
+    enabled: ${install_prometheus}
     service:
       annotations: {}
       labels: {}
@@ -171,7 +171,7 @@ dex:
   #    memory: 32Mi
 redis:
   metrics:
-    enabled: true
+    enabled: ${install_prometheus}
     service:
       annotations: {}
       labels: {}
@@ -191,7 +191,7 @@ redis:
   #    memory: 64Mi
 repoServer:
   metrics:
-    enabled: true
+    enabled: ${install_prometheus}
     service:
       annotations: {}
       labels: {}

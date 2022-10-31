@@ -87,3 +87,104 @@ output "oracle-password" {
   value       = join("", module.oraclexe[*].oracle-password)
   sensitive   = true
 }
+
+output "helm_version_cert-manager" {
+  value = var.cert_manager_helm_version
+}
+
+output "helm_version_traefik" {
+  value = var.traefik_helm_version
+}
+
+output "helm_version_linkerd" {
+  value = var.linkerd_helm_version
+}
+
+output "helm_version_metrics" {
+  value = var.metrics_helm_version
+}
+
+output "helm_version_seq" {
+  value = var.seq_helm_version
+}
+
+output "helm_version_fluent" {
+  value = var.fluent_helm_version
+}
+
+output "helm_version_jaeger" {
+  value = var.jaeger_helm_version
+}
+
+output "helm_version_opentelemetry" {
+  value = var.opentelemetry_helm_version
+}
+
+output "helm_version_loki" {
+  value = var.loki_helm_version
+}
+
+output "helm_version_promtail" {
+  value = var.promtail_helm_version
+}
+
+output "helm_version_tempo" {
+  value = var.tempo_helm_version
+}
+output "helm_version_prometheus" {
+  value = var.prometheus_helm_version
+}
+
+output "helm_version_argocd" {
+  value = var.argocd_helm_version
+}
+output "helm_version_elasticsearch" {
+  value = var.elasticsearch_helm_version
+}
+
+output "helm_version_vault" {
+  value = var.vault_helm_version
+}
+
+output "helm_version_identityserveradmin" {
+  value = var.identityserver4admin_helm_version
+}
+output "helm_version_identityserveradmin-mssql" {
+  value = var.identityserver4admin_mssql_helm_version
+}
+
+output "helm_version_keycloak" {
+  value = var.keycloak_helm_version
+}
+
+output "helm_version_etcd" {
+  value = var.etcd_helm_version
+}
+
+output "helm_version_minio" {
+  value = var.minio_helm_version
+}
+
+output "helm_version_rabbitmq" {
+  value = var.rabbitmq_helm_version
+}
+
+output "helm_version_localstack" {
+  value = var.localstack_helm_version
+}
+
+output "helm_version_mysql" {
+  value = var.mysql_helm_version
+}
+
+output "helm_version_mariadb" {
+  value = var.mariadb_helm_version
+}
+
+output "helm_version_postgres" {
+  value = var.postgres_helm_version
+}
+
+output "helm_version_mssql" {
+  value = var.mssql_helm_version
+}
