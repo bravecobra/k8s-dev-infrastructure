@@ -34,11 +34,11 @@ node-ips = [
 
 //metrics
 install_metrics      = false
-metrics_helm_version = "6.2.0"
+metrics_helm_version = "6.2.2"
 
 //cert-manager
 install_cert_manager      = true
-cert_manager_helm_version = "v1.9.1"
+cert_manager_helm_version = "v1.10.0"
 
 //linkerd
 install_linkerd      = false
@@ -46,7 +46,7 @@ linkerd_helm_version = "2.11.5"
 
 //traefik
 install_traefik      = true
-traefik_helm_version = "10.26.1"
+traefik_helm_version = "18.3.0"
 
 //-------------------------------------
 // Monitoring
@@ -56,33 +56,33 @@ traefik_helm_version = "10.26.1"
 install_seq         = false
 expose_seq          = false
 seq_helm_version    = "2022.1.7929"
-fluent_helm_version = "0.20.8"
+fluent_helm_version = "0.20.9"
 
 //jaeger
 install_jaeger      = false
 expose_jaeger       = false
-jaeger_helm_version = "2.23.0"
+jaeger_helm_version = "2.36.0"
 
 //opentelemetry (operator)
 install_opentelemetry      = false
 expose_opentelemetry       = false
-opentelemetry_helm_version = "0.16.0"
+opentelemetry_helm_version = "0.17.0"
 
 //loki
 install_loki          = false
 expose_loki           = false
 install_promtail      = false
-loki_helm_version     = "3.2.1"
-promtail_helm_version = "6.5.1"
+loki_helm_version     = "3.3.1"
+promtail_helm_version = "6.6.0"
 
 //tempo
 install_tempo      = false
-tempo_helm_version = "0.16.2"
+tempo_helm_version = "0.16.3"
 
 //prometheus - grafana
 install_prometheus      = false
 install_grafana         = false
-prometheus_helm_version = "41.5.1"
+prometheus_helm_version = "41.7.1"
 
 //-------------------------------------
 //Saas
@@ -90,7 +90,7 @@ prometheus_helm_version = "41.5.1"
 
 //argocd
 install_argocd      = false
-argocd_helm_version = "5.5.6"
+argocd_helm_version = "5.12.2"
 
 //elasticsearch
 install_elasticsearch      = false
@@ -99,7 +99,7 @@ elasticsearch_helm_version = "2.4.0"
 
 //vault
 install_vault      = false
-vault_helm_version = "0.22.0"
+vault_helm_version = "0.22.1"
 
 //identityserver4-admin
 install_identityserver4admin            = false
@@ -113,11 +113,11 @@ keycloak_include_domainrealm = true
 
 //etcd
 install_etcd      = false
-etcd_helm_version = "8.5.5"
+etcd_helm_version = "8.5.8"
 
 //minio
 install_minio      = false
-minio_helm_version = "4.0.15"
+minio_helm_version = "5.0.0"
 
 //Azurite
 install_azurite = false
@@ -127,12 +127,12 @@ azurite_version = "latest"
 //RabbitMQ
 install_rabbitmq      = false
 expose_rabbitmq       = false
-rabbitmq_helm_version = "3.0.0"
+rabbitmq_helm_version = "3.1.1"
 
 //Localstack
 install_localstack = false
 # expose_localstack       = false
-localstack_helm_version = "0.4.2"
+localstack_helm_version = "0.5.0"
 
 //fluxcd
 ## Edit the .env file with a valid github username and token
@@ -146,22 +146,22 @@ flux2_github_repository_visibility = "private"
 //MySQL
 install_mysql      = false
 expose_mysql       = false
-mysql_helm_version = "9.3.4"
+mysql_helm_version = "9.4.1"
 
 //Mariadb
 install_mariadb      = false
 expose_mariadb       = false
-mariadb_helm_version = "11.3.1"
+mariadb_helm_version = "11.3.3"
 
 //Postgres
 install_postgres      = false
 expose_postgres       = false
-postgres_helm_version = "11.9.2"
+postgres_helm_version = "12.0.0"
 
 //MSSQL
 install_mssql      = false
 expose_mssql       = false
-mssql_helm_version = "1.1.0"
+mssql_helm_version = "1.2.0"
 
 //MongoDb
 install_mongodb      = false

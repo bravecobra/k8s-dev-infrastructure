@@ -1,6 +1,6 @@
 resource "random_password" "init_password" {
   length           = 8
-  special          = true
+  special          = false
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
@@ -66,7 +66,6 @@ resource "kubectl_manifest" "e3w-ingress" {
   })
   depends_on = [
     helm_release.etcd,
-
     kubectl_manifest.etcd-cert
   ]
 }

@@ -119,7 +119,7 @@ module "argocd" {
   source             = "./modules/services/deployment/argocd"
   helm_release       = var.argocd_helm_version
   domain-name        = var.domain-name
-  install_dashboards = var.install_prometheus
+  install_prometheus = var.install_prometheus
   namespace          = kubernetes_namespace.argocd[0].metadata[0].name
   depends_on = [
     module.jaeger,

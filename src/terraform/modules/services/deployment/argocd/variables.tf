@@ -7,10 +7,11 @@ variable "domain-name" {
   description = "Domain Name"
 }
 
-variable "install_dashboards" {
-  type = bool
-}
-
 variable "namespace" {
   description = "Namespace"
+}
+
+variable "install_prometheus" {
+  type = bool
+  description = "Expose metrics"
 }
