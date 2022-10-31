@@ -12,6 +12,6 @@ variable "namespace" {
 }
 
 variable "install_prometheus" {
-  type = bool
+  type        = bool
   description = "Expose metrics"
 }

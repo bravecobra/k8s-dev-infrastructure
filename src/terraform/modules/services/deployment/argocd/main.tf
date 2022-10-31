@@ -6,7 +6,7 @@ resource "helm_release" "argocd" {
   namespace  = var.namespace
   values = [
     templatefile("${path.module}/argo-values.yaml", {
-      domain-name = var.domain-name
+      domain-name        = var.domain-name
       install_prometheus = var.install_prometheus
     }),
   ]
