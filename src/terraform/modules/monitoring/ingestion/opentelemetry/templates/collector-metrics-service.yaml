@@ -6,6 +6,11 @@ metadata:
   labels:
     app: opentelemetry
     component: otel-collector
+  annotations:
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8889"
+    prometheus.io/scrape: "true"
+    component: otel-connector
 spec:
   ports:
     - name: otel-metrics # Default endpoint for metrics.

@@ -13,6 +13,8 @@ tracing:
 monitoring:
   selfMonitoring:
     enabled: false
+    grafanaAgent:
+      installOperator: false
     lokiCanary:
       enabled: false
   serviceMonitor:
