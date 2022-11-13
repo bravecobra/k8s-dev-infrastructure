@@ -39,17 +39,29 @@ This repository contains a `kubernetes` dev infrastructure, providing both cross
 ### Quick Start
 
 - Install Tooling
-  - Install `docker desktop`/`rancher-desktop`
-  - Install `Lens` (K8S GUI)
-  - Install `terraform`
-  - Install [prerequisites](./docs/preparation/cli.md)
-- Host preperation
-  - edit hosts: add domain names
-  - check docker network subnet range (adjust in main.tf -> variable)
-  - generate mkcert as admin
-  - run generate certificates.ps1
-- Creation local cluster
-  - cluster k3d: terraform init + apply
+  - Install Docker: [Docker desktop](https://www.docker.com/products/docker-desktop/) or [Rancher desktop](https://rancherdesktop.io/)
+  - Install [Lens](https://k8slens.dev/) (K8S GUI)
+  - Install tooling [prerequisites](./docs/preparation/cli.md)
+- Create a local `k8s` cluster
+  - Edit your `hosts`: add domain names
+  - Check the docker network subnet range (adjust in main.tf -> variable) so there is no overlap with an existing one.
+  - Generate mkcert as admin
+  - Run generate certificates.ps1
+  - Creation local cluster
+    - cluster k3d: terraform init + apply
+    - cluster kind: terraform init + apply
 - Deploy
   - edit `terraform.tfvars`
   - deploy services: terraform init + apply
+
+### Documentation
+
+The docs are available at [Github Pages](https://bravecobra.github.io/k8s-dev-infrastructure/)
+
+#### Build the docs locally
+
+```shell
+pip install --user -f requirements.txt
+mkdocs build
+mkdocs serve
+```

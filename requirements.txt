@@ -1,0 +1,9 @@
+mkdocs
+mkdocs-material
+mkdocs-exclude
+markdown-include
+mkdocs-awesome-pages-plugin
+mkdocs-material-extensions
+mkdocs-minify-plugin
+mkdocs-git-authors-plugin
+mkdocs-git-revision-date-plugin
