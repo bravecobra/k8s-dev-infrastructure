@@ -5,21 +5,10 @@ theme:
     - content.tabs.link
 nav:
     - Home: 'index.md'
-    - Introduction: 'introduction.md'
-    - Installing:
-      - Preparation:
-        - CLI: './preparation/cli.md'
-        - K8s cluster:
-          - Docker desktop: './preparation/docker-desktop.md'
-          - Minikube: './preparation/minikube.md'
-          - Kind: './preparation/kind.md'
-          - K3D: './preparation/k3d.md'
-        - Testing Ingress: './preparation/test-ingress-controller.md'
-      - Install:
-        - Terraform: './installation-terraform.md'
+    - Preparation: './preparation.md'
+    - Install: './installation-terraform.md'
     - About:
         - 'License': 'license.md'
-        - 'Release Notes': 'release-notes.md'
 dev_addr: '0.0.0.0:8080'
 
 markdown_extensions:

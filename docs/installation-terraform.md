@@ -3,7 +3,9 @@
 
 ## Prerequisites
 
-Check you have all the [cli tools](./preparation/cli.md) installed and that you can connect to a running cluster.
+Check you've done all the [preparation](./preparation.md) and that you can connect to a running cluster. You should have all the required CLI tools and a running local cluster (using either `k3d`, `kind`, `docker desktop`, `rancher desktop` or `minikube`).
+
+To check:
 
 ```bash
 kubectl cluster-info --context <your cluster name>
@@ -23,10 +25,8 @@ On Windows, open `C:\Windows\system32\drivers\etc\hosts` in an editor as `Admini
 On Linux edit your `/etc/hosts` file as root.
 
 ```text
-
 127.0.0.1 k8s.local infrastructure.k8s.local traefik.infrastructure.k8s.local traefik.k8s.local
-127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local seq.infrastructure.k8s.local
-127.0.0.1 grafana.infrastructure.k8s.local
+127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local seq.infrastructure.k8s.local grafana.infrastructure.k8s.local
 127.0.0.1 consul.infrastructure.k8s.local vault.infrastructure.k8s.local
 127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local
 127.0.0.1 login.k8s.local admin.login.k8s.local api.login.k8s.local
@@ -37,30 +37,58 @@ On Linux edit your `/etc/hosts` file as root.
 127.0.0.1 keycloak.k8s.local auth.k8s.local
 127.0.0.1 etcd.infrastructure.k8s.local
 127.0.0.1 minio.infrastructure.k8s.local console.minio.infrastructure.k8s.local
+127.0.0.1 azurite.infrastructure.k8s.local
 127.0.0.1 rabbitmq.infrastructure.k8s.local
 127.0.0.1 localstack.infrastructure.k8s.local
 127.0.0.1 flux.infrastructure.k8s.local
+127.0.0.1 kafka.infrastructure.k8s.local
+127.0.0.1 mysql.infrastructure.k8s.local
+127.0.0.1 mariadb.infrastructure.k8s.local
+127.0.0.1 postgres.infrastructure.k8s.local
+127.0.0.1 mssql.infrastructure.k8s.local
+127.0.0.1 oracle.infrastructure.k8s.local
+127.0.0.1 mongo.infrastructure.k8s.local
+127.0.0.1 oracle.infrastructure.k8s.local
 ```
 
-## Installer
-
-=== "Linux/WSL"
-
-    Next run the installer in a Linux/WSL shell:
-
-    ```bash
-    helm repo update
-    cd src/terraform
-    ./generate-certificate.sh
-    terraform init
-    terraform apply -auto-approve
-    ```
+## Generate a root certificate
 
 === "Windows"
 
     ```bash
     cd src/terraform
     ./generate-certificate.ps1
+    ```
+
+=== "Linux/WSL"
+
+    Next run the installer in a Linux/WSL shell:
+
+    ```bash
+    cd src/terraform
+    ./generate-certificate.sh
+    ```
+
+## Installer
+
+Edit the `terraform.tfvars` as you see fit.
+
+=== "Windows"
+
+    ```bash
+    cd src/terraform
+    helm repo update
+    terraform init
+    terraform apply -auto-approve
+    ```
+
+=== "Linux/WSL"
+
+    Next run the installer in a Linux/WSL shell:
+
+    ```bash
+    cd src/terraform
+    helm repo update
     terraform init
     terraform apply -auto-approve
     ```
