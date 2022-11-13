@@ -6,7 +6,7 @@ After installation, make sure you enable `WSL2` in the settings
 
 ![enable wsl2](../images/docker-desktop-settings.png)
 
-and you enable `kubernetes` of course:
+and you enable `kubernetes` of course if not using `k3s` or `kind`:
 
 ![enable k8s](../images/docker-desktop-kubernetes-settings.png)
 

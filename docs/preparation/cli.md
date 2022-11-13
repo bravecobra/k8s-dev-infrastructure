@@ -6,13 +6,14 @@ Install/download the CLIs.
 
     ```powershell
     choco install kind
+    choco install k3d
     choco install base64
     choco install mkcert
     choco install kubernetes-cli
     choco install kubernetes-helm
     choco install linkerd2
-    choco install k3d
     choco install argocd-cli
+    choco install flux
     choco install terraform
     ```
 
@@ -48,6 +49,9 @@ Install/download the CLIs.
     # argocd (if needed)
     sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
     sudo chmod +x /usr/local/bin/argocd
+
+    # flux
+    curl -s https://fluxcd.io/install.sh | sudo bash
 
     #linkerd
     curl -sL https://run.linkerd.io/install | sh

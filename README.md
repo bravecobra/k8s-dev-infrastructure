@@ -2,9 +2,7 @@
 
 ## Description
 
-This repository contains a local `kubernetes` dev infrastructure.
-
-It uses `Infrastructure as Code` using `terraform` to easily deploy a desired configuration onto the cluster, providing:
+This repository contains a `kubernetes` dev infrastructure, providing both crosscutting concerns as well as Saas infrastructure. All this is provided through `terraform` deploying `helm` charts and custom configuration.
 
 | Category        | Service                 | Description              |
 | :-------------- | ----------------------- | ------------------------ |

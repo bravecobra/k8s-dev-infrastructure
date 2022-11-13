@@ -5,7 +5,6 @@ theme:
     - content.tabs.link
 nav:
     - Home: 'index.md'
-    - Introduction: 'introduction.md'
     - Installing:
       - Preparation:
         - CLI: './preparation/cli.md'
