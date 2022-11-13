@@ -41,7 +41,7 @@ This repository contains a `kubernetes` dev infrastructure, providing both cross
 - Install Tooling
   - Install Docker: [Docker desktop](https://www.docker.com/products/docker-desktop/) or [Rancher desktop](https://rancherdesktop.io/)
   - Install [Lens](https://k8slens.dev/) (K8S GUI)
-  - Install tooling [prerequisites](./docs/preparation/cli.md)
+  - Install tooling [prerequisites](./docs/preparation.md)
 - Create a local `k8s` cluster
   - Edit your `hosts`: add domain names
   - Check the docker network subnet range (adjust in main.tf -> variable) so there is no overlap with an existing one.
