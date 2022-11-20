@@ -88,6 +88,12 @@ output "oracle-password" {
   sensitive   = true
 }
 
+output "redis-password" {
+  description = "Redis password"
+  value       = join("", module.redis[*].redis-password)
+  sensitive   = true
+}
+
 output "helm_version_cert-manager" {
   value = var.cert_manager_helm_version
 }
@@ -187,4 +193,8 @@ output "helm_version_postgres" {
 
 output "helm_version_mssql" {
   value = var.mssql_helm_version
+}
+
+output "helm_version_redis" {
+  value = var.redis_helm_version
 }

@@ -111,6 +111,11 @@ install_keycloak             = false
 keycloak_helm_version        = "18.3.0"
 keycloak_include_domainrealm = true
 
+//Redis
+install_redis      = true
+expose_redis       = true
+redis_helm_version = "17.3.11"
+
 //etcd
 install_etcd      = false
 etcd_helm_version = "8.5.8"

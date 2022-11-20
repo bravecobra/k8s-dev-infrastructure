@@ -1,0 +1,14 @@
+# https://github.com/bitnami/charts/blob/main/bitnami/redis/values.yaml
+
+auth:
+  password: "${password}"
+
+replica:
+  replicaCount: ${replica_count}
+
+metrics:
+  enabled: false
+  serviceMonitor:
+    enabled: false
+  prometheusRule:
+    enable: false

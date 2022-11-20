@@ -111,6 +111,12 @@ ports:
       - loadbalancer
 #%{ endif }
 
+#%{ if expose_redis == true }
+  - port: 6379:6379 # same as `--port '6379:6379@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+#%{ endif }
+
 # env:
 #   - envVar: bar=baz # same as `--env 'bar=baz@server:0'`
 #     nodeFilters:

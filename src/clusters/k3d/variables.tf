@@ -116,3 +116,9 @@ variable "expose_nosql_mongodb" {
   type    = bool
   default = false
 }
+
+variable "expose_redis" {
+  type    = bool
+  default = false
+
+}

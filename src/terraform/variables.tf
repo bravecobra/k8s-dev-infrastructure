@@ -550,3 +550,23 @@ variable "oracle_operator_version" {
 variable "oracle_xe_version" {
   type = string
 }
+
+# redis
+variable "install_redis" {
+  type    = bool
+  default = false
+}
+
+variable "redis_helm_version" {
+  type = string
+}
+
+variable "redis_namespace" {
+  type    = string
+  default = "redis"
+}
+
+variable "expose_redis" {
+  type    = bool
+  default = false
+}
