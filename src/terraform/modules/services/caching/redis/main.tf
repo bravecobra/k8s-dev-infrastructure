@@ -13,13 +13,13 @@ resource "helm_release" "redis" {
   values = [
     templatefile("${path.module}/redis-values.yaml", {
       password : random_password.init_password.result
-      replica_count: var.replica_count
+      replica_count : var.replica_count
     }),
   ]
 }
 
 resource "kubectl_manifest" "redis-ingress" {
-  count     = var.expose_redis ? 1 : 0
+  count = var.expose_redis ? 1 : 0
   yaml_body = templatefile("${path.module}/templates/ingress.yaml", {
     domain-name = var.domain-name
     namespace   = var.namespace

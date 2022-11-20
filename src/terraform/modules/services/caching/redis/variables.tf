@@ -1,5 +1,5 @@
 variable "helm_release" {
-  type    = string
+  type = string
 }
 
 variable "domain-name" {
@@ -11,11 +11,11 @@ variable "namespace" {
 }
 
 variable "expose_redis" {
-  type = bool
+  type        = bool
   description = "Expose Redis"
 }
 
 variable "replica_count" {
   description = "Replicas count"
-  default = 0
+  default     = 0
 }
