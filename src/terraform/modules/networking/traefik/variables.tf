@@ -113,6 +113,11 @@ variable "expose_oracle" {
   default = false
 }
 
+variable "expose_redis" {
+  type    = bool
+  default = false
+}
+
 variable "cluster-type" {
   type = string
 }

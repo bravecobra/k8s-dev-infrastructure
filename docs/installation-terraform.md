@@ -49,6 +49,7 @@ On Linux edit your `/etc/hosts` file as root.
 127.0.0.1 oracle.infrastructure.k8s.local
 127.0.0.1 mongo.infrastructure.k8s.local
 127.0.0.1 oracle.infrastructure.k8s.local
+127.0.0.1 redis.infrastructure.k8s.local
 ```
 
 ## Generate a root certificate

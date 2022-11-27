@@ -56,6 +56,9 @@ additionalArguments:
 #%{ if expose_oracle == true }
   - "--entryPoints.oracle.address=:1521"
 #%{ endif }
+#%{ if expose_redis == true }
+  - "--entryPoints.redis.address=:6379"
+#%{ endif }
 
 
 entryPoints:
@@ -116,6 +119,10 @@ entryPoints:
 #%{ if expose_oracle == true }
   oracle:
     address: ":1521"
+#%{ endif }
+#%{ if expose_redis == true }
+  redis:
+    address: ":6379"
 #%{ endif }
 
 deployment:
@@ -221,6 +228,11 @@ ports:
 #%{ if expose_oracle == true }
   oracle:
     port: 1521
+    expose: true
+#%{ endif }
+#%{ if expose_redis == true }
+  redis:
+    port: 6379
     expose: true
 #%{ endif }
 

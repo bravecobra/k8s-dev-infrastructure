@@ -5,7 +5,7 @@ Make sure docker is up and running.
 ## Create the cluster
 
 ```shell
-terraform init
+terraform init --upgrade
 terraform apply --auto-approve
 ```
 

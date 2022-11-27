@@ -63,6 +63,7 @@ module "traefik" {
   expose_mariadb       = var.expose_mariadb
   expose_mongodb       = var.expose_mongodb
   expose_oracle        = var.expose_oracle
+  expose_redis         = var.expose_redis
   depends_on = [
     module.linkerd,
     kubernetes_namespace.traefik
@@ -436,5 +437,19 @@ module "oraclexe" {
     module.linkerd,
     module.certmanager,
     kubernetes_namespace.oracle
+  ]
+}
+
+module "redis" {
+  count        = var.install_redis == true ? 1 : 0
+  source       = "./modules/services/caching/redis"
+  domain-name  = var.domain-name
+  helm_release = var.redis_helm_version
+  namespace    = kubernetes_namespace.redis[0].metadata[0].name
+  expose_redis = var.expose_redis
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.redis
   ]
 }

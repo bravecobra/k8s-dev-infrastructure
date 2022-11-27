@@ -42,6 +42,7 @@ resource "local_file" "cluster-config" {
     expose_rds_mariadb   = var.expose_rds_mariadb,
     expose_rds_postgres  = var.expose_rds_postgres,
     expose_nosql_mongodb = var.expose_nosql_mongodb,
+    expose_redis         = var.expose_redis,
   })
 
   filename = "${path.module}/k3s-${var.cluster-name}.yaml"

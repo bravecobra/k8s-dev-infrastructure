@@ -308,3 +308,14 @@ resource "kubernetes_namespace" "oracle" {
     }
   }
 }
+
+resource "kubernetes_namespace" "redis" {
+  count = var.install_redis ? 1 : 0
+  metadata {
+    name = var.redis_namespace
+    annotations = {
+      "kubernetes.io/description" = var.redis_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
