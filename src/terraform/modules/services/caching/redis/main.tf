@@ -1,3 +1,10 @@
+resource "kubectl_manifest" "redis-cert" {
+  yaml_body = templatefile("${path.module}/templates/redis-commander/redis-cert.yaml", {
+    domain-name = var.domain-name
+    namespace   = var.namespace
+  })
+}
+
 resource "random_password" "init_password" {
   length           = 8
   special          = false
@@ -27,4 +34,29 @@ resource "kubectl_manifest" "redis-ingress" {
   depends_on = [
     helm_release.redis,
   ]
+}
+
+resource "kubectl_manifest" "redis_commander_deployment" {
+  yaml_body = templatefile("${path.module}/templates/redis-commander/deployment.yaml", {
+    namespace   = var.namespace,
+    domain-name = var.domain-name
+    password    = random_password.init_password.result
+  })
+  depends_on = [
+    random_password.init_password
+  ]
+}
+
+resource "kubectl_manifest" "redis_commander_service" {
+  yaml_body = templatefile("${path.module}/templates/redis-commander/service.yaml", {
+    namespace   = var.namespace,
+    domain-name = var.domain-name
+  })
+}
+
+resource "kubectl_manifest" "redis_commander_ingress" {
+  yaml_body = templatefile("${path.module}/templates/redis-commander/ingress.yaml", {
+    namespace   = var.namespace,
+    domain-name = var.domain-name
+  })
 }
