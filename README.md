@@ -16,6 +16,7 @@ This repository contains a `kubernetes` dev infrastructure, providing both cross
 | Monitoring      | prometheus              | Metrics                  |
 | Monitoring      | metrics-server          | Metrics                  |
 | Monitoring      | opentelemetry-collector | Ingestion                |
+| Saas Cache      | redis                   | Caching                  |
 | Saas Cloud      | localstack              | AWS emulator             |
 | Saas Config     | etcd                    | Key-Value service        |
 | Saas Config     | vault                   | Secrets management       |
