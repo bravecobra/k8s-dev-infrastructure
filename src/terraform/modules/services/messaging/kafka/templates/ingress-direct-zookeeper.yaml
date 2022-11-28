@@ -10,6 +10,6 @@ spec:
   - kind: Rule
     match: HostSNI(`*`)
     services:
-    - name: kafka-zookeeper
+    - name: kafka-cluster-zookeeper-client
       port: 2181
 
