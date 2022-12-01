@@ -119,7 +119,7 @@ variable "expose_redis" {
 }
 
 variable "expose_kafka" {
-  type = bool
+  type    = bool
   default = false
 }
 

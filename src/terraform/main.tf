@@ -461,7 +461,7 @@ module "kafka" {
   domain-name  = var.domain-name
   helm_release = var.kafka_helm_version
   expose_kafka = var.expose_kafka
-  namespace = kubernetes_namespace.kafka[0].metadata[0].name
+  namespace    = kubernetes_namespace.kafka[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
