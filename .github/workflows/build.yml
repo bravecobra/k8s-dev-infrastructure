@@ -1,5 +1,9 @@
 on: [push]
 
+permissions:
+  contents: write
+  discussions: write
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -20,8 +24,8 @@ jobs:
           touch src/terraform/.env
           echo GITHUB_OWNER=somebody >> src/terraform/.env
           echo GITHUB_TOKEN=sometoken >> src/terraform/.env
-          echo ORACLE_EMAIL=sometoken >> src/terraform/.env
-          echo ORACLE_PASSWORD=sometoken >> src/terraform/.env
+          echo ORACLE_EMAIL=someemail >> src/terraform/.env
+          echo ORACLE_PASSWORD=somepassword >> src/terraform/.env
 
       - name: terraform validate src-clusters-k3d
         uses: dflook/terraform-validate@v1
@@ -37,3 +41,15 @@ jobs:
         uses: dflook/terraform-validate@v1
         with:
           path: src/terraform
+
+  release:
+    runs-on: ubuntu-latest
+    name: Build release
+    steps:
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          generate_release_notes: true
+          discussion_category_name: Announcements
+          append_body: true
