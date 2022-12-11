@@ -125,6 +125,7 @@ entryPoints:
     address: ":6379"
 #%{ endif }
 
+
 deployment:
   labels:
     app: traefik

@@ -18,7 +18,7 @@ This repository contains a `kubernetes` dev infrastructure, providing both cross
 | Monitoring      | prometheus              | Metrics                  |
 | Monitoring      | metrics-server          | Metrics                  |
 | Monitoring      | opentelemetry-collector | Ingestion                |
-| Saas Caching    | redis                   | Caching                  |
+| Saas Cache      | redis                   | Caching                  |
 | Saas Cloud      | localstack              | AWS emulator             |
 | Saas Config     | etcd                    | Key-Value service        |
 | Saas Config     | vault                   | Secrets management       |
@@ -30,7 +30,8 @@ This repository contains a `kubernetes` dev infrastructure, providing both cross
 | Saas Database   | sqlserver               | Relational database      |
 | Saas Deployment | fluxcd                  | GitOps                   |
 | Saas Deployment | argocd                  | GitOps                   |
-| Saas Messaging  | rabbitmq                | Message Broker           |
+| Saas Messaging  | kafka                   | Messaging                |
+| Saas Messaging  | rabbitmq                | Messaging                |
 | Saas Search     | elasticsearch           | Search Engine            |
 | Saas Auth       | identityserver          | IDP                      |
 | Saas Auth       | keycloak                | IDP                      |

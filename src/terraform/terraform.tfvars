@@ -120,6 +120,16 @@ redis_helm_version = "17.3.11"
 install_etcd      = false
 etcd_helm_version = "8.5.8"
 
+
+//Kafka
+install_kafka      = false
+expose_kafka       = false
+kafka_helm_version = "0.32.0"
+
+//-------------------------------------
+// Storage
+//-------------------------------------
+
 //minio
 install_minio      = false
 minio_helm_version = "5.0.0"

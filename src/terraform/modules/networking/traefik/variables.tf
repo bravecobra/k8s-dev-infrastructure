@@ -118,6 +118,11 @@ variable "expose_redis" {
   default = false
 }
 
+variable "expose_kafka" {
+  type    = bool
+  default = false
+}
+
 variable "cluster-type" {
   type = string
 }

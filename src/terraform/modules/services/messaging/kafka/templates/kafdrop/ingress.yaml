@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kafdrop
+  namespace: ${namespace}
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+spec:
+  rules:
+    - host: kafka.infrastructure.k8s.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kafdrop
+                port:
+                  number: 9000
+  tls:
+  - secretName: kafka-cert
+    hosts:
+    - kafka.infrastructure.k8s.local

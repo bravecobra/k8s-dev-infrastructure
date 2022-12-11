@@ -62,6 +62,7 @@ module "traefik" {
   expose_mssql         = var.expose_mssql
   expose_mariadb       = var.expose_mariadb
   expose_mongodb       = var.expose_mongodb
+  expose_kafka         = var.expose_kafka
   expose_oracle        = var.expose_oracle
   expose_redis         = var.expose_redis
   depends_on = [
@@ -451,5 +452,19 @@ module "redis" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.redis
+  ]
+}
+
+module "kafka" {
+  count        = var.install_kafka == true ? 1 : 0
+  source       = "./modules/services/messaging/kafka"
+  domain-name  = var.domain-name
+  helm_release = var.kafka_helm_version
+  expose_kafka = var.expose_kafka
+  namespace    = kubernetes_namespace.kafka[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.kafka
   ]
 }
