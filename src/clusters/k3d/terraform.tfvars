@@ -24,4 +24,3 @@ expose_rds_mariadb   = true # MariaDB
 expose_rds_postgres  = true # PostgreSQL
 expose_nosql_mongodb = true # MongoDb
 expose_redis         = true # Redis
-expose_kafka         = true

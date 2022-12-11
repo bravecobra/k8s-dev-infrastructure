@@ -28,28 +28,6 @@ resource "kubectl_manifest" "kafka-cluster" {
   ]
 }
 
-resource "kubectl_manifest" "kafka-ingress" {
-  count = var.expose_kafka ? 1 : 0
-  yaml_body = templatefile("${path.module}/templates/ingress-direct-kafka.yaml", {
-    domain-name = var.domain-name
-    namespace   = var.namespace
-  })
-  depends_on = [
-    helm_release.strimzi-kafka,
-  ]
-}
-
-resource "kubectl_manifest" "zookeeper-ingress" {
-  count = var.expose_kafka ? 1 : 0
-  yaml_body = templatefile("${path.module}/templates/ingress-direct-zookeeper.yaml", {
-    domain-name = var.domain-name
-    namespace   = var.namespace
-  })
-  depends_on = [
-    helm_release.strimzi-kafka,
-  ]
-}
-
 resource "kubectl_manifest" "kafdrop-deployment" {
   yaml_body = templatefile("${path.module}/templates/kafdrop/deployment.yaml", {
     domain-name = var.domain-name
