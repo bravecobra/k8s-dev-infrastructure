@@ -35,7 +35,6 @@ resource "local_file" "cluster-config" {
     expose_jaeger        = var.expose_jaeger,
     expose_opentelemetry = var.expose_opentelemetry,
     expose_rabbitmq      = var.expose_rabbitmq,
-    expose_kafka         = var.expose_kafka,
     expose_loki          = var.expose_loki,
     expose_rds_mssql     = var.expose_rds_mssql,
     expose_rds_oracle    = var.expose_rds_oracle,
