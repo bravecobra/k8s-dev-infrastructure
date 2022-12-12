@@ -1,0 +1,16 @@
+{
+    "cSpell.words": [
+        "argocd",
+        "fluxcd",
+        "identityserver",
+        "keycloak",
+        "linkerd",
+        "localstack",
+        "minio",
+        "mkcert",
+        "mkdocs",
+        "rabbitmq",
+        "sqlserver",
+        "traefik"
+    ]
+}

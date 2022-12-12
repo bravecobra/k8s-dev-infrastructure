@@ -2,7 +2,9 @@
 
 ## Description
 
-This repository contains a `kubernetes` dev infrastructure, providing both crosscutting concerns as well as Saas infrastructure. All this is provided through `terraform` deploying `helm` charts and custom configuration.
+This repository contains a [kubernetes](https://kubernetes.io/) dev infrastructure, providing both crosscutting concerns as well as Saas services. This is provided through [terraform](https://www.terraform.io/) scripts deploying (mostly) [helm](https://helm.sh/) charts and custom configuration.
+
+## Components
 
 | Category        | Service                 | Description              |
 | :-------------- | ----------------------- | ------------------------ |
@@ -14,8 +16,9 @@ This repository contains a `kubernetes` dev infrastructure, providing both cross
 | Monitoring      | jaeger                  | Tracing                  |
 | Monitoring      | tempo                   | Tracing                  |
 | Monitoring      | prometheus              | Metrics                  |
+| Monitoring      | grafana                 | Dashboards               |
 | Monitoring      | metrics-server          | Metrics                  |
-| Monitoring      | opentelemetry-collector | Ingestion                |
+| Monitoring      | opentelemetry-collector | Telemetry Ingestion      |
 | Saas Cache      | redis                   | Caching                  |
 | Saas Cloud      | localstack              | AWS emulator             |
 | Saas Config     | etcd                    | Key-Value service        |
@@ -35,26 +38,52 @@ This repository contains a `kubernetes` dev infrastructure, providing both cross
 | Saas Auth       | keycloak                | IDP                      |
 | Saas Storage    | minio                   | S3 compatible storage    |
 | Saas Storage    | azurite                 | Azure compatible storage |
+| Saas Storage    | docker-registry         | Docker Registry          |
 
 ## Deploy
 
 ### Quick Start
 
 - Install Tooling
-  - Install Docker: [Docker desktop](https://www.docker.com/products/docker-desktop/) or [Rancher desktop](https://rancherdesktop.io/)
-  - Install [Lens](https://k8slens.dev/) (K8S GUI)
+  - Install a `Docker` environment : [Docker desktop](https://www.docker.com/products/docker-desktop/) or [Rancher desktop](https://rancherdesktop.io/)
   - Install tooling [prerequisites](./docs/preparation.md)
-- Create a local `k8s` cluster
-  - Edit your `hosts`: add domain names
-  - Check the docker network subnet range (adjust in main.tf -> variable) so there is no overlap with an existing one.
-  - Generate mkcert as admin
-  - Run generate certificates.ps1
+  - Install [Lens](https://k8slens.dev/), a K8S GUI (optional)
+- Create a local `k8s` cluster to deploy on
+  - Edit your `hosts` file: add domain names to resolve to `localhost` so we can point them to the local cluster
+  - Check the docker network subnet range (adjust in `main.tf `-> variable) so there is no overlap with an existing one.
+  - Generate `mkcert` as admin
+  - Run generate a certificate:
+
+    ```shell
+    ./src/terraform/certificates.ps1
+    ```
+
   - Creation local cluster
-    - cluster k3d: terraform init + apply
-    - cluster kind: terraform init + apply
+    - cluster k3d:
+
+    ```shell
+    cd ./src/clusters/k3d
+    terraform init
+    terraform apply --auto-approve
+    ```
+
+    - cluster kind:
+
+    ```shell
+    cd ./src/clusters/kind
+    terraform init
+    terraform apply --auto-approve
+    ```
+
 - Deploy
   - edit `terraform.tfvars`
-  - deploy services: terraform init + apply
+  - deploy services:
+
+    ```shell
+    cd ./src/terraform
+    terraform init
+    terraform apply --auto-approve
+    ```
 
 ### Documentation
 

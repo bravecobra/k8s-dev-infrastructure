@@ -1,0 +1,21 @@
+ui:
+  proxy: true
+  dockerRegistryUrl: http://registry.localhost:5000
+  deleteImages: true
+  showCatalogNbTags: true
+  showContentDigest: true
+  singleRegistry: false
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
+    host: registry.infrastructure.${domain-name}
+    path: /
+    pathType: Prefix
+    ingressClassName: traefik
+    tls:
+      - secretName: registry-cert
+        hosts:
+        - registry.infrastructure.${domain-name}
+

@@ -116,20 +116,6 @@ module "loki" {
   ]
 }
 
-module "argocd" {
-  count              = var.install_argocd == true ? 1 : 0
-  source             = "./modules/services/deployment/argocd"
-  helm_release       = var.argocd_helm_version
-  domain-name        = var.domain-name
-  install_prometheus = var.install_prometheus
-  namespace          = kubernetes_namespace.argocd[0].metadata[0].name
-  depends_on = [
-    module.jaeger,
-    module.linkerd,
-    kubernetes_namespace.argocd
-  ]
-}
-
 module "tempo" {
   count        = var.install_tempo == true ? 1 : 0
   source       = "./modules/monitoring/tracing/tempo"
@@ -160,6 +146,20 @@ module "prometheus" {
     module.jaeger,
     module.linkerd,
     kubernetes_namespace.prometheus
+  ]
+}
+
+module "argocd" {
+  count              = var.install_argocd == true ? 1 : 0
+  source             = "./modules/services/deployment/argocd"
+  helm_release       = var.argocd_helm_version
+  domain-name        = var.domain-name
+  install_prometheus = var.install_prometheus
+  namespace          = kubernetes_namespace.argocd[0].metadata[0].name
+  depends_on = [
+    module.jaeger,
+    module.linkerd,
+    kubernetes_namespace.argocd
   ]
 }
 
@@ -466,5 +466,18 @@ module "kafka" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.kafka
+  ]
+}
+
+module "registry" {
+  count        = var.install_docker_registry == true ? 1 : 0
+  source       = "./modules/services/storage/docker"
+  domain-name  = var.domain-name
+  helm_release = var.docker_registry_helm_version
+  namespace    = kubernetes_namespace.docker_registry[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.docker_registry
   ]
 }

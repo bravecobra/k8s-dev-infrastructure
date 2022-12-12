@@ -592,3 +592,17 @@ variable "expose_redis" {
   type    = bool
   default = false
 }
+
+variable "install_docker_registry" {
+  type    = bool
+  default = false
+}
+
+variable "docker_registry_helm_version" {
+  type = string
+}
+
+variable "docker_registry_namespace" {
+  type    = string
+  default = "registryui"
+}
