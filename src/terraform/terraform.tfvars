@@ -141,7 +141,7 @@ install_azurite = false
 expose_azurite  = false
 azurite_version = "latest"
 
-install_docker_registry = true
+install_docker_registry      = true
 docker_registry_helm_version = "0.4.3"
 
 //-------------------------------------
