@@ -2,7 +2,7 @@
 
 ## Description
 
-This repository contains a `kubernetes` dev infrastructure, providing both crosscutting concerns as well as Saas infrastructure. All this is provided through `terraform` deploying `helm` charts and custom configuration.
+This repository contains a [kubernetes](https://kubernetes.io/) dev infrastructure, providing both crosscutting concerns as well as Saas services. This is provided through [terraform](https://www.terraform.io/) scripts deploying (mostly) [helm](https://helm.sh/) charts and custom configuration.
 
 ## Components
 
@@ -16,8 +16,9 @@ This repository contains a `kubernetes` dev infrastructure, providing both cross
 | Monitoring      | jaeger                  | Tracing                  |
 | Monitoring      | tempo                   | Tracing                  |
 | Monitoring      | prometheus              | Metrics                  |
+| Monitoring      | grafana                 | Dashboards               |
 | Monitoring      | metrics-server          | Metrics                  |
-| Monitoring      | opentelemetry-collector | Ingestion                |
+| Monitoring      | opentelemetry-collector | Telemetry Ingestion      |
 | Saas Cache      | redis                   | Caching                  |
 | Saas Cloud      | localstack              | AWS emulator             |
 | Saas Config     | etcd                    | Key-Value service        |
@@ -37,3 +38,4 @@ This repository contains a `kubernetes` dev infrastructure, providing both cross
 | Saas Auth       | keycloak                | IDP                      |
 | Saas Storage    | minio                   | S3 compatible storage    |
 | Saas Storage    | azurite                 | Azure compatible storage |
+| Saas Storage    | docker-registry         | Docker Registry          |

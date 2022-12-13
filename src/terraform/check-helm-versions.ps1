@@ -15,6 +15,7 @@ $currentversions = terraform output | Select-String -Pattern '^helm_version_(.*)
 ## Looking up Latest version in the helm repos
 $table = @{}
 $table.Add("argocd", (Get-Latest-ChartVersion "argo-cd" "argo-cd" ))
+$table.Add("docker-registry-ui", (Get-Latest-ChartVersion "joxit" "docker-registry-ui" ))
 $table.Add("cert-manager", (Get-Latest-ChartVersion "jetstack" "cert-manager" ))
 $table.Add("elasticsearch", (Get-Latest-ChartVersion "elastic" "eck-operator"))
 $table.Add("etcd", (Get-Latest-ChartVersion "bitnami" "etcd"))

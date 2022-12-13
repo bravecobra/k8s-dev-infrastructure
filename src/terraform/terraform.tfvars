@@ -85,21 +85,38 @@ install_grafana         = false
 prometheus_helm_version = "41.7.1"
 
 //-------------------------------------
-//Saas
+// Search
 //-------------------------------------
-
-//argocd
-install_argocd      = false
-argocd_helm_version = "5.12.2"
 
 //elasticsearch
 install_elasticsearch      = false
 install_kibana             = false
 elasticsearch_helm_version = "2.4.0"
 
+//-------------------------------------
+// Caching
+//-------------------------------------
+
+//Redis
+install_redis      = false
+expose_redis       = false
+redis_helm_version = "17.3.11"
+
+//-------------------------------------
+// Config
+//-------------------------------------
+
 //vault
 install_vault      = false
 vault_helm_version = "0.22.1"
+
+//etcd
+install_etcd      = false
+etcd_helm_version = "8.5.8"
+
+//-------------------------------------
+// Security
+//-------------------------------------
 
 //identityserver4-admin
 install_identityserver4admin            = false
@@ -110,21 +127,6 @@ identityserver4admin_mssql_helm_version = "0.1.0"
 install_keycloak             = false
 keycloak_helm_version        = "18.3.0"
 keycloak_include_domainrealm = true
-
-//Redis
-install_redis      = false
-expose_redis       = false
-redis_helm_version = "17.3.11"
-
-//etcd
-install_etcd      = false
-etcd_helm_version = "8.5.8"
-
-
-//Kafka
-install_kafka      = false
-expose_kafka       = false
-kafka_helm_version = "0.32.0"
 
 //-------------------------------------
 // Storage
@@ -139,6 +141,13 @@ install_azurite = false
 expose_azurite  = false
 azurite_version = "latest"
 
+install_docker_registry      = true
+docker_registry_helm_version = "0.4.3"
+
+//-------------------------------------
+// Messaging
+//-------------------------------------
+
 //RabbitMQ
 install_rabbitmq      = false
 expose_rabbitmq       = false
@@ -149,6 +158,19 @@ install_localstack = false
 # expose_localstack       = false
 localstack_helm_version = "0.5.0"
 
+//Kafka
+install_kafka      = false
+expose_kafka       = false
+kafka_helm_version = "0.32.0"
+
+//-------------------------------------
+// Deployment
+//-------------------------------------
+
+//argocd
+install_argocd      = false
+argocd_helm_version = "5.12.2"
+
 //fluxcd
 ## Edit the .env file with a valid github username and token
 install_flux2                      = false
@@ -157,6 +179,10 @@ flux2_github_repository_create     = true                 #use an existing (priv
 flux2_github_repository_name       = "k8s-flux-example"   # name of the github repo
 flux2_github_repository_path       = "clusters/k8s-local" # path in the github repo where the flux config will be stored
 flux2_github_repository_visibility = "private"
+
+//-------------------------------------
+// Databases
+//-------------------------------------
 
 //MySQL
 install_mysql      = false

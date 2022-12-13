@@ -198,3 +198,7 @@ output "helm_version_mssql" {
 output "helm_version_redis" {
   value = var.redis_helm_version
 }
+
+output "helm_version_docker_registry" {
+  value = var.docker_registry_helm_version
+}

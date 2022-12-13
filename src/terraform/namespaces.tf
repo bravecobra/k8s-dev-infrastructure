@@ -329,3 +329,14 @@ resource "kubernetes_namespace" "kafka" {
     }
   }
 }
+
+resource "kubernetes_namespace" "docker_registry" {
+  count = var.install_docker_registry ? 1 : 0
+  metadata {
+    name = var.docker_registry_namespace
+    annotations = {
+      "kubernetes.io/description" = var.docker_registry_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}
