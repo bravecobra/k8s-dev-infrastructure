@@ -9,10 +9,7 @@ jobs:
   e2e:
     strategy:
       matrix:
-        cluster: [k3s]
-        include:
-          - cluster: k3s
-            config: tests/k3s/k3s-devinfra.yaml
+        cluster: [k3s, kind]
 
     runs-on: ubuntu-latest
     steps:
@@ -82,6 +79,13 @@ jobs:
           k3d-args: '--config=src/tests/k3s/k3s-devinfra.yaml'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Setup Kind Cluster
+        if: ${{ matrix.cluster == 'kind' }}
+        uses: helm/kind-action@v1.4.0
+        with:
+          cluster_name: kind-devinfra
+          config: src/tests/kind/kind-config.yaml
+
       - name: Testing connectivity
         run: |
           kubectl cluster-info
@@ -95,7 +99,7 @@ jobs:
         run: |
           cd ./src/terraform
           terraform init --upgrade
-          terraform apply -var-file="../tests/k3s/terraform.tfvars" --auto-approve
+          terraform apply -var-file="../tests/${{cluster}}/terraform.tfvars" --auto-approve
 
       - name: Await deployment traefik
         uses: jupyterhub/action-k8s-await-workloads@v1
@@ -132,5 +136,5 @@ jobs:
       - name: Run newman tests
         uses: matt-ball/newman-action@master
         with:
-          collection: ./src/tests/k3s/k8s-dev-infrastructure.postman_collection.json
-          environment: ./src/tests/k3s/k8s.local.postman_environment.json
+          collection: ./src/tests/k8s-dev-infrastructure.postman_collection.json
+          environment: ./src/tests/k8s.local.postman_environment.json
