@@ -59,11 +59,6 @@ jobs:
           curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
           chmod +x mkcert-v*-linux-amd64
           sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
-          sudo mkcert -install
-          sudo mkcert -CAROOT
-          sudo ls -al /root/.local/share/mkcert/
-          sudo cp -R /root/.local/share/mkcert/* /etc/ssl/certs/
-          sudo update-ca-certificates
 
       - name: Generate self-signed certificate
         run: |
@@ -129,6 +124,10 @@ jobs:
         if: always()
         with:
           namespace: whoami
+
+      - name: run plain curl
+        run: |
+          curl https://app1.k8s.local
 
       - name: "Call whoami.local"
         id: call
