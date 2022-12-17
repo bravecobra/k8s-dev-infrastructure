@@ -127,13 +127,13 @@ jobs:
 
       - name: run plain curl
         run: |
-          curl https://app1.k8s.local
+          curl https://whoami1.k8s.local
 
       - name: "Call whoami.local"
         id: call
         uses: indiesdev/curl@v1.1
         with:
-          url: https://app1.k8s.local
+          url: https://whoami1.k8s.local
           accept: 200
       - name: "Use response"
         run: echo ${{ steps.call.outputs.response }}
