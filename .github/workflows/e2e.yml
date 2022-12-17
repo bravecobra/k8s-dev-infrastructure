@@ -65,6 +65,7 @@ jobs:
           cd ./src/terraform
           chmod +x ./generate_certificate.sh
           ./generate_certificate.sh
+          sudo update-ca-certificates
 
       - name: Create env file for terraform validation
         run: |
@@ -97,21 +98,21 @@ jobs:
           terraform init --upgrade
           terraform apply -var-file="../tests/k3s/terraform.tfvars" --auto-approve
 
-      - name: Await deployment default
+      - name: Await deployment traefik
         uses: jupyterhub/action-k8s-await-workloads@v1
         with:
           workloads: "" # all
-          namespace: "traefik" # default
+          namespace: "traefik"
           timeout: 300
           max-restarts: 0
 
-      - name: Kubernetes namespace report (default)
+      - name: Kubernetes namespace report (traefik)
         uses: jupyterhub/action-k8s-namespace-report@v1
         if: always()
         with:
           namespace: traefik
 
-      - name: Await deployment default
+      - name: Await deployment whoami
         uses: jupyterhub/action-k8s-await-workloads@v1
         with:
           workloads: "" # all
@@ -119,7 +120,7 @@ jobs:
           timeout: 300
           max-restarts: 0
 
-      - name: Kubernetes namespace report (default)
+      - name: Kubernetes namespace report (whoami)
         uses: jupyterhub/action-k8s-namespace-report@v1
         if: always()
         with:
