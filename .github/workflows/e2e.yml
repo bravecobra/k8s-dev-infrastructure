@@ -96,4 +96,4 @@ jobs:
         run: |
           cd ./src/terraform
           terraform init --upgrade
-          terraform apply --auto-approve
+          terraform apply -var-file=”src/tests/k3s/terraform.tfvars" --auto-approve
