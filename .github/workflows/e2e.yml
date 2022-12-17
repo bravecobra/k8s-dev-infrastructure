@@ -75,6 +75,14 @@ jobs:
           k3d-args: '--config=src/tests/k3s/k3s-devinfra.yaml'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create temp files for terraform validation
+        run: |
+          touch src/terraform/.env
+          echo GITHUB_OWNER=somebody >> src/terraform/.env
+          echo GITHUB_TOKEN=sometoken >> src/terraform/.env
+          echo ORACLE_EMAIL=someemail >> src/terraform/.env
+          echo ORACLE_PASSWORD=somepassword >> src/terraform/.env
+
       - name: Terraform apply
         run: |
           cd ./src/terraform
