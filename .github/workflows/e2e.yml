@@ -21,17 +21,50 @@ jobs:
       - name: Add hosts to /etc/hosts
         if: ${{ matrix.cluster != 'minikube' }}
         run: |
-          sudo echo "127.0.0.1 k8s.local" | sudo tee -a /etc/hosts
-          sudo echo "127.0.0.1 whoami.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 k8s.local infrastructure.k8s.local traefik.infrastructure.k8s.local traefik.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local seq.infrastructure.k8s.local grafana.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 consul.infrastructure.k8s.local vault.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 login.k8s.local admin.login.k8s.local api.login.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 app1.k8s.local api.app1.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 argo.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 linkerd.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 whoami1.k8s.local whoami2.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 keycloak.k8s.local auth.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 etcd.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 minio.infrastructure.k8s.local console.minio.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 azurite.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 rabbitmq.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 localstack.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 flux.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 kafka.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 mysql.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 mariadb.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 postgres.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 mssql.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 oracle.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 mongo.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 oracle.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 redis.infrastructure.k8s.local" | sudo tee -a /etc/hosts
 
-
-      - name: MkCert
+      - name: Installing prerequisites
         run: |
-          sudo apt install libnss3-tools
+          sudo apt-get install -y apt-transport-https ca-certificates curl wget libnss3-tools cl-base64
+          wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+          sudo apt update && sudo apt install terraform
+
+      - name: Install MkCert
+        run: |
           curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
           chmod +x mkcert-v*-linux-amd64
           sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
           sudo mkcert -install
+
+      - name: Generate self-signed certificate
+        run: |
+          cd ./src/terraform
+          ./generate_certificate.sh
 
       # - name: Setup K3S Cluster
       #   uses: nolar/setup-k3d-k3s@v1
