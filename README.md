@@ -4,6 +4,9 @@
 
 This repository contains a [kubernetes](https://kubernetes.io/) dev infrastructure, providing both crosscutting concerns as well as Saas services. This is provided through [terraform](https://www.terraform.io/) scripts deploying (mostly) [helm](https://helm.sh/) charts and custom configuration.
 
+![Terraform syntax](https://github.com/bravecobra/k8s-dev-infrastructure/actions/workflows/build.yml/badge.svg)
+![E2E workflow](https://github.com/bravecobra/k8s-dev-infrastructure/actions/workflows/e2e.yml/badge.svg)
+
 ## Components
 
 | Category        | Service                 | Description              |
