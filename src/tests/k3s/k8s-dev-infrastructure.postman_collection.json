@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Tests",
+			"name": "health",
 			"item": [
 				{
 					"name": "WhoAmI",
@@ -31,12 +31,45 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://whoami1.k8s.local",
+							"raw": "https://whoami1.{{domain}}",
 							"protocol": "https",
 							"host": [
 								"whoami1",
-								"k8s",
-								"local"
+								"{{domain}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Traefik Dashboard",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://traefik.infrastructure.{{domain}}/dashboard/",
+							"protocol": "https",
+							"host": [
+								"traefik",
+								"infrastructure",
+								"{{domain}}"
+							],
+							"path": [
+								"dashboard",
+								""
 							]
 						}
 					},

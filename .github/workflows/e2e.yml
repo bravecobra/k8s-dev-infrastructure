@@ -133,4 +133,4 @@ jobs:
         uses: matt-ball/newman-action@master
         with:
           collection: ./src/tests/k3s/k8s-dev-infrastructure.postman_collection.json
-          # environment: postman_environment.json
+          environment: ./src/tests/k3s/k8s.local.postman_environment.json
