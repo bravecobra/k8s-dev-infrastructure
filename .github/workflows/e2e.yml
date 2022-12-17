@@ -67,10 +67,16 @@ jobs:
           chmod +x ./generate_certificate.sh
           ./generate_certificate.sh
 
-      # - name: Setup K3S Cluster
-      #   uses: nolar/setup-k3d-k3s@v1
-      #   if: ${{ matrix.cluster == 'k3s' }}
-      #   with:
-      #     version: v1.25.4+k3s1  # E.g.: v1.21, v1.21.2, v1.21.2+k3s1
-      #     k3d-args: '--config=tests/k3s/k3s-devinfra.yaml'
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup K3S Cluster
+        uses: nolar/setup-k3d-k3s@v1
+        if: ${{ matrix.cluster == 'k3s' }}
+        with:
+          version: v1.25.4+k3s1  # E.g.: v1.21, v1.21.2, v1.21.2+k3s1
+          k3d-args: '--config=tests/k3s/k3s-devinfra.yaml'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Terraform apply
+        run: |
+          cd ./src/terraform
+          terraform init --upgrade
+          terraform apply --auto-approve
