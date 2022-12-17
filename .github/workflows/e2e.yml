@@ -59,7 +59,6 @@ jobs:
           curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
           chmod +x mkcert-v*-linux-amd64
           sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
-          sudo mkcert -install
 
       - name: Generate self-signed certificate
         run: |
@@ -96,4 +95,4 @@ jobs:
         run: |
           cd ./src/terraform
           terraform init --upgrade
-          terraform apply -var-file=”src/tests/k3s/terraform.tfvars" --auto-approve
+          terraform apply -var-file="src/tests/k3s/terraform.tfvars" --auto-approve
