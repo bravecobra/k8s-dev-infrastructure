@@ -132,8 +132,12 @@ jobs:
       - name: "Call whoami.local"
         id: call
         uses: indiesdev/curl@v1.1
+        env:
+          name: SSL_CERT_DIR
+          value: "/etc/ssl/certs"
         with:
           url: https://whoami1.k8s.local
           accept: 200
+
       - name: "Use response"
         run: echo ${{ steps.call.outputs.response }}
