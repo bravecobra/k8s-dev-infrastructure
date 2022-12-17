@@ -60,7 +60,8 @@ jobs:
           chmod +x mkcert-v*-linux-amd64
           sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
           sudo mkcert -install
-          sudo cp ~/.local/share/mkcert/*.pem /etc/ssl/certs/
+          sudo mkcert -CAROOT
+          sudo cp /root/.local/share/mkcert/*.pem /etc/ssl/certs/
           sudo update-ca-certificates
 
       - name: Generate self-signed certificate
