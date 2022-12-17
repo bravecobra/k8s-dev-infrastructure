@@ -302,6 +302,7 @@ variable "keycloak_helm_version" {
 
 variable "keycloak_include_domainrealm" {
   type = bool
+  default = false
 }
 
 variable "keycloak_namespace" {

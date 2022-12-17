@@ -51,7 +51,7 @@ jobs:
           echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
           sudo apt update && sudo apt install terraform
 
-      - name: Install MkCert
+      - name: Install mkcert
         run: |
           curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
           chmod +x mkcert-v*-linux-amd64
@@ -129,7 +129,7 @@ jobs:
         with:
           namespace: whoami
 
-      - name: run plain curl
+      - name: Run plain curl
         run: |
           curl https://whoami1.k8s.local
 
