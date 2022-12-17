@@ -34,16 +34,18 @@ variable "install_metrics" {
   default = false
 }
 variable "metrics_helm_version" {
-  type = string
+  type    = string
+  default = "6.2.2"
 }
 
 //cert-manager
 variable "cert_manager_helm_version" {
-  type = string
+  type    = string
+  default = "v1.10.0"
 }
 variable "install_cert_manager" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "cert_manager_namespace" {
@@ -58,7 +60,8 @@ variable "install_traefik" {
 }
 
 variable "traefik_helm_version" {
-  type = string
+  type    = string
+  default = "18.3.0"
 }
 
 variable "traefik_namespace" {
@@ -72,7 +75,8 @@ variable "install_linkerd" {
   default = false
 }
 variable "linkerd_helm_version" {
-  type = string
+  type    = string
+  default = "2.11.5"
 }
 
 variable "linkerd_namespace" {
@@ -82,7 +86,8 @@ variable "linkerd_namespace" {
 
 //prometheus
 variable "prometheus_helm_version" {
-  type = string
+  type    = string
+  default = "41.7.1"
 }
 variable "install_prometheus" {
   type    = bool
@@ -107,7 +112,8 @@ variable "install_grafana" {
 
 //jaeger
 variable "jaeger_helm_version" {
-  type = string
+  type    = string
+  default = "2.36.0"
 }
 variable "install_jaeger" {
   type    = bool
@@ -125,7 +131,8 @@ variable "jaeger_namespace" {
 
 //opentelemetry
 variable "opentelemetry_helm_version" {
-  type = string
+  type    = string
+  default = "0.17.0"
 }
 variable "install_opentelemetry" {
   type    = bool
@@ -147,14 +154,16 @@ variable "install_loki" {
   default = false
 }
 variable "loki_helm_version" {
-  type = string
+  type    = string
+  default = "3.3.1"
 }
 variable "install_promtail" {
   type    = bool
   default = false
 }
 variable "promtail_helm_version" {
-  type = string
+  type    = string
+  default = "6.6.0"
 }
 variable "expose_loki" {
   type    = bool
@@ -169,10 +178,11 @@ variable "loki_namespace" {
 //tempo
 variable "install_tempo" {
   type    = bool
-  default = true
+  default = false
 }
 variable "tempo_helm_version" {
-  type = string
+  type    = string
+  default = "0.16.3"
 }
 
 variable "tempo_namespace" {
@@ -183,10 +193,11 @@ variable "tempo_namespace" {
 //argocd
 variable "install_argocd" {
   type    = bool
-  default = true
+  default = false
 }
 variable "argocd_helm_version" {
-  type = string
+  type    = string
+  default = "5.12.2"
 }
 
 variable "argocd_namespace" {
@@ -197,14 +208,15 @@ variable "argocd_namespace" {
 //elasticsearch
 variable "install_elasticsearch" {
   type    = bool
-  default = true
+  default = false
 }
 variable "install_kibana" {
   type    = bool
-  default = true
+  default = false
 }
 variable "elasticsearch_helm_version" {
-  type = string
+  type    = string
+  default = "2.4.0"
 }
 
 variable "elasticsearch_namespace" {
@@ -219,14 +231,16 @@ variable "elasticsearch_namespace" {
 //identityserver4-admin
 variable "install_identityserver4admin" {
   type    = bool
-  default = true
+  default = false
 }
 variable "identityserver4admin_helm_version" {
-  type = string
+  type    = string
+  default = "0.5.2"
 }
 
 variable "identityserver4admin_mssql_helm_version" {
-  type = string
+  type    = string
+  default = "0.1.0"
 }
 
 variable "identityserver4admin_namespace" {
@@ -237,7 +251,7 @@ variable "identityserver4admin_namespace" {
 //seq
 variable "install_seq" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "expose_seq" {
@@ -246,11 +260,13 @@ variable "expose_seq" {
 }
 
 variable "seq_helm_version" {
-  type = string
+  type    = string
+  default = "2022.1.7929"
 }
 
 variable "fluent_helm_version" {
-  type = string
+  type    = string
+  default = "0.20.9"
 }
 
 variable "seq_namespace" {
@@ -261,10 +277,11 @@ variable "seq_namespace" {
 //vault
 variable "install_vault" {
   type    = bool
-  default = true
+  default = false
 }
 variable "vault_helm_version" {
-  type = string
+  type    = string
+  default = "0.22.1"
 }
 
 variable "vault_namespace" {
@@ -275,15 +292,17 @@ variable "vault_namespace" {
 # Keycloak
 variable "install_keycloak" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "keycloak_helm_version" {
-  type = string
+  type    = string
+  default = "18.3.0"
 }
 
 variable "keycloak_include_domainrealm" {
-  type = bool
+  type    = bool
+  default = false
 }
 
 variable "keycloak_namespace" {
@@ -298,7 +317,8 @@ variable "install_whoami" {
 }
 
 variable "whoami_helm_version" {
-  type = string
+  type    = string
+  default = "2.5.5"
 }
 
 variable "whoami_namespace" {
@@ -313,7 +333,8 @@ variable "install_etcd" {
 }
 
 variable "etcd_helm_version" {
-  type = string
+  type    = string
+  default = "8.5.8"
 }
 
 variable "etcd_namespace" {
@@ -333,7 +354,8 @@ variable "install_minio" {
 # }
 
 variable "minio_helm_version" {
-  type = string
+  type    = string
+  default = "5.0.0"
 }
 
 variable "minio_namespace" {
@@ -352,7 +374,8 @@ variable "expose_azurite" {
 }
 
 variable "azurite_version" {
-  type = string
+  type    = string
+  default = "latest"
 }
 
 variable "azurite_namespace" {
@@ -377,7 +400,8 @@ variable "rabbitmq_namespace" {
 }
 
 variable "rabbitmq_helm_version" {
-  type = string
+  type    = string
+  default = "3.1.1"
 }
 
 
@@ -398,7 +422,8 @@ variable "kafka_namespace" {
 }
 
 variable "kafka_helm_version" {
-  type = string
+  type    = string
+  default = "0.32.0"
 }
 
 # localstack
@@ -408,7 +433,8 @@ variable "install_localstack" {
 }
 
 variable "localstack_helm_version" {
-  type = string
+  type    = string
+  default = "0.5.0"
 }
 
 variable "localstack_namespace" {
@@ -429,15 +455,17 @@ variable "install_flux2" {
 
 variable "flux2_github_repository_create" {
   type    = bool
-  default = false
+  default = true
 }
 
 variable "flux2_github_repository_name" {
-  type = string
+  type    = string
+  default = "k8s-flux-example"
 }
 
 variable "flux2_github_repository_path" {
-  type = string
+  type    = string
+  default = "clusters/k8s-local"
 }
 
 variable "flux2_github_repository_visibility" {
@@ -467,7 +495,8 @@ variable "mysql_namespace" {
 }
 
 variable "mysql_helm_version" {
-  type = string
+  type    = string
+  default = "9.4.1"
 }
 
 # Mariadb
@@ -487,7 +516,8 @@ variable "mariadb_namespace" {
 }
 
 variable "mariadb_helm_version" {
-  type = string
+  type    = string
+  default = "11.3.3"
 }
 
 # Postgres
@@ -507,7 +537,8 @@ variable "postgres_namespace" {
 }
 
 variable "postgres_helm_version" {
-  type = string
+  type    = string
+  default = "12.0.0"
 }
 
 # mssql
@@ -527,7 +558,8 @@ variable "mssql_namespace" {
 }
 
 variable "mssql_helm_version" {
-  type = string
+  type    = string
+  default = "1.2.0"
 }
 
 # mongodb
@@ -547,7 +579,8 @@ variable "mongodb_namespace" {
 }
 
 variable "mongodb_helm_version" {
-  type = string
+  type    = string
+  default = "13.1.5"
 }
 
 # oracle
@@ -567,10 +600,12 @@ variable "oracle_namespace" {
 }
 
 variable "oracle_operator_version" {
-  type = string
+  type    = string
+  default = "0.2.0"
 }
 variable "oracle_xe_version" {
-  type = string
+  type    = string
+  default = "21.3.0-xe"
 }
 
 # redis
@@ -580,7 +615,8 @@ variable "install_redis" {
 }
 
 variable "redis_helm_version" {
-  type = string
+  type    = string
+  default = "17.3.11"
 }
 
 variable "redis_namespace" {
@@ -599,7 +635,8 @@ variable "install_docker_registry" {
 }
 
 variable "docker_registry_helm_version" {
-  type = string
+  type    = string
+  default = "0.4.3"
 }
 
 variable "docker_registry_namespace" {

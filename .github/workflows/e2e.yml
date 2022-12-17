@@ -1,0 +1,139 @@
+name: E2E
+
+on: [push]
+
+permissions:
+  contents: write
+
+jobs:
+  e2e:
+    strategy:
+      matrix:
+        cluster: [k3s, kind]
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo echo "127.0.0.1 k8s.local infrastructure.k8s.local traefik.infrastructure.k8s.local traefik.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local seq.infrastructure.k8s.local grafana.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 consul.infrastructure.k8s.local vault.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 es.infrastructure.k8s.local kibana.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 login.k8s.local admin.login.k8s.local api.login.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 app1.k8s.local api.app1.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 argo.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 linkerd.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 whoami1.k8s.local whoami2.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 keycloak.k8s.local auth.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 etcd.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 minio.infrastructure.k8s.local console.minio.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 azurite.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 rabbitmq.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 localstack.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 flux.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 kafka.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 mysql.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 mariadb.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 postgres.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 mssql.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 oracle.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 mongo.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 oracle.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 redis.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+
+      - name: Installing prerequisites
+        run: |
+          sudo apt-get install -y apt-transport-https ca-certificates curl wget libnss3-tools cl-base64
+          wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+          sudo apt update && sudo apt install terraform
+
+      - name: Install mkcert
+        run: |
+          curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+          chmod +x mkcert-v*-linux-amd64
+          sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
+
+      - name: Generate self-signed certificate
+        run: |
+          cd ./src/terraform
+          chmod +x ./generate_certificate.sh
+          ./generate_certificate.sh
+
+      - name: Create env file for terraform validation
+        run: |
+          touch src/terraform/.env
+          echo GITHUB_OWNER=somebody >> src/terraform/.env
+          echo GITHUB_TOKEN=sometoken >> src/terraform/.env
+          echo ORACLE_EMAIL=someemail >> src/terraform/.env
+          echo ORACLE_PASSWORD=somepassword >> src/terraform/.env
+
+      - name: Setup K3S Cluster
+        uses: nolar/setup-k3d-k3s@v1
+        if: ${{ matrix.cluster == 'k3s' }}
+        with:
+          version: v1.25.4+k3s1  # E.g.: v1.21, v1.21.2, v1.21.2+k3s1
+          k3d-args: '--config=src/tests/k3s/k3s-devinfra.yaml'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Kind Cluster
+        if: ${{ matrix.cluster == 'kind' }}
+        uses: helm/kind-action@v1.4.0
+        with:
+          cluster_name: kind-devinfra
+          config: src/tests/kind/kind-config.yaml
+
+      - name: Testing connectivity
+        run: |
+          kubectl cluster-info
+          kubectl get namespace
+          kubectl get pods --all-namespaces
+          echo "current-context:" $(kubectl config current-context)
+          echo "environment-kubeconfig:" ${KUBECONFIG}
+          kubectl cluster-info dump
+
+      - name: Terraform apply
+        run: |
+          cd ./src/terraform
+          terraform init --upgrade
+          terraform apply -var-file="../tests/${{ matrix.cluster }}/terraform.tfvars" --auto-approve
+
+      - name: Await deployment traefik
+        uses: jupyterhub/action-k8s-await-workloads@v1
+        with:
+          workloads: "" # all
+          namespace: "traefik"
+          timeout: 300
+          max-restarts: 0
+
+      - name: Kubernetes namespace report (traefik)
+        uses: jupyterhub/action-k8s-namespace-report@v1
+        if: always()
+        with:
+          namespace: traefik
+
+      - name: Await deployment whoami
+        uses: jupyterhub/action-k8s-await-workloads@v1
+        with:
+          workloads: "" # all
+          namespace: "whoami" # default
+          timeout: 300
+          max-restarts: 0
+
+      - name: Kubernetes namespace report (whoami)
+        uses: jupyterhub/action-k8s-namespace-report@v1
+        if: always()
+        with:
+          namespace: whoami
+
+      - name: Run plain curl
+        run: |
+          curl https://whoami1.k8s.local
+
+      - name: Run newman tests
+        uses: matt-ball/newman-action@master
+        with:
+          collection: ./src/tests/k8s-dev-infrastructure.postman_collection.json
+          environment: ./src/tests/k8s.local.postman_environment.json

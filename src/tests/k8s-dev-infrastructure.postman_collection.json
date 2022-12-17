@@ -1,376 +1,84 @@
 {
 	"info": {
-		"_postman_id": "4516e449-916f-44f5-ab5a-9d9fd8a28e59",
-		"name": "k8s-dev-infrastructure",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "0ce16487-a7d3-4924-ae69-dda7fd6bb7bd",
+		"name": "k8s-dev-infrastructure-tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "456142"
 	},
 	"item": [
 		{
-			"name": "Linkerd",
-			"event": [
+			"name": "health",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://linkerd.infrastructure.{{domain}}/",
-					"protocol": "https",
-					"host": [
-						"linkerd",
-						"infrastructure",
-						"{{domain}}"
-					],
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Prometheus",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://prometheus.infrastructure.{{domain}}/",
-					"protocol": "https",
-					"host": [
-						"prometheus",
-						"infrastructure",
-						"{{domain}}"
-					],
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Jaeger",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://jaeger.infrastructure.{{domain}}/jaeger/",
-					"protocol": "https",
-					"host": [
-						"jaeger",
-						"infrastructure",
-						"{{domain}}"
-					],
-					"path": [
-						"jaeger",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Grafana",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://grafana.infrastructure.{{domain}}/",
-					"protocol": "https",
-					"host": [
-						"grafana",
-						"infrastructure",
-						"{{domain}}"
-					],
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Traefik",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://traefik.infrastructure.{{domain}}/dashboard/",
-					"protocol": "https",
-					"host": [
-						"traefik",
-						"infrastructure",
-						"{{domain}}"
-					],
-					"path": [
-						"dashboard",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "IdentityServer",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://login.{{domain}}/",
-					"protocol": "https",
-					"host": [
-						"login",
-						"{{domain}}"
-					],
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Argo",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://argo.{{domain}}/",
-					"protocol": "https",
-					"host": [
-						"argo",
-						"{{domain}}"
-					],
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Vault",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://vault.infrastructure.{{domain}}/ui/vault/auth?with=token",
-					"protocol": "https",
-					"host": [
-						"vault",
-						"infrastructure",
-						"{{domain}}"
-					],
-					"path": [
-						"ui",
-						"vault",
-						"auth"
-					],
-					"query": [
+					"name": "WhoAmI",
+					"event": [
 						{
-							"key": "with",
-							"value": "token"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Kibana",
-			"event": [
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://whoami1.{{domain}}",
+							"protocol": "https",
+							"host": [
+								"whoami1",
+								"{{domain}}"
+							]
+						}
+					},
+					"response": []
+				},
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://kibana.infrastructure.{{domain}}/app/home#/",
-					"protocol": "https",
-					"host": [
-						"kibana",
-						"infrastructure",
-						"{{domain}}"
+					"name": "Traefik Dashboard",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"path": [
-						"app",
-						"home"
-					],
-					"hash": "/"
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://traefik.infrastructure.{{domain}}/dashboard/",
+							"protocol": "https",
+							"host": [
+								"traefik",
+								"infrastructure",
+								"{{domain}}"
+							],
+							"path": [
+								"dashboard",
+								""
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "ElasticSearch",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 401 when anonymous\", function () {\r",
-							"    pm.response.to.have.status(401);\r",
-							"}); "
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://es.infrastructure.{{domain}}/",
-					"protocol": "https",
-					"host": [
-						"es",
-						"infrastructure",
-						"{{domain}}"
-					],
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "domain",
-			"value": "k8s.local",
-			"type": "string"
+			]
 		}
 	]
 }

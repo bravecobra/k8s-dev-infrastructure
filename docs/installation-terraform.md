@@ -54,6 +54,8 @@ On Linux edit your `/etc/hosts` file as root.
 
 ## Generate a root certificate
 
+Assuming the root certificate is already created with `mkcert -install`, then
+
 === "Windows"
 
     ```bash
@@ -69,6 +71,59 @@ On Linux edit your `/etc/hosts` file as root.
     cd src/terraform
     ./generate-certificate.sh
     ```
+
+## Helm repositories
+
+| Name                 | URL                                                               |
+| -------------------- | ----------------------------------------------------------------- |
+| stable               | [https://charts.helm.sh/stable]                                   |
+| hashicorp            | [https://helm.releases.hashicorp.com]                             |
+| datawire             | [https://www.getambassador.io]                                    |
+| jaegertracing        | [https://jaegertracing.github.io/helm-charts]                     |
+| bitnami              | [https://charts.bitnami.com/bitnami]                              |
+| prometheus-community | [https://prometheus-community.github.io/helm-charts]              |
+| traefik              | [https://helm.traefik.io/traefik]                                 |
+| datalust             | [https://helm.datalust.co]                                        |
+| fluent               | [https://fluent.github.io/helm-charts]                            |
+| grafana              | [https://grafana.github.io/helm-charts]                           |
+| agua                 | [https://aguafrommars.github.io/helm]                             |
+| elastic              | [https://helm.elastic.co]                                         |
+| jetstack             | [https://charts.jetstack.io]                                      |
+| identityserver4admin | [https://bravecobra.github.io/identityserver4.admin-helm/charts/] |
+| argo                 | [https://argoproj.github.io/argo-helm]                            |
+| argo-cd              | [https://argoproj.github.io/argo-helm]                            |
+| linkerd              | [https://helm.linkerd.io/stable]                                  |
+| longhorn             | [https://charts.longhorn.io]                                      |
+| codecentric          | [https://codecentric.github.io/helm-charts]                       |
+| open-telemetry       | [https://open-telemetry.github.io/opentelemetry-helm-charts]      |
+| minio                | [https://charts.min.io/]                                          |
+| kubecost             | [https://kubecost.github.io/cost-analyzer/]                       |
+| localstack-charts    | [https://localstack.github.io/helm-charts]                        |
+| fluxcd-community     | [https://fluxcd-community.github.io/helm-charts]                  |
+| simcube              | [https://simcubeltd.github.io/simcube-helm-charts/]               |
+| oracle               | [https://oracle.github.io/helm-charts]                            |
+| cilium               | [https://helm.cilium.io/]                                         |
+| confluentinc         | [https://confluentinc.github.io/cp-helm-charts/]                  |
+| strimzi              | [https://strimzi.io/charts/]                                      |
+| aqua                 | [https://aquasecurity.github.io/helm-charts/]                     |
+| jfrog                | [https://charts.jfrog.io]                                         |
+| joxit                | [https://helm.joxit.dev]                                          |
+
+To add these easily
+
+=== "Windows"
+
+```bash
+cd src/terraform
+./add-helm-repos.ps1
+```
+
+=== "Linux/WSL"
+
+```bash
+cd src/terraform
+./add-helm-repos.sh
+```
 
 ## Installer
 

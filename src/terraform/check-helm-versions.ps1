@@ -38,6 +38,7 @@ $table.Add("prometheus", (Get-Latest-ChartVersion "prometheus-community" "kube-p
 $table.Add("promtail", (Get-Latest-ChartVersion "grafana" "promtail"))
 $table.Add("rabbitmq", (Get-Latest-ChartVersion "bitnami" "rabbitmq-cluster-operator"))
 $table.Add("redis", (Get-Latest-ChartVersion "bitnami" "redis"))
+$table.Add("registry", (Get-Latest-ChartVersion), "joxit", "docker-registry-ui")
 $table.Add("seq", (Get-Latest-ChartVersion "datalust" "seq"))
 $table.Add("tempo", (Get-Latest-ChartVersion "grafana" "tempo"))
 $table.Add("traefik", (Get-Latest-ChartVersion "traefik" "traefik"))
