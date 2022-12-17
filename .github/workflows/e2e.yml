@@ -1,0 +1,42 @@
+name: E2E
+
+on: [push]
+
+permissions:
+  contents: write
+
+jobs:
+  e2e:
+    strategy:
+      matrix:
+        cluster: [k3s]
+        include:
+          - cluster: k3s
+            config: tests/k3s/k3s-devinfra.yaml
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Add hosts to /etc/hosts
+        if: ${{ matrix.cluster != 'minikube' }}
+        run: |
+          sudo echo "127.0.0.1 k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 whoami.local" | sudo tee -a /etc/hosts
+
+
+      - name: MkCert
+        run: |
+          sudo apt install libnss3-tools
+          curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+          chmod +x mkcert-v*-linux-amd64
+          sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
+          sudo mkcert -install
+
+      # - name: Setup K3S Cluster
+      #   uses: nolar/setup-k3d-k3s@v1
+      #   if: ${{ matrix.cluster == 'k3s' }}
+      #   with:
+      #     version: v1.25.4+k3s1  # E.g.: v1.21, v1.21.2, v1.21.2+k3s1
+      #     k3d-args: '--config=tests/k3s/k3s-devinfra.yaml'
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}

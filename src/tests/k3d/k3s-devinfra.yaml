@@ -1,0 +1,41 @@
+# k3d configuration file, saved as e.g. /home/me/myk3dcluster.yaml
+apiVersion: k3d.io/v1alpha4 # this will change in the future as we make everything more stable
+kind: Simple # internally, we also have a Cluster config, which is not yet available externally
+servers: 1 # same as `--servers 1`
+agents: 2 # same as `--agents 2`
+kubeAPI: # same as `--api-port myhost.my.domain:6445` (where the name would resolve to 127.0.0.1)
+  host: "k8s.local" # important for the `server` setting in the kubeconfig
+  hostIP: "127.0.0.1" # where the Kubernetes API will be listening on
+  hostPort: "6550" # where the Kubernetes API listening port will be mapped to on your host system
+image: rancher/k3s:v1.25.3-k3s1 # same as `--image rancher/k3s:v1.20.4-k3s1`
+network: k3d # same as `--network my-custom-net`
+# subnet: "172.28.0.0/16" # same as `--subnet 172.28.0.0/16`
+token: superSecretToken # same as `--token superSecretToken`
+ports:
+  - port: 80:80 # same as `--port '80:80@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+  - port: 443:443 # same as `--port '443:443@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+  - port: 8100:8100 # same as `--port '8100:8100@loadbalancer'`
+    nodeFilters:
+      - loadbalancer
+options:
+  k3d: # k3d runtime settings
+    wait: true # wait for cluster to be usable before returning; same as `--wait` (default: true)
+    timeout: "60s" # wait timeout before aborting; same as `--timeout 60s`
+    disableLoadbalancer: false # same as `--no-lb`
+    disableImageVolume: false # same as `--no-image-volume`
+    disableRollback: false # same as `--no-Rollback`
+    loadbalancer:
+      configOverrides:
+        - settings.workerConnections=2048
+  k3s:
+    extraArgs:
+      - arg: --disable=traefik
+        nodeFilters:
+          - server:*
+      - arg: --disable=metrics-server
+        nodeFilters:
+          - server:*
