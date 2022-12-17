@@ -72,7 +72,7 @@ jobs:
         if: ${{ matrix.cluster == 'k3s' }}
         with:
           version: v1.25.4+k3s1  # E.g.: v1.21, v1.21.2, v1.21.2+k3s1
-          k3d-args: '--config=tests/k3s/k3s-devinfra.yaml'
+          k3d-args: '--config=src/tests/k3s/k3s-devinfra.yaml'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Terraform apply
