@@ -9,4 +9,4 @@ node-ips = [
   "172.18.0.4"
 ]
 
-install_whoami      = true
+install_whoami = true

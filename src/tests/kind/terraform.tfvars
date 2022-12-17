@@ -1,6 +1,6 @@
 # kind
 cluster-context-name = "kind-kind-devinfra"
-cluster-type = "kind"
+cluster-type         = "kind"
 loadbalancer-ip      = "172.18.0.2"
 node-ips = [
   "172.18.0.2",
@@ -8,4 +8,4 @@ node-ips = [
   "172.18.0.4"
 ]
 
-install_whoami      = true
+install_whoami = true
