@@ -64,6 +64,7 @@ jobs:
       - name: Generate self-signed certificate
         run: |
           cd ./src/terraform
+          chmod +x ./generate_certificate.sh
           ./generate_certificate.sh
 
       # - name: Setup K3S Cluster
