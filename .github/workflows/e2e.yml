@@ -16,7 +16,6 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Add hosts to /etc/hosts
-        if: ${{ matrix.cluster != 'minikube' }}
         run: |
           sudo echo "127.0.0.1 k8s.local infrastructure.k8s.local traefik.infrastructure.k8s.local traefik.k8s.local" | sudo tee -a /etc/hosts
           sudo echo "127.0.0.1 jaeger.infrastructure.k8s.local prometheus.infrastructure.k8s.local seq.infrastructure.k8s.local grafana.infrastructure.k8s.local" | sudo tee -a /etc/hosts
