@@ -67,6 +67,14 @@ jobs:
           chmod +x ./generate_certificate.sh
           ./generate_certificate.sh
 
+      - name: Create env file for terraform validation
+        run: |
+          touch src/terraform/.env
+          echo GITHUB_OWNER=somebody >> src/terraform/.env
+          echo GITHUB_TOKEN=sometoken >> src/terraform/.env
+          echo ORACLE_EMAIL=someemail >> src/terraform/.env
+          echo ORACLE_PASSWORD=somepassword >> src/terraform/.env
+
       - name: Setup K3S Cluster
         uses: nolar/setup-k3d-k3s@v1
         if: ${{ matrix.cluster == 'k3s' }}
@@ -75,13 +83,14 @@ jobs:
           k3d-args: '--config=src/tests/k3s/k3s-devinfra.yaml'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create temp files for terraform validation
+      - name: Testing connectivity
         run: |
-          touch src/terraform/.env
-          echo GITHUB_OWNER=somebody >> src/terraform/.env
-          echo GITHUB_TOKEN=sometoken >> src/terraform/.env
-          echo ORACLE_EMAIL=someemail >> src/terraform/.env
-          echo ORACLE_PASSWORD=somepassword >> src/terraform/.env
+          kubectl cluster-info
+          kubectl get namespace
+          kubectl get pods --all-namespaces
+          echo "current-context:" $(kubectl config current-context)
+          echo "environment-kubeconfig:" ${KUBECONFIG}
+          kubectl cluster-info dump
 
       - name: Terraform apply
         run: |
