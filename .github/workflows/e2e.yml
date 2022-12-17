@@ -129,15 +129,8 @@ jobs:
         run: |
           curl https://whoami1.k8s.local
 
-      - name: "Call whoami.local"
-        id: call
-        uses: indiesdev/curl@v1.1
-        env:
-          name: SSL_CERT_DIR
-          value: "/etc/ssl/certs"
+      - name: Run newman tests
+        uses: matt-ball/newman-action@master
         with:
-          url: https://whoami1.k8s.local
-          accept: 200
-
-      - name: "Use response"
-        run: echo ${{ steps.call.outputs.response }}
+          collection: ./src/tests/k3s/k8s-dev-infrastructure.postman_collection.json
+          # environment: postman_environment.json
