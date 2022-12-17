@@ -62,7 +62,7 @@ jobs:
           sudo mkcert -install
           sudo mkcert -CAROOT
           sudo ls -al /root/.local/share/mkcert/
-          sudo cp /root/.local/share/mkcert/*.pem /etc/ssl/certs/
+          sudo cp /root/.local/share/mkcert/* /etc/ssl/certs/
           sudo update-ca-certificates
 
       - name: Generate self-signed certificate
