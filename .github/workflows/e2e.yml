@@ -96,3 +96,40 @@ jobs:
           cd ./src/terraform
           terraform init --upgrade
           terraform apply -var-file="../tests/k3s/terraform.tfvars" --auto-approve
+
+      - name: Await deployment default
+        uses: jupyterhub/action-k8s-await-workloads@v1
+        with:
+          workloads: "" # all
+          namespace: "traefik" # default
+          timeout: 300
+          max-restarts: 0
+
+      - name: Kubernetes namespace report (default)
+        uses: jupyterhub/action-k8s-namespace-report@v1
+        if: always()
+        with:
+          namespace: traefik
+
+      - name: Await deployment default
+        uses: jupyterhub/action-k8s-await-workloads@v1
+        with:
+          workloads: "" # all
+          namespace: "whoami" # default
+          timeout: 300
+          max-restarts: 0
+
+      - name: Kubernetes namespace report (default)
+        uses: jupyterhub/action-k8s-namespace-report@v1
+        if: always()
+        with:
+          namespace: whoami
+
+      - name: "Call whoami.local"
+        id: call
+        uses: indiesdev/curl@v1.1
+        with:
+          url: https://app1.k8s.local
+          accept: 200
+      - name: "Use response"
+        run: echo ${{ steps.call.outputs.response }}
