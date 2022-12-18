@@ -12,6 +12,8 @@ permissions:
 jobs:
   helm-charts:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
     - uses: actions/checkout@master
     - name: Helm Dependencies
