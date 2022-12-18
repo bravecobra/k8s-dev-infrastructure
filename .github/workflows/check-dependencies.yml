@@ -1,7 +1,11 @@
 name: Check Dependencies
 
 on:
+  workflow_dispatch:
   push:
+    paths:
+    - '.github/workflows/check-dependencies.yml'
+    - 'src/terraform/dependencies.yaml'
   schedule:
     # Runs "At 00:00 on Saturday." (see https://crontab.guru)
     - cron: '0 0 * * 6'
@@ -15,13 +19,17 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-    - uses: actions/checkout@master
-    - name: Helm Dependencies
-      uses: hckops/actions/helm-dependencies-action@main
-      with:
-        user-email: "391353+bravecobra@users.noreply.github.com"
-        user-name: "bravecobra"
-        config-path: src/terraform/dependencies.yml
-        default-branch: feature/helm_versioning
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Helm Dependencies
+        uses: hckops/actions/helm-dependencies-action@main
+        with:
+          user-email: "bravecobra-bot@users.noreply.github.com"
+          user-name: "bravecobra-bot"
+          config-path: src/terraform/dependencies.yml
+          default-branch: feature/helm_versioning
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
+          GITHUB_SHA: ${{ env.GITHUB_SHA }}
