@@ -4,6 +4,10 @@ on:
     branches:
       - master
   pull_request:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   tfsec:
     name: tfsec sarif report
