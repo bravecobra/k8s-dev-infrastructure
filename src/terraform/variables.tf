@@ -41,7 +41,7 @@ variable "metrics_helm_version" {
 //cert-manager
 variable "cert_manager_helm_version" {
   type    = string
-  default = "v1.10.0"
+  default = ""
 }
 variable "install_cert_manager" {
   type    = bool
@@ -61,7 +61,7 @@ variable "install_traefik" {
 
 variable "traefik_helm_version" {
   type    = string
-  default = "18.3.0"
+  default = ""
 }
 
 variable "traefik_namespace" {

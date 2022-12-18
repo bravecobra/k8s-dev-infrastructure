@@ -95,11 +95,11 @@ output "redis-password" {
 }
 
 output "helm_version_cert-manager" {
-  value = var.cert_manager_helm_version
+  value = module.versions.chart_versions["cert_manager"].chart_version
 }
 
 output "helm_version_traefik" {
-  value = var.traefik_helm_version
+  value = module.versions.chart_versions["traefik"].chart_version
 }
 
 output "helm_version_linkerd" {
