@@ -7,7 +7,7 @@ locals {
   patch_coredns = var.install_identityserver4admin || var.install_keycloak || var.install_minio
   chart_version_variables = {
     "traefik"      = { chart_version = var.traefik_helm_version },
-    "cert-manager" = { chart_version = var.cert_manager_helm_version }
+    "cert_manager" = { chart_version = var.cert_manager_helm_version }
   }
 }
 
