@@ -19,10 +19,7 @@ dependencies:
       # TODO add support for [github] i.e. releases/tags
       type: artifacthub
       name: traefik/traefik
-    # TODO override default
-    pr:
-      description: "todo"
-  - name: "Cert-Manager"
+  - name: "CertManager"
     source:
       file: src/terraform/versions.yaml
       path: .helm_versions.cert_manager.chart_version
