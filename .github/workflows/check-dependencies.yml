@@ -11,13 +11,13 @@ on:
     - cron: '0 0 * * 6'
 
 permissions:
+  pull-requests: write
   contents: write
+  repository-projects: write
 
 jobs:
   helm-charts:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
