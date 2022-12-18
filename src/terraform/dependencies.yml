@@ -14,7 +14,7 @@ dependencies:
   - name: "Traefik"
     source:
       file: src/terraform/versions.yaml
-      path: .helm_versions["traefik"].chart_version
+      path: .helm_versions.traefik.chart_version
     repository:
       # TODO add support for [github] i.e. releases/tags
       type: artifacthub
@@ -25,7 +25,7 @@ dependencies:
   - name: "Cert-Manager"
     source:
       file: src/terraform/versions.yaml
-      path: .helm_versions["cert-manager"].chart_version
+      path: .helm_versions.cert-manager.chart_version
     repository:
       type: artifacthub
       name: cert-manager/cert-manager
