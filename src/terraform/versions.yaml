@@ -8,4 +8,4 @@ helm_versions:
     repository:
       name: traefik
       url: https://helm.traefik.io/traefik
-    chart_version: 18.3.0
+    chart_version: 20.8.0
