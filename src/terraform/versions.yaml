@@ -1,5 +1,5 @@
 helm_versions:
-  cert-manager:
+  cert_manager:
     repository:
       name: cert-manager
       url: https://charts.jetstack.io

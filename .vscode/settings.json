@@ -4,6 +4,7 @@
         "artifacthub",
         "autoclose",
         "automerge",
+        "certmanager",
         "fluxcd",
         "identityserver",
         "keycloak",

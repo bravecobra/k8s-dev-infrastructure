@@ -26,7 +26,7 @@ module "metrics" {
 module "certmanager" {
   count        = var.install_cert_manager == true ? 1 : 0
   source       = "./modules/networking/cert-manager"
-  helm_release = module.versions.chart_versions["cert-manager"].chart_version
+  helm_release = module.versions.chart_versions["cert_manager"].chart_version
   namespace    = kubernetes_namespace.cert-manager[0].metadata[0].name
   depends_on = [
     kubernetes_namespace.cert-manager,

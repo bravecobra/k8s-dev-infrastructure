@@ -25,7 +25,7 @@ dependencies:
   - name: "Cert-Manager"
     source:
       file: src/terraform/versions.yaml
-      path: .helm_versions.cert-manager.chart_version
+      path: .helm_versions.cert_manager.chart_version
     repository:
       type: artifacthub
       name: cert-manager/cert-manager
