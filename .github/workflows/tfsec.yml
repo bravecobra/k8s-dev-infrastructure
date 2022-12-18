@@ -24,7 +24,6 @@ jobs:
       - name: tfsec
         uses: aquasecurity/tfsec-sarif-action@v0.1.4
         with:
-          tfsec_version: v1.8.0
           sarif_file: tfsec.sarif
           working_directory: src/terraform
           tfvars_file: src/tests/k3s/terraform.tfvars
