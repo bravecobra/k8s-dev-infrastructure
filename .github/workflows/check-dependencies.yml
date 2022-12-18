@@ -2,6 +2,7 @@ name: Check Dependencies
 
 on:
   workflow_dispatch:
+  pull_request:
   push:
     paths:
     - '.github/workflows/check-dependencies.yml'
@@ -29,7 +30,6 @@ jobs:
           user-email: "bravecobra-bot@users.noreply.github.com"
           user-name: "bravecobra-bot"
           config-path: src/terraform/dependencies.yml
-          default-branch: feature/helm_versioning
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
