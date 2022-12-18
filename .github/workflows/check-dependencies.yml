@@ -1,4 +1,4 @@
-name: E2E
+name: Check Dependencies
 
 on:
   push:
@@ -19,6 +19,6 @@ jobs:
       with:
         user-email: "391353+bravecobra@users.noreply.github.com"
         user-name: "bravecobra"
-        config-path: src/terraform/dependencies.yaml
+        config-path: src/terraform/dependencies.yml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
