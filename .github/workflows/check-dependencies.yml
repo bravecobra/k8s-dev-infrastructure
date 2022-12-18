@@ -23,6 +23,5 @@ jobs:
         user-name: "bravecobra"
         config-path: src/terraform/dependencies.yml
         default-branch: feature/helm_versioning
-        dry-run: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
