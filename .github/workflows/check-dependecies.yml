@@ -1,0 +1,24 @@
+name: E2E
+
+on:
+  push:
+  schedule:
+    # Runs "At 00:00 on Saturday." (see https://crontab.guru)
+    - cron: '0 0 * * 6'
+
+permissions:
+  contents: write
+
+jobs:
+  helm-charts:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Helm Dependencies
+      uses: hckops/actions/helm-dependencies-action@main
+      with:
+        user-email: "391353+bravecobra@users.noreply.github.com"
+        user-name: "bravecobra"
+        config-path: src/terraform/dependencies.yaml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

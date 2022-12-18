@@ -5,8 +5,17 @@ resource "kubectl_manifest" "notify_watchers" {
 
 locals {
   patch_coredns = var.install_identityserver4admin || var.install_keycloak || var.install_minio
+  chart_version_variables =  {
+      "traefik" = { chart_version = var.traefik_helm_version },
+      "cert-manager" = { chart_version = var.cert_manager_helm_version }
+  }
 }
 
+module "versions" {
+    source       = "./modules/utils/chartversions"
+    config_file_content = file("./versions.yaml")
+    input_versions = local.chart_version_variables
+}
 
 module "metrics" {
   count        = var.install_metrics == true ? 1 : 0
@@ -17,7 +26,7 @@ module "metrics" {
 module "certmanager" {
   count        = var.install_cert_manager == true ? 1 : 0
   source       = "./modules/networking/cert-manager"
-  helm_release = var.cert_manager_helm_version
+  helm_release = module.versions.chart_versions["cert-manager"].chart_version
   namespace    = kubernetes_namespace.cert-manager[0].metadata[0].name
   depends_on = [
     kubernetes_namespace.cert-manager,
@@ -42,7 +51,7 @@ module "linkerd" {
 module "traefik" {
   count                = var.install_traefik == true ? 1 : 0
   source               = "./modules/networking/traefik"
-  helm_release         = var.traefik_helm_version
+  helm_release         = module.versions.chart_versions["traefik"].chart_version
   domain-name          = var.domain-name
   namespace            = kubernetes_namespace.traefik[0].metadata[0].name
   install_dashboards   = var.install_prometheus
