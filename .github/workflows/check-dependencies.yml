@@ -2,11 +2,9 @@ name: Check Dependencies
 
 on:
   workflow_dispatch:
-  pull_request:
   push:
-    paths:
-    - '.github/workflows/check-dependencies.yml'
-    - 'src/terraform/dependencies.yaml'
+    branches:
+      - master
   schedule:
     # Runs "At 00:00 on Saturday." (see https://crontab.guru)
     - cron: '0 0 * * 6'
