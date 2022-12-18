@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
         "argocd",
+        "artifacthub",
+        "autoclose",
+        "automerge",
         "fluxcd",
         "identityserver",
         "keycloak",
