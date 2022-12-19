@@ -15,6 +15,7 @@
         "codeql",
         "cowboysysop",
         "datalust",
+        "datasource",
         "fluxcd",
         "hckops",
         "identityserver",
