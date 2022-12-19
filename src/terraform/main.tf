@@ -7,7 +7,36 @@ locals {
   patch_coredns = var.install_identityserver4admin || var.install_keycloak || var.install_minio
   chart_version_variables = {
     "traefik"      = { chart_version = var.traefik_helm_version },
-    "cert_manager" = { chart_version = var.cert_manager_helm_version }
+    "cert_manager" = { chart_version = var.cert_manager_helm_version },
+    "metrics" = { chart_version = var.metrics_helm_version },
+    "linkerd" = { chart_version = var.linkerd_helm_version },
+    "prometheus" = { chart_version = var.prometheus_helm_version },
+    "jaeger" = { chart_version = var.jaeger_helm_version },
+    "opentelemetry" = { chart_version = var.opentelemetry_helm_version },
+    "loki" = { chart_version = var.loki_helm_version },
+    "promtail" = { chart_version = var.promtail_helm_version },
+    "tempo" = { chart_version = var.tempo_helm_version },
+    "argocd" = { chart_version = var.argocd_helm_version },
+    "elasticsearch" = { chart_version = var.elasticsearch_helm_version },
+    "identityserver4admin" = { chart_version = var.identityserver4admin_helm_version },
+    "identityserver4admin_mssql" = { chart_version = var.identityserver4admin_mssql_helm_version },
+    "seq" = { chart_version = var.seq_helm_version },
+    "fluent" = { chart_version = var.fluent_helm_version },
+    "vault" = { chart_version = var.vault_helm_version },
+    "keycloak" = { chart_version = var.keycloak_helm_version },
+    "whoami" = { chart_version = var.whoami_helm_version },
+    "etcd" = { chart_version = var.etcd_helm_version },
+    "minio" = { chart_version = var.minio_helm_version },
+    "rabbitmq" = { chart_version = var.rabbitmq_helm_version },
+    "kafka" = { chart_version = var.kafka_helm_version },
+    "localstack" = { chart_version = var.localstack_helm_version },
+    "mysql" = { chart_version = var.mysql_helm_version },
+    "mariadb" = { chart_version = var.mariadb_helm_version },
+    "postgres" = { chart_version = var.postgres_helm_version },
+    "mssql" = { chart_version = var.mssql_helm_version },
+    "mongodb" = { chart_version = var.mongodb_helm_version },
+    "redis" = { chart_version = var.redis_helm_version },
+    "docker_registry" = { chart_version = var.docker_registry_helm_version }
   }
 }
 
@@ -20,7 +49,7 @@ module "versions" {
 module "metrics" {
   count        = var.install_metrics == true ? 1 : 0
   source       = "./modules/monitoring/metrics/metrics"
-  helm_release = var.metrics_helm_version
+  helm_release = module.versions.chart_versions["metrics"].chart_version
 }
 
 module "certmanager" {
@@ -36,7 +65,7 @@ module "certmanager" {
 module "linkerd" {
   count             = var.install_linkerd == true ? 1 : 0
   source            = "./modules/networking/linkerd"
-  helm_release      = var.linkerd_helm_version
+  helm_release      = module.versions.chart_versions["linkerd"].chart_version
   domain-name       = var.domain-name
   namespace         = kubernetes_namespace.linkerd[0].metadata[0].name
   tracing_enabled   = var.install_jaeger
@@ -83,7 +112,7 @@ module "traefik" {
 module "jaeger" {
   count              = var.install_jaeger == true ? 1 : 0
   source             = "./modules/monitoring/tracing/jaeger"
-  helm_release       = var.jaeger_helm_version
+  helm_release       = module.versions.chart_versions["jaeger"].chart_version
   domain-name        = var.domain-name
   install_dashboards = var.install_prometheus
   namespace          = kubernetes_namespace.jaeger[0].metadata[0].name
@@ -96,7 +125,7 @@ module "jaeger" {
 module "opentelemetry" {
   count            = var.install_opentelemetry == true ? 1 : 0
   source           = "./modules/monitoring/ingestion/opentelemetry"
-  helm_release     = var.opentelemetry_helm_version
+  helm_release     = module.versions.chart_versions["opentelemetry"].chart_version
   expose_ingestion = var.expose_opentelemetry
   namespace        = kubernetes_namespace.opentelemetry[0].metadata[0].name
   install_jaeger   = var.install_jaeger
@@ -112,8 +141,8 @@ module "opentelemetry" {
 module "loki" {
   count                 = var.install_loki == true ? 1 : 0
   source                = "./modules/monitoring/logging/loki"
-  helm_release_loki     = var.loki_helm_version
-  helm_release_promtail = var.promtail_helm_version
+  helm_release_loki     = module.versions.chart_versions["loki"].chart_version
+  helm_release_promtail = module.versions.chart_versions["promtail"].chart_version
   install_dashboards    = var.install_prometheus
   install_promtail      = var.install_promtail
   tracing_enabled       = var.install_jaeger
@@ -128,7 +157,7 @@ module "loki" {
 module "tempo" {
   count        = var.install_tempo == true ? 1 : 0
   source       = "./modules/monitoring/tracing/tempo"
-  helm_release = var.tempo_helm_version
+  helm_release = module.versions.chart_versions["tempo"].chart_version
   namespace    = kubernetes_namespace.tempo[0].metadata[0].name
   depends_on = [
     module.linkerd,
@@ -139,7 +168,7 @@ module "tempo" {
 module "prometheus" {
   count              = var.install_prometheus == true || var.install_grafana == true ? 1 : 0
   source             = "./modules/monitoring/metrics/prometheus"
-  helm_release       = var.prometheus_helm_version
+  helm_release       = module.versions.chart_versions["prometheus"].chart_version
   install_prometheus = var.install_prometheus
   install_grafana    = var.install_grafana
   metrics_jaeger     = var.install_jaeger
@@ -161,7 +190,7 @@ module "prometheus" {
 module "argocd" {
   count              = var.install_argocd == true ? 1 : 0
   source             = "./modules/services/deployment/argocd"
-  helm_release       = var.argocd_helm_version
+  helm_release       = module.versions.chart_versions["argocd"].chart_version
   domain-name        = var.domain-name
   install_prometheus = var.install_prometheus
   namespace          = kubernetes_namespace.argocd[0].metadata[0].name
@@ -176,7 +205,7 @@ module "argocd" {
 module "elasticsearch" {
   count                 = var.install_elasticsearch == true ? 1 : 0
   source                = "./modules/services/search/elasticsearch"
-  helm_release          = var.elasticsearch_helm_version
+  helm_release          = module.versions.chart_versions["elasticsearch"].chart_version
   install_elasticsearch = var.install_elasticsearch
   install_kibana        = var.install_kibana
   domain-name           = var.domain-name
@@ -191,7 +220,7 @@ module "elasticsearch" {
 module "vault" {
   count        = var.install_vault == true ? 1 : 0
   source       = "./modules/services/configuration/vault"
-  helm_release = var.vault_helm_version
+  helm_release = module.versions.chart_versions["vault"].chart_version
   domain-name  = var.domain-name
   namespace    = kubernetes_namespace.vault[0].metadata[0].name
   depends_on = [
@@ -213,8 +242,8 @@ module "coredns" {
 module "identityserver4" {
   count              = var.install_identityserver4admin == true ? 1 : 0
   source             = "./modules/services/security/auth/identityserver4-admin"
-  helm_release       = var.identityserver4admin_helm_version
-  mssql_helm_release = var.identityserver4admin_mssql_helm_version
+  helm_release       = module.versions.chart_versions["identityserver4admin"].chart_version
+  mssql_helm_release = module.versions.chart_versions["identityserver4admin_mssql"].chart_version
   domain-name        = var.domain-name
   namespace          = kubernetes_namespace.identityserver4[0].metadata[0].name
   depends_on = [
@@ -228,8 +257,8 @@ module "identityserver4" {
 module "seq" {
   count               = var.install_seq == true ? 1 : 0
   source              = "./modules/monitoring/logging/seq"
-  helm_release        = var.seq_helm_version
-  fluent_helm_release = var.fluent_helm_version
+  helm_release        = module.versions.chart_versions["seq"].chart_version
+  fluent_helm_release = module.versions.chart_versions["fluent"].chart_version
   domain-name         = var.domain-name
   expose_ingestion    = var.expose_seq
   namespace           = kubernetes_namespace.seq[0].metadata[0].name
@@ -243,7 +272,7 @@ module "seq" {
 module "keycloak" {
   count        = var.install_keycloak == true ? 1 : 0
   source       = "./modules/services/security/auth/keycloak"
-  helm_release = var.keycloak_helm_version
+  helm_release = module.versions.chart_versions["keycloak"].chart_version
   domain-name  = var.domain-name
   namespace    = kubernetes_namespace.keycloak[0].metadata[0].name
   //forward_client_secret = var.forward_client_secret
@@ -258,7 +287,7 @@ module "keycloak" {
 module "whoami" {
   count        = var.install_whoami == true ? 1 : 0
   source       = "./samples/whoami"
-  helm_release = var.whoami_helm_version
+  helm_release = module.versions.chart_versions["whoami"].chart_version
   domain-name  = var.domain-name
   namespace    = kubernetes_namespace.whoami[0].metadata[0].name
   depends_on = [
@@ -271,7 +300,7 @@ module "whoami" {
 module "minio" {
   count        = var.install_minio == true ? 1 : 0
   source       = "./modules/services/storage/minio"
-  helm_release = var.minio_helm_version
+  helm_release = module.versions.chart_versions["minio"].chart_version
   domain-name  = var.domain-name
   metrics      = var.install_prometheus
   namespace    = kubernetes_namespace.minio[0].metadata[0].name
@@ -285,7 +314,7 @@ module "minio" {
 module "etcd" {
   count        = var.install_etcd == true ? 1 : 0
   source       = "./modules/services/configuration/etcd"
-  helm_release = var.etcd_helm_version
+  helm_release = module.versions.chart_versions["etcd"].chart_version
   domain-name  = var.domain-name
   namespace    = kubernetes_namespace.etcd[0].metadata[0].name
   depends_on = [
@@ -312,7 +341,7 @@ module "rabbitmq" {
   count              = var.install_rabbitmq == true ? 1 : 0
   source             = "./modules/services/messaging/rabbitmq"
   domain-name        = var.domain-name
-  helm_release       = var.rabbitmq_helm_version
+  helm_release       = module.versions.chart_versions["rabbitmq"].chart_version
   install_dashboards = var.install_prometheus
   namespace          = kubernetes_namespace.rabbitmq[0].metadata[0].name
   depends_on = [
@@ -326,7 +355,7 @@ module "localstack" {
   count        = var.install_localstack == true ? 1 : 0
   source       = "./modules/services/cloud/localstack"
   domain-name  = var.domain-name
-  helm_release = var.localstack_helm_version
+  helm_release = module.versions.chart_versions["localstack"].chart_version
   namespace    = kubernetes_namespace.localstack[0].metadata[0].name
   depends_on = [
     module.coredns,
@@ -356,7 +385,7 @@ module "mysql" {
   count        = var.install_mysql == true ? 1 : 0
   source       = "./modules/services/database/rds/mysql"
   domain-name  = var.domain-name
-  helm_release = var.mysql_helm_version
+  helm_release = module.versions.chart_versions["mysql"].chart_version
   expose_mysql = var.expose_mysql
   namespace    = kubernetes_namespace.mysql[0].metadata[0].name
   depends_on = [
@@ -370,7 +399,7 @@ module "postgres" {
   count           = var.install_postgres == true ? 1 : 0
   source          = "./modules/services/database/rds/postgres"
   domain-name     = var.domain-name
-  helm_release    = var.postgres_helm_version
+  helm_release    = module.versions.chart_versions["postgres"].chart_version
   expose_postgres = var.expose_postgres
   namespace       = kubernetes_namespace.postgres[0].metadata[0].name
   depends_on = [
@@ -384,7 +413,7 @@ module "mssql" {
   count        = var.install_mssql == true ? 1 : 0
   source       = "./modules/services/database/rds/sqlserver"
   domain-name  = var.domain-name
-  helm_release = var.mssql_helm_version
+  helm_release = module.versions.chart_versions["mssql"].chart_version
   expose_mssql = var.expose_mssql
   namespace    = kubernetes_namespace.mssql[0].metadata[0].name
   depends_on = [
@@ -398,7 +427,7 @@ module "mariadb" {
   count          = var.install_mariadb == true ? 1 : 0
   source         = "./modules/services/database/rds/mariadb"
   domain-name    = var.domain-name
-  helm_release   = var.mariadb_helm_version
+  helm_release   = module.versions.chart_versions["mariadb"].chart_version
   expose_mariadb = var.expose_mariadb
   namespace      = kubernetes_namespace.mariadb[0].metadata[0].name
   depends_on = [
@@ -412,7 +441,7 @@ module "mongodb" {
   count          = var.install_mongodb == true ? 1 : 0
   source         = "./modules/services/database/nosql/mongodb"
   domain-name    = var.domain-name
-  helm_release   = var.mongodb_helm_version
+  helm_release   = module.versions.chart_versions["mongodb"].chart_version
   expose_mongodb = var.expose_mongodb
   namespace      = kubernetes_namespace.mongodb[0].metadata[0].name
   depends_on = [
@@ -454,7 +483,7 @@ module "redis" {
   count        = var.install_redis == true ? 1 : 0
   source       = "./modules/services/caching/redis"
   domain-name  = var.domain-name
-  helm_release = var.redis_helm_version
+  helm_release = module.versions.chart_versions["redis"].chart_version
   namespace    = kubernetes_namespace.redis[0].metadata[0].name
   expose_redis = var.expose_redis
   depends_on = [
@@ -468,7 +497,7 @@ module "kafka" {
   count        = var.install_kafka == true ? 1 : 0
   source       = "./modules/services/messaging/kafka"
   domain-name  = var.domain-name
-  helm_release = var.kafka_helm_version
+  helm_release = module.versions.chart_versions["kafka"].chart_version
   expose_kafka = var.expose_kafka
   namespace    = kubernetes_namespace.kafka[0].metadata[0].name
   depends_on = [
@@ -482,7 +511,7 @@ module "registry" {
   count        = var.install_docker_registry == true ? 1 : 0
   source       = "./modules/services/storage/docker"
   domain-name  = var.domain-name
-  helm_release = var.docker_registry_helm_version
+  helm_release = module.versions.chart_versions["docker_registry"].chart_version
   namespace    = kubernetes_namespace.docker_registry[0].metadata[0].name
   depends_on = [
     module.coredns,
