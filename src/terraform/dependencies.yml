@@ -17,7 +17,7 @@ dependencies:
       path: .helm_versions.argocd.chart_version
     repository:
       type: artifacthub
-      name: argo-cd/argo-cd
+      name: argo/argo-cd
   - name: "cert-manager"
     source:
       file: src/terraform/versions.yaml
@@ -59,7 +59,7 @@ dependencies:
       path: .helm_versions.jaeger.chart_version
     repository:
       type: artifacthub
-      name: jaegertracing/jaeger
+      name: jaegertracing/jaeger-operator
   - name: "kafka"
     source:
       file: src/terraform/versions.yaml
@@ -80,14 +80,14 @@ dependencies:
       path: .helm_versions.linkerd.chart_version
     repository:
       type: artifacthub
-      name: linkerd/linkerd2
+      name: linkerd2/linkerd2
   - name: "localstack"
     source:
       file: src/terraform/versions.yaml
       path: .helm_versions.localstack.chart_version
     repository:
       type: artifacthub
-      name: localstack-charts/localstack
+      name: localstack/localstack
   - name: "loki"
     source:
       file: src/terraform/versions.yaml
@@ -143,7 +143,7 @@ dependencies:
       path: .helm_versions.opentelemetry.chart_version
     repository:
       type: artifacthub
-      name: open-telemetry/opentelemetry-operator
+      name: opentelemetry-helm/opentelemetry-operator
   - name: "postgres"
     source:
       file: src/terraform/versions.yaml
