@@ -1,5 +1,8 @@
 # Override of: https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
 
+test:
+  enabled: false
+
 auth_enabled: false
 
 podAnnotations:
@@ -15,8 +18,8 @@ monitoring:
     enabled: false
     grafanaAgent:
       installOperator: false
-    lokiCanary:
-      enabled: false
+  lokiCanary:
+    enabled: false
   serviceMonitor:
     enabled: false
     additionalLabels:
