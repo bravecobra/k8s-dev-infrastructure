@@ -86,7 +86,7 @@ jobs:
 
       - name: Setup Kind Cluster
         if: ${{ matrix.cluster == 'kind' }}
-        uses: helm/kind-action@v1.4.0
+        uses: helm/kind-action@v1.5.0
         with:
           cluster_name: kind-devinfra
           config: src/tests/kind/kind-config.yaml
