@@ -34,7 +34,7 @@ helm_versions:
       name: fluent
       url: https://fluent.github.io/helm-charts
     chart_name: fluent-bit
-    chart_version: 0.20.9
+    chart_version: 0.21.6
   identityserver4admin:
     repository:
       name: identityserver4admin
