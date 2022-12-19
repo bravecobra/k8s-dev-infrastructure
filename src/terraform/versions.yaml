@@ -178,7 +178,7 @@ helm_versions:
       name: hashicorp
       url: https://helm.releases.hashicorp.com
     chart_name: vault
-    chart_version: 0.22.1
+    chart_version: 0.23.0
   whoami:
     repository:
       name: cowboysysop
