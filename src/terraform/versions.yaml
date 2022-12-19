@@ -118,7 +118,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: mysql
-    chart_version: 9.4.1
+    chart_version: 9.4.5
   opentelemetry:
     repository:
       name: open-telemetry
