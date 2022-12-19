@@ -143,9 +143,9 @@ module "loki" {
   source                = "./modules/monitoring/logging/loki"
   helm_release_loki     = module.versions.chart_versions["loki"].chart_version
   helm_release_promtail = module.versions.chart_versions["promtail"].chart_version
-  install_dashboards    = var.install_prometheus
   install_promtail      = var.install_promtail
-  tracing_enabled       = var.install_jaeger
+  tracing_enabled       = var.install_jaeger || var.install_tempo
+  metrics_enabled       = var.install_prometheus
   expose_ingestion      = var.expose_loki
   namespace             = kubernetes_namespace.loki[0].metadata[0].name
   depends_on = [

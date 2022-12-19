@@ -8,10 +8,6 @@ variable "helm_release_promtail" {
   default     = "3.8.1"
 }
 
-variable "install_dashboards" {
-  type = bool
-}
-
 variable "install_promtail" {
   type = bool
 }
@@ -21,6 +17,10 @@ variable "namespace" {
 }
 
 variable "tracing_enabled" {
+  type = bool
+}
+
+variable "metrics_enabled" {
   type = bool
 }
 
