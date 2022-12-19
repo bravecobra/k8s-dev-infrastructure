@@ -8,7 +8,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
 spec:
   rules:
-    - host: kafka.infrastructure.k8s.local
+    - host: kafka.infrastructure.${domain-name}
       http:
         paths:
           - path: /
@@ -21,4 +21,4 @@ spec:
   tls:
   - secretName: kafka-cert
     hosts:
-    - kafka.infrastructure.k8s.local
+    - kafka.infrastructure.${domain-name}
