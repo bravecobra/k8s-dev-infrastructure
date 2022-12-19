@@ -115,7 +115,7 @@ dependencies:
       path: .helm_versions.minio.chart_version
     repository:
       type: artifacthub
-      name: minio/minio
+      name: minio-official/minio
   - name: "mongodb"
     source:
       file: src/terraform/versions.yaml
@@ -150,7 +150,7 @@ dependencies:
       path: .helm_versions.postgres.chart_version
     repository:
       type: artifacthub
-      name: bitnami/postgres
+      name: bitnami/postgresql
   - name: "prometheus"
     source:
       file: src/terraform/versions.yaml
