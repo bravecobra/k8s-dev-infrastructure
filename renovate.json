@@ -37,6 +37,7 @@
     "jfrog":"https://charts.jfrog.io",
     "joxit":"https://helm.joxit.dev"
   },
+  "enabledManagers": ["regex"],
   "regexManagers": [
     {
       "fileMatch": ["^src/terraform/versions.yaml$"],
