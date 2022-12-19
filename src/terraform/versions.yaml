@@ -82,7 +82,7 @@ helm_versions:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: loki
-    chart_version: 3.3.1
+    chart_version: 3.8.0
   mariadb:
     repository:
       name: bitnami
