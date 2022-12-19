@@ -64,7 +64,7 @@ helm_versions:
       name: codecentric
       url: https://codecentric.github.io/helm-charts
     chart_name: keycloak
-    chart_version: 18.3.0
+    chart_version: 18.4.0
   linkerd:
     repository:
       name: linkerd
@@ -94,7 +94,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: metrics-server
-    chart_version: 6.2.2
+    chart_version: 6.2.4
   minio:
     repository:
       name: minio
@@ -124,7 +124,7 @@ helm_versions:
       name: open-telemetry
       url: https://open-telemetry.github.io/opentelemetry-helm-charts
     chart_name: opentelemetry-operator
-    chart_version: 0.17.0
+    chart_version: 0.20.4
   postgres:
     repository:
       name: bitnami
