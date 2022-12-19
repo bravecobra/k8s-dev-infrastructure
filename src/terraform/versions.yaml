@@ -4,7 +4,7 @@ helm_versions:
       name: argo-cd
       url: https://argoproj.github.io/argo-helm
     chart_name: argo-cd
-    chart_version: 5.12.2
+    chart_version: 5.16.7
   cert_manager:
     repository:
       name: jetstack
@@ -52,7 +52,7 @@ helm_versions:
       name: jaegertracing
       url: https://jaegertracing.github.io/helm-charts
     chart_name: jaeger-operator
-    chart_version: 2.36.0
+    chart_version: 2.38.0
   kafka:
     repository:
       name: strimzi
@@ -178,10 +178,10 @@ helm_versions:
       name: hashicorp
       url: https://helm.releases.hashicorp.com
     chart_name: vault
-    chart_version: 0.22.1
+    chart_version: 0.23.0
   whoami:
     repository:
       name: cowboysysop
       url: https://cowboysysop.github.io/charts/
     chart_name: whoami
-    chart_version: 2.5.5
+    chart_version: 2.7.1
