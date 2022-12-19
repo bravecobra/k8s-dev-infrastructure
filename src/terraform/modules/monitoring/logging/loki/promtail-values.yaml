@@ -8,6 +8,6 @@ podAnnotations:
   prometheus.io/port: "http-metrics"
 
 serviceMonitor:
-  enabled: true
+  enabled: ${metrics_enabled}
   labels:
     release: "prometheus"

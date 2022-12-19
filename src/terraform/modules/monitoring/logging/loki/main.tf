@@ -17,12 +17,14 @@ resource "helm_release" "promtail" {
   repository = "https://grafana.github.io/helm-charts"
   version    = var.helm_release_promtail
   values = [
-    "${file("${path.module}/promtail-values.yaml")}"
+    templatefile("${path.module}/promtail-values.yaml", {
+      metrics_enabled = var.metrics_enabled
+    })
   ]
 }
 
 resource "kubectl_manifest" "promtail_dashboard" {
-  count     = var.install_dashboards && var.install_promtail ? 1 : 0
+  count     = var.metrics_enabled && var.install_promtail ? 1 : 0
   yaml_body = file("${path.module}/dashboards/loki/loki-promtail-dashboard.yaml")
   depends_on = [
     helm_release.promtail
@@ -30,7 +32,7 @@ resource "kubectl_manifest" "promtail_dashboard" {
 }
 
 resource "kubectl_manifest" "loki_dashboard" {
-  count     = var.install_dashboards ? 1 : 0
+  count     = var.metrics_enabled ? 1 : 0
   yaml_body = file("${path.module}/dashboards/loki/loki-monitor-dashboard.yaml")
   depends_on = [
     helm_release.loki
