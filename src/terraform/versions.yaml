@@ -70,7 +70,7 @@ helm_versions:
       name: linkerd
       url: https://helm.linkerd.io/stable
     chart_name: linkerd2
-    chart_version: 2.11.5
+    chart_version: ""
   localstack:
     repository:
       name: localstack-charts
