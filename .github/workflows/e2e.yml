@@ -1,6 +1,12 @@
 name: E2E
 
-on: [push, pull_request]
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
