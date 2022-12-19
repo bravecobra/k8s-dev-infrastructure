@@ -7,7 +7,7 @@ terraform {
     }
     docker = {
       source                = "kreuzwerker/docker"
-      version               = "~> 2.15.0"
+      version               = "~> 2.23.0"
       configuration_aliases = [docker.docker-windows]
     }
     environment = {
