@@ -6,8 +6,8 @@ on:
     branches:
       - master
   schedule:
-    # Runs "At 00:00 on Saturday." (see https://crontab.guru)
-    - cron: '0 0 * * 6'
+    # Runs "Daily At 18:00." (see https://crontab.guru)
+    - cron: '0 18 * * *'
 
 permissions:
   pull-requests: write

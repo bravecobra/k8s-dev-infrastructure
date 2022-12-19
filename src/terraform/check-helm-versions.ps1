@@ -14,15 +14,17 @@ helm repo update
 $currentversions = terraform output | Select-String -Pattern '^helm_version_(.*) = "(.*)"$' -AllMatches | ForEach-Object { $_.Matches }
 ## Looking up Latest version in the helm repos
 $table = @{}
+
 $table.Add("argocd", (Get-Latest-ChartVersion "argo-cd" "argo-cd" ))
-$table.Add("docker-registry-ui", (Get-Latest-ChartVersion "joxit" "docker-registry-ui" ))
 $table.Add("cert-manager", (Get-Latest-ChartVersion "jetstack" "cert-manager" ))
+$table.Add("docker-registry-ui", (Get-Latest-ChartVersion "joxit" "docker-registry-ui" ))
 $table.Add("elasticsearch", (Get-Latest-ChartVersion "elastic" "eck-operator"))
 $table.Add("etcd", (Get-Latest-ChartVersion "bitnami" "etcd"))
 $table.Add("fluent", (Get-Latest-ChartVersion "fluent" "fluent-bit"))
 $table.Add("identityserveradmin", (Get-Latest-ChartVersion "identityserver4admin" "identityserver4admin"))
 $table.Add("identityserveradmin-mssql", (Get-Latest-ChartVersion "identityserver4admin" "mssql"))
 $table.Add("jaeger", (Get-Latest-ChartVersion "jaegertracing" "jaeger-operator"))
+$table.Add("kafka", (Get-Latest-ChartVersion "strimzi" "strimzi-kafka-operator"))
 $table.Add("keycloak", (Get-Latest-ChartVersion "codecentric" "keycloak"))
 $table.Add("linkerd", (Get-Latest-ChartVersion "linkerd" "linkerd2"))
 $table.Add("localstack", (Get-Latest-ChartVersion "localstack-charts" "localstack"))
@@ -38,7 +40,6 @@ $table.Add("prometheus", (Get-Latest-ChartVersion "prometheus-community" "kube-p
 $table.Add("promtail", (Get-Latest-ChartVersion "grafana" "promtail"))
 $table.Add("rabbitmq", (Get-Latest-ChartVersion "bitnami" "rabbitmq-cluster-operator"))
 $table.Add("redis", (Get-Latest-ChartVersion "bitnami" "redis"))
-$table.Add("registry", (Get-Latest-ChartVersion), "joxit", "docker-registry-ui")
 $table.Add("seq", (Get-Latest-ChartVersion "datalust" "seq"))
 $table.Add("tempo", (Get-Latest-ChartVersion "grafana" "tempo"))
 $table.Add("traefik", (Get-Latest-ChartVersion "traefik" "traefik"))

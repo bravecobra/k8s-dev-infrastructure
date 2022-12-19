@@ -103,102 +103,114 @@ output "helm_version_traefik" {
 }
 
 output "helm_version_linkerd" {
-  value = var.linkerd_helm_version
+  value = module.versions.chart_versions["linkerd"].chart_version
 }
 
 output "helm_version_metrics" {
-  value = var.metrics_helm_version
+  value = module.versions.chart_versions["metrics"].chart_version
 }
 
 output "helm_version_seq" {
-  value = var.seq_helm_version
+  value = module.versions.chart_versions["seq"].chart_version
 }
 
 output "helm_version_fluent" {
-  value = var.fluent_helm_version
+  value = module.versions.chart_versions["fluent"].chart_version
 }
 
 output "helm_version_jaeger" {
-  value = var.jaeger_helm_version
+  value = module.versions.chart_versions["jaeger"].chart_version
 }
 
 output "helm_version_opentelemetry" {
-  value = var.opentelemetry_helm_version
+  value = module.versions.chart_versions["opentelemetry"].chart_version
 }
 
 output "helm_version_loki" {
-  value = var.loki_helm_version
+  value = module.versions.chart_versions["loki"].chart_version
 }
 
 output "helm_version_promtail" {
-  value = var.promtail_helm_version
+  value = module.versions.chart_versions["promtail"].chart_version
 }
 
 output "helm_version_tempo" {
-  value = var.tempo_helm_version
+  value = module.versions.chart_versions["tempo"].chart_version
 }
 output "helm_version_prometheus" {
-  value = var.prometheus_helm_version
+  value = module.versions.chart_versions["prometheus"].chart_version
 }
 
 output "helm_version_argocd" {
-  value = var.argocd_helm_version
+  value = module.versions.chart_versions["argocd"].chart_version
 }
 output "helm_version_elasticsearch" {
-  value = var.elasticsearch_helm_version
+  value = module.versions.chart_versions["elasticsearch"].chart_version
 }
 
 output "helm_version_vault" {
-  value = var.vault_helm_version
+  value = module.versions.chart_versions["vault"].chart_version
 }
 
 output "helm_version_identityserveradmin" {
-  value = var.identityserver4admin_helm_version
+  value = module.versions.chart_versions["identityserver4admin"].chart_version
 }
 output "helm_version_identityserveradmin-mssql" {
-  value = var.identityserver4admin_mssql_helm_version
+  value = module.versions.chart_versions["identityserver4admin_mssql"].chart_version
 }
 
 output "helm_version_keycloak" {
-  value = var.keycloak_helm_version
+  value = module.versions.chart_versions["keycloak"].chart_version
 }
 
 output "helm_version_etcd" {
-  value = var.etcd_helm_version
+  value = module.versions.chart_versions["etcd"].chart_version
 }
 
 output "helm_version_minio" {
-  value = var.minio_helm_version
+  value = module.versions.chart_versions["minio"].chart_version
 }
 
 output "helm_version_rabbitmq" {
-  value = var.rabbitmq_helm_version
+  value = module.versions.chart_versions["rabbitmq"].chart_version
 }
 
 output "helm_version_localstack" {
-  value = var.localstack_helm_version
+  value = module.versions.chart_versions["localstack"].chart_version
 }
 
 output "helm_version_mysql" {
-  value = var.mysql_helm_version
+  value = module.versions.chart_versions["mysql"].chart_version
 }
 
 output "helm_version_mariadb" {
-  value = var.mariadb_helm_version
+  value = module.versions.chart_versions["mariadb"].chart_version
 }
 
 output "helm_version_postgres" {
-  value = var.postgres_helm_version
+  value = module.versions.chart_versions["postgres"].chart_version
 }
 
 output "helm_version_mssql" {
-  value = var.mssql_helm_version
+  value = module.versions.chart_versions["mssql"].chart_version
+}
+
+output "helm_version_mongodb" {
+  value = module.versions.chart_versions["mongodb"].chart_version
 }
 
 output "helm_version_redis" {
-  value = var.redis_helm_version
+  value = module.versions.chart_versions["redis"].chart_version
+}
+
+output "helm_version_kafka" {
+  value = module.versions.chart_versions["kafka"].chart_version
 }
 
 output "helm_version_docker_registry" {
-  value = var.docker_registry_helm_version
+  value = module.versions.chart_versions["docker_registry"].chart_version
+}
+
+output "helm_versions" {
+  value = module.versions.chart_versions
 }

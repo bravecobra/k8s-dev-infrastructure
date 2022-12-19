@@ -35,7 +35,7 @@ variable "install_metrics" {
 }
 variable "metrics_helm_version" {
   type    = string
-  default = "6.2.2"
+  default = ""
 }
 
 //cert-manager
@@ -76,7 +76,7 @@ variable "install_linkerd" {
 }
 variable "linkerd_helm_version" {
   type    = string
-  default = "2.11.5"
+  default = ""
 }
 
 variable "linkerd_namespace" {
@@ -87,7 +87,7 @@ variable "linkerd_namespace" {
 //prometheus
 variable "prometheus_helm_version" {
   type    = string
-  default = "41.7.1"
+  default = ""
 }
 variable "install_prometheus" {
   type    = bool
@@ -113,7 +113,7 @@ variable "install_grafana" {
 //jaeger
 variable "jaeger_helm_version" {
   type    = string
-  default = "2.36.0"
+  default = ""
 }
 variable "install_jaeger" {
   type    = bool
@@ -132,7 +132,7 @@ variable "jaeger_namespace" {
 //opentelemetry
 variable "opentelemetry_helm_version" {
   type    = string
-  default = "0.17.0"
+  default = ""
 }
 variable "install_opentelemetry" {
   type    = bool
@@ -155,7 +155,7 @@ variable "install_loki" {
 }
 variable "loki_helm_version" {
   type    = string
-  default = "3.3.1"
+  default = ""
 }
 variable "install_promtail" {
   type    = bool
@@ -163,7 +163,7 @@ variable "install_promtail" {
 }
 variable "promtail_helm_version" {
   type    = string
-  default = "6.6.0"
+  default = ""
 }
 variable "expose_loki" {
   type    = bool
@@ -182,7 +182,7 @@ variable "install_tempo" {
 }
 variable "tempo_helm_version" {
   type    = string
-  default = "0.16.3"
+  default = ""
 }
 
 variable "tempo_namespace" {
@@ -197,7 +197,7 @@ variable "install_argocd" {
 }
 variable "argocd_helm_version" {
   type    = string
-  default = "5.12.2"
+  default = ""
 }
 
 variable "argocd_namespace" {
@@ -216,7 +216,7 @@ variable "install_kibana" {
 }
 variable "elasticsearch_helm_version" {
   type    = string
-  default = "2.4.0"
+  default = ""
 }
 
 variable "elasticsearch_namespace" {
@@ -235,12 +235,12 @@ variable "install_identityserver4admin" {
 }
 variable "identityserver4admin_helm_version" {
   type    = string
-  default = "0.5.2"
+  default = ""
 }
 
 variable "identityserver4admin_mssql_helm_version" {
   type    = string
-  default = "0.1.0"
+  default = ""
 }
 
 variable "identityserver4admin_namespace" {
@@ -261,12 +261,12 @@ variable "expose_seq" {
 
 variable "seq_helm_version" {
   type    = string
-  default = "2022.1.7929"
+  default = ""
 }
 
 variable "fluent_helm_version" {
   type    = string
-  default = "0.20.9"
+  default = ""
 }
 
 variable "seq_namespace" {
@@ -281,7 +281,7 @@ variable "install_vault" {
 }
 variable "vault_helm_version" {
   type    = string
-  default = "0.22.1"
+  default = ""
 }
 
 variable "vault_namespace" {
@@ -297,7 +297,7 @@ variable "install_keycloak" {
 
 variable "keycloak_helm_version" {
   type    = string
-  default = "18.3.0"
+  default = ""
 }
 
 variable "keycloak_include_domainrealm" {
@@ -318,7 +318,7 @@ variable "install_whoami" {
 
 variable "whoami_helm_version" {
   type    = string
-  default = "2.5.5"
+  default = ""
 }
 
 variable "whoami_namespace" {
@@ -334,7 +334,7 @@ variable "install_etcd" {
 
 variable "etcd_helm_version" {
   type    = string
-  default = "8.5.8"
+  default = ""
 }
 
 variable "etcd_namespace" {
@@ -355,7 +355,7 @@ variable "install_minio" {
 
 variable "minio_helm_version" {
   type    = string
-  default = "5.0.0"
+  default = ""
 }
 
 variable "minio_namespace" {
@@ -401,7 +401,7 @@ variable "rabbitmq_namespace" {
 
 variable "rabbitmq_helm_version" {
   type    = string
-  default = "3.1.1"
+  default = ""
 }
 
 
@@ -423,7 +423,7 @@ variable "kafka_namespace" {
 
 variable "kafka_helm_version" {
   type    = string
-  default = "0.32.0"
+  default = ""
 }
 
 # localstack
@@ -434,7 +434,7 @@ variable "install_localstack" {
 
 variable "localstack_helm_version" {
   type    = string
-  default = "0.5.0"
+  default = ""
 }
 
 variable "localstack_namespace" {
@@ -496,7 +496,7 @@ variable "mysql_namespace" {
 
 variable "mysql_helm_version" {
   type    = string
-  default = "9.4.1"
+  default = ""
 }
 
 # Mariadb
@@ -517,7 +517,7 @@ variable "mariadb_namespace" {
 
 variable "mariadb_helm_version" {
   type    = string
-  default = "11.3.3"
+  default = ""
 }
 
 # Postgres
@@ -538,7 +538,7 @@ variable "postgres_namespace" {
 
 variable "postgres_helm_version" {
   type    = string
-  default = "12.0.0"
+  default = ""
 }
 
 # mssql
@@ -559,7 +559,7 @@ variable "mssql_namespace" {
 
 variable "mssql_helm_version" {
   type    = string
-  default = "1.2.0"
+  default = ""
 }
 
 # mongodb
@@ -580,7 +580,7 @@ variable "mongodb_namespace" {
 
 variable "mongodb_helm_version" {
   type    = string
-  default = "13.1.5"
+  default = ""
 }
 
 # oracle
@@ -616,7 +616,7 @@ variable "install_redis" {
 
 variable "redis_helm_version" {
   type    = string
-  default = "17.3.11"
+  default = ""
 }
 
 variable "redis_namespace" {
@@ -636,7 +636,7 @@ variable "install_docker_registry" {
 
 variable "docker_registry_helm_version" {
   type    = string
-  default = "0.4.3"
+  default = ""
 }
 
 variable "docker_registry_namespace" {
