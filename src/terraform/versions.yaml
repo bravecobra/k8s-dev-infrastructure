@@ -10,7 +10,7 @@ helm_versions:
       name: jetstack
       url: https://charts.jetstack.io
     chart_name: cert-manager
-    chart_version: "1.10.1"
+    chart_version: 1.10.1
   docker_registry:
     repository:
       name: joxit
@@ -75,7 +75,7 @@ helm_versions:
     repository:
       name: localstack-charts
       url: https://localstack.github.io/helm-charts
-    chart_name: localstack-charts/localstack
+    chart_name: localstack
     chart_version: 0.5.2
   loki:
     repository:
