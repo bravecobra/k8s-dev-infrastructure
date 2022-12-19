@@ -184,4 +184,4 @@ helm_versions:
       name: cowboysysop
       url: https://cowboysysop.github.io/charts/
     chart_name: whoami
-    chart_version: 2.5.5
+    chart_version: 2.7.1
