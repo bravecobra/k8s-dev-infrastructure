@@ -39,11 +39,10 @@
   },
   "regexManagers": [
     {
-      "fileMatch": ["^versions.yaml$"],
+      "fileMatch": ["^src/terraform/versions.yaml$"],
       "matchStringsStrategy": "combination",
       "matchStrings": [
-        "chart_name:\\s*\"(?<depName>.*)\"\\s*//",
-        "chart_version:\\s*\"(?<currentValue>.*)\"\\s*//"
+        "/chart_name:\\s*(?<depName>.*)\\n\\s*chart_version:\\s*(?<currentValue>.*)/gm"
       ],
       "datasourceTemplate": "helm"
     }
