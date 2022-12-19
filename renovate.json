@@ -40,7 +40,7 @@
   "regexManagers": [
     {
       "fileMatch": ["^src/terraform/versions.yaml$"],
-      "matchStringsStrategy": "combination",
+      "matchStringsStrategy": "any",
       "matchStrings": [
         "/chart_name:\\s*(?<depName>.*)\\n\\s*chart_version:\\s*(?<currentValue>.*)/gm"
       ],
