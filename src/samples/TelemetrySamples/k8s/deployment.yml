@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: telemetrysampleweb
-        image: registry.localhost:5000/telemetrysampleweb:latest
+        image: registry.localhost:5000/bravecobra/telemetrysampleweb:latest
         ports:
         - containerPort: 80
         env:
@@ -69,3 +69,10 @@ spec:
             path: /ready
             port: 80
           successThreshold: 3
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 200m
+            memory: 200Mi
