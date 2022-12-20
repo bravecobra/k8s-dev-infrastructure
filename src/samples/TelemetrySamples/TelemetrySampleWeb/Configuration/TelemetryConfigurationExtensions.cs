@@ -32,7 +32,7 @@ namespace TelemetrySampleWeb.Configuration
                         instrumentationOptions.RecordException = true;
                     })
                     .AddSource(Assembly.GetEntryAssembly()?.GetName().Name);
-                var tracingExporter = configuration.GetValue<string>("UseTracingExporter").ToLowerInvariant();
+                var tracingExporter = configuration.GetValue<string>("UseTracingExporter")?.ToLowerInvariant();
                 switch (tracingExporter)
                 {
                     case "jaeger":
@@ -115,7 +115,7 @@ namespace TelemetrySampleWeb.Configuration
         public static WebApplicationBuilder AddCustomLogging(this WebApplicationBuilder builder, ResourceBuilder resourceBuilder)
         {
             builder.Logging.ClearProviders();
-            var logExporter = builder.Configuration.GetValue<string>("UseLogExporter").ToLowerInvariant();
+            var logExporter = builder.Configuration.GetValue<string>("UseLogExporter")?.ToLowerInvariant();
             switch (logExporter)
             {
                 case "loki":
@@ -228,7 +228,7 @@ namespace TelemetrySampleWeb.Configuration
                     .AddAspNetCoreInstrumentation()
                     .AddMeter(MyApplicationMeterName);
 
-                var metricsExporter = configuration.GetValue<string>("UseMetricsExporter").ToLowerInvariant();
+                var metricsExporter = configuration.GetValue<string>("UseMetricsExporter")?.ToLowerInvariant();
                 switch (metricsExporter)
                 {
                     case "prometheus":
