@@ -28,22 +28,17 @@ namespace TelemetrySampleWeb
             var app = builder.Build();
             app.UseMiddleware<LogContextMiddleware>();
             app.UseCustomErrorhandling();
-            // Configure the HTTP request pipeline.
-            // if (app.Environment.IsDevelopment())
-            // {
+
             app.UseSwagger();
             app.UseSwaggerUI();
-            //}
+
             app.UseRouting();
             app.UseAuthorization();
-            
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHealthChecks("/health/startup");
-                endpoints.MapHealthChecks("/healthz");
-                endpoints.MapHealthChecks("/ready");
-                endpoints.MapControllers();
-            });
+
+            app.MapHealthChecks("/health/startup");
+            app.MapHealthChecks("/healthz");
+            app.MapHealthChecks("/ready");
+            app.MapControllers();
 
             app.AddMetricsEndpoint();
             app.Run();

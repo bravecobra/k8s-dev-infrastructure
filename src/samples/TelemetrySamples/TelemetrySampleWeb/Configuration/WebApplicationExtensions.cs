@@ -9,7 +9,7 @@ namespace TelemetrySampleWeb.Configuration
     {
         public static WebApplication AddMetricsEndpoint(this WebApplication app)
         {
-            var metricsExporter = app.Configuration.GetValue<string>("UseMetricsExporter").ToLowerInvariant();
+            var metricsExporter = app.Configuration.GetValue<string>("UseMetricsExporter")?.ToLowerInvariant();
 
             if (metricsExporter == "prometheus")
             {
@@ -31,8 +31,8 @@ namespace TelemetrySampleWeb.Configuration
                     {
                         await context.Response.WriteAsync(JsonSerializer.Serialize(new
                         {
-                            StatusCode = context.Response.StatusCode,
-                            Message = contextFeature.Error.Message,
+                            context.Response.StatusCode,
+                            contextFeature.Error.Message,
                             TraceID = Activity.Current?.TraceId.ToString(),
                         }));
                     }

@@ -2,7 +2,10 @@
     "cSpell.words": [
     ],
     "cSpell.ignoreWords": [
+        "ASPNETCORE",
+        "FORWARDEDHEADERS",
         "Loadbalancer",
+        "Serilog",
         "aquasecurity",
         "argocd",
         "artifacthub",
@@ -18,6 +21,7 @@
         "datasource",
         "fluxcd",
         "hckops",
+        "healthz",
         "identityserver",
         "jaegertracing",
         "jetstack",
@@ -31,12 +35,14 @@
         "mkdocs",
         "mssql",
         "mssqlserver",
+        "otlp",
         "promtail",
         "rabbitmq",
         "sarif",
         "simcube",
         "sqlserver",
         "strimzi",
+        "telemetrysampleweb",
         "tfsec",
         "tfvars",
         "traefik"
