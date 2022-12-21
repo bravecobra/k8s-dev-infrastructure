@@ -109,7 +109,7 @@ jobs:
         id: params
         run: |
           INSTALL_GRAFANA_INPUT=${{ inputs.install_grafana_backend }}
-          echo "install_grafana_backend=`${INSTALL_GRAFANA_INPUT:-false}`\n" >> $GITHUB_OUTPUT
+          echo "install_grafana_backend=${INSTALL_GRAFANA_INPUT:-false}" >> $GITHUB_OUTPUT
 
       - name: Terraform apply
         run: |
