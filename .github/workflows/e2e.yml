@@ -2,6 +2,11 @@ name: E2E
 
 on:
   workflow_dispatch:
+    inputs:
+      install_grafana_backend:
+        description: With Grafana backend
+        default: false
+        type: boolean
   push:
     branches:
       - master
@@ -105,6 +110,13 @@ jobs:
           cd ./src/terraform
           terraform init --upgrade
           terraform apply -var-file="../tests/${{ matrix.cluster }}/terraform.tfvars" --auto-approve
+        env:
+          TF_VAR_install_opentelemetry: ${{ inputs.install_grafana_backend }}
+          TF_VAR_install_loki: ${{ inputs.install_grafana_backend }}
+          TF_VAR_install_promtail: ${{ inputs.install_grafana_backend }}
+          TF_VAR_install_tempo: ${{ inputs.install_grafana_backend }}
+          TF_VAR_install_prometheus: ${{ inputs.install_grafana_backend }}
+          TF_VAR_install_grafana: ${{ inputs.install_grafana_backend }}
 
       - name: Await deployment traefik
         uses: jupyterhub/action-k8s-await-workloads@v1
