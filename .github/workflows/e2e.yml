@@ -13,7 +13,7 @@ on:
         type: boolean
       install_ingress:
         description: With Traefik and WhoAmI
-        default: false
+        default: true
         type: boolean
       install_config:
         description: With Elastic Backend, Redis, Vault, Etc
