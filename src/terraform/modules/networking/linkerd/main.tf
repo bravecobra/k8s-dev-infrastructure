@@ -43,6 +43,7 @@ resource "helm_release" "linkerd" {
   version       = var.helm_release
   wait          = true
   wait_for_jobs = true
+  skip_crds     = false
   set {
     name  = "identityTrustAnchorsPEM"
     value = data.local_file.ca-cert.content
