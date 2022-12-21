@@ -117,12 +117,12 @@ jobs:
           terraform init --upgrade
           terraform apply -var-file="../tests/${{ matrix.cluster }}/terraform.tfvars" --auto-approve
         env:
-          TF_VAR_install_opentelemetry: ${{ steps.params.install_grafana_backend.value }}
-          TF_VAR_install_loki: ${{ steps.params.install_grafana_backend.value }}
-          TF_VAR_install_promtail: ${{ steps.params.install_grafana_backend.value }}
-          TF_VAR_install_tempo: ${{ steps.params.install_grafana_backend.value }}
-          TF_VAR_install_prometheus: ${{ steps.params.install_grafana_backend.value }}
-          TF_VAR_install_grafana: ${{ steps.params.install_grafana_backend.value }}
+          TF_VAR_install_opentelemetry: ${{ steps.params.outputs.install_grafana_backend }}
+          TF_VAR_install_loki: ${{ steps.params.outputs.install_grafana_backend }}
+          TF_VAR_install_promtail: ${{ steps.params.outputs.install_grafana_backend }}
+          TF_VAR_install_tempo: ${{ steps.params.outputs.install_grafana_backend }}
+          TF_VAR_install_prometheus: ${{ steps.params.outputs.install_grafana_backend }}
+          TF_VAR_install_grafana: ${{ steps.params.outputs.install_grafana_backend }}
 
       - name: Await deployment traefik
         uses: jupyterhub/action-k8s-await-workloads@v1
