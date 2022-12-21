@@ -4,43 +4,43 @@ on:
   workflow_dispatch:
     inputs:
       install_monitoring:
-        description: With Grafana backend and Seq and Jaeger
+        description: With Monitoring (Grafana backend and Seq and Jaeger)
         default: false
         type: boolean
       install_mesh :
-        description: With Mesh LinkerD
+        description: With Mesh (LinkerD)
         default: false
         type: boolean
       install_ingress:
-        description: With Traefik and WhoAmI
+        description: With Ingress (Cert-Manager, Traefik and WhoAmI)
         default: true
         type: boolean
       install_config:
-        description: With Elastic Backend, Redis, Vault, Etc
+        description: With Config (Elastic Backend, Redis, Vault, Etc)
         default: false
         type: boolean
       install_identityserver4admin:
-        description: With IdentityServer4
+        description: With Auth (IdentityServer4)
         default: false
         type: boolean
       install_keycloak:
-        description: With Keycloak
+        description: With Auth (Keycloak)
         default: false
         type: boolean
       install_storage:
-        description: With Minio, Azurite, DockerRegistry UI
+        description: With Storage (Minio, Azurite, DockerRegistry UI)
         default: false
         type: boolean
       install_messaging:
-        description: With RabbitMq, Localstack, Kafka
+        description: With Messaging (RabbitMq, Localstack, Kafka)
         default: false
         type: boolean
       install_deploy:
-        description: With ArgoCD, Flux2
+        description: With Deployments (ArgoCD)
         default: false
         type: boolean
       install_DBs:
-        description: With MySQL, MariaDB, Postgres, MSSQL, MongoDB, Oracle
+        description: With Databases (MySQL, MariaDB, Postgres, MSSQL, MongoDB)
         default: false
         type: boolean
   push:
