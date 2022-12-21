@@ -155,7 +155,8 @@ jobs:
           TF_VAR_install_grafana: ${{ inputs.install_monitoring  || false }}
           TF_VAR_install_metrics: ${{ inputs.install_metrics  || false }}
           TF_VAR_install_linkerd : ${{ inputs.install_mesh || false}}
-          TF_VAR_install_traefik: ${{ inputs.install_ingress || false}}
+          TF_VAR_install_traefik: ${{ inputs.install_ingress || true}}
+          TF_VAR_install_cert_manager: ${{ inputs.install_ingress || true}}
           TF_VAR_install_seq: ${{ inputs.install_monitoring || false}}
           TF_VAR_install_jaeger: ${{ inputs.install_monitoring || false}}
           TF_VAR_install_elasticsearch: ${{ inputs.install_config || false}}
@@ -179,7 +180,7 @@ jobs:
           TF_VAR_install_mssql: ${{ inputs.install_DBs || false}}
           TF_VAR_install_mongodb: ${{ inputs.install_DBs || false}}
           TF_VAR_install_oracle: ${{ inputs.install_DBs || false}}
-          TF_VAR_install_whoami: ${{ inputs.install_ingress || false}}
+          TF_VAR_install_whoami: ${{ inputs.install_ingress || true}}
 
       - name: Await deployment traefik
         uses: jupyterhub/action-k8s-await-workloads@v1
