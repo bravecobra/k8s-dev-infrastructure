@@ -105,24 +105,18 @@ jobs:
           echo "environment-kubeconfig:" ${KUBECONFIG}
           kubectl cluster-info dump
 
-      - name: Set default parameters if missing
-        id: params
-        run: |
-          INSTALL_GRAFANA_INPUT=${{ inputs.install_grafana_backend }}
-          echo "install_grafana_backend=${INSTALL_GRAFANA_INPUT:-false}" >> $GITHUB_OUTPUT
-
       - name: Terraform apply
         run: |
           cd ./src/terraform
           terraform init --upgrade
           terraform apply -var-file="../tests/${{ matrix.cluster }}/terraform.tfvars" --auto-approve
         env:
-          TF_VAR_install_opentelemetry: ${{ steps.params.outputs.install_grafana_backend }}
-          TF_VAR_install_loki: ${{ steps.params.outputs.install_grafana_backend }}
-          TF_VAR_install_promtail: ${{ steps.params.outputs.install_grafana_backend }}
-          TF_VAR_install_tempo: ${{ steps.params.outputs.install_grafana_backend }}
-          TF_VAR_install_prometheus: ${{ steps.params.outputs.install_grafana_backend }}
-          TF_VAR_install_grafana: ${{ steps.params.outputs.install_grafana_backend }}
+          TF_VAR_install_opentelemetry: ${{ inputs.install_grafana_backend  || false }}
+          TF_VAR_install_loki: ${{ inputs.install_grafana_backend  || false }}
+          TF_VAR_install_promtail: ${{ inputs.install_grafana_backend  || false }}
+          TF_VAR_install_tempo: ${{ inputs.install_grafana_backend  || false }}
+          TF_VAR_install_prometheus: ${{ inputs.install_grafana_backend  || false }}
+          TF_VAR_install_grafana: ${{ inputs.install_grafana_backend  || false }}
 
       - name: Await deployment traefik
         uses: jupyterhub/action-k8s-await-workloads@v1
