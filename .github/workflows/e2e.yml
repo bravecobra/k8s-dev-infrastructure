@@ -3,8 +3,112 @@ name: E2E
 on:
   workflow_dispatch:
     inputs:
+      install_whoami:
+        description: With WhoAmI
+        default: false
+        type: boolean
       install_grafana_backend:
         description: With Grafana backend
+        default: false
+        type: boolean
+      install_metrics:
+        description: With Metrics Server
+        default: false
+        type: boolean
+      install_linkerd :
+        description: With LinkerD
+        default: false
+        type: boolean
+      install_traefik:
+        description: With Traefik
+        default: false
+        type: boolean
+      install_seq:
+        description: With Seq
+        default: false
+        type: boolean
+      install_jaeger:
+        description: With Jaeger
+        default: false
+        type: boolean
+      install_elasticsearch:
+        description: With Elastic Backend
+        default: false
+        type: boolean
+      install_redis:
+        description: With Redis
+        default: false
+        type: boolean
+      install_vault:
+        description: With Vault
+        default: false
+        type: boolean
+      install_etcd:
+        description: With Etcd
+        default: false
+        type: boolean
+      install_identityserver4admin:
+        description: With IdentityServer4
+        default: false
+        type: boolean
+      install_keycloak:
+        description: With Keycloak
+        default: false
+        type: boolean
+      install_minio:
+        description: With Minio
+        default: false
+        type: boolean
+      install_azurite:
+        description: With Azurite
+        default: false
+        type: boolean
+      install_docker_registry:
+        description: With DockerRegistry UI
+        default: false
+        type: boolean
+      install_rabbitmq:
+        description: With RabbitMq
+        default: false
+        type: boolean
+      install_localstack:
+        description: With Localstack
+        default: false
+        type: boolean
+      install_kafka:
+        description: With Kafka
+        default: false
+        type: boolean
+      install_argocd:
+        description: With ArgoCD
+        default: false
+        type: boolean
+      install_flux2:
+        description: With Flux2
+        default: false
+        type: boolean
+      install_mysql:
+        description: With MySQL
+        default: false
+        type: boolean
+      install_mariadb:
+        description: With MariaDB
+        default: false
+        type: boolean
+      install_postgres:
+        description: With Postgres
+        default: false
+        type: boolean
+      install_mssql:
+        description: With MSSQL
+        default: false
+        type: boolean
+      install_mongodb:
+        description: With MongoDB
+        default: false
+        type: boolean
+      install_oracle:
+        description: With Oracle
         default: false
         type: boolean
   push:
@@ -117,6 +221,33 @@ jobs:
           TF_VAR_install_tempo: ${{ inputs.install_grafana_backend  || false }}
           TF_VAR_install_prometheus: ${{ inputs.install_grafana_backend  || false }}
           TF_VAR_install_grafana: ${{ inputs.install_grafana_backend  || false }}
+          TF_VAR_install_metrics: ${{ inputs.install_metrics  || false }}
+          TF_VAR_install_linkerd : ${{ inputs.install_linkerd || false}}
+          TF_VAR_install_traefik: ${{ inputs.install_traefik || false}}
+          TF_VAR_install_seq: ${{ inputs.install_seq || false}}
+          TF_VAR_install_jaeger: ${{ inputs.install_jaeger || false}}
+          TF_VAR_install_elasticsearch: ${{ inputs.install_elasticsearch || false}}
+          TF_VAR_install_kibana: ${{ inputs.install_elasticsearch || false}}
+          TF_VAR_install_redis: ${{ inputs.install_redis || false}}
+          TF_VAR_install_vault: ${{ inputs.install_vault || false}}
+          TF_VAR_install_etcd: ${{ inputs.install_etcd || false}}
+          TF_VAR_install_identityserver4admin: ${{ inputs.install_identityserver4admin || false}}
+          TF_VAR_install_keycloak: ${{ inputs.install_keycloak || false}}
+          TF_VAR_install_minio: ${{ inputs.install_minio || false}}
+          TF_VAR_install_azurite: ${{ inputs.install_azurite || false}}
+          TF_VAR_install_docker_registry: ${{ inputs.install_docker_registry || false}}
+          TF_VAR_install_rabbitmq: ${{ inputs.install_rabbitmq || false}}
+          TF_VAR_install_localstack: ${{ inputs.install_localstack || false}}
+          TF_VAR_install_kafka: ${{ inputs.install_kafka || false}}
+          TF_VAR_install_argocd: ${{ inputs.install_argocd || false}}
+          TF_VAR_install_flux2: ${{ inputs.install_flux2 || false}}
+          TF_VAR_install_mysql: ${{ inputs.install_mysql || false}}
+          TF_VAR_install_mariadb: ${{ inputs.install_mariadb || false}}
+          TF_VAR_install_postgres: ${{ inputs.install_postgres || false}}
+          TF_VAR_install_mssql: ${{ inputs.install_mssql || false}}
+          TF_VAR_install_mongodb: ${{ inputs.install_mongodb || false}}
+          TF_VAR_install_oracle: ${{ inputs.install_oracle || false}}
+          TF_VAR_install_whoami: ${{ inputs.install_whoami || false}}
 
       - name: Await deployment traefik
         uses: jupyterhub/action-k8s-await-workloads@v1
