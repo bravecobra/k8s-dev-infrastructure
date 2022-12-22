@@ -474,9 +474,9 @@ data "kubectl_file_documents" "oracle_manifests" {
 }
 
 module "oraclexe" {
-  count       = var.install_oracle == true ? 1 : 0
-  source      = "./modules/services/database/rds/oracle-xe"
-  domain-name = var.domain-name
+  count                   = var.install_oracle == true ? 1 : 0
+  source                  = "./modules/services/database/rds/oracle-xe"
+  domain-name             = var.domain-name
   expose_oracle           = var.expose_oracle
   oracle_operator_version = var.oracle_operator_version
   oracle_xe_version       = var.oracle_xe_version
