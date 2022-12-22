@@ -21,7 +21,8 @@ resource "helm_release" "mssql" {
   wait_for_jobs = true
   values = [
     templatefile("${path.module}/mssql-values.yaml", {
-      domain-name = var.domain-name,
+      domain-name  = var.domain-name,
+      storageclass = var.storageclass,
     mssqlPassword = random_password.init_password.result })
   ]
   depends_on = [

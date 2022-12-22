@@ -4,4 +4,4 @@ acceptEula:
 sapassword: "${mssqlPassword}"
 
 persistence:
-  storageClass: "local-path"
+  storageClass: "${storageclass}"

@@ -4,7 +4,8 @@ resource "kubectl_manifest" "notify_watchers" {
 }
 
 locals {
-  patch_coredns = var.install_identityserver4admin || var.install_keycloak || var.install_minio
+  patch_coredns        = var.install_identityserver4admin || var.install_keycloak || var.install_minio
+  cluster_storageclass = var.cluster-type == "k3s" ? "local-path" : "standard"
   chart_version_variables = {
     "traefik"                    = { chart_version = var.traefik_helm_version },
     "cert_manager"               = { chart_version = var.cert_manager_helm_version },
@@ -136,8 +137,6 @@ module "opentelemetry" {
   namespace        = kubernetes_namespace.opentelemetry[0].metadata[0].name
   install_jaeger   = var.install_jaeger
   install_loki     = var.install_loki
-  # domain-name  = var.domain-name
-  # install_dashboards    = var.install_prometheus
   depends_on = [
     module.linkerd,
     kubernetes_namespace.opentelemetry
@@ -251,6 +250,7 @@ module "identityserver4" {
   helm_release       = module.versions.chart_versions["identityserver4admin"].chart_version
   mssql_helm_release = module.versions.chart_versions["identityserver4admin_mssql"].chart_version
   domain-name        = var.domain-name
+  storageclass       = local.cluster_storageclass
   namespace          = kubernetes_namespace.identityserver4[0].metadata[0].name
   depends_on = [
     module.jaeger,
@@ -309,6 +309,7 @@ module "minio" {
   helm_release = module.versions.chart_versions["minio"].chart_version
   domain-name  = var.domain-name
   metrics      = var.install_prometheus
+  storageclass = local.cluster_storageclass
   namespace    = kubernetes_namespace.minio[0].metadata[0].name
   depends_on = [
     module.coredns,
@@ -393,6 +394,7 @@ module "mysql" {
   domain-name  = var.domain-name
   helm_release = module.versions.chart_versions["mysql"].chart_version
   expose_mysql = var.expose_mysql
+  storageclass = local.cluster_storageclass
   namespace    = kubernetes_namespace.mysql[0].metadata[0].name
   depends_on = [
     module.coredns,
@@ -407,6 +409,7 @@ module "postgres" {
   domain-name     = var.domain-name
   helm_release    = module.versions.chart_versions["postgres"].chart_version
   expose_postgres = var.expose_postgres
+  storageclass    = local.cluster_storageclass
   namespace       = kubernetes_namespace.postgres[0].metadata[0].name
   depends_on = [
     module.coredns,
@@ -421,6 +424,7 @@ module "mssql" {
   domain-name  = var.domain-name
   helm_release = module.versions.chart_versions["mssql"].chart_version
   expose_mssql = var.expose_mssql
+  storageclass = local.cluster_storageclass
   namespace    = kubernetes_namespace.mssql[0].metadata[0].name
   depends_on = [
     module.coredns,
@@ -435,6 +439,7 @@ module "mariadb" {
   domain-name    = var.domain-name
   helm_release   = module.versions.chart_versions["mariadb"].chart_version
   expose_mariadb = var.expose_mariadb
+  storageclass   = local.cluster_storageclass
   namespace      = kubernetes_namespace.mariadb[0].metadata[0].name
   depends_on = [
     module.coredns,
@@ -449,6 +454,7 @@ module "mongodb" {
   domain-name    = var.domain-name
   helm_release   = module.versions.chart_versions["mongodb"].chart_version
   expose_mongodb = var.expose_mongodb
+  storageclass   = local.cluster_storageclass
   namespace      = kubernetes_namespace.mongodb[0].metadata[0].name
   depends_on = [
     module.coredns,
@@ -471,10 +477,10 @@ module "oraclexe" {
   count       = var.install_oracle == true ? 1 : 0
   source      = "./modules/services/database/rds/oracle-xe"
   domain-name = var.domain-name
-  # helm_release   = var.mongodb_helm_version
   expose_oracle           = var.expose_oracle
   oracle_operator_version = var.oracle_operator_version
   oracle_xe_version       = var.oracle_xe_version
+  storageclass            = local.cluster_storageclass
   manifestfiles           = data.kubectl_file_documents.oracle_manifests.manifests
   namespace               = kubernetes_namespace.oracle[0].metadata[0].name
   depends_on = [

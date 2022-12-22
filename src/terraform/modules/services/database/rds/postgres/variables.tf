@@ -14,3 +14,7 @@ variable "expose_postgres" {
   type    = bool
   default = false
 }
+
+variable "storageclass" {
+  type = string
+}

@@ -28,3 +28,7 @@ variable "oracle_xe_version" {
 variable "manifestfiles" {
   type = map(any)
 }
+
+variable "storageclass" {
+  type = string
+}

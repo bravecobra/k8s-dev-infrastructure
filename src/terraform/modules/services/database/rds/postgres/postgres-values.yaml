@@ -7,5 +7,5 @@ global:
 
 primary:
   persistence:
-    storageClass: local-path
+    storageClass: "${storageclass}"
     size: 1Gi

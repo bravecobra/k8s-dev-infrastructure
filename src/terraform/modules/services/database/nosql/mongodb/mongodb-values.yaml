@@ -7,5 +7,5 @@ auth:
   rootPassword: "${rootPassword}"
 
 persistence:
-  storageClass: "local-path"
+  storageClass: "${storageclass}"
   size: 1Gi

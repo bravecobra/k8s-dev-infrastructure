@@ -21,8 +21,10 @@ resource "helm_release" "mysql" {
   wait_for_jobs = true
   values = [
     templatefile("${path.module}/mysql-values.yaml", {
-      domain-name = var.domain-name,
-    rootPassword = random_password.init_password.result })
+      domain-name  = var.domain-name,
+      storageclass = var.storageclass,
+      rootPassword = random_password.init_password.result }
+    )
   ]
   depends_on = [
     random_password.init_password

@@ -43,7 +43,7 @@ persistence:
   enabled: true
   annotations: {}
   existingClaim: ""
-  storageClassName: local-path
+  storageClassName: "${storageclass}"
   VolumeName: "minio-volume"
   accessMode: ReadWriteOnce
   size: 10Gi

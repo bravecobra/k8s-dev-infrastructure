@@ -42,6 +42,7 @@
         "sarif",
         "simcube",
         "sqlserver",
+        "storageclass",
         "strimzi",
         "telemetrysampleweb",
         "tfsec",
