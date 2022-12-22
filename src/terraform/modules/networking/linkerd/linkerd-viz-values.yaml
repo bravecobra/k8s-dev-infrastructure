@@ -1,6 +1,7 @@
 # Override of: https://github.com/linkerd/linkerd2/blob/main/viz/charts/linkerd-viz/values.yaml
 
 dashboard:
+  # TODO: fix domain variable
   enforcedHostRegexp: "^linkerd\\.infrastructure\\.k8s\\.local$"
 #%{ if metrics_external == true }
 prometheusUrl: http://prometheus-kube-prometheus-prometheus.prometheus:9090

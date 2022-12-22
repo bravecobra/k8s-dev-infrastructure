@@ -35,15 +35,25 @@ data "local_file" "ca-cert" {
   depends_on = [null_resource.fetch_ca]
 }
 
+resource "helm_release" "linkerd_crds" {
+  name          = "linkerd-crds"
+  chart         = "linkerd-crds"
+  namespace     = var.namespace
+  repository    = "https://helm.linkerd.io/stable"
+  version       = var.helm_release_crds
+  wait          = true
+  wait_for_jobs = true
+  skip_crds     = false
+}
+
 resource "helm_release" "linkerd" {
   name          = "linkerd"
-  chart         = "linkerd2"
+  chart         = "linkerd-control-plane"
   namespace     = var.namespace
   repository    = "https://helm.linkerd.io/stable"
   version       = var.helm_release
   wait          = true
   wait_for_jobs = true
-  skip_crds     = false
   set {
     name  = "identityTrustAnchorsPEM"
     value = data.local_file.ca-cert.content
@@ -62,17 +72,19 @@ resource "helm_release" "linkerd" {
 
   depends_on = [
     null_resource.fetch_ca,
+    helm_release.linkerd
   ]
 }
 
 resource "helm_release" "linkerd-viz" {
-  name          = "linkerd-viz"
-  chart         = "linkerd-viz"
-  namespace     = var.namespace
-  version       = var.helm_release
-  repository    = "https://helm.linkerd.io/stable"
-  wait          = true
-  wait_for_jobs = true
+  name             = "linkerd-viz"
+  chart            = "linkerd-viz"
+  namespace        = "${var.namespace}-viz"
+  version          = var.helm_release_viz
+  repository       = "https://helm.linkerd.io/stable"
+  create_namespace = true
+  wait             = true
+  wait_for_jobs    = true
   values = [
     templatefile("${path.module}/linkerd-viz-values.yaml", {
       tracing          = var.tracing_enabled,
@@ -80,7 +92,8 @@ resource "helm_release" "linkerd-viz" {
     })
   ]
   depends_on = [
-    helm_release.linkerd
+    helm_release.linkerd,
+    helm_release.linkerd_crds
   ]
 }
 
@@ -98,21 +111,21 @@ resource "kubectl_manifest" "linkerd-viz-ingress" {
   yaml_body = templatefile("${path.module}/templates/ingress.yaml", { domain-name = var.domain-name })
 }
 
-# TODO only install jaeger in install_jaeger is enabled
-
 resource "helm_release" "linkerd-jaeger" {
-  count         = var.tracing_enabled == true && (var.tracing_controlplane || var.tracing_dataplane) ? 1 : 0
-  name          = "linkerd-jaeger"
-  chart         = "linkerd-jaeger"
-  namespace     = var.namespace
-  version       = var.helm_release
-  repository    = "https://helm.linkerd.io/stable"
-  wait          = true
-  wait_for_jobs = true
+  count            = var.tracing_enabled == true && (var.tracing_controlplane || var.tracing_dataplane) ? 1 : 0
+  name             = "linkerd-jaeger"
+  chart            = "linkerd-jaeger"
+  namespace        = "${var.namespace}-jaeger"
+  version          = var.helm_release_jaeger
+  repository       = "https://helm.linkerd.io/stable"
+  create_namespace = true
+  wait             = true
+  wait_for_jobs    = true
   values = [
     "${file("${path.module}/linkerd-jaeger-values.yaml")}"
   ]
   depends_on = [
-    helm_release.linkerd
+    helm_release.linkerd,
+    helm_release.linkerd_crds
   ]
 }

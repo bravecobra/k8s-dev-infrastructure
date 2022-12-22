@@ -10,6 +10,9 @@ locals {
     "cert_manager"               = { chart_version = var.cert_manager_helm_version },
     "metrics"                    = { chart_version = var.metrics_helm_version },
     "linkerd"                    = { chart_version = var.linkerd_helm_version },
+    "linkerdcrds"                = { chart_version = var.linkerdcrds_helm_version },
+    "linkerdviz"                 = { chart_version = var.linkerdviz_helm_version },
+    "linkerdjaeger"              = { chart_version = var.linkerdjaeger_helm_version },
     "prometheus"                 = { chart_version = var.prometheus_helm_version },
     "jaeger"                     = { chart_version = var.jaeger_helm_version },
     "opentelemetry"              = { chart_version = var.opentelemetry_helm_version },
@@ -63,14 +66,17 @@ module "certmanager" {
 }
 
 module "linkerd" {
-  count             = var.install_linkerd == true ? 1 : 0
-  source            = "./modules/networking/linkerd"
-  helm_release      = module.versions.chart_versions["linkerd"].chart_version
-  domain-name       = var.domain-name
-  namespace         = kubernetes_namespace.linkerd[0].metadata[0].name
-  tracing_enabled   = var.install_jaeger
-  tracing_dataplane = var.install_jaeger
-  metrics_external  = var.install_prometheus
+  count               = var.install_linkerd == true ? 1 : 0
+  source              = "./modules/networking/linkerd"
+  helm_release        = module.versions.chart_versions["linkerd"].chart_version
+  helm_release_crds   = module.versions.chart_versions["linkerdcrds"].chart_version
+  helm_release_viz    = module.versions.chart_versions["linkerdviz"].chart_version
+  helm_release_jaeger = module.versions.chart_versions["linkerdjaeger"].chart_version
+  domain-name         = var.domain-name
+  namespace           = kubernetes_namespace.linkerd[0].metadata[0].name
+  tracing_enabled     = var.install_jaeger
+  tracing_dataplane   = var.install_jaeger
+  metrics_external    = var.install_prometheus
   depends_on = [
     module.certmanager,
     kubernetes_namespace.linkerd
