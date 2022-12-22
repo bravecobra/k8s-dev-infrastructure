@@ -60,6 +60,7 @@ resource "time_sleep" "wait_x_seconds" {
 resource "kubectl_manifest" "oracledb" {
   yaml_body = templatefile("${path.module}/templates/oracle-xe.yaml", {
     domain-name    = var.domain-name
+    storageclass   = var.storageclass
     oracle_version = var.oracle_xe_version
   })
   depends_on = [

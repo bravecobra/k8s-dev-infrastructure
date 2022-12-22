@@ -2,7 +2,7 @@ mssql:
   enabled: true
   MSSQL_MEMORY_LIMIT_MB: 512
   pvc:
-    StorageClass: "local-path"
+    StorageClass: "${storageclass}"
     userdbaccessMode: ReadWriteOnce
     userdbsize: 1Gi
     userlogaccessMode: ReadWriteOnce

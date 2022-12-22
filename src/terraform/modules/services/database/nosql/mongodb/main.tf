@@ -21,7 +21,8 @@ resource "helm_release" "mongodb" {
   wait_for_jobs = true
   values = [
     templatefile("${path.module}/mongodb-values.yaml", {
-      domain-name = var.domain-name,
+      domain-name  = var.domain-name,
+      storageclass = var.storageclass,
     rootPassword = random_password.init_password.result })
   ]
   depends_on = [

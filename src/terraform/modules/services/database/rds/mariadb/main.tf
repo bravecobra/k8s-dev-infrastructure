@@ -21,7 +21,8 @@ resource "helm_release" "mariadb" {
   wait_for_jobs = true
   values = [
     templatefile("${path.module}/mariadb-values.yaml", {
-      domain-name = var.domain-name,
+      domain-name  = var.domain-name,
+      storageclass = var.storageclass,
     rootPassword = random_password.init_password.result })
   ]
   depends_on = [

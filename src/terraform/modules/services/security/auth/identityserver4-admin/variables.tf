@@ -15,3 +15,7 @@ variable "domain-name" {
 variable "namespace" {
   description = "Namespace"
 }
+
+variable "storageclass" {
+  type = string
+}

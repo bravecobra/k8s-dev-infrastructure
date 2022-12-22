@@ -7,7 +7,8 @@ resource "helm_release" "mssql" {
   wait          = true
   wait_for_jobs = true
   values = [
-    "${file("${path.module}/mssql-values.yaml")}"
+    templatefile("${path.module}/mssql-values.yaml",
+    { storageclass = var.storageclass })
   ]
 }
 

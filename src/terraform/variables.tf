@@ -79,6 +79,21 @@ variable "linkerd_helm_version" {
   default = ""
 }
 
+variable "linkerdcrds_helm_version" {
+  type    = string
+  default = ""
+}
+
+variable "linkerdviz_helm_version" {
+  type    = string
+  default = ""
+}
+
+variable "linkerdjaeger_helm_version" {
+  type    = string
+  default = ""
+}
+
 variable "linkerd_namespace" {
   type    = string
   default = "linkerd"

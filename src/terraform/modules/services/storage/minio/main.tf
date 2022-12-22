@@ -22,6 +22,7 @@ resource "helm_release" "minio" {
     templatefile("${path.module}/minio-values.yaml", {
       domain-name      = var.domain-name,
       namespace        = var.namespace,
+      storageclass     = var.storageclass,
       init_password    = random_password.init_password.result,
       metrics_external = var.metrics,
     }),

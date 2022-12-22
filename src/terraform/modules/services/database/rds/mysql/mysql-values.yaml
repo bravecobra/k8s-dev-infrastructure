@@ -6,4 +6,4 @@ auth:
 
 primary:
   persistence:
-    storageClass: "local-path"
+    storageClass: "${storageclass}"

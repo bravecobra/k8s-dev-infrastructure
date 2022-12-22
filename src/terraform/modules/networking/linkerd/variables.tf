@@ -1,6 +1,17 @@
 variable "helm_release" {
-  type    = string
-  default = "2.11.0"
+  type = string
+}
+
+variable "helm_release_crds" {
+  type = string
+}
+
+variable "helm_release_viz" {
+  type = string
+}
+
+variable "helm_release_jaeger" {
+  type = string
 }
 
 variable "prometheus" {

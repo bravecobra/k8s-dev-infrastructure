@@ -14,3 +14,7 @@ variable "metrics" {
   description = "Enable metrics"
   default     = "false"
 }
+
+variable "storageclass" {
+  type = string
+}

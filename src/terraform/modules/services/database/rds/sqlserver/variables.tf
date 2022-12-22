@@ -14,3 +14,7 @@ variable "expose_mssql" {
   type    = bool
   default = false
 }
+
+variable "storageclass" {
+  type = string
+}

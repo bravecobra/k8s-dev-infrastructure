@@ -3,9 +3,9 @@
 global:
   postgresql:
     auth:
-      postgresPassword: ${postgresPassword}
+      postgresPassword: "${postgresPassword}"
 
 primary:
   persistence:
-    storageClass: local-path
+    storageClass: "${storageclass}"
     size: 1Gi

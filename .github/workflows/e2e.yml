@@ -2,6 +2,47 @@ name: E2E
 
 on:
   workflow_dispatch:
+    inputs:
+      install_monitoring:
+        description: With Monitoring (Grafana backend and Seq and Jaeger)
+        default: false
+        type: boolean
+      install_mesh :
+        description: With Mesh (LinkerD)
+        default: false
+        type: boolean
+      install_ingress:
+        description: With Ingress (Cert-Manager, Traefik and WhoAmI)
+        default: true
+        type: boolean
+      install_config:
+        description: With Config (Elastic Backend, Redis, Vault, Etc)
+        default: false
+        type: boolean
+      install_identityserver4admin:
+        description: With Auth (IdentityServer4)
+        default: false
+        type: boolean
+      install_keycloak:
+        description: With Auth (Keycloak)
+        default: false
+        type: boolean
+      install_storage:
+        description: With Storage (Minio, Azurite, DockerRegistry UI)
+        default: false
+        type: boolean
+      install_messaging:
+        description: With Messaging (RabbitMq, Localstack, Kafka)
+        default: false
+        type: boolean
+      install_deploy:
+        description: With Deployments (ArgoCD)
+        default: false
+        type: boolean
+      install_DBs:
+        description: With Databases (MySQL, MariaDB, Postgres, MSSQL, MongoDB)
+        default: false
+        type: boolean
   push:
     branches:
       - master
@@ -105,6 +146,41 @@ jobs:
           cd ./src/terraform
           terraform init --upgrade
           terraform apply -var-file="../tests/${{ matrix.cluster }}/terraform.tfvars" --auto-approve
+        env:
+          TF_VAR_install_opentelemetry: ${{ inputs.install_monitoring  || false }}
+          TF_VAR_install_loki: ${{ inputs.install_monitoring  || false }}
+          TF_VAR_install_promtail: ${{ inputs.install_monitoring  || false }}
+          TF_VAR_install_tempo: ${{ inputs.install_monitoring  || false }}
+          TF_VAR_install_prometheus: ${{ inputs.install_monitoring  || false }}
+          TF_VAR_install_grafana: ${{ inputs.install_monitoring  || false }}
+          TF_VAR_install_metrics: ${{ inputs.install_metrics  || false }}
+          TF_VAR_install_linkerd : ${{ inputs.install_mesh || false}}
+          TF_VAR_install_traefik: ${{ inputs.install_ingress || true}}
+          TF_VAR_install_cert_manager: ${{ inputs.install_ingress || true}}
+          TF_VAR_install_seq: ${{ inputs.install_monitoring || false}}
+          TF_VAR_install_jaeger: ${{ inputs.install_monitoring || false}}
+          TF_VAR_install_elasticsearch: ${{ inputs.install_config || false}}
+          TF_VAR_install_kibana: ${{ inputs.install_config || false}}
+          TF_VAR_install_redis: ${{ inputs.install_config || false}}
+          TF_VAR_install_vault: ${{ inputs.install_config || false}}
+          TF_VAR_install_etcd: ${{ inputs.install_config || false}}
+          TF_VAR_install_identityserver4admin: ${{ inputs.install_identityserver4admin || false}}
+          TF_VAR_install_keycloak: ${{ inputs.install_keycloak || false}}
+          TF_VAR_install_minio: ${{ inputs.install_storage || false}}
+          TF_VAR_install_azurite: ${{ inputs.install_storage || false}}
+          TF_VAR_install_docker_registry: ${{ inputs.install_storage || false}}
+          TF_VAR_install_rabbitmq: ${{ inputs.install_messaging || false}}
+          TF_VAR_install_localstack: ${{ inputs.install_messaging || false}}
+          TF_VAR_install_kafka: ${{ inputs.install_messaging || false}}
+          TF_VAR_install_argocd: ${{ inputs.install_deploy || false}}
+          TF_VAR_install_flux2: false
+          TF_VAR_install_mysql: ${{ inputs.install_DBs || false}}
+          TF_VAR_install_mariadb: ${{ inputs.install_DBs || false}}
+          TF_VAR_install_postgres: ${{ inputs.install_DBs || false}}
+          TF_VAR_install_mssql: ${{ inputs.install_DBs || false}}
+          TF_VAR_install_mongodb: ${{ inputs.install_DBs || false}}
+          TF_VAR_install_oracle: false
+          TF_VAR_install_whoami: ${{ inputs.install_ingress || true}}
 
       - name: Await deployment traefik
         uses: jupyterhub/action-k8s-await-workloads@v1
@@ -143,3 +219,8 @@ jobs:
         with:
           collection: ./src/tests/k8s-dev-infrastructure.postman_collection.json
           environment: ./src/tests/k8s.local.postman_environment.json
+
+      - name: Terraform destroy
+        run: |
+          cd ./src/terraform
+          terraform destroy -var-file="../tests/${{ matrix.cluster }}/terraform.tfvars" --auto-approve

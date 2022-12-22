@@ -31,7 +31,7 @@ spec:
   persistence:
     size: 50Gi
     ## oci-bv applies to OCI block volumes. Use "standard" storageClass for dynamic provisioning in Minikube. Update as appropriate for other cloud service providers
-    storageClass: "local-path"
+    storageClass: "${storageclass}"
     accessMode: "ReadWriteOnce"
 
   ## Count of Database Pods. Should be 1 for express edition.
