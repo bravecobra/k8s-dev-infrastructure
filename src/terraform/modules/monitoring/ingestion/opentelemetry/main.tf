@@ -19,12 +19,12 @@ resource "kubectl_manifest" "collector" {
   yaml_body = templatefile("${path.module}/templates/${var.monitoring_backend}/collector.yaml", {
     namespace = var.namespace,
     configuration = indent(4, templatefile("${path.module}/templates/${var.monitoring_backend}/collector-config.yaml", {
-      install_jaeger  = var.install_jaeger
-      jaeger_endpoint = "jaeger-collector.jaeger.svc.cluster.local:14250"
-      install_loki    = var.install_loki
-      loki_endpoint   = "http://loki.loki.svc.cluster.local:3100/loki/api/v1/push"
+      install_jaeger          = var.install_jaeger
+      jaeger_endpoint         = "jaeger-collector.jaeger.svc.cluster.local:14250"
+      install_loki            = var.install_loki
+      loki_endpoint           = "http://loki.loki.svc.cluster.local:3100/loki/api/v1/push"
       NEW_RELIC_OTLP_ENDPOINT = local.envs["NEW_RELIC_ENDPOINT"]
-      NEW_RELIC_LICENSE_KEY = local.envs["NEW_RELIC_LICENSE_KEY"]
+      NEW_RELIC_LICENSE_KEY   = local.envs["NEW_RELIC_LICENSE_KEY"]
     }))
   })
   depends_on = [

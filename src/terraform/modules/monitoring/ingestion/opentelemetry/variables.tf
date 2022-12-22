@@ -28,8 +28,8 @@ variable "install_loki" {
 
 variable "monitoring_backend" {
   description = "the backend to ship telemetry to"
-  type = string
-  default = "grafana"
+  type        = string
+  default     = "grafana"
 
   # using contains()
   validation {
@@ -39,6 +39,6 @@ variable "monitoring_backend" {
 }
 
 variable "k8smonitoring_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
