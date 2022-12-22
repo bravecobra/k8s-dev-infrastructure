@@ -158,6 +158,11 @@ variable "expose_opentelemetry" {
   default = false
 }
 
+variable "monitoring_backend" {
+  type    = string
+  default = "grafana"
+}
+
 variable "opentelemetry_namespace" {
   type    = string
   default = "opentelemetry"

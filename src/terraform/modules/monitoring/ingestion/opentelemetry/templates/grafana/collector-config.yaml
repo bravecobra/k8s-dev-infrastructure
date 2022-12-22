@@ -53,7 +53,7 @@ exporters:
 #%{ endif }
   prometheus:
     endpoint: 0.0.0.0:8889
-    namespace: "external"
+    namespace: "otelgateway"
 service:
   extensions: [health_check,pprof,zpages]
   telemetry:

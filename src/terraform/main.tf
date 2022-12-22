@@ -137,6 +137,7 @@ module "opentelemetry" {
   namespace        = kubernetes_namespace.opentelemetry[0].metadata[0].name
   install_jaeger   = var.install_jaeger
   install_loki     = var.install_loki
+  monitoring_backend = var.monitoring_backend
   depends_on = [
     module.linkerd,
     kubernetes_namespace.opentelemetry
