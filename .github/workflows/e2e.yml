@@ -219,3 +219,7 @@ jobs:
         with:
           collection: ./src/tests/k8s-dev-infrastructure.postman_collection.json
           environment: ./src/tests/k8s.local.postman_environment.json
+
+      - name: Terraform destroy
+        run: |
+          terraform destroy --auto-approve
