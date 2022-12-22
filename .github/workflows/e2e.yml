@@ -222,4 +222,5 @@ jobs:
 
       - name: Terraform destroy
         run: |
+          cd ./src/terraform
           terraform destroy --auto-approve
