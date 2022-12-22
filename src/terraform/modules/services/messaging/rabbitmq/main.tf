@@ -25,6 +25,7 @@ resource "kubectl_manifest" "rabbitmq-cluster" {
   })
   depends_on = [
     kubectl_manifest.rabbitmq-cert,
+    helm_release.rabbitmq-operator
   ]
 }
 
