@@ -7,7 +7,7 @@ namespace TelemetrySampleWeb.Configuration
 {
     public static class WebApplicationExtensions
     {
-        public static WebApplication AddMetricsEndpoint(this WebApplication app)
+        public static void AddMetricsEndpoint(this WebApplication app)
         {
             var metricsExporter = app.Configuration.GetValue<string>("UseMetricsExporter")?.ToLowerInvariant();
 
@@ -15,10 +15,9 @@ namespace TelemetrySampleWeb.Configuration
             {
                 app.UseOpenTelemetryPrometheusScrapingEndpoint();
             }
-            return app;
         }
 
-        public static WebApplication UseCustomErrorhandling(this WebApplication app)
+        public static void UseCustomErrorhandling(this WebApplication app)
         {
             app.UseExceptionHandler(appError =>
             {
@@ -38,7 +37,6 @@ namespace TelemetrySampleWeb.Configuration
                     }
                 });
             });
-            return app;
         }
     }
 }
