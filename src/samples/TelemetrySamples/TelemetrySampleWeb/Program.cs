@@ -1,3 +1,4 @@
+using OpenTelemetry.Resources;
 using TelemetrySampleWeb.Configuration;
 
 namespace TelemetrySampleWeb
@@ -10,13 +11,11 @@ namespace TelemetrySampleWeb
             //the following switch must be set before adding OtlpExporter.
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true); 
             var builder = WebApplication.CreateBuilder(args);
-            var resourceBuilder = ResourceBuilderFactory.CreateResourceBuilder(builder);
+            var resourceBuilder = ResourceBuilderFactory.CreateResourceBuilder(ResourceBuilder.CreateDefault());
             // Add Logging
             builder.AddCustomLogging(resourceBuilder);
-            // Add Metrics
-            builder.Services.AddCustomMetrics(builder.Configuration, resourceBuilder);
             // Add Traces
-            builder.Services.AddCustomTracing(builder.Configuration, resourceBuilder);
+            builder.Services.AddCustomTelemetry(builder.Configuration, resourceBuilder);
 
             builder.Services.AddHealthChecks();
 
