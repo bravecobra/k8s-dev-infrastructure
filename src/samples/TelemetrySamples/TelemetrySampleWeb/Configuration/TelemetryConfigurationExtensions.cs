@@ -17,77 +17,99 @@ namespace TelemetrySampleWeb.Configuration
     {
         internal const string MyApplicationMeterName = "MyApplication";
 
-        public static IServiceCollection AddCustomTracing(this IServiceCollection services,
+        public static void AddCustomTelemetry(this IServiceCollection services,
             IConfiguration configuration, ResourceBuilder resourceBuilder)
         {
-            services.AddOpenTelemetryTracing(options =>
-            {
-                options
-                    .SetResourceBuilder(resourceBuilder)
-                    .SetSampler(new AlwaysOnSampler())
-                    .AddHttpClientInstrumentation()
-                    .AddAspNetCoreInstrumentation(instrumentationOptions =>
-                    {
-                        instrumentationOptions.Enrich = Enrich;
-                        instrumentationOptions.RecordException = true;
-                    })
-                    .AddSource(Assembly.GetEntryAssembly()?.GetName().Name);
-                var tracingExporter = configuration.GetValue<string>("UseTracingExporter")?.ToLowerInvariant();
-                switch (tracingExporter)
+            services.AddOpenTelemetry()
+                .WithTracing(options =>
                 {
-                    case "jaeger":
-                        options.AddJaegerExporter();
-                        services.Configure<JaegerExporterOptions>(configuration.GetSection("Jaeger"));
-
-                        // Customize the HttpClient that will be used when JaegerExporter is configured for HTTP transport.
-                        services.AddHttpClient("JaegerExporter", configureClient: client => client.DefaultRequestHeaders.Add("X-MyCustomHeader", "value"));
-                        break;
-
-                    // case "zipkin":
-                    //     options.AddZipkinExporter();
-                    //
-                    //     builder.Services.Configure<ZipkinExporterOptions>(builder.Configuration.GetSection("Zipkin"));
-                    //     break;
-
-                    case "otlp":
-                        options.AddOtlpExporter(otlpOptions =>
+                    options
+                        .SetResourceBuilder(resourceBuilder)
+                        .SetSampler(new AlwaysOnSampler())
+                        .AddHttpClientInstrumentation()
+                        .AddAspNetCoreInstrumentation(instrumentationOptions =>
                         {
-                            otlpOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
-                            otlpOptions.Endpoint = new Uri(configuration.GetValue<string>("Otlp:Endpoint") + "/v1/traces");
-                            otlpOptions.ExportProcessorType = ExportProcessorType.Simple;
-                        });
-                        break;
+                            instrumentationOptions.EnrichWithHttpRequest = EnrichWithHttpRequest;
+                            instrumentationOptions.EnrichWithHttpResponse = EnrichWithHttpResponse;
+                            instrumentationOptions.RecordException = true;
+                        })
+                        .AddSource(Assembly.GetEntryAssembly()?.GetName().Name);
+                    var tracingExporter = configuration.GetValue<string>("UseTracingExporter")?.ToLowerInvariant();
+                    switch (tracingExporter)
+                    {
+                        case "jaeger":
+                            options.AddJaegerExporter();
+                            services.Configure<JaegerExporterOptions>(configuration.GetSection("Jaeger"));
 
-                    default:
-                        options.AddConsoleExporter();
+                            // Customize the HttpClient that will be used when JaegerExporter is configured for HTTP transport.
+                            services.AddHttpClient("JaegerExporter", configureClient: client => client.DefaultRequestHeaders.Add("X-MyCustomHeader", "value"));
+                            break;
 
-                        break;
-                }
-            });
+                        // case "zipkin":
+                        //     options.AddZipkinExporter();
+                        //
+                        //     builder.Services.Configure<ZipkinExporterOptions>(builder.Configuration.GetSection("Zipkin"));
+                        //     break;
+
+                        case "otlp":
+                            options.AddOtlpExporter("traces", otlpOptions =>
+                            {
+                                otlpOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
+                                otlpOptions.Endpoint = new Uri(configuration.GetValue<string>("Otlp:Endpoint") + "/v1/traces");
+                                otlpOptions.ExportProcessorType = ExportProcessorType.Simple;
+                            });
+                            break;
+
+                        default:
+                            options.AddConsoleExporter();
+
+                            break;
+                    }
+                })
+                .WithMetrics(options =>
+                {
+                    options.SetResourceBuilder(resourceBuilder)
+                        .AddHttpClientInstrumentation()
+                        .AddAspNetCoreInstrumentation()
+                        .AddMeter(MyApplicationMeterName);
+
+                    var metricsExporter = configuration.GetValue<string>("UseMetricsExporter")?.ToLowerInvariant();
+                    switch (metricsExporter)
+                    {
+                        case "prometheus":
+                            options.AddPrometheusExporter();
+                            break;
+                        case "otlp":
+                            options.AddOtlpExporter("metrics", otlpOptions =>
+                            {
+                                otlpOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
+                                otlpOptions.Endpoint = new Uri(configuration.GetValue<string>("Otlp:Endpoint") + "/v1/metrics");
+                                otlpOptions.ExportProcessorType = ExportProcessorType.Simple;
+                            });
+                            break;
+                        default:
+                            options.AddConsoleExporter();
+                            break;
+                    }
+                })
+                .StartWithHost();
             services.Configure<AspNetCoreInstrumentationOptions>(configuration.GetSection("AspNetCoreInstrumentation"));
-            return services;
-
         }
 
-        private static void Enrich(Activity activity, string eventName, object obj)
+        private static void EnrichWithHttpResponse(Activity activity, HttpResponse response)
         {
-            switch (obj)
-            {
-                case HttpRequest request:
-                {
-                    var context = request.HttpContext;
-                    activity.AddTag("http.flavor", GetHttpFlavour(request.Protocol));
-                    activity.AddTag("http.scheme", request.Scheme);
-                    activity.AddTag("http.client_ip", context.Connection.RemoteIpAddress);
-                    activity.AddTag("http.request_content_length", request.ContentLength);
-                    activity.AddTag("http.request_content_type", request.ContentType);
-                    break;
-                }
-                case HttpResponse response:
-                    activity.AddTag("http.response_content_length", response.ContentLength);
-                    activity.AddTag("http.response_content_type", response.ContentType);
-                    break;
-            }
+            activity.AddTag("http.response_content_length", response.ContentLength);
+            activity.AddTag("http.response_content_type", response.ContentType);
+        }
+
+        private static void EnrichWithHttpRequest(Activity activity, HttpRequest request)
+        {
+            var context = request.HttpContext;
+            activity.AddTag("http.flavor", GetHttpFlavour(request.Protocol));
+            activity.AddTag("http.scheme", request.Scheme);
+            activity.AddTag("http.client_ip", context.Connection.RemoteIpAddress);
+            activity.AddTag("http.request_content_length", request.ContentLength);
+            activity.AddTag("http.request_content_type", request.ContentType);
         }
 
         private static string GetHttpFlavour(string protocol)
@@ -96,23 +118,26 @@ namespace TelemetrySampleWeb.Configuration
             {
                 return "1.0";
             }
-            else if (HttpProtocol.IsHttp11(protocol))
+
+            if (HttpProtocol.IsHttp11(protocol))
             {
                 return "1.1";
             }
-            else if (HttpProtocol.IsHttp2(protocol))
+
+            if (HttpProtocol.IsHttp2(protocol))
             {
                 return "2.0";
             }
-            else if (HttpProtocol.IsHttp3(protocol))
+
+            if (HttpProtocol.IsHttp3(protocol))
             {
                 return "3.0";
             }
-            else
-              throw new InvalidOperationException($"Protocol {protocol} not recognised.");
+
+            throw new InvalidOperationException($"Protocol {protocol} not recognised.");
         }
 
-        public static WebApplicationBuilder AddCustomLogging(this WebApplicationBuilder builder, ResourceBuilder resourceBuilder)
+        public static void AddCustomLogging(this WebApplicationBuilder builder, ResourceBuilder resourceBuilder)
         {
             builder.Logging.ClearProviders();
             var logExporter = builder.Configuration.GetValue<string>("UseLogExporter")?.ToLowerInvariant();
@@ -215,39 +240,6 @@ namespace TelemetrySampleWeb.Configuration
                     });
                     break;
             }
-            return builder;
-        }
-
-        public static IServiceCollection AddCustomMetrics(this IServiceCollection services,
-            IConfiguration configuration, ResourceBuilder resourceBuilder)
-        {
-            services.AddOpenTelemetryMetrics(options =>
-            {
-                options.SetResourceBuilder(resourceBuilder)
-                    .AddHttpClientInstrumentation()
-                    .AddAspNetCoreInstrumentation()
-                    .AddMeter(MyApplicationMeterName);
-
-                var metricsExporter = configuration.GetValue<string>("UseMetricsExporter")?.ToLowerInvariant();
-                switch (metricsExporter)
-                {
-                    case "prometheus":
-                        options.AddPrometheusExporter();
-                        break;
-                    case "otlp":
-                        options.AddOtlpExporter(otlpOptions =>
-                        {
-                            otlpOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
-                            otlpOptions.Endpoint = new Uri(configuration.GetValue<string>("Otlp:Endpoint") + "/v1/metrics");
-                            otlpOptions.ExportProcessorType = ExportProcessorType.Simple;
-                        });
-                        break;
-                    default:
-                        options.AddConsoleExporter();
-                        break;
-                }
-            });
-            return services;
         }
     }
 }
