@@ -1,11 +1,9 @@
 variable "helm_release" {
-  type    = string
-  default = "0.5.2"
+  type = string
 }
 
 variable "mssql_helm_release" {
-  type    = string
-  default = "0.1.0"
+  type = string
 }
 
 variable "domain-name" {

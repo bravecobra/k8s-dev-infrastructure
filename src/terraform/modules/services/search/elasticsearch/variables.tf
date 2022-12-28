@@ -1,6 +1,5 @@
 variable "helm_release" {
-  type    = string
-  default = "1.8.0"
+  type = string
 }
 
 variable "install_kibana" {

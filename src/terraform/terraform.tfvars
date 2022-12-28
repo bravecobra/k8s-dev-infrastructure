@@ -35,6 +35,10 @@ node-ips = [
 //metrics
 # install_metrics = true
 
+//vpa
+# install_vpa        = true
+# install_goldilocks = true
+
 //cert-manager
 # install_cert_manager = true
 

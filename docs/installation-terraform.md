@@ -50,6 +50,7 @@ On Linux edit your `/etc/hosts` file as root.
 127.0.0.1 mongo.infrastructure.k8s.local
 127.0.0.1 oracle.infrastructure.k8s.local
 127.0.0.1 redis.infrastructure.k8s.local
+127.0.0.1 goldilocks.infrastructure.k8s.local
 ```
 
 ## Generate a root certificate
@@ -108,6 +109,7 @@ Assuming the root certificate is already created with `mkcert -install`, then
 | aqua                 | [https://aquasecurity.github.io/helm-charts/]                     |
 | jfrog                | [https://charts.jfrog.io]                                         |
 | joxit                | [https://helm.joxit.dev]                                          |
+| fairwinds-stable     | [https://charts.fairwinds.com/stable]                             |
 
 To add these easily
 

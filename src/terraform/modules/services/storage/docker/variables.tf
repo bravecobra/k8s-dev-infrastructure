@@ -1,6 +1,5 @@
 variable "helm_release" {
-  type    = string
-  default = "17.0.2"
+  type = string
 }
 
 variable "domain-name" {

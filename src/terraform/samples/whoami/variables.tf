@@ -1,6 +1,5 @@
 variable "helm_release" {
-  type    = string
-  default = "2.5.5"
+  type = string
 }
 
 variable "namespace" {

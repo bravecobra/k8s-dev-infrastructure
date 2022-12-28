@@ -38,6 +38,36 @@ variable "metrics_helm_version" {
   default = ""
 }
 
+// VPA
+variable "install_vpa" {
+  type    = bool
+  default = false
+}
+variable "vpa_helm_version" {
+  type    = string
+  default = ""
+}
+
+variable "vpa_namespace" {
+  type    = string
+  default = "vpa"
+}
+
+// goldilocks
+variable "install_goldilocks" {
+  type    = bool
+  default = false
+}
+variable "goldilocks_helm_version" {
+  type    = string
+  default = ""
+}
+
+variable "goldilocks_namespace" {
+  type    = string
+  default = "goldilocks"
+}
+
 //cert-manager
 variable "cert_manager_helm_version" {
   type    = string
