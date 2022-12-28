@@ -11,6 +11,9 @@ changelog:
       labels:
         - Semver-Minor
         - enhancement
+    - title: Dependency Upgrades
+      labels:
+        - dependencies
     - title: Other Changes
       labels:
         - "*"
