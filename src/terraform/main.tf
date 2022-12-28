@@ -43,7 +43,7 @@ locals {
     "docker_registry"            = { chart_version = var.docker_registry_helm_version },
     "vpa"                        = { chart_version = var.vpa_helm_version },
     "goldilocks"                 = { chart_version = var.goldilocks_helm_version },
-    "dashboard"                 = { chart_version = var.dashboard_helm_version },
+    "dashboard"                  = { chart_version = var.dashboard_helm_version },
   }
 }
 
