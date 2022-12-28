@@ -25,6 +25,8 @@ resource "kubectl_manifest" "collector" {
       loki_endpoint           = "http://loki.loki.svc.cluster.local:3100/loki/api/v1/push"
       NEW_RELIC_OTLP_ENDPOINT = local.envs["NEW_RELIC_ENDPOINT"]
       NEW_RELIC_LICENSE_KEY   = local.envs["NEW_RELIC_LICENSE_KEY"]
+      DD_SITE                 = local.envs["DD_SITE"]
+      DD_API_KEY              = local.envs["DD_API_KEY"]
     }))
   })
   depends_on = [
@@ -33,7 +35,7 @@ resource "kubectl_manifest" "collector" {
 }
 
 resource "kubectl_manifest" "otel_clusterrole" {
-  count = var.monitoring_backend == "newrelic" ? 1 : 0
+  count = var.monitoring_backend != "grafana" ? 1 : 0
   yaml_body = templatefile("${path.module}/templates/${var.monitoring_backend}/clusterrole.yaml", {
     namespace = var.namespace,
   })
@@ -43,7 +45,7 @@ resource "kubectl_manifest" "otel_clusterrole" {
 }
 
 resource "kubectl_manifest" "otel_clusterrole_binding" {
-  count = var.monitoring_backend == "newrelic" ? 1 : 0
+  count = var.monitoring_backend != "grafana" ? 1 : 0
   yaml_body = templatefile("${path.module}/templates/${var.monitoring_backend}/clusterrolebinding.yaml", {
     namespace = var.namespace,
   })
