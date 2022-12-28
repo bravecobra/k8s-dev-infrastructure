@@ -462,3 +462,17 @@ resource "kubernetes_namespace" "goldilocks" {
     }
   }
 }
+
+resource "kubernetes_namespace" "dashboard" {
+  count = var.install_dashboard ? 1 : 0
+  metadata {
+    name = var.dashboard_namespace
+    labels = {
+      "goldilocks.fairwinds.com/enabled" = "true"
+    }
+    annotations = {
+      "kubernetes.io/description" = var.dashboard_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}

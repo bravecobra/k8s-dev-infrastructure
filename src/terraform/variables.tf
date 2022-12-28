@@ -129,6 +129,22 @@ variable "linkerd_namespace" {
   default = "linkerd"
 }
 
+//dashboard
+variable "dashboard_helm_version" {
+  type    = string
+  default = ""
+}
+variable "install_dashboard" {
+  type    = bool
+  default = false
+}
+
+variable "dashboard_namespace" {
+  type    = string
+  default = "dashboard"
+}
+
+
 //prometheus
 variable "prometheus_helm_version" {
   type    = string

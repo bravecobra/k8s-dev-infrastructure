@@ -54,6 +54,8 @@ node-ips = [
 
 # monitoring_backend = "grafana" #grafana, newrelic, datadog
 
+# install_dashboard = true
+
 //seq
 # install_seq = true
 # expose_seq  = true

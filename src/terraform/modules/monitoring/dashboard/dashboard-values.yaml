@@ -1,0 +1,32 @@
+# https://github.com/kubernetes/dashboard/blob/master/charts/helm-chart/kubernetes-dashboard/templates/deployment.yaml
+
+extraArgs:
+  - --enable-skip-login
+  - --enable-insecure-login
+  - --disable-settings-authorizer
+  - --insecure-bind-address=0.0.0.0
+
+# ## Note: If set to true, you may want to add --enable-insecure-login to extraArgs
+protocolHttp: false
+
+ingress:
+  enabled: true
+  annotations:
+  className: "traefik"
+  paths:
+    - /
+  #  - /*
+  hosts:
+    - dashboard.infrastructure.${domain-name}
+  tls:
+    - secretName: dashboard-cert
+      hosts:
+        - dashboard.infrastructure.${domain-name}
+
+metricsScraper:
+  enabled: true
+
+rbac:
+  create: true
+  clusterRoleMetrics: true
+  clusterReadOnlyRole: true

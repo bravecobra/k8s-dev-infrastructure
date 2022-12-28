@@ -11,6 +11,12 @@ helm_versions:
       url: https://charts.jetstack.io
     chart_name: cert-manager
     chart_version: 1.10.1
+  dashboard:
+    repository:
+      name: k8s-dashboard
+      url: https://kubernetes.github.io/dashboard/
+    chart_name: kubernetes-dashboard
+    chart_version: 6.0.0
   docker_registry:
     repository:
       name: joxit
