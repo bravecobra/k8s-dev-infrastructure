@@ -4,7 +4,7 @@ helm_versions:
       name: argo-cd
       url: https://argoproj.github.io/argo-helm
     chart_name: argo-cd
-    chart_version: 5.16.9
+    chart_version: 5.16.10
   cert_manager:
     repository:
       name: jetstack
@@ -112,7 +112,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: metrics-server
-    chart_version: 6.2.4
+    chart_version: 6.2.5
   minio:
     repository:
       name: minio
@@ -154,7 +154,7 @@ helm_versions:
       name: prometheus-community
       url: https://prometheus-community.github.io/helm-charts
     chart_name: kube-prometheus-stack
-    chart_version: 43.1.4
+    chart_version: 43.2.0
   promtail:
     repository:
       name: grafana
