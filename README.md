@@ -21,6 +21,7 @@ This repository contains a [kubernetes](https://kubernetes.io/) dev infrastructu
 | Monitoring      | prometheus              | Metrics                  |
 | Monitoring      | grafana                 | Dashboards               |
 | Monitoring      | metrics-server          | Metrics                  |
+| Monitoring      | vpa                     | Autoscaling              |
 | Monitoring      | opentelemetry-collector | Telemetry Ingestion      |
 | Saas Cache      | redis                   | Caching                  |
 | Saas Cloud      | localstack              | AWS emulator             |

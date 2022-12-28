@@ -108,6 +108,7 @@ Assuming the root certificate is already created with `mkcert -install`, then
 | aqua                 | [https://aquasecurity.github.io/helm-charts/]                     |
 | jfrog                | [https://charts.jfrog.io]                                         |
 | joxit                | [https://helm.joxit.dev]                                          |
+| fairwinds-stable     | [https://charts.fairwinds.com/stable]                             |
 
 To add these easily
 
