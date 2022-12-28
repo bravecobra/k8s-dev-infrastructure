@@ -20,6 +20,7 @@ This repository contains a [kubernetes](https://kubernetes.io/) dev infrastructu
 | Monitoring      | tempo                   | Tracing                  |
 | Monitoring      | prometheus              | Metrics                  |
 | Monitoring      | grafana                 | Dashboards               |
+| Monitoring      | k8s dashboard           | Dashboards               |
 | Monitoring      | metrics-server          | Metrics                  |
 | Monitoring      | vpa                     | Autoscaling              |
 | Monitoring      | opentelemetry-collector | Telemetry Ingestion      |
