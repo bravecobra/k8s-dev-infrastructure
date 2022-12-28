@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - master
+      - 'refs/tags/**'
   pull_request:
     types: [opened, synchronize, reopened]
 
