@@ -40,7 +40,9 @@ locals {
     "mssql"                      = { chart_version = var.mssql_helm_version },
     "mongodb"                    = { chart_version = var.mongodb_helm_version },
     "redis"                      = { chart_version = var.redis_helm_version },
-    "docker_registry"            = { chart_version = var.docker_registry_helm_version }
+    "docker_registry"            = { chart_version = var.docker_registry_helm_version },
+    "vpa"                        = { chart_version = var.vpa_helm_version },
+    "goldilocks"                 = { chart_version = var.goldilocks_helm_version },
   }
 }
 
@@ -51,7 +53,7 @@ module "versions" {
 }
 
 module "metrics" {
-  count        = var.install_metrics == true ? 1 : 0
+  count        = var.install_metrics == true || var.install_vpa == true || var.install_goldilocks == true ? 1 : 0
   source       = "./modules/monitoring/metrics/metrics"
   helm_release = module.versions.chart_versions["metrics"].chart_version
 }
@@ -530,5 +532,33 @@ module "registry" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.docker_registry
+  ]
+}
+
+module "vpa" {
+  count        = var.install_vpa == true || var.install_goldilocks == true ? 1 : 0
+  source       = "./modules/monitoring/vpa"
+  domain-name  = var.domain-name
+  helm_release = module.versions.chart_versions["vpa"].chart_version
+  namespace    = kubernetes_namespace.vpa[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    module.metrics,
+    kubernetes_namespace.vpa
+  ]
+}
+
+module "goldilocks" {
+  count        = var.install_goldilocks == true ? 1 : 0
+  source       = "./modules/monitoring/goldilocks"
+  domain-name  = var.domain-name
+  helm_release = module.versions.chart_versions["goldilocks"].chart_version
+  namespace    = kubernetes_namespace.goldilocks[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    module.vpa,
+    kubernetes_namespace.goldilocks
   ]
 }

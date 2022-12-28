@@ -35,6 +35,12 @@ helm_versions:
       url: https://fluent.github.io/helm-charts
     chart_name: fluent-bit
     chart_version: 0.21.6
+  goldilocks:
+    repository:
+      name: fairwinds-stable
+      url: https://charts.fairwinds.com/stable
+    chart_name: goldilocks
+    chart_version: 6.4.0
   identityserver4admin:
     repository:
       name: identityserver4admin
@@ -197,6 +203,12 @@ helm_versions:
       url: https://helm.releases.hashicorp.com
     chart_name: vault
     chart_version: 0.23.0
+  vpa:
+    repository:
+      name: fairwinds-stable
+      url: https://charts.fairwinds.com/stable
+    chart_name: vpa
+    chart_version: 1.5.0
   whoami:
     repository:
       name: cowboysysop

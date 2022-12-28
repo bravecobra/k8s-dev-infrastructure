@@ -20,6 +20,7 @@
         "crds",
         "datalust",
         "datasource",
+        "entrypoints",
         "fluxcd",
         "hckops",
         "healthz",
@@ -29,8 +30,10 @@
         "joxit",
         "keycloak",
         "kubeconfig",
+        "kubernetescrd",
         "linkerd",
         "localstack",
+        "middlewares",
         "minio",
         "mkcert",
         "mkdocs",
@@ -47,6 +50,7 @@
         "telemetrysampleweb",
         "tfsec",
         "tfvars",
-        "traefik"
+        "traefik",
+        "websecure"
     ]
 }

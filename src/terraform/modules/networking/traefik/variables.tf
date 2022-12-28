@@ -11,7 +11,7 @@ variable "node-ips" {
 }
 
 variable "helm_release" {
-  type    = string
+  type = string
 }
 
 variable "domain-name" {

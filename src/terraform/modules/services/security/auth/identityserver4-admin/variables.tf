@@ -1,9 +1,9 @@
 variable "helm_release" {
-  type    = string
+  type = string
 }
 
 variable "mssql_helm_release" {
-  type    = string
+  type = string
 }
 
 variable "domain-name" {

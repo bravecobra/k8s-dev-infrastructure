@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       install_monitoring:
-        description: With Monitoring (Grafana backend and Seq and Jaeger)
+        description: With Monitoring (Grafana backend, Goldilocks, Seq and Jaeger)
         default: false
         type: boolean
       install_mesh :
@@ -89,6 +89,7 @@ jobs:
           sudo echo "127.0.0.1 mongo.infrastructure.k8s.local" | sudo tee -a /etc/hosts
           sudo echo "127.0.0.1 oracle.infrastructure.k8s.local" | sudo tee -a /etc/hosts
           sudo echo "127.0.0.1 redis.infrastructure.k8s.local" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 goldilocks.infrastructure.k8s.local" | sudo tee -a /etc/hosts
 
       - name: Installing prerequisites
         run: |
@@ -157,6 +158,7 @@ jobs:
           TF_VAR_install_tempo: ${{ inputs.install_monitoring  || false }}
           TF_VAR_install_prometheus: ${{ inputs.install_monitoring  || false }}
           TF_VAR_install_grafana: ${{ inputs.install_monitoring  || false }}
+          TF_VAR_install_goldilocks: ${{ inputs.install_monitoring  || false }}
           TF_VAR_install_metrics: ${{ inputs.install_metrics  || false }}
           TF_VAR_install_linkerd : ${{ inputs.install_mesh || false}}
           TF_VAR_install_traefik: ${{ inputs.install_ingress || true}}

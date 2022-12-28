@@ -1,0 +1,11 @@
+recommender:
+  enabled: true
+  image:
+    pullPolicy: IfNotPresent
+    tag: "0.12.0"
+
+updater:
+  enabled: false
+  image:
+    pullPolicy: IfNotPresent
+    tag: "0.12.0"
