@@ -116,6 +116,10 @@ jobs:
           echo GITHUB_TOKEN=sometoken >> src/terraform/.env
           echo ORACLE_EMAIL=someemail >> src/terraform/.env
           echo ORACLE_PASSWORD=somepassword >> src/terraform/.env
+          echo DD_API_KEY=somekey >> src/terraform/.env
+          echo DD_SITE=somedomain >> src/terraform/.env
+          echo NEW_RELIC_ENDPOINT=someendpoint >> src/terraform/.env
+          echo NEW_RELIC_LICENSE_KEY=somekey >> src/terraform/.env
 
       - name: Setup K3S Cluster
         uses: nolar/setup-k3d-k3s@v1

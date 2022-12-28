@@ -1,3 +1,7 @@
+locals {
+  envs = { for tuple in regexall("(.*)=(.*)", file(".env")) : tuple[0] => sensitive(tuple[1]) }
+}
+
 resource "helm_release" "opentelemetry" {
   name       = "opentelemetry-operator"
   chart      = "opentelemetry-operator"
@@ -12,14 +16,38 @@ resource "helm_release" "opentelemetry" {
 }
 
 resource "kubectl_manifest" "collector" {
-  yaml_body = templatefile("${path.module}/templates/collector.yaml", {
+  yaml_body = templatefile("${path.module}/templates/${var.monitoring_backend}/collector.yaml", {
     namespace = var.namespace,
-    configuration = indent(4, templatefile("${path.module}/templates/collector-config.yaml", {
-      install_jaeger  = var.install_jaeger
-      jaeger_endpoint = "jaeger-collector.jaeger.svc.cluster.local:14250"
-      install_loki    = var.install_loki
-      loki_endpoint   = "http://loki.loki.svc.cluster.local:3100/loki/api/v1/push"
+    configuration = indent(4, templatefile("${path.module}/templates/${var.monitoring_backend}/collector-config.yaml", {
+      install_jaeger          = var.install_jaeger
+      jaeger_endpoint         = "jaeger-collector.jaeger.svc.cluster.local:14250"
+      install_loki            = var.install_loki
+      loki_endpoint           = "http://loki.loki.svc.cluster.local:3100/loki/api/v1/push"
+      NEW_RELIC_OTLP_ENDPOINT = local.envs["NEW_RELIC_ENDPOINT"]
+      NEW_RELIC_LICENSE_KEY   = local.envs["NEW_RELIC_LICENSE_KEY"]
+      DD_SITE                 = local.envs["DD_SITE"]
+      DD_API_KEY              = local.envs["DD_API_KEY"]
     }))
+  })
+  depends_on = [
+    helm_release.opentelemetry
+  ]
+}
+
+resource "kubectl_manifest" "otel_clusterrole" {
+  count = var.monitoring_backend != "grafana" ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/${var.monitoring_backend}/clusterrole.yaml", {
+    namespace = var.namespace,
+  })
+  depends_on = [
+    helm_release.opentelemetry
+  ]
+}
+
+resource "kubectl_manifest" "otel_clusterrole_binding" {
+  count = var.monitoring_backend != "grafana" ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/${var.monitoring_backend}/clusterrolebinding.yaml", {
+    namespace = var.namespace,
   })
   depends_on = [
     helm_release.opentelemetry

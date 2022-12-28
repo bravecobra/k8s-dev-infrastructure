@@ -130,13 +130,14 @@ module "jaeger" {
 }
 
 module "opentelemetry" {
-  count            = var.install_opentelemetry == true ? 1 : 0
-  source           = "./modules/monitoring/ingestion/opentelemetry"
-  helm_release     = module.versions.chart_versions["opentelemetry"].chart_version
-  expose_ingestion = var.expose_opentelemetry
-  namespace        = kubernetes_namespace.opentelemetry[0].metadata[0].name
-  install_jaeger   = var.install_jaeger
-  install_loki     = var.install_loki
+  count              = var.install_opentelemetry == true ? 1 : 0
+  source             = "./modules/monitoring/ingestion/opentelemetry"
+  helm_release       = module.versions.chart_versions["opentelemetry"].chart_version
+  expose_ingestion   = var.expose_opentelemetry
+  namespace          = kubernetes_namespace.opentelemetry[0].metadata[0].name
+  install_jaeger     = var.install_jaeger
+  install_loki       = var.install_loki
+  monitoring_backend = var.monitoring_backend
   depends_on = [
     module.linkerd,
     kubernetes_namespace.opentelemetry
