@@ -43,6 +43,7 @@ locals {
     "docker_registry"            = { chart_version = var.docker_registry_helm_version },
     "vpa"                        = { chart_version = var.vpa_helm_version },
     "goldilocks"                 = { chart_version = var.goldilocks_helm_version },
+    "dashboard"                  = { chart_version = var.dashboard_helm_version },
   }
 }
 
@@ -560,5 +561,18 @@ module "goldilocks" {
     module.linkerd,
     module.vpa,
     kubernetes_namespace.goldilocks
+  ]
+}
+
+module "dashboard" {
+  count        = var.install_dashboard == true ? 1 : 0
+  source       = "./modules/monitoring/dashboard"
+  domain-name  = var.domain-name
+  helm_release = module.versions.chart_versions["dashboard"].chart_version
+  namespace    = kubernetes_namespace.dashboard[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    kubernetes_namespace.dashboard
   ]
 }
