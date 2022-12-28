@@ -48,39 +48,13 @@ This repository contains a [kubernetes](https://kubernetes.io/) dev infrastructu
 
 ### Quick Start
 
-- Install Tooling
+- Install the tooling
   - Install a `Docker` environment : [Docker desktop](https://www.docker.com/products/docker-desktop/) or [Rancher desktop](https://rancherdesktop.io/)
-  - Install tooling [prerequisites](./docs/preparation.md)
+  - Install the tooling [prerequisites](https://bravecobra.github.io/k8s-dev-infrastructure/preparation/). A couple of binaries are required to run this.
   - Install [Lens](https://k8slens.dev/), a K8S GUI (optional)
-- Create a local `k8s` cluster to deploy on
-  - Edit your `hosts` file: add domain names to resolve to `localhost` so we can point them to the local cluster
-  - Check the docker network subnet range (adjust in `main.tf `-> variable) so there is no overlap with an existing one.
-  - Generate `mkcert` as admin
-  - Run generate a certificate:
-
-    ```shell
-    ./src/terraform/certificates.ps1
-    ```
-
-  - Creation local cluster
-    - cluster k3d:
-
-    ```shell
-    cd ./src/clusters/k3d
-    terraform init
-    terraform apply --auto-approve
-    ```
-
-    - cluster kind:
-
-    ```shell
-    cd ./src/clusters/kind
-    terraform init
-    terraform apply --auto-approve
-    ```
-
-- Deploy
-  - edit `terraform.tfvars`
+- Prepare your local setup (create certificates, DNS, a running cluster, etc..). Just follow the [docs](https://bravecobra.github.io/k8s-dev-infrastructure/installation-terraform/).
+- Final step: Deploy!
+  - edit `terraform.tfvars`. You can uncomment the install booleans to choose what to install on your cluster.
   - deploy services:
 
     ```shell
@@ -91,7 +65,7 @@ This repository contains a [kubernetes](https://kubernetes.io/) dev infrastructu
 
 ### Documentation
 
-The docs are available at [Github Pages](https://bravecobra.github.io/k8s-dev-infrastructure/)
+The full docs are available at [Github Pages](https://bravecobra.github.io/k8s-dev-infrastructure/)
 
 #### Build the docs locally
 

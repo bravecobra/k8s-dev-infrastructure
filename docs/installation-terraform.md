@@ -115,17 +115,17 @@ To add these easily
 
 === "Windows"
 
-```bash
-cd src/terraform
-./add-helm-repos.ps1
-```
+    ```bash
+    cd src/terraform
+    ./add-helm-repos.ps1
+    ```
 
 === "Linux/WSL"
 
-```bash
-cd src/terraform
-./add-helm-repos.sh
-```
+    ```bash
+    cd src/terraform
+    ./add-helm-repos.sh
+    ```
 
 ## Installer
 
