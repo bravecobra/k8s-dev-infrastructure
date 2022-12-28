@@ -1,6 +1,5 @@
 variable "helm_release" {
   type    = string
-  default = "19.0.2"
 }
 
 variable "metrics_jaeger" {

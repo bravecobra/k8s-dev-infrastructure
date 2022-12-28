@@ -12,7 +12,6 @@ variable "node-ips" {
 
 variable "helm_release" {
   type    = string
-  default = "10.3.6"
 }
 
 variable "domain-name" {
