@@ -13,8 +13,8 @@ resource "helm_release" "goldilocks" {
   namespace  = var.namespace
   values = [
     templatefile("${path.module}/goldilocks-values.yaml", {
-        domain-name = var.domain-name
-        namespace   = var.namespace
+      domain-name = var.domain-name
+      namespace   = var.namespace
     })
   ]
   depends_on = [
