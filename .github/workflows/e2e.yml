@@ -373,9 +373,6 @@ jobs:
           timeout: 300
           max-restarts: 0
 
-
-
-
       - name: Await deployment mongodb
         uses: jupyterhub/action-k8s-await-workloads@v2
         if: ${{ inputs.install_DBs == true }}
