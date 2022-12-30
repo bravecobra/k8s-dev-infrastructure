@@ -16,6 +16,8 @@ resource "helm_release" "rabbitmq-operator" {
       domain-name = var.domain-name
     }),
   ]
+  wait = true
+  timeout = 600
 }
 
 resource "kubectl_manifest" "rabbitmq-cluster" {
@@ -27,6 +29,8 @@ resource "kubectl_manifest" "rabbitmq-cluster" {
     kubectl_manifest.rabbitmq-cert,
     helm_release.rabbitmq-operator
   ]
+  wait = true
+  timeout = 600
 }
 
 resource "kubectl_manifest" "rabbitmq-ingress" {
