@@ -219,6 +219,33 @@ jobs:
         with:
           namespace: whoami
 
+      - name: Await deployment rabbitmq
+        uses: jupyterhub/action-k8s-await-workloads@v2
+        if: ${{ inputs.install_messaging == true }}
+        with:
+          workloads: "" # all
+          namespace: "rabbitmq" # default
+          timeout: 300
+          max-restarts: 0
+
+      - name: Await deployment kafka
+        uses: jupyterhub/action-k8s-await-workloads@v2
+        if: ${{ inputs.install_messaging == true }}
+        with:
+          workloads: "" # all
+          namespace: "kafka" # default
+          timeout: 300
+          max-restarts: 0
+
+      - name: Await deployment localstack
+        uses: jupyterhub/action-k8s-await-workloads@v2
+        if: ${{ inputs.install_messaging == true }}
+        with:
+          workloads: "" # all
+          namespace: "localstack" # default
+          timeout: 300
+          max-restarts: 0
+
       - name: Run plain curl
         run: |
           curl https://whoami1.k8s.local
