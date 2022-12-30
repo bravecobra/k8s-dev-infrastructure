@@ -21,8 +21,8 @@ resource "helm_release" "elasticsearch" {
 }
 
 resource "kubectl_manifest" "elasticsearch-serviceaccount" {
-  count     = var.install_elasticsearch ? 1 : 0
-  yaml_body = templatefile("${path.module}/templates/elasticsearch-serviceaccount.yaml",{
+  count = var.install_elasticsearch ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/elasticsearch-serviceaccount.yaml", {
     namespace = var.namespace
   })
   depends_on = [
@@ -31,7 +31,7 @@ resource "kubectl_manifest" "elasticsearch-serviceaccount" {
 }
 
 resource "kubectl_manifest" "elasticsearch" {
-  count     = var.install_elasticsearch ? 1 : 0
+  count = var.install_elasticsearch ? 1 : 0
   yaml_body = templatefile("${path.module}/templates/elasticsearch.yaml", {
     namespace = var.namespace
   })
@@ -41,16 +41,19 @@ resource "kubectl_manifest" "elasticsearch" {
 }
 
 resource "kubectl_manifest" "elasticsearch-ingress" {
-  count     = var.install_elasticsearch ? 1 : 0
-  yaml_body = templatefile("${path.module}/templates/elasticsearch-ingress.yaml", { domain-name = var.domain-name })
+  count = var.install_elasticsearch ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/elasticsearch-ingress.yaml", {
+    domain-name = var.domain-name
+    namespace   = var.namespace
+  })
   depends_on = [
     kubectl_manifest.elasticsearch
   ]
 }
 
 resource "kubectl_manifest" "kibana-serviceaccount" {
-  count     = var.install_kibana ? 1 : 0
-  yaml_body = templatefile("${path.module}/templates/kibana-serviceaccount.yaml",{
+  count = var.install_kibana ? 1 : 0
+  yaml_body = templatefile("${path.module}/templates/kibana-serviceaccount.yaml", {
     namespace = var.namespace
   })
   depends_on = [
@@ -59,7 +62,7 @@ resource "kubectl_manifest" "kibana-serviceaccount" {
 }
 
 resource "kubectl_manifest" "kibana" {
-  count     = var.install_kibana ? 1 : 0
+  count = var.install_kibana ? 1 : 0
   yaml_body = templatefile("${path.module}/templates/kibana.yaml", {
     namespace = var.namespace
   })
@@ -69,10 +72,10 @@ resource "kubectl_manifest" "kibana" {
 }
 
 resource "kubectl_manifest" "kibana-ingress" {
-  count     = var.install_kibana ? 1 : 0
+  count = var.install_kibana ? 1 : 0
   yaml_body = templatefile("${path.module}/templates/kibana-ingress.yaml", {
     domain-name = var.domain-name
-    namespace = var.namespace
+    namespace   = var.namespace
   })
   depends_on = [
     kubectl_manifest.kibana
