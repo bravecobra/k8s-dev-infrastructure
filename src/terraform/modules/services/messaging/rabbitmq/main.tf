@@ -30,7 +30,6 @@ resource "kubectl_manifest" "rabbitmq-cluster" {
     helm_release.rabbitmq-operator
   ]
   wait = true
-  timeout = 600
 }
 
 resource "kubectl_manifest" "rabbitmq-ingress" {
