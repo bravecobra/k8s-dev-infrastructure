@@ -434,7 +434,7 @@ jobs:
           workloads: "" # all
           namespace: "prometheus" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: 2
 
       - name: Await deployment goldilocks
         uses: jupyterhub/action-k8s-await-workloads@v2
