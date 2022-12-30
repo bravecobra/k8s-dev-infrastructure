@@ -276,7 +276,7 @@ jobs:
 
       - name: Await deployment azurite
         uses: jupyterhub/action-k8s-await-workloads@v2
-        if: ${{ inputs.install_config == true }}
+        if: ${{ inputs.install_storage == true }}
         with:
           workloads: "" # all
           namespace: "azurite" # default
