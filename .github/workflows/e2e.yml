@@ -308,7 +308,7 @@ jobs:
           workloads: "" # all
           namespace: "kafka" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: 2
 
       - name: Await deployment localstack
         uses: jupyterhub/action-k8s-await-workloads@v2
