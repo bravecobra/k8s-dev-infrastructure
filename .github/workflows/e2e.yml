@@ -198,7 +198,7 @@ jobs:
           workloads: "" # all
           namespace: "cert-manager"
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment linkerd
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -207,7 +207,7 @@ jobs:
           workloads: "" # all
           namespace: "linkerd"
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment traefik
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -216,7 +216,7 @@ jobs:
           workloads: "" # all
           namespace: "traefik"
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Kubernetes namespace report (traefik)
         uses: jupyterhub/action-k8s-namespace-report@v1
@@ -230,7 +230,7 @@ jobs:
           workloads: "" # all
           namespace: "whoami" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Kubernetes namespace report (whoami)
         uses: jupyterhub/action-k8s-namespace-report@v1
@@ -245,7 +245,7 @@ jobs:
           workloads: "" # all
           namespace: "etcd" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment vault
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -254,7 +254,7 @@ jobs:
           workloads: "" # all
           namespace: "vault" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment redis
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -263,7 +263,7 @@ jobs:
           workloads: "" # all
           namespace: "redis" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment elasticsearch
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -272,7 +272,7 @@ jobs:
           workloads: "" # all
           namespace: "elasticsearch" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment azurite
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -281,7 +281,7 @@ jobs:
           workloads: "" # all
           namespace: "azurite" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment docker_registry
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -290,7 +290,7 @@ jobs:
           workloads: "" # all
           namespace: "default" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment minio
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -299,7 +299,7 @@ jobs:
           workloads: "" # all
           namespace: "minio" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment kafka
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -317,7 +317,7 @@ jobs:
           workloads: "" # all
           namespace: "localstack" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment rabbitmq
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -326,7 +326,7 @@ jobs:
           workloads: "" # all
           namespace: "rabbitmq" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment argocd
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -335,7 +335,7 @@ jobs:
           workloads: "" # all
           namespace: "argocd" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment mysql
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -344,7 +344,7 @@ jobs:
           workloads: "" # all
           namespace: "mysql" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment postgres
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -353,7 +353,7 @@ jobs:
           workloads: "" # all
           namespace: "postgres" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment mariadb
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -362,7 +362,7 @@ jobs:
           workloads: "" # all
           namespace: "mariadb" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment mssql
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -371,7 +371,7 @@ jobs:
           workloads: "" # all
           namespace: "mssql" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment mongodb
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -380,7 +380,7 @@ jobs:
           workloads: "" # all
           namespace: "mongodb" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment identityserver4admin
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -389,7 +389,7 @@ jobs:
           workloads: "" # all
           namespace: "identityserver4" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment keycloak
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -398,7 +398,7 @@ jobs:
           workloads: "" # all
           namespace: "keycloak" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment opentelemetry
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -407,7 +407,7 @@ jobs:
           workloads: "" # all
           namespace: "opentelemetry" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment loki
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -416,7 +416,7 @@ jobs:
           workloads: "" # all
           namespace: "loki" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment tempo
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -425,7 +425,7 @@ jobs:
           workloads: "" # all
           namespace: "tempo" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment prometheus
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -443,7 +443,7 @@ jobs:
           workloads: "" # all
           namespace: "goldilocks" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment vpa
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -452,7 +452,7 @@ jobs:
           workloads: "" # all
           namespace: "vpa" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment metrics
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -461,7 +461,7 @@ jobs:
           workloads: "" # all
           namespace: "kube-system" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment seq
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -470,7 +470,7 @@ jobs:
           workloads: "" # all
           namespace: "seq" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Await deployment jaeger
         uses: jupyterhub/action-k8s-await-workloads@v2
@@ -479,7 +479,7 @@ jobs:
           workloads: "" # all
           namespace: "jaeger" # default
           timeout: 300
-          max-restarts: 0
+          max-restarts: -1
 
       - name: Run plain curl
         run: |
