@@ -16,7 +16,7 @@ resource "helm_release" "rabbitmq-operator" {
       domain-name = var.domain-name
     }),
   ]
-  wait = true
+  wait    = true
   timeout = 600
 }
 
