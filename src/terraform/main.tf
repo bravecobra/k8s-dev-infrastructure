@@ -57,6 +57,7 @@ module "metrics" {
   count        = var.install_metrics == true || var.install_vpa == true || var.install_goldilocks == true ? 1 : 0
   source       = "./modules/monitoring/metrics/metrics"
   helm_release = module.versions.chart_versions["metrics"].chart_version
+  cluster-type = var.cluster-type
 }
 
 module "certmanager" {

@@ -5,6 +5,8 @@ resource "helm_release" "metrics" {
   repository = "https://charts.bitnami.com/bitnami"
   version    = var.helm_release
   values = [
-    "${templatefile("${path.module}/metrics-values.yaml", {})}"
+    templatefile("${path.module}/metrics-values.yaml", {
+      cluster-type = var.cluster-type
+    })
   ]
 }
