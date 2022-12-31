@@ -7,7 +7,6 @@ injector:
   enabled: true
 server:
   affinity: ""
-  updateStrategy: RollingUpdate
   dev:
     enabled: true
     devRootToken: "${vaultDevRootToken}"
