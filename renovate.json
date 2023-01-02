@@ -4,6 +4,7 @@
     "config:base"
   ],
   "labels": ["dependencies"],
+  "assignees": ["bravecobra"],
   "regexManagers": [
     {
       "fileMatch": ["^src/terraform/versions.yaml$"],
