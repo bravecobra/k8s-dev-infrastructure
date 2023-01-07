@@ -178,7 +178,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: rabbitmq-cluster-operator
-    chart_version: 3.1.5
+    chart_version: 3.1.6
   redis:
     repository:
       name: bitnami
