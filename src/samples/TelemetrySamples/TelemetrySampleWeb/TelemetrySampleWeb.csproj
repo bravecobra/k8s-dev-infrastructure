@@ -9,16 +9,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
-    <PackageReference Include="OpenTelemetry" Version="1.4.0-rc.1" />
-    <PackageReference Include="OpenTelemetry.Api" Version="1.4.0-rc.1" />
-    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.4.0-rc.1" />
-    <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0-rc.1" />
-    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.4.0-rc.1" />
-    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol.Logs" Version="1.4.0-rc.1" />
+    <PackageReference Include="OpenTelemetry" Version="1.4.0-rc.2" />
+    <PackageReference Include="OpenTelemetry.Api" Version="1.4.0-rc.2" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.4.0-rc.2" />
+    <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0-rc.2" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.4.0-rc.2" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol.Logs" Version="1.4.0-rc.2" />
     <PackageReference Include="OpenTelemetry.Exporter.Prometheus" Version="1.3.0-rc.2" />
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.4.0-rc.1" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.10" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.10" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.4.0-rc.2" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.11" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.11" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.1.0-beta.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
     <PackageReference Include="Serilog.Enrichers.AssemblyName" Version="1.0.9" />
