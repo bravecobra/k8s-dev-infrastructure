@@ -106,7 +106,7 @@ helm_versions:
       name: localstack-charts
       url: https://localstack.github.io/helm-charts
     chart_name: localstack
-    chart_version: 0.5.2
+    chart_version: 0.5.3
   loki:
     repository:
       name: grafana
