@@ -153,7 +153,7 @@ resource "docker_image" "registry" {
 resource "docker_container" "registry" {
   count = var.install_private_registry ? 1 : 0
   name  = "kind-registry"
-  image = docker_image.registry[0].latest
+  image = docker_image.registry[0].name
   ports {
     external = 5000
     internal = 5000
