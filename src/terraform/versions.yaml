@@ -154,7 +154,7 @@ helm_versions:
       name: open-telemetry
       url: https://open-telemetry.github.io/opentelemetry-helm-charts
     chart_name: opentelemetry-operator
-    chart_version: 0.21.1
+    chart_version: 0.21.2
   postgres:
     repository:
       name: bitnami
