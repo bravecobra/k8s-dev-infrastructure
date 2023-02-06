@@ -7,14 +7,6 @@ on:
 
 jobs:
   call_workflow:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        Default: ${{ github.repository }}
-
-    - name: Call E2E Workflow
-      uses: ./.github/workflows/e2e.yml
-      with:
-        install_monitoring: true
+    uses: ./.github/workflows/e2e.yml
+    with:
+      install_monitoring: true
