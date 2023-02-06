@@ -11,6 +11,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        Default: ${{ github.repository }}
 
     - name: Call E2E Workflow
       uses: ./.github/workflows/e2e.yml
