@@ -3,7 +3,7 @@ name: E2E Monitoring
 on:
   pull_request:
     paths:
-      - src/terraform/versions-monitoring.yaml
+      - 'src/terraform/versions-monitoring.yaml'
 
 jobs:
   call_workflow:

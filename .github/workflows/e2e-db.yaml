@@ -3,7 +3,7 @@ name: E2E Databases
 on:
   pull_request:
     paths:
-      - src/terraform/versions-databases.yaml
+      - 'src/terraform/versions-databases.yaml'
 
 jobs:
   call_workflow:
