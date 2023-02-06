@@ -1,0 +1,18 @@
+name: Enhanced E2E
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  call_workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Call E2E Workflow
+      if: contains(github.event.pull_request.files, 'src/terraform/versions-monitoring.yaml')
+      uses: .github/workflows/e2e.yml
+      with:
+        install_monitoring: true
