@@ -1,7 +1,9 @@
-name: Enhanced E2E
+name: E2E Databases
 
 on:
   pull_request:
+    paths:
+      - src/terraform/versions-databases.yaml
 
 jobs:
   call_workflow:
@@ -11,7 +13,6 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Call E2E Workflow
-      if: contains(github.event.pull_request.files, 'src/terraform/versions-monitoring.yaml')
       uses: ./.github/workflows/e2e.yml
       with:
-        install_monitoring: true
+        install_DBs: true

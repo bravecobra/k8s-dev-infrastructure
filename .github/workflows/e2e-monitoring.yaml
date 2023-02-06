@@ -1,0 +1,18 @@
+name: E2E Monitoring
+
+on:
+  pull_request:
+    paths:
+      - src/terraform/versions-monitoring.yaml
+
+jobs:
+  call_workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Call E2E Workflow
+      uses: ./.github/workflows/e2e.yml
+      with:
+        install_monitoring: true

@@ -1,0 +1,31 @@
+helm_versions:
+  mariadb:
+    repository:
+      name: bitnami
+      url: https://charts.bitnami.com/bitnami
+    chart_name: mariadb
+    chart_version: 11.4.5
+  mongodb:
+    repository:
+      name: bitnami
+      url: https://charts.bitnami.com/bitnami
+    chart_name: mongodb
+    chart_version: 13.6.7
+  mssql:
+    repository:
+      name: simcube
+      url: https://simcubeltd.github.io/simcube-helm-charts/
+    chart_name: mssqlserver-2022
+    chart_version: 1.2.0
+  mysql:
+    repository:
+      name: bitnami
+      url: https://charts.bitnami.com/bitnami
+    chart_name: mysql
+    chart_version: 9.4.8
+  postgres:
+    repository:
+      name: bitnami
+      url: https://charts.bitnami.com/bitnami
+    chart_name: postgresql
+    chart_version: 12.1.14
