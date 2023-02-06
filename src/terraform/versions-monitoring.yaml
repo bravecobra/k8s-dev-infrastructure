@@ -1,0 +1,91 @@
+helm_versions:
+  cert_manager:
+    repository:
+      name: jetstack
+      url: https://charts.jetstack.io
+    chart_name: cert-manager
+    chart_version: v1.11.0
+  dashboard:
+    repository:
+      name: k8s-dashboard
+      url: https://kubernetes.github.io/dashboard/
+    chart_name: kubernetes-dashboard
+    chart_version: 6.0.0
+  fluent:
+    repository:
+      name: fluent
+      url: https://fluent.github.io/helm-charts
+    chart_name: fluent-bit
+    chart_version: 0.22.0
+  goldilocks:
+    repository:
+      name: fairwinds-stable
+      url: https://charts.fairwinds.com/stable
+    chart_name: goldilocks
+    chart_version: 6.4.0
+  jaeger:
+    repository:
+      name: jaegertracing
+      url: https://jaegertracing.github.io/helm-charts
+    chart_name: jaeger-operator
+    chart_version: 2.39.0
+  loki:
+    repository:
+      name: grafana
+      url: https://grafana.github.io/helm-charts
+    chart_name: loki
+    chart_version: 4.4.2
+  metrics:
+    repository:
+      name: bitnami
+      url: https://charts.bitnami.com/bitnami
+    chart_name: metrics-server
+    chart_version: 6.2.9
+  opentelemetry:
+    repository:
+      name: open-telemetry
+      url: https://open-telemetry.github.io/opentelemetry-helm-charts
+    chart_name: opentelemetry-operator
+    chart_version: 0.21.4
+  prometheus:
+    repository:
+      name: prometheus-community
+      url: https://prometheus-community.github.io/helm-charts
+    chart_name: kube-prometheus-stack
+    chart_version: 44.3.0
+  promtail:
+    repository:
+      name: grafana
+      url: https://grafana.github.io/helm-charts
+    chart_name: promtail
+    chart_version: 6.8.1
+  seq:
+    repository:
+      name: datalust
+      url: https://helm.datalust.co
+    chart_name: seq
+    chart_version: 2022.1.7929
+  tempo:
+    repository:
+      name: grafana
+      url: https://grafana.github.io/helm-charts
+    chart_name: tempo
+    chart_version: 0.16.9
+  traefik:
+    repository:
+      name: traefik
+      url: https://helm.traefik.io/traefik
+    chart_name: traefik
+    chart_version: 20.8.0
+  vpa:
+    repository:
+      name: fairwinds-stable
+      url: https://charts.fairwinds.com/stable
+    chart_name: vpa
+    chart_version: 1.6.0
+  whoami:
+    repository:
+      name: cowboysysop
+      url: https://cowboysysop.github.io/charts/
+    chart_name: whoami
+    chart_version: 2.7.3

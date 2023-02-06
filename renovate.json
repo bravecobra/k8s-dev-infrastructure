@@ -7,7 +7,7 @@
   "assignees": ["bravecobra"],
   "regexManagers": [
     {
-      "fileMatch": ["^src/terraform/versions.yaml$"],
+      "fileMatch": ["^src/terraform/versions.*.yaml$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "url:\\s*(?<registryUrl>.*)\\n\\s*chart_name:\\s*(?<depName>.*)\\n\\s*chart_version:\\s*(?<currentValue>.*)"
