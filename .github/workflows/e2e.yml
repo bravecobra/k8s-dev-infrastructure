@@ -43,6 +43,48 @@ on:
         description: With Databases (MySQL, MariaDB, Postgres, MSSQL, MongoDB)
         default: false
         type: boolean
+  workflow_call:
+    inputs:
+      install_monitoring:
+        description: With Monitoring (Grafana backend, Goldilocks, k8s Dashboard, Seq and Jaeger)
+        default: false
+        type: boolean
+      install_mesh :
+        description: With Mesh (LinkerD)
+        default: false
+        type: boolean
+      install_ingress:
+        description: With Ingress (Cert-Manager, Traefik and WhoAmI)
+        default: true
+        type: boolean
+      install_config:
+        description: With Config (Elastic Backend, Redis, Vault, Etc)
+        default: false
+        type: boolean
+      install_identityserver4admin:
+        description: With Auth (IdentityServer4)
+        default: false
+        type: boolean
+      install_keycloak:
+        description: With Auth (Keycloak)
+        default: false
+        type: boolean
+      install_storage:
+        description: With Storage (Minio, Azurite, DockerRegistry UI)
+        default: false
+        type: boolean
+      install_messaging:
+        description: With Messaging (RabbitMq, Localstack, Kafka)
+        default: false
+        type: boolean
+      install_deploy:
+        description: With Deployments (ArgoCD)
+        default: false
+        type: boolean
+      install_DBs:
+        description: With Databases (MySQL, MariaDB, Postgres, MSSQL, MongoDB)
+        default: false
+        type: boolean
   push:
     branches:
       - master
