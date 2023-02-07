@@ -142,7 +142,7 @@ helm_versions:
       name: simcube
       url: https://simcubeltd.github.io/simcube-helm-charts/
     chart_name: mssqlserver-2022
-    chart_version: 1.2.0
+    chart_version: 1.2.1
   mysql:
     repository:
       name: bitnami
