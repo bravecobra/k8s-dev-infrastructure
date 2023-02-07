@@ -1,0 +1,12 @@
+name: E2E Config
+
+on:
+  pull_request:
+    paths:
+      - 'src/terraform/versions-config.yaml'
+
+jobs:
+  call_workflow:
+    uses: ./.github/workflows/e2e.yml
+    with:
+      install_config: true

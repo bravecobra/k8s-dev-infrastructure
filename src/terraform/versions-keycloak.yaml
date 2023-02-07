@@ -1,0 +1,7 @@
+helm_versions:
+  keycloak:
+    repository:
+      name: codecentric
+      url: https://codecentric.github.io/helm-charts
+    chart_name: keycloak
+    chart_version: 18.4.0

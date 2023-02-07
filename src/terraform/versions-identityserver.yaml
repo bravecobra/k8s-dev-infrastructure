@@ -1,0 +1,13 @@
+helm_versions:
+  identityserver4admin:
+    repository:
+      name: identityserver4admin
+      url: https://bravecobra.github.io/identityserver4.admin-helm/charts/
+    chart_name: identityserver4admin
+    chart_version: 0.5.2
+  identityserver4admin_mssql:
+    repository:
+      name: identityserver4admin
+      url: https://bravecobra.github.io/identityserver4.admin-helm/charts/
+    chart_name: mssql
+    chart_version: 0.1.0

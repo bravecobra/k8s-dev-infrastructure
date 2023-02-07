@@ -1,0 +1,7 @@
+helm_versions:
+  minio:
+    repository:
+      name: minio
+      url: https://charts.min.io/
+    chart_name: minio
+    chart_version: 5.0.5

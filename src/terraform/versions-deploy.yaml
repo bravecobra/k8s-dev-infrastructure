@@ -1,0 +1,7 @@
+helm_versions:
+  argocd:
+    repository:
+      name: argo-cd
+      url: https://argoproj.github.io/argo-helm
+    chart_name: argo-cd
+    chart_version: 5.19.14

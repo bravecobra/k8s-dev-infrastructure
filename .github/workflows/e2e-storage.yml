@@ -1,0 +1,12 @@
+name: E2E Storage
+
+on:
+  pull_request:
+    paths:
+      - 'src/terraform/versions-storage.yaml'
+
+jobs:
+  call_workflow:
+    uses: ./.github/workflows/e2e.yml
+    with:
+      install_storage: true

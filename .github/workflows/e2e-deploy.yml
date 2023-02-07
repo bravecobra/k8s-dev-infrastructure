@@ -1,0 +1,12 @@
+name: E2E Deploy
+
+on:
+  pull_request:
+    paths:
+      - 'src/terraform/versions-deploy.yaml'
+
+jobs:
+  call_workflow:
+    uses: ./.github/workflows/e2e.yml
+    with:
+      install_deploy: true

@@ -1,0 +1,25 @@
+helm_versions:
+  linkerd:
+    repository:
+      name: linkerd
+      url: https://helm.linkerd.io/stable
+    chart_name: linkerd-control-plane
+    chart_version: 1.9.5
+  linkerdcrds:
+    repository:
+      name: linkerd
+      url: https://helm.linkerd.io/stable
+    chart_name: linkerd-crds
+    chart_version: 1.4.0
+  linkerdviz:
+    repository:
+      name: linkerd
+      url: https://helm.linkerd.io/stable
+    chart_name: linkerd-viz
+    chart_version: 30.3.5
+  linkerdjaeger:
+    repository:
+      name: linkerd
+      url: https://helm.linkerd.io/stable
+    chart_name: linkerd-jaeger
+    chart_version: 30.4.5

@@ -1,0 +1,12 @@
+name: E2E IdentityServer
+
+on:
+  pull_request:
+    paths:
+      - 'src/terraform/versions-identityserver.yaml'
+
+jobs:
+  call_workflow:
+    uses: ./.github/workflows/e2e.yml
+    with:
+      install_identityserver4admin: true

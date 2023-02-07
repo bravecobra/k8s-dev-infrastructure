@@ -1,0 +1,19 @@
+helm_versions:
+  kafka:
+    repository:
+      name: strimzi
+      url: https://strimzi.io/charts/
+    chart_name: strimzi-kafka-operator
+    chart_version: 0.33.0
+  localstack:
+    repository:
+      name: localstack-charts
+      url: https://localstack.github.io/helm-charts
+    chart_name: localstack
+    chart_version: 0.5.3
+  rabbitmq:
+    repository:
+      name: bitnami
+      url: https://charts.bitnami.com/bitnami
+    chart_name: rabbitmq-cluster-operator
+    chart_version: 3.2.2
