@@ -4,7 +4,7 @@ helm_versions:
       name: strimzi
       url: https://strimzi.io/charts/
     chart_name: strimzi-kafka-operator
-    chart_version: 0.33.0
+    chart_version: 0.33.1
   localstack:
     repository:
       name: localstack-charts
