@@ -4,4 +4,4 @@ helm_versions:
       name: argo-cd
       url: https://argoproj.github.io/argo-helm
     chart_name: argo-cd
-    chart_version: 5.20.1
+    chart_version: 5.20.3
