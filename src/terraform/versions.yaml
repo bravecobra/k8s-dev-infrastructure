@@ -46,7 +46,7 @@ helm_versions:
       name: fairwinds-stable
       url: https://charts.fairwinds.com/stable
     chart_name: goldilocks
-    chart_version: 6.5.0
+    chart_version: 6.5.1
   identityserver4admin:
     repository:
       name: identityserver4admin
