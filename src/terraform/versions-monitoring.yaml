@@ -70,4 +70,4 @@ helm_versions:
       name: fairwinds-stable
       url: https://charts.fairwinds.com/stable
     chart_name: vpa
-    chart_version: 1.6.0
+    chart_version: 1.6.1
