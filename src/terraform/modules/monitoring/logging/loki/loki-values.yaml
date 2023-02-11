@@ -39,7 +39,8 @@ loki:
     storage:
       type: local
 
-# singleBinary:
+singleBinary:
+  replicas: 1
 #   resources:
 #     requests:
 #       memory: "6Gi"
