@@ -92,7 +92,7 @@ namespace TelemetrySampleWeb.Configuration
                             break;
                     }
                 })
-                .StartWithHost();
+                ;
             services.Configure<AspNetCoreInstrumentationOptions>(configuration.GetSection("AspNetCoreInstrumentation"));
         }
 
