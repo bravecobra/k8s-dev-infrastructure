@@ -189,6 +189,8 @@ node-ips = [
 //Oracle
 # install_oracle = true
 # expose_oracle  = true
+# oracle_operator_version=0.2.1
+# oracle_xe_version=21.3.0-xe
 
 //-------------------------------------
 //Examples
