@@ -667,7 +667,7 @@ variable "oracle_namespace" {
 
 variable "oracle_operator_version" {
   type    = string
-  default = "0.2.0"
+  default = "0.2.1"
 }
 variable "oracle_xe_version" {
   type    = string

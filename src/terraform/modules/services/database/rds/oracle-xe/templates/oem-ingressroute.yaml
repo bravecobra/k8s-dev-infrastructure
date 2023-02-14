@@ -11,7 +11,7 @@ spec:
   - kind: Rule
     match: Host(`oracle.infrastructure.${domain-name}`) && PathPrefix(`/`)
     services:
-    - name: oraclexe
+    - name: oraclexe-ext
       port: 5500
       scheme: https
   tls:
