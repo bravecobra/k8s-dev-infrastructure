@@ -29,6 +29,10 @@ terraform init
 terraform apply -auto-approve
 ```
 
+```shell
+terraform destroy -auto-approve
+```
+
 ## Terraform documentation
 <!-- BEGIN_TF_DOCS -->
 ### Requirements
