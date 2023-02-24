@@ -75,12 +75,12 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| cluster-name | n/a | `string` | n/a | yes |
-| install\_private\_registry | n/a | `bool` | `true` | no |
-| kind-network-gateway | n/a | `string` | `"172.19.0.1"` | no |
-| kind-network-subnet | n/a | `string` | `"172.19.0.0/16"` | no |
-| kind\_version | n/a | `string` | `"v1.24.3"` | no |
-| worker-node-count | n/a | `number` | `0` | no |
+| cluster-name | The cluster name | `string` | n/a | yes |
+| install\_private\_registry | Install a private docker registry | `bool` | `true` | no |
+| kind-network-gateway | The default gateway for the cluster network | `string` | `"172.19.0.1"` | no |
+| kind-network-subnet | The subnet to run the cluster in | `string` | `"172.19.0.0/16"` | no |
+| kind\_version | The KinD image version to use | `string` | `"v1.24.3"` | no |
+| worker-node-count | The amount of worker nodes (doesn't affect anything now) | `number` | `0` | no |
 
 ### Outputs
 
