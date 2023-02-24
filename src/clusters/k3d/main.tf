@@ -48,7 +48,7 @@ resource "local_file" "cluster-config" {
   filename = "${path.module}/k3s-${var.cluster-name}.yaml"
 }
 
-resource "null_resource" "cluster" {
+resource "null_resource" "cluster_create" {
   for_each = toset(var.k3d-cluster-name)
   triggers = {
     agent_count  = var.worker-node-count

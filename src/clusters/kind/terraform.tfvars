@@ -1,5 +1,5 @@
 cluster-name             = "devinfra"
-worker-node-count        = 0
+worker-node-count        = 2
 install_private_registry = true
 kind_version             = "v1.24.3"
 

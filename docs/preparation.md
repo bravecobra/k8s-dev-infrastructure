@@ -18,6 +18,7 @@ Install/download the CLIs.
     choco install argocd-cli
     choco install flux
     choco install terraform
+    choco install terraform-docs
     ```
 
 === "Linux"
@@ -68,6 +69,12 @@ Install/download the CLIs.
     wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
     echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
     sudo apt update && sudo apt install terraform
+
+    wget https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64.tar.gz && \
+    tar -xzvf ./terraform-docs-v0.16.0-linux-amd64.tar.gz && \
+    rm ./terraform-docs-v0.16.0-linux-amd64.tar.gz && \
+    chmod +x ./terraform-docs && \
+    sudo mv ./terraform-docs /usr/local/bin/terraform-docs
     ```
 
 ## Docker environment
