@@ -132,15 +132,15 @@ variable "expose_rds_mariadb" {
 }
 
 variable "expose_rds_postgres" {
-  type          = bool
-  default       = false
+  type        = bool
+  default     = false
   description = "Expose Postgres externally"
 }
 
 
 variable "expose_nosql_mongodb" {
-  type          = bool
-  default       = false
+  type        = bool
+  default     = false
   description = "Expose MongoDb externally"
 }
 
