@@ -34,7 +34,7 @@ terraform apply -auto-approve
 terraform destroy -auto-approve
 ```
 
-## Terraform documentation
+## Terraform
 <!-- BEGIN_TF_DOCS -->
 ### Requirements
 

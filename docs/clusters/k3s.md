@@ -61,7 +61,7 @@ kubectl cluster-info --context k3d-devinfra
 terraform destroy --auto-approve
 ```
 
-## Terraform documentation
+## Terraform
 
 <!-- BEGIN_TF_DOCS -->
 ### Requirements
