@@ -8,11 +8,11 @@ nav:
     - Home: index.md
     - Preparation: preparation.md
     - Clusters:
-      - 'K3S with terraform': ./k3s.md
-      - 'KinD with terraform': ./kind.md
-      - 'Docker Desktop': ./desktop-cluster.md
-      - 'Rancher Desktop': ./rancher-cluster.md
-      - 'Minikube': ./minikube-cluster.md
+      - 'K3S with terraform': ./clusters/k3s.md
+      - 'KinD with terraform': ./clusters/kind.md
+      - 'Docker Desktop': ./clusters/desktop-cluster.md
+      - 'Rancher Desktop': ./clusters/rancher-cluster.md
+      - 'Minikube': ./clusters/minikube-cluster.md
     - Install: ./installation-terraform.md
     - Terraform Specs:
       - Main: ./terraform-specs.md
