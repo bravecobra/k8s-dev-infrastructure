@@ -1,5 +1,4 @@
-
-<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD033 MD046 -->
 # K3S Cluster
 
 ## Description
@@ -31,9 +30,34 @@ Make sure docker is up and running.
 
 ### Create the cluster
 
+!!! Note
+    When using `WSL2` (Windows Subsystem for Linux), you need to copy the context configuration to your `.kubeconfig` file on the `WSL2` home directory or the other way round, depending on which shell you use to run the `terraform` code.
+
+    ```powershell
+    cp /mnt/c/users/$(whoami)/.kube/config ~/.kube/config
+    ```
+
+    or
+
+    ```powershell
+    cp ~/.kube/config /mnt/c/users/$(whoami)/.kube/config
+    ```
+
 ```shell
 terraform init --upgrade
 terraform apply --auto-approve
+```
+
+The cluster creation automatically add configuration to your `kubectl` contexts connect to so you can connect to the new cluster
+
+```powershell
+kubectl cluster-info --context k3d-devinfra
+```
+
+To delete the cluster again, just run
+
+```shell
+terraform destroy --auto-approve
 ```
 
 ### Destroy the cluster

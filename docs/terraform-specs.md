@@ -1,29 +1,7 @@
 <!-- markdownlint-disable MD033 -->
-# Kubernetes Terraform deployments
+# Terraform documentation
 
 ## Description
-
-Using the default configuration, this terraform code will deploy `cert-manager` and `traefik` onto a K3S cluster (which in turn is created by the scripts in `./src/clusters/[k3s-kind]`). You can further tweak the settings to deploy lots more. You can also use it to deploy to any K8S cluster providing the correct settings in `terraform.tfvars`.
-
-## Installation
-
-Be sure to edit your `hosts` file to allow DNS to resolve your local URIs as described in the [prerequisites](https://bravecobra.github.io/k8s-dev-infrastructure/installation-terraform/#prerequisites) section.
-
->Note: be sure to verify the `terraform.tfvars` configuration for the correct cluster settings. K3S needs other settings than the KinD cluster.
-
-```shell
-cd src/terraform
-./generate_certificate.sh
-helm repo update
-terraform init --upgrade
-terraform apply --auto-approve
-```
-
-```shell
-terraform destroy --auto-approve
-```
-
-## Terraform documentation
 
 <!-- BEGIN_TF_DOCS -->
 ### Requirements

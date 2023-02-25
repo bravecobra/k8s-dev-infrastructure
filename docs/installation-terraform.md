@@ -151,3 +151,5 @@ Edit the `terraform.tfvars` as you see fit.
     terraform init
     terraform apply -auto-approve
     ```
+
+The `traefik` dashboard should now be available at [https://traefik.infrastructure.k8s.local](https://traefik.infrastructure.k8s.local)

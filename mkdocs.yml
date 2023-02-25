@@ -6,13 +6,25 @@ theme:
 nav:
     - Home: 'index.md'
     - Preparation: './preparation.md'
+    - Clusters:
+      - 'K3S with terraform': './k3s.md'
+      - 'KinD with terraform': './kind.md'
+      - 'Docker Desktop': './desktop-cluster.md'
+      - 'Rancher Desktop': './rancher-cluster.md'
+      - 'Minikube': './minikube-cluster.md'
     - Install: './installation-terraform.md'
+    - Specs:
+      - 'terraform': './terraform-specs.md'
     - About:
         - 'License': 'license.md'
 dev_addr: '0.0.0.0:8080'
 
 markdown_extensions:
   - admonition
-  - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

@@ -71,7 +71,7 @@ The full docs are available at [Github Pages](https://bravecobra.github.io/k8s-d
 #### Build the docs locally
 
 ```shell
-pip install --user -f requirements.txt
+pip install --upgrade --user -r requirements.txt
 mkdocs build
 mkdocs serve
 ```
