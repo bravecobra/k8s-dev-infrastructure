@@ -7,3 +7,4 @@ mkdocs-material-extensions
 mkdocs-minify-plugin
 mkdocs-git-authors-plugin
 mkdocs-git-revision-date-plugin
+mkdocs-include-dir-to-nav

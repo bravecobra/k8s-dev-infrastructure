@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD046 -->
 # Preparation
 
-## Installing commandline tools
+## Installing cli tools
 
 Install/download the CLIs.
 
@@ -18,6 +18,7 @@ Install/download the CLIs.
     choco install argocd-cli
     choco install flux
     choco install terraform
+    choco install terraform-docs
     ```
 
 === "Linux"
@@ -68,6 +69,12 @@ Install/download the CLIs.
     wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
     echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
     sudo apt update && sudo apt install terraform
+
+    wget https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64.tar.gz && \
+    tar -xzvf ./terraform-docs-v0.16.0-linux-amd64.tar.gz && \
+    rm ./terraform-docs-v0.16.0-linux-amd64.tar.gz && \
+    chmod +x ./terraform-docs && \
+    sudo mv ./terraform-docs /usr/local/bin/terraform-docs
     ```
 
 ## Docker environment
@@ -87,140 +94,3 @@ After installation, make sure you enable `WSL2` in the settings
 ### Rancher Desktop
 
 Just run the installer from [Rancher Desktop](https://rancherdesktop.io/).
-
-## Local K8S cluster installation
-
-### K3D (preferred)
-
-Edit `./src/clusters/k3d/terraform.tfvars` to your needs. By default it will create a 3-node cluster on a custom `Docker` network. Then run to create the cluster, run:
-
-```shell
-cd ./src/clusters/k3d
-terraform init
-terraform apply --auto-approve
-```
-
-!!! Note
-    When using `WSL2` (Windows Subsystem for Linux), you need to copy the context configuration to your `.kubeconfig` file on the `WSL2` home directory or the other way round, depending on which shell you use to run the `terraform` code.
-
-    ```powershell
-    cp /mnt/c/users/$(whoami)/.kube/config ~/.kube/config
-    ```
-
-    or
-
-    ```powershell
-    cp ~/.kube/config /mnt/c/users/$(whoami)/.kube/config
-    ```
-
-The cluster creation automatically add configuration to your `kubectl` contexts connect to so you can connect to the new cluster
-
-```powershell
-kubectl cluster-info --context k3d-devinfra
-```
-
-To delete the cluster again, just run
-
-```shell
-terraform destroy --auto-approve
-```
-
-### KinD
-
-#### Creating a cluster with `terraform`
-
-Edit `terraform.tfvars` to your needs. Then run `terraform apply` to create the cluster.
-
-```shell
-cd ./src/clusters/kind
-terraform init
-terraform apply --auto-approve
-```
-
-Verify with
-
-```hell
-kubectl cluster-info --context kind-devinfra
-```
-
-#### Creating a 3-node k8s-cluster manually
-
-An example of running a multi-node cluster on docker can be done with `kind`. There are some restrictions with Windows. The provided config `./src/clusters/kind/config-devinfra.yaml` provides a 3-node cluster. There is also a `traefik` ingress test setup to verify your networking configuration.
-
-To fire up the cluster, run the following:
-
-```powershell
-kind create cluster --name=devinfra --config ./src/clusters/kind/config-devinfra.yaml
-```
-
-We specifically expose ports 80, 443 and 8100 to this cluster on ip `127.0.0.1`. Think carefully what ports to expose. `kind` has no update strategy to change this afterwards.
-
-![kind cluster creation](./images/kind-cluster-creation.png)
-
-The cluster creation automatically add configuration to connect to the new cluster
-
-```powershell
-kubectl cluster-info --context kind-devinfra
-```
-
-To delete the cluster again
-
-```powershell
-kind delete cluster --name devinfra
-```
-
-When using WSL (Windows Subsystem for Linux), you need to copy the context configuration to your .kubeconfig file on the WSL home directory.
-
-```powershell
-cp /mnt/c/users/$(whoami)/.kube/config ~/.kube/config
-```
-
-### Docker Desktop K8s
-
-!!!Warning
-    `Docker Desktop` creates a single-node `k8s` cluster.
-Enable `kubernetes` in the settings:
-
-![enable k8s](./images/docker-desktop-kubernetes-settings.png)
-
-### Rancher Desktop K8S
-
-!!!Warning
-    `Rancher Desktop` creates a single-node `k8s` cluster.
-
-If you want to use the kubernetes version of Rancher Desktop itself, just check the checkbox in the settings, but leave the `Traefik` checkbox empty as we will deploy our own version:
-
-![enable k8s](./images/rancher-desktop-settings.png)
-
-### Minikube
-
-!!!Warning
-    `Minikube` creates a single-node `k8s` cluster.
-
-Basically there are 2 options, which look fairly the same. Either,
-
-- run `minikube ` op windows with the `docker` driver and thus WSL2 and make it accessible in your WSL2 distro.
-- run `minikube` on WSL2 directly following the [official blog](https://kubernetes.io/blog/2020/05/21/wsl-docker-kubernetes-on-the-windows-desktop/)
-
-#### On Windows
-
-> **Warning**
-> `minikube` only provide a 1-node cluster
-
-Fire up your cluster
-
-```shell
-minikube start
-```
-
-![minikube windows](./images/minikube-windows.png)
-
-The cluster creation automatically add configuration to connect to the new cluster
-
-```powershell
-kubectl cluster-info --context minikube
-```
-
-#### On WSL2
-
-To run `minikube` from WSL2, try this [blog post](https://hellokube.dev/posts/configure-minikube-ingress-on-wsl2/) or this [blog post](https://matheja.me/2020/04/08/getting-started-with-minikube-on-wsl2.html)

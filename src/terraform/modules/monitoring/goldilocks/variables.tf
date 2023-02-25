@@ -1,5 +1,6 @@
 variable "helm_release" {
-  type = string
+  type        = string
+  description = "Version of the helm chart to install"
 }
 
 variable "domain-name" {

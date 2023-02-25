@@ -1,8 +1,24 @@
+<!-- markdownlint-disable MD007 -->
 # K8S Dev Infrastructure
 
 ## Description
 
 This repository contains a [kubernetes](https://kubernetes.io/) dev infrastructure, providing both crosscutting concerns as well as Saas services. This is provided through [terraform](https://www.terraform.io/) scripts deploying (mostly) [helm](https://helm.sh/) charts and custom configuration.
+
+## Quick Start
+
+- Install [prerequisites](./preparation.md)
+- Install Lens (optionally)
+- Prerequisites
+    - Edit you hosts file: add domain names
+    - Generate root certificate with mkcert as admin
+    - Run `generate_certificate.ps1`
+    - check docker network subnet range (adjust in main.tf -> variable)
+- Run local cluster
+    - cluster k3d with `terraform init + apply`
+- Deploy services
+    - Edit the terraform.tfvars to your liking
+    - Deploy services: `terraform init` + `terraform apply`
 
 ## Components
 
