@@ -44,6 +44,7 @@ Make sure docker is up and running.
     ```
 
 ```shell
+cd ./src/clusters/k3s
 terraform init --upgrade
 terraform apply --auto-approve
 ```
@@ -52,12 +53,6 @@ The cluster creation automatically add configuration to your `kubectl` contexts 
 
 ```powershell
 kubectl cluster-info --context k3d-devinfra
-```
-
-To delete the cluster again, just run
-
-```shell
-terraform destroy --auto-approve
 ```
 
 ### Destroy the cluster

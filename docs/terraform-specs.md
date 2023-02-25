@@ -111,142 +111,142 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| argocd\_helm\_version | n/a | `string` | `""` | no |
-| argocd\_namespace | n/a | `string` | `"argocd"` | no |
-| azurite\_namespace | n/a | `string` | `"azurite"` | no |
-| azurite\_version | n/a | `string` | `"latest"` | no |
-| cert\_manager\_helm\_version | cert-manager | `string` | `""` | no |
-| cert\_manager\_namespace | n/a | `string` | `"cert-manager"` | no |
-| cluster-context-name | n/a | `string` | n/a | yes |
-| cluster-type | n/a | `string` | `"k3s"` | no |
-| dashboard\_helm\_version | dashboard | `string` | `""` | no |
-| dashboard\_namespace | n/a | `string` | `"dashboard"` | no |
-| docker\_registry\_helm\_version | n/a | `string` | `""` | no |
-| docker\_registry\_namespace | n/a | `string` | `"registryui"` | no |
-| domain-name | n/a | `string` | n/a | yes |
-| elasticsearch\_helm\_version | n/a | `string` | `""` | no |
-| elasticsearch\_namespace | n/a | `string` | `"elasticsearch"` | no |
-| etcd\_helm\_version | n/a | `string` | `""` | no |
-| etcd\_namespace | n/a | `string` | `"etcd"` | no |
-| expose\_azurite | n/a | `bool` | `false` | no |
-| expose\_jaeger | n/a | `bool` | `false` | no |
-| expose\_kafka | n/a | `bool` | `false` | no |
-| expose\_loki | n/a | `bool` | `false` | no |
-| expose\_mariadb | n/a | `bool` | `false` | no |
-| expose\_mongodb | n/a | `bool` | `false` | no |
-| expose\_mssql | n/a | `bool` | `false` | no |
-| expose\_mysql | n/a | `bool` | `false` | no |
-| expose\_opentelemetry | n/a | `bool` | `false` | no |
-| expose\_oracle | n/a | `bool` | `false` | no |
-| expose\_postgres | n/a | `bool` | `false` | no |
-| expose\_rabbitmq | n/a | `bool` | `false` | no |
-| expose\_redis | n/a | `bool` | `false` | no |
-| expose\_seq | n/a | `bool` | `false` | no |
-| fluent\_helm\_version | n/a | `string` | `""` | no |
-| flux2\_github\_repository\_branch | n/a | `string` | `"master"` | no |
-| flux2\_github\_repository\_create | n/a | `bool` | `true` | no |
-| flux2\_github\_repository\_name | n/a | `string` | `"k8s-flux-example"` | no |
-| flux2\_github\_repository\_path | n/a | `string` | `"clusters/k8s-local"` | no |
-| flux2\_github\_repository\_visibility | n/a | `string` | `"private"` | no |
-| flux2\_namespace | flux2 | `string` | `"flux-system"` | no |
-| goldilocks\_helm\_version | n/a | `string` | `""` | no |
-| goldilocks\_namespace | n/a | `string` | `"goldilocks"` | no |
-| identityserver4admin\_helm\_version | n/a | `string` | `""` | no |
-| identityserver4admin\_mssql\_helm\_version | n/a | `string` | `""` | no |
-| identityserver4admin\_namespace | n/a | `string` | `"identityserver4"` | no |
-| install\_argocd | argocd | `bool` | `false` | no |
-| install\_azurite | Azurite | `bool` | `false` | no |
-| install\_cert\_manager | n/a | `bool` | `true` | no |
-| install\_dashboard | n/a | `bool` | `false` | no |
-| install\_docker\_registry | n/a | `bool` | `false` | no |
-| install\_elasticsearch | elasticsearch | `bool` | `false` | no |
-| install\_etcd | Etcd | `bool` | `false` | no |
-| install\_flux2 | n/a | `bool` | `false` | no |
-| install\_goldilocks | goldilocks | `bool` | `false` | no |
-| install\_grafana | grafana | `bool` | `false` | no |
-| install\_identityserver4admin | identityserver4-admin | `bool` | `false` | no |
-| install\_jaeger | n/a | `bool` | `false` | no |
-| install\_kafka | kafka | `bool` | `false` | no |
-| install\_keycloak | Keycloak | `bool` | `false` | no |
-| install\_kibana | n/a | `bool` | `false` | no |
-| install\_linkerd | linkerd | `bool` | `false` | no |
-| install\_localstack | localstack | `bool` | `false` | no |
-| install\_loki | loki | `bool` | `false` | no |
-| install\_mariadb | Mariadb | `bool` | `false` | no |
-| install\_metrics | metrics | `bool` | `false` | no |
-| install\_minio | minio | `bool` | `false` | no |
-| install\_mongodb | mongodb | `bool` | `false` | no |
-| install\_mssql | mssql | `bool` | `false` | no |
-| install\_mysql | MySQL | `bool` | `false` | no |
-| install\_opentelemetry | n/a | `bool` | `false` | no |
-| install\_oracle | oracle | `bool` | `false` | no |
-| install\_postgres | Postgres | `bool` | `false` | no |
-| install\_prometheus | n/a | `bool` | `false` | no |
-| install\_promtail | n/a | `bool` | `false` | no |
-| install\_rabbitmq | rabbitmq | `bool` | `false` | no |
-| install\_redis | redis | `bool` | `false` | no |
-| install\_seq | seq | `bool` | `false` | no |
-| install\_tempo | tempo | `bool` | `false` | no |
-| install\_traefik | traefik | `bool` | `true` | no |
-| install\_vault | vault | `bool` | `false` | no |
-| install\_vpa | VPA | `bool` | `false` | no |
-| install\_whoami | WhoAmI | `bool` | `false` | no |
-| jaeger\_helm\_version | jaeger | `string` | `""` | no |
-| jaeger\_namespace | n/a | `string` | `"jaeger"` | no |
-| kafka\_helm\_version | n/a | `string` | `""` | no |
-| kafka\_namespace | n/a | `string` | `"kafka"` | no |
-| keycloak\_helm\_version | n/a | `string` | `""` | no |
-| keycloak\_include\_domainrealm | n/a | `bool` | `false` | no |
-| keycloak\_namespace | n/a | `string` | `"keycloak"` | no |
-| linkerd\_helm\_version | n/a | `string` | `""` | no |
-| linkerd\_namespace | n/a | `string` | `"linkerd"` | no |
-| linkerdcrds\_helm\_version | n/a | `string` | `""` | no |
-| linkerdjaeger\_helm\_version | n/a | `string` | `""` | no |
-| linkerdviz\_helm\_version | n/a | `string` | `""` | no |
-| loadbalancer-ip | n/a | `string` | `"172.19.0.2"` | no |
-| localstack\_helm\_version | n/a | `string` | `""` | no |
-| localstack\_namespace | n/a | `string` | `"localstack"` | no |
-| loki\_helm\_version | n/a | `string` | `""` | no |
-| loki\_namespace | n/a | `string` | `"loki"` | no |
-| mariadb\_helm\_version | n/a | `string` | `""` | no |
-| mariadb\_namespace | n/a | `string` | `"mariadb"` | no |
-| metrics\_helm\_version | n/a | `string` | `""` | no |
-| minio\_helm\_version | n/a | `string` | `""` | no |
-| minio\_namespace | n/a | `string` | `"minio"` | no |
-| mongodb\_helm\_version | n/a | `string` | `""` | no |
-| mongodb\_namespace | n/a | `string` | `"mongodb"` | no |
-| monitoring\_backend | n/a | `string` | `"grafana"` | no |
-| mssql\_helm\_version | n/a | `string` | `""` | no |
-| mssql\_namespace | n/a | `string` | `"mssql"` | no |
-| mysql\_helm\_version | n/a | `string` | `""` | no |
-| mysql\_namespace | n/a | `string` | `"mysql"` | no |
-| node-ips | n/a | `list(any)` | <pre>[<br>  "172.19.0.2"<br>]</pre> | no |
-| opentelemetry\_helm\_version | opentelemetry | `string` | `""` | no |
-| opentelemetry\_namespace | n/a | `string` | `"opentelemetry"` | no |
-| oracle\_namespace | n/a | `string` | `"oracle"` | no |
-| oracle\_operator\_version | n/a | `string` | `"0.2.1"` | no |
-| oracle\_xe\_version | n/a | `string` | `"21.3.0-xe"` | no |
-| postgres\_helm\_version | n/a | `string` | `""` | no |
-| postgres\_namespace | n/a | `string` | `"postgres"` | no |
-| prometheus\_helm\_version | prometheus | `string` | `""` | no |
-| prometheus\_namespace | n/a | `string` | `"prometheus"` | no |
-| promtail\_helm\_version | n/a | `string` | `""` | no |
-| rabbitmq\_helm\_version | n/a | `string` | `""` | no |
-| rabbitmq\_namespace | n/a | `string` | `"rabbitmq"` | no |
-| redis\_helm\_version | n/a | `string` | `""` | no |
-| redis\_namespace | n/a | `string` | `"redis"` | no |
-| seq\_helm\_version | n/a | `string` | `""` | no |
-| seq\_namespace | n/a | `string` | `"seq"` | no |
-| tempo\_helm\_version | n/a | `string` | `""` | no |
-| tempo\_namespace | n/a | `string` | `"tempo"` | no |
-| traefik\_helm\_version | n/a | `string` | `""` | no |
-| traefik\_namespace | n/a | `string` | `"traefik"` | no |
-| vault\_helm\_version | n/a | `string` | `""` | no |
-| vault\_namespace | n/a | `string` | `"vault"` | no |
-| vpa\_helm\_version | n/a | `string` | `""` | no |
-| vpa\_namespace | n/a | `string` | `"vpa"` | no |
-| whoami\_helm\_version | n/a | `string` | `""` | no |
-| whoami\_namespace | n/a | `string` | `"whoami"` | no |
+| argocd\_helm\_version | Override Helm version of argocd | `string` | `""` | no |
+| argocd\_namespace | Namespace of argocd | `string` | `"argocd"` | no |
+| azurite\_namespace | Namespace of azurite | `string` | `"azurite"` | no |
+| azurite\_version | Override version of azurite | `string` | `"latest"` | no |
+| cert\_manager\_helm\_version | Override Helm version of cert-manager | `string` | `""` | no |
+| cert\_manager\_namespace | Namespace of cert-manager | `string` | `"cert-manager"` | no |
+| cluster-context-name | The kubectl context to use | `string` | n/a | yes |
+| cluster-type | The type of the cluster. Important for Traefik to route traffic correctly | `string` | `"k3s"` | no |
+| dashboard\_helm\_version | Override Helm version of dashboard | `string` | `""` | no |
+| dashboard\_namespace | Namespace of dashboard | `string` | `"dashboard"` | no |
+| docker\_registry\_helm\_version | Override Helm version of docker-registry | `string` | `""` | no |
+| docker\_registry\_namespace | Namespace of docker-registry | `string` | `"registryui"` | no |
+| domain-name | The toplevel domain of the cluster | `string` | n/a | yes |
+| elasticsearch\_helm\_version | Override Helm version of ECK (Elasticsearch Operator) | `string` | `""` | no |
+| elasticsearch\_namespace | Namespace of elasticsearch | `string` | `"elasticsearch"` | no |
+| etcd\_helm\_version | Override Helm version of etcd | `string` | `""` | no |
+| etcd\_namespace | Namespace of etcd | `string` | `"etcd"` | no |
+| expose\_azurite | Flag to expose azurite externally | `bool` | `false` | no |
+| expose\_jaeger | Flag to expose jaeger externally | `bool` | `false` | no |
+| expose\_kafka | Flag to expose kafka externally | `bool` | `false` | no |
+| expose\_loki | Flag to expose loki externally | `bool` | `false` | no |
+| expose\_mariadb | Flag to expose mariadb externally | `bool` | `false` | no |
+| expose\_mongodb | Flag to expose mongodb externally | `bool` | `false` | no |
+| expose\_mssql | Flag to expose SQL Server externally | `bool` | `false` | no |
+| expose\_mysql | Flag to expose mysql externally | `bool` | `false` | no |
+| expose\_opentelemetry | Flag to expose opentelemetry collector externally | `bool` | `false` | no |
+| expose\_oracle | Flag to expose Oracl XE externally | `bool` | `false` | no |
+| expose\_postgres | Flag to expose postgres externally | `bool` | `false` | no |
+| expose\_rabbitmq | Flag to expose rabbitmq externally | `bool` | `false` | no |
+| expose\_redis | Flag to expose redis externally | `bool` | `false` | no |
+| expose\_seq | Flag to expose seq externally | `bool` | `false` | no |
+| fluent\_helm\_version | Override Helm version of fluent-bit | `string` | `""` | no |
+| flux2\_github\_repository\_branch | The branch to read configuration from | `string` | `"master"` | no |
+| flux2\_github\_repository\_create | Create github repo to read configuration from | `bool` | `true` | no |
+| flux2\_github\_repository\_name | Name of the github repo to create | `string` | `"k8s-flux-example"` | no |
+| flux2\_github\_repository\_path | The path inside the repo to read configuration | `string` | `"clusters/k8s-local"` | no |
+| flux2\_github\_repository\_visibility | Visibility of the repository | `string` | `"private"` | no |
+| flux2\_namespace | Namespace of Flux2 | `string` | `"flux-system"` | no |
+| goldilocks\_helm\_version | Override Helm version of goldilocks | `string` | `""` | no |
+| goldilocks\_namespace | Namespace of goldilocks | `string` | `"goldilocks"` | no |
+| identityserver4admin\_helm\_version | Override Helm version of Identityserver4 Admin | `string` | `""` | no |
+| identityserver4admin\_mssql\_helm\_version | Override Helm version of SQL Server for Identityserver4 Admin | `string` | `""` | no |
+| identityserver4admin\_namespace | Namespace of Identityserver4 Admin | `string` | `"identityserver4"` | no |
+| install\_argocd | Flag to install argocd | `bool` | `false` | no |
+| install\_azurite | Flag to install azurite | `bool` | `false` | no |
+| install\_cert\_manager | Flag to install cert-manager | `bool` | `true` | no |
+| install\_dashboard | Flag to install kubernetes dashboard | `bool` | `false` | no |
+| install\_docker\_registry | Flag to install docker-registry | `bool` | `false` | no |
+| install\_elasticsearch | Flag to install elasticsearch | `bool` | `false` | no |
+| install\_etcd | Flag to install etcd | `bool` | `false` | no |
+| install\_flux2 | Flag to install flux2 | `bool` | `false` | no |
+| install\_goldilocks | Flag to install goldilocks | `bool` | `false` | no |
+| install\_grafana | Flag to install grafana | `bool` | `false` | no |
+| install\_identityserver4admin | Flag to install identityserver4-admin | `bool` | `false` | no |
+| install\_jaeger | Flag to install jaeger | `bool` | `false` | no |
+| install\_kafka | Flag to install kafka | `bool` | `false` | no |
+| install\_keycloak | Flag to install keycloak | `bool` | `false` | no |
+| install\_kibana | Flag to install kibana | `bool` | `false` | no |
+| install\_linkerd | Flag to install linkerd | `bool` | `false` | no |
+| install\_localstack | Flag to install localstack | `bool` | `false` | no |
+| install\_loki | Flag to install Loki | `bool` | `false` | no |
+| install\_mariadb | Flag to install mariadb | `bool` | `false` | no |
+| install\_metrics | Flag to install metrics server | `bool` | `false` | no |
+| install\_minio | Flag to install minio | `bool` | `false` | no |
+| install\_mongodb | Flag to install MongoDB | `bool` | `false` | no |
+| install\_mssql | Flag to install SQL Server | `bool` | `false` | no |
+| install\_mysql | Flag to install mysql | `bool` | `false` | no |
+| install\_opentelemetry | Flag to install opentelemetry collector | `bool` | `false` | no |
+| install\_oracle | Flag to install Oracle XE | `bool` | `false` | no |
+| install\_postgres | Flag to install postgres | `bool` | `false` | no |
+| install\_prometheus | Flag to install prometheus | `bool` | `false` | no |
+| install\_promtail | Flag to install promtail | `bool` | `false` | no |
+| install\_rabbitmq | Flag to install rabbitmq | `bool` | `false` | no |
+| install\_redis | Flag to install redis | `bool` | `false` | no |
+| install\_seq | Flag to install seq | `bool` | `false` | no |
+| install\_tempo | Flag to install tempo | `bool` | `false` | no |
+| install\_traefik | Flag to install traefik | `bool` | `true` | no |
+| install\_vault | Flag to install vault | `bool` | `false` | no |
+| install\_vpa | Flag to install vpa | `bool` | `false` | no |
+| install\_whoami | Flag to install whoami | `bool` | `false` | no |
+| jaeger\_helm\_version | Override Helm version of jaeger | `string` | `""` | no |
+| jaeger\_namespace | Namespace of Jaeger | `string` | `"jaeger"` | no |
+| kafka\_helm\_version | Override Helm version of kafka strimzi | `string` | `""` | no |
+| kafka\_namespace | Namespace of kafka | `string` | `"kafka"` | no |
+| keycloak\_helm\_version | Override Helm version of keycloak | `string` | `""` | no |
+| keycloak\_include\_domainrealm | Flag to include a default realm | `bool` | `false` | no |
+| keycloak\_namespace | Namespace of keycloak | `string` | `"keycloak"` | no |
+| linkerd\_helm\_version | Override Helm version of linkerd | `string` | `""` | no |
+| linkerd\_namespace | Namespace of linkerd | `string` | `"linkerd"` | no |
+| linkerdcrds\_helm\_version | Override Helm version of linkerd-crds | `string` | `""` | no |
+| linkerdjaeger\_helm\_version | Override Helm version of linkerd-jaeger | `string` | `""` | no |
+| linkerdviz\_helm\_version | Override Helm version of linkerd-viz | `string` | `""` | no |
+| loadbalancer-ip | The IP of the loadbalancer | `string` | `"172.19.0.2"` | no |
+| localstack\_helm\_version | Override Helm version of localstack | `string` | `""` | no |
+| localstack\_namespace | Namespace of localstack | `string` | `"localstack"` | no |
+| loki\_helm\_version | Override Helm version of loki | `string` | `""` | no |
+| loki\_namespace | Namespace of loki | `string` | `"loki"` | no |
+| mariadb\_helm\_version | Override Helm version of mariadb | `string` | `""` | no |
+| mariadb\_namespace | Namespace of mariadb | `string` | `"mariadb"` | no |
+| metrics\_helm\_version | Override Helm version of metrics-server | `string` | `""` | no |
+| minio\_helm\_version | Override Helm version of minio | `string` | `""` | no |
+| minio\_namespace | Namespace of minio | `string` | `"minio"` | no |
+| mongodb\_helm\_version | Override Helm version of mongodb | `string` | `""` | no |
+| mongodb\_namespace | Namespace of mongodb | `string` | `"mongodb"` | no |
+| monitoring\_backend | Default monitoring backend | `string` | `"grafana"` | no |
+| mssql\_helm\_version | Override Helm version of SQL Server | `string` | `""` | no |
+| mssql\_namespace | Namespace of SQL Server | `string` | `"mssql"` | no |
+| mysql\_helm\_version | Override Helm version of mysql | `string` | `""` | no |
+| mysql\_namespace | Namespace of mysql | `string` | `"mysql"` | no |
+| node-ips | The list of ip's of nodes in the cluster | `list(any)` | <pre>[<br>  "172.19.0.2"<br>]</pre> | no |
+| opentelemetry\_helm\_version | Override Helm version of opentelemetry collector | `string` | `""` | no |
+| opentelemetry\_namespace | Namespace of opentelemetry collector | `string` | `"opentelemetry"` | no |
+| oracle\_namespace | Namespace of Oracle XE | `string` | `"oracle"` | no |
+| oracle\_operator\_version | Version of the Oracle Operator to use | `string` | `"0.2.1"` | no |
+| oracle\_xe\_version | Version of the Oracle XE server to install | `string` | `"21.3.0-xe"` | no |
+| postgres\_helm\_version | Override Helm version of postgres | `string` | `""` | no |
+| postgres\_namespace | Namespace of postgres | `string` | `"postgres"` | no |
+| prometheus\_helm\_version | Override Helm version of prometheus | `string` | `""` | no |
+| prometheus\_namespace | Namespace of prometheus | `string` | `"prometheus"` | no |
+| promtail\_helm\_version | Override Helm version of promtail | `string` | `""` | no |
+| rabbitmq\_helm\_version | Override Helm version of rabbitmq | `string` | `""` | no |
+| rabbitmq\_namespace | Namespace of rabbitmq | `string` | `"rabbitmq"` | no |
+| redis\_helm\_version | Override Helm version of redis | `string` | `""` | no |
+| redis\_namespace | Namespace of redis | `string` | `"redis"` | no |
+| seq\_helm\_version | Override Helm version of seq | `string` | `""` | no |
+| seq\_namespace | Namespace of seq | `string` | `"seq"` | no |
+| tempo\_helm\_version | Override Helm version of tempo | `string` | `""` | no |
+| tempo\_namespace | Namespace of tempo | `string` | `"tempo"` | no |
+| traefik\_helm\_version | Override Helm version of traefik | `string` | `""` | no |
+| traefik\_namespace | Namespace of traefik | `string` | `"traefik"` | no |
+| vault\_helm\_version | Override Helm version of vault | `string` | `""` | no |
+| vault\_namespace | Namespace of vault | `string` | `"vault"` | no |
+| vpa\_helm\_version | Override Helm version of vpa | `string` | `""` | no |
+| vpa\_namespace | Namespace of vpa | `string` | `"vpa"` | no |
+| whoami\_helm\_version | Override Helm version of whoami | `string` | `""` | no |
+| whoami\_namespace | Namespace of whoami | `string` | `"whoami"` | no |
 
 ### Outputs
 
@@ -258,36 +258,6 @@
 | etcd-password | Etcd Initial Admin password |
 | grafana-password | Grafana Admin password |
 | grafana-user | Grafana Admin user |
-| helm\_version\_argocd | ArgoCD helm version |
-| helm\_version\_cert-manager | Cert-Manager helm version |
-| helm\_version\_docker\_registry | Docker Registry helm version |
-| helm\_version\_elasticsearch | ECK (ElasticSearch - Kibana) helm version |
-| helm\_version\_etcd | Etcd helm version |
-| helm\_version\_fluent | Fluent-bit helm version |
-| helm\_version\_identityserveradmin | Identityserver Admin helm version |
-| helm\_version\_identityserveradmin-mssql | IdentityServer Admin SQL Server helm version |
-| helm\_version\_jaeger | Jaeger helm version |
-| helm\_version\_kafka | Kafka helm version |
-| helm\_version\_keycloak | Keycloak helm version |
-| helm\_version\_linkerd | Linkerd helm version |
-| helm\_version\_localstack | Localstack helm version |
-| helm\_version\_loki | Loki helm version |
-| helm\_version\_mariadb | MariaDB helm version |
-| helm\_version\_metrics | Metrics-server helm version |
-| helm\_version\_minio | Minio helm version |
-| helm\_version\_mongodb | MongoDB helm version |
-| helm\_version\_mssql | SQL Server helm version |
-| helm\_version\_mysql | MySQL helm version |
-| helm\_version\_opentelemetry | Opentelemetry collector helm version |
-| helm\_version\_postgres | PostgreSQL helm version |
-| helm\_version\_prometheus | Prometheus helm version |
-| helm\_version\_promtail | Promtail helm version |
-| helm\_version\_rabbitmq | RabbitMq helm version |
-| helm\_version\_redis | Redis helm version |
-| helm\_version\_seq | Seq helm version |
-| helm\_version\_tempo | Tempo helm version |
-| helm\_version\_traefik | Traefik helm version |
-| helm\_version\_vault | Hashicorp Vault helm version |
 | helm\_versions | Chart versions |
 | keycloak-password | Keycloak Initial Admin password |
 | mariadb-password | MariaDB password |

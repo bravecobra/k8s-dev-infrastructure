@@ -38,6 +38,7 @@ variable "monitoring_backend" {
 }
 
 variable "k8smonitoring_enabled" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
+  description = "Flag to enable cluster monitoring"
 }

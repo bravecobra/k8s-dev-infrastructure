@@ -1,23 +1,28 @@
 site_name: K8S Dev Infrastructure
+extra_css: [stylesheets/extra.css]
 theme:
   name: material
   features:
     - content.tabs.link
 nav:
-    - Home: 'index.md'
-    - Preparation: './preparation.md'
+    - Home: index.md
+    - Preparation: preparation.md
     - Clusters:
-      - 'K3S with terraform': './k3s.md'
-      - 'KinD with terraform': './kind.md'
-      - 'Docker Desktop': './desktop-cluster.md'
-      - 'Rancher Desktop': './rancher-cluster.md'
-      - 'Minikube': './minikube-cluster.md'
-    - Install: './installation-terraform.md'
-    - Specs:
-      - 'terraform': './terraform-specs.md'
+      - 'K3S with terraform': ./k3s.md
+      - 'KinD with terraform': ./kind.md
+      - 'Docker Desktop': ./desktop-cluster.md
+      - 'Rancher Desktop': ./rancher-cluster.md
+      - 'Minikube': ./minikube-cluster.md
+    - Install: ./installation-terraform.md
+    - Terraform Specs:
+      - Main: ./terraform-specs.md
+      - Modules: specs/
     - About:
-        - 'License': 'license.md'
+        - 'License': license.md
 dev_addr: '0.0.0.0:8080'
+
+plugins:
+  - include_dir_to_nav
 
 markdown_extensions:
   - admonition

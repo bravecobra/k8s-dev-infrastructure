@@ -25,6 +25,7 @@ devinfra-worker2 -.uses.-> kind-registry
 ## Installation
 
 ```shell
+cd ./src/clusters/kind
 terraform init
 terraform apply -auto-approve
 ```
