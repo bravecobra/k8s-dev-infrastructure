@@ -6,6 +6,7 @@ This repository contains a [kubernetes](https://kubernetes.io/) dev infrastructu
 
 ![Terraform syntax](https://github.com/bravecobra/k8s-dev-infrastructure/actions/workflows/build.yml/badge.svg)
 ![E2E workflow](https://github.com/bravecobra/k8s-dev-infrastructure/actions/workflows/e2e.yml/badge.svg)
+[![Infracost](https://img.shields.io/endpoint?url=https://dashboard.api.infracost.io/shields/json/38905a6f-00f7-409b-acc5-b65ddc92759f/repos/48ef7fd6-da4b-41a3-95fb-515165e939be/branch/a3558d90-5a2a-4d70-9b66-1f471f5cfa1b)](https://dashboard.infracost.io/org/bravecobra/repos/48ef7fd6-da4b-41a3-95fb-515165e939be)
 
 ## Components
 

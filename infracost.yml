@@ -1,0 +1,8 @@
+version: 0.1
+projects:
+  - path: src/clusters/k3d
+    name: k3d
+  - path: src/clusters/kind
+    name: kind
+  - path: src/terraform
+    name: terraform
