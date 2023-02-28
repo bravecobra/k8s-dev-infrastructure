@@ -10,7 +10,7 @@ helm_versions:
       name: localstack-charts
       url: https://localstack.github.io/helm-charts
     chart_name: localstack
-    chart_version: 0.5.4
+    chart_version: 0.5.5
   rabbitmq:
     repository:
       name: bitnami
