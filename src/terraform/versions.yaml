@@ -4,7 +4,7 @@ helm_versions:
       name: argo-cd
       url: https://argoproj.github.io/argo-helm
     chart_name: argo-cd
-    chart_version: 5.23.3
+    chart_version: 5.23.5
   cert_manager:
     repository:
       name: jetstack
