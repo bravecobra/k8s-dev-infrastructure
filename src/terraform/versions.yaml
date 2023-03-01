@@ -160,7 +160,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: postgresql
-    chart_version: 12.2.1
+    chart_version: 12.2.2
   prometheus:
     repository:
       name: prometheus-community
