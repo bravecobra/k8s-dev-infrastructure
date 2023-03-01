@@ -28,7 +28,7 @@ helm_versions:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: loki
-    chart_version: 4.7.0
+    chart_version: 4.8.0
   metrics:
     repository:
       name: bitnami
