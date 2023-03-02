@@ -172,7 +172,7 @@ helm_versions:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: promtail
-    chart_version: 6.9.1
+    chart_version: 6.9.2
   rabbitmq:
     repository:
       name: bitnami
