@@ -40,7 +40,7 @@ helm_versions:
       name: open-telemetry
       url: https://open-telemetry.github.io/opentelemetry-helm-charts
     chart_name: opentelemetry-operator
-    chart_version: 0.24.0
+    chart_version: 0.24.1
   prometheus:
     repository:
       name: prometheus-community
