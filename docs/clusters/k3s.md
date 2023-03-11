@@ -76,7 +76,7 @@ terraform destroy --auto-approve
 | Name | Version |
 |------|---------|
 | docker | 3.0.1 |
-| local | 2.3.0 |
+| local | 2.4.0 |
 | null | 3.2.1 |
 
 ### Modules

@@ -1,8 +1,17 @@
 #!/bin/bash
+cd src/clusters/k3d
+terraform init --upgrade
+cd ../../../
+cd src/clusters/kind
+terraform init --upgrade
+cd ../../../
+cd src/terraform
+terraform init --upgrade
+cd ../../
 
 terraform-docs markdown table "./src/terraform" --output-file "../../docs/terraform-specs.md"
-terraform-docs markdown table "./src/clusters/k3d" --output-file "../../../docs/k3s.md"
-terraform-docs markdown table "./src/clusters/kind" --output-file "../../../docs/kind.md"
+terraform-docs markdown table "./src/clusters/k3d" --output-file "../../../docs/clusters/k3s.md"
+terraform-docs markdown table "./src/clusters/kind" --output-file "../../../docs/clusters/kind.md"
 
 # monitoring
 terraform-docs markdown table "./src/terraform/modules/monitoring/dashboard" --output-file "../../../../../docs/specs/dashboard.md"
