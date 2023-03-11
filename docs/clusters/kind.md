@@ -51,7 +51,7 @@ terraform destroy -auto-approve
 | Name | Version |
 |------|---------|
 | docker | 3.0.1 |
-| environment | 1.3.3 |
+| environment | 1.3.4 |
 | kind | 0.0.16 |
 | kubectl | 1.14.0 |
 | null | 3.2.1 |

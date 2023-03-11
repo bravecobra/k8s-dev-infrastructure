@@ -21,7 +21,7 @@
 |------|---------|
 | http | 3.2.1 |
 | kubectl | 1.14.0 |
-| kubernetes | 2.17.0 |
+| kubernetes | 2.18.1 |
 | null | 3.2.1 |
 
 ### Modules

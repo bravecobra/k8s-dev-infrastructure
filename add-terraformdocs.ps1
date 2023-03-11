@@ -1,6 +1,16 @@
+Push-Location src/clusters/k3d
+terraform init --upgrade
+Pop-Location
+Push-Location src/clusters/kind
+terraform init --upgrade
+Pop-Location
+Push-Location src/terraform
+terraform init --upgrade
+Pop-Location
+
 terraform-docs markdown table "./src/terraform" --output-file "../../docs/terraform-specs.md"
-terraform-docs markdown table "./src/clusters/k3d" --output-file "../../../docs/k3s.md"
-terraform-docs markdown table "./src/clusters/kind" --output-file "../../../docs/kind.md"
+terraform-docs markdown table "./src/clusters/k3d" --output-file "../../../docs/clusters/k3s.md"
+terraform-docs markdown table "./src/clusters/kind" --output-file "../../../docs/clusters/kind.md"
 
 # monitoring
 terraform-docs markdown table "./src/terraform/modules/monitoring/dashboard" --output-file "../../../../../docs/specs/dashboard.md"
