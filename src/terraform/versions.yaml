@@ -64,7 +64,7 @@ helm_versions:
       name: jaegertracing
       url: https://jaegertracing.github.io/helm-charts
     chart_name: jaeger-operator
-    chart_version: 2.40.0
+    chart_version: 2.41.0
   kafka:
     repository:
       name: strimzi
