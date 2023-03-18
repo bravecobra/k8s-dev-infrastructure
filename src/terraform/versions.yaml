@@ -16,7 +16,7 @@ helm_versions:
       name: k8s-dashboard
       url: https://kubernetes.github.io/dashboard/
     chart_name: kubernetes-dashboard
-    chart_version: 6.0.5
+    chart_version: 6.0.6
   docker_registry:
     repository:
       name: joxit
