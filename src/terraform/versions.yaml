@@ -184,7 +184,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: redis
-    chart_version: 17.8.5
+    chart_version: 17.8.6
   seq:
     repository:
       name: datalust
