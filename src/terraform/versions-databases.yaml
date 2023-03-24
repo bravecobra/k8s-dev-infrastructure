@@ -10,7 +10,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: mongodb
-    chart_version: 13.9.2
+    chart_version: 13.9.3
   mssql:
     repository:
       name: simcube
