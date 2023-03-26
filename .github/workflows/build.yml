@@ -108,9 +108,9 @@ jobs:
       id: terrascan
       uses: tenable/terrascan-action@main
       with:
-        iac_type: 'terraform'
-        iac_version: 'v14'
-        policy_type: 'aws'
+        # iac_type: 'terraform'
+        # iac_version: 'v14'
+        # policy_type: 'aws'
         only_warn: true
         sarif_upload: true
         #non_recursive:

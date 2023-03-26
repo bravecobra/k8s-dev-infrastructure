@@ -6,6 +6,7 @@
         "FORWARDEDHEADERS",
         "Loadbalancer",
         "Serilog",
+        "Terrascan",
         "aquasecurity",
         "argocd",
         "artifacthub",
