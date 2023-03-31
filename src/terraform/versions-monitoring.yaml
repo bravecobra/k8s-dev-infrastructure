@@ -64,7 +64,7 @@ helm_versions:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: tempo
-    chart_version: 1.0.2
+    chart_version: 1.0.3
   vpa:
     repository:
       name: fairwinds-stable
