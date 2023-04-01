@@ -124,7 +124,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: metrics-server
-    chart_version: 6.2.14
+    chart_version: 6.2.15
   minio:
     repository:
       name: minio
