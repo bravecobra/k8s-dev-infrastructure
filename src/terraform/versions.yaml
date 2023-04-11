@@ -88,7 +88,7 @@ helm_versions:
       name: linkerd
       url: https://helm.linkerd.io/stable
     chart_name: linkerd-crds
-    chart_version: 1.4.0
+    chart_version: 1.6.0
   linkerdviz:
     repository:
       name: linkerd
