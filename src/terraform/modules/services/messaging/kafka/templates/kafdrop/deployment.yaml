@@ -5,6 +5,8 @@ metadata:
   namespace: ${namespace}
   labels:
     app: kafdrop
+  annotations:
+    runterrascan.io/skip: "[{\"rule\": \"AC_K8S_0087\", \"comment\": \"Container requirement\"}]"
 spec:
   replicas: 1
   selector:
@@ -27,3 +29,10 @@ spec:
             runAsNonRoot: false
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: false
+          resources:
+            requests:
+              cpu: 15m
+              memory: 100M
+            limits:
+              cpu: 15m
+              memory: 550M
