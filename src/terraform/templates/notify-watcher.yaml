@@ -6,6 +6,9 @@ metadata:
   labels:
     app: more-fs-watchers
     k8s-app: more-fs-watchers
+  annotations:
+    runterrascan.io/skip: "[{\"rule\": \"AC-K8-CA-PO-H-0165\", \"comment\": \"Required\"}]"
+    runterrascan.io/skip: "[{\"rule\": \"AC-K8-CA-PO-H-0168\", \"comment\": \"Required\"}]"
 spec:
   selector:
     matchLabels:
