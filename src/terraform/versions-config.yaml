@@ -10,7 +10,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: etcd
-    chart_version: 8.8.1
+    chart_version: 8.8.3
   redis:
     repository:
       name: bitnami
