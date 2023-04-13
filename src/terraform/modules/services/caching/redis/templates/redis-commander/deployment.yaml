@@ -39,9 +39,12 @@ spec:
             initialDelaySeconds: 10
             timeoutSeconds: 5
           resources:
+            requests:
+              cpu: 15m
+              memory: 105M
             limits:
-              cpu: "500m"
-              memory: "512M"
+              cpu: 15m
+              memory: 105M
           securityContext:
             runAsNonRoot: true
             readOnlyRootFilesystem: false
