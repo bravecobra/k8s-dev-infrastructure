@@ -4,22 +4,22 @@ helm_versions:
       name: elastic
       url: https://helm.elastic.co
     chart_name: eck-operator
-    chart_version: 2.6.1
+    chart_version: 2.7.0
   etcd:
     repository:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: etcd
-    chart_version: 8.8.0
+    chart_version: 8.8.1
   redis:
     repository:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: redis
-    chart_version: 17.9.2
+    chart_version: 17.9.4
   vault:
     repository:
       name: hashicorp
       url: https://helm.releases.hashicorp.com
     chart_name: vault
-    chart_version: 0.23.0
+    chart_version: 0.24.0

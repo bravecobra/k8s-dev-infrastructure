@@ -4,13 +4,13 @@ helm_versions:
       name: jetstack
       url: https://charts.jetstack.io
     chart_name: cert-manager
-    chart_version: v1.11.0
+    chart_version: v1.11.1
   traefik:
     repository:
       name: traefik
       url: https://helm.traefik.io/traefik
     chart_name: traefik
-    chart_version: 21.2.0
+    chart_version: 22.1.0
   whoami:
     repository:
       name: cowboysysop

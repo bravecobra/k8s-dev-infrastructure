@@ -4,13 +4,13 @@ helm_versions:
       name: argo-cd
       url: https://argoproj.github.io/argo-helm
     chart_name: argo-cd
-    chart_version: 5.27.3
+    chart_version: 5.28.2
   cert_manager:
     repository:
       name: jetstack
       url: https://charts.jetstack.io
     chart_name: cert-manager
-    chart_version: v1.11.0
+    chart_version: v1.11.1
   dashboard:
     repository:
       name: k8s-dashboard
@@ -28,25 +28,25 @@ helm_versions:
       name: elastic
       url: https://helm.elastic.co
     chart_name: eck-operator
-    chart_version: 2.6.1
+    chart_version: 2.7.0
   etcd:
     repository:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: etcd
-    chart_version: 8.8.0
+    chart_version: 8.8.1
   fluent:
     repository:
       name: fluent
       url: https://fluent.github.io/helm-charts
     chart_name: fluent-bit
-    chart_version: 0.25.0
+    chart_version: 0.27.0
   goldilocks:
     repository:
       name: fairwinds-stable
       url: https://charts.fairwinds.com/stable
     chart_name: goldilocks
-    chart_version: 6.5.1
+    chart_version: 6.5.2
   identityserver4admin:
     repository:
       name: identityserver4admin
@@ -64,7 +64,7 @@ helm_versions:
       name: jaegertracing
       url: https://jaegertracing.github.io/helm-charts
     chart_name: jaeger-operator
-    chart_version: 2.41.0
+    chart_version: 2.42.0
   kafka:
     repository:
       name: strimzi
@@ -82,25 +82,25 @@ helm_versions:
       name: linkerd
       url: https://helm.linkerd.io/stable
     chart_name: linkerd-control-plane
-    chart_version: 1.9.6
+    chart_version: 1.12.0
   linkerdcrds:
     repository:
       name: linkerd
       url: https://helm.linkerd.io/stable
     chart_name: linkerd-crds
-    chart_version: 1.4.0
+    chart_version: 1.6.0
   linkerdviz:
     repository:
       name: linkerd
       url: https://helm.linkerd.io/stable
     chart_name: linkerd-viz
-    chart_version: 30.3.6
+    chart_version: 30.8.0
   linkerdjaeger:
     repository:
       name: linkerd
       url: https://helm.linkerd.io/stable
     chart_name: linkerd-jaeger
-    chart_version: 30.4.6
+    chart_version: 30.8.0
   localstack:
     repository:
       name: localstack-charts
@@ -112,19 +112,19 @@ helm_versions:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: loki
-    chart_version: 4.8.0
+    chart_version: 5.0.0
   mariadb:
     repository:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: mariadb
-    chart_version: 11.5.5
+    chart_version: 11.5.7
   metrics:
     repository:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: metrics-server
-    chart_version: 6.2.14
+    chart_version: 6.2.15
   minio:
     repository:
       name: minio
@@ -136,7 +136,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: mongodb
-    chart_version: 13.9.3
+    chart_version: 13.9.4
   mssql:
     repository:
       name: simcube
@@ -148,43 +148,43 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: mysql
-    chart_version: 9.7.0
+    chart_version: 9.7.1
   opentelemetry:
     repository:
       name: open-telemetry
       url: https://open-telemetry.github.io/opentelemetry-helm-charts
     chart_name: opentelemetry-operator
-    chart_version: 0.25.0
+    chart_version: 0.26.3
   postgres:
     repository:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: postgresql
-    chart_version: 12.2.6
+    chart_version: 12.2.7
   prometheus:
     repository:
       name: prometheus-community
       url: https://prometheus-community.github.io/helm-charts
     chart_name: kube-prometheus-stack
-    chart_version: 45.7.1
+    chart_version: 45.9.1
   promtail:
     repository:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: promtail
-    chart_version: 6.9.3
+    chart_version: 6.10.0
   rabbitmq:
     repository:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: rabbitmq-cluster-operator
-    chart_version: 3.2.7
+    chart_version: 3.2.10
   redis:
     repository:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: redis
-    chart_version: 17.9.2
+    chart_version: 17.9.4
   seq:
     repository:
       name: datalust
@@ -196,25 +196,25 @@ helm_versions:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: tempo
-    chart_version: 1.0.2
+    chart_version: 1.1.0
   traefik:
     repository:
       name: traefik
       url: https://helm.traefik.io/traefik
     chart_name: traefik
-    chart_version: 21.2.0
+    chart_version: 22.1.0
   vault:
     repository:
       name: hashicorp
       url: https://helm.releases.hashicorp.com
     chart_name: vault
-    chart_version: 0.23.0
+    chart_version: 0.24.0
   vpa:
     repository:
       name: fairwinds-stable
       url: https://charts.fairwinds.com/stable
     chart_name: vpa
-    chart_version: 1.6.1
+    chart_version: 1.7.1
   whoami:
     repository:
       name: cowboysysop

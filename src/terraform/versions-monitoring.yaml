@@ -10,49 +10,49 @@ helm_versions:
       name: fluent
       url: https://fluent.github.io/helm-charts
     chart_name: fluent-bit
-    chart_version: 0.25.0
+    chart_version: 0.27.0
   goldilocks:
     repository:
       name: fairwinds-stable
       url: https://charts.fairwinds.com/stable
     chart_name: goldilocks
-    chart_version: 6.5.1
+    chart_version: 6.5.2
   jaeger:
     repository:
       name: jaegertracing
       url: https://jaegertracing.github.io/helm-charts
     chart_name: jaeger-operator
-    chart_version: 2.41.0
+    chart_version: 2.42.0
   loki:
     repository:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: loki
-    chart_version: 4.8.0
+    chart_version: 5.0.0
   metrics:
     repository:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: metrics-server
-    chart_version: 6.2.14
+    chart_version: 6.2.15
   opentelemetry:
     repository:
       name: open-telemetry
       url: https://open-telemetry.github.io/opentelemetry-helm-charts
     chart_name: opentelemetry-operator
-    chart_version: 0.25.0
+    chart_version: 0.26.3
   prometheus:
     repository:
       name: prometheus-community
       url: https://prometheus-community.github.io/helm-charts
     chart_name: kube-prometheus-stack
-    chart_version: 45.7.1
+    chart_version: 45.9.1
   promtail:
     repository:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: promtail
-    chart_version: 6.9.3
+    chart_version: 6.10.0
   seq:
     repository:
       name: datalust
@@ -64,10 +64,10 @@ helm_versions:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: tempo
-    chart_version: 1.0.2
+    chart_version: 1.1.0
   vpa:
     repository:
       name: fairwinds-stable
       url: https://charts.fairwinds.com/stable
     chart_name: vpa
-    chart_version: 1.6.1
+    chart_version: 1.7.1
