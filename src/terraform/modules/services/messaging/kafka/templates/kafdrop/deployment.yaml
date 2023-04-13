@@ -17,9 +17,13 @@ spec:
     spec:
       containers:
         - name: kafdrop
-          image: obsidiandynamics/kafdrop:latest
+          image: obsidiandynamics/kafdrop:3.31.0
           ports:
             - containerPort: 9000
           env:
             - name: KAFKA_BROKERCONNECT
               value: "kafka-cluster-kafka-bootstrap:9092" #name of deployed kafka service
+          securityContext:
+            runAsNonRoot: false
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
