@@ -82,7 +82,7 @@ helm_versions:
       name: linkerd
       url: https://helm.linkerd.io/stable
     chart_name: linkerd-control-plane
-    chart_version: 1.12.0
+    chart_version: 1.12.1
   linkerdcrds:
     repository:
       name: linkerd
