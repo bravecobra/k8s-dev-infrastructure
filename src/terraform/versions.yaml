@@ -208,7 +208,7 @@ helm_versions:
       name: hashicorp
       url: https://helm.releases.hashicorp.com
     chart_name: vault
-    chart_version: 0.24.0
+    chart_version: 0.24.1
   vpa:
     repository:
       name: fairwinds-stable
