@@ -5,6 +5,7 @@ metadata:
   namespace: ${namespace}
   annotations:
     runterrascan.io/skip: "[{\"rule\": \"AC_K8S_0087\", \"comment\": \"Container requirement\"}]"
+    runterrascan.io/skip: "[{\"rule\": \"AC_K8S_0078\", \"comment\": \"Container requirement\"}]"
 spec:
   selector:
     matchLabels:

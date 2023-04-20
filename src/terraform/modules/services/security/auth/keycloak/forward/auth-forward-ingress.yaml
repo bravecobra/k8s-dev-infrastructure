@@ -6,6 +6,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     #traefik.ingress.kubernetes.io/router.middlewares: default-keycloakforwardauth@kubernetescrd
+    runterrascan.io/skip: "[{\"rule\": \"AC_K8S_0002\", \"comment\": \"TLS Termination on reverse proxy\"}]"
 spec:
   rules:
     - host: auth.${domain-name}
