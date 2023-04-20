@@ -16,7 +16,7 @@ helm_versions:
       name: fairwinds-stable
       url: https://charts.fairwinds.com/stable
     chart_name: goldilocks
-    chart_version: 6.5.4
+    chart_version: 6.5.5
   jaeger:
     repository:
       name: jaegertracing
