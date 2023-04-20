@@ -46,6 +46,7 @@
         "otlp",
         "promtail",
         "rabbitmq",
+        "runterrascan",
         "sarif",
         "serverlb",
         "simcube",

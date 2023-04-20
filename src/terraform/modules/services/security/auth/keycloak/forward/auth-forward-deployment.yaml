@@ -4,7 +4,7 @@ metadata:
   name: traefik-forward-auth-deployment
   namespace: ${namespace}
   annotations:
-    runterrascan.io/skip: "[{\"rule\": \"AC-K8-NS-PO-H-0117\", \"comment\": \"Demo container\"}]"
+    runterrascan.io/skip: "[{\"rule\": \"AC-K8-NS-PO-H-0117\", \"comment\": \"Demo container\"},{\"rule\": \"AC_K8S_0069\", \"comment\": \"No other tag available\"},{\"rule\": \"AC_K8S_0068\", \"comment\": \"No other tag available\"}]"
 spec:
   selector:
     matchLabels:
