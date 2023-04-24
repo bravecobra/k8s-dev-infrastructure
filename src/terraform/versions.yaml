@@ -202,7 +202,7 @@ helm_versions:
       name: traefik
       url: https://helm.traefik.io/traefik
     chart_name: traefik
-    chart_version: 22.1.0
+    chart_version: 22.2.0
   vault:
     repository:
       name: hashicorp
