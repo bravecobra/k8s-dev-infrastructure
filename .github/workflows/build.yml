@@ -117,7 +117,7 @@ jobs:
         iac_dir: src/terraform
         #policy_path:
         #skip_rules:
-        #config_path:
+        config_path: terrascan_config.toml
     - name: Upload SARIF file
       uses: github/codeql-action/upload-sarif@v1
       with:
