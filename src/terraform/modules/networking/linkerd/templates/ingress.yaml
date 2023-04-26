@@ -9,7 +9,6 @@ metadata:
     ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web.linkerd-viz.svc.cluster.local:8084
     traefik.ingress.kubernetes.io/auth-type: basic
     traefik.ingress.kubernetes.io/auth-secret: web-ingress-auth
-    runterrascan.io/skip: "[{\"rule\": \"AC_K8S_0002\", \"comment\": \"TLS Termination on reverse proxy\"}]"
 spec:
   ingressClassName: traefik
   rules:

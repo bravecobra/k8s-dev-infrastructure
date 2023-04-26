@@ -6,7 +6,6 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.middlewares: default-redirect-http@kubernetescrd
-    runterrascan.io/skip: "[{\"rule\": \"AC_K8S_0002\", \"comment\": \"TLS Termination on reverse proxy\"}]"
 spec:
   rules:
     - host: rabbitmq.infrastructure.${domain-name}
