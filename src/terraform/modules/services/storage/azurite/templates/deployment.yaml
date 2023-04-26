@@ -24,3 +24,10 @@ spec:
         - containerPort: 10000
         - containerPort: 10001
         - containerPort: 10002
+        resources:
+          requests:
+            cpu: 15m
+            memory: 110M
+          limits:
+            cpu: 15m
+            memory: 110M
