@@ -2,12 +2,12 @@ domain-name = "k8s.local"
 
 # k3s
 cluster-context-name = "k3d-devinfra"
-loadbalancer-ip      = "172.19.0.6"
-cluster-type         = "k3s"
+loadbalancer-ip      = "172.19.0.7"
+cluster-type         = "k3d"
 node-ips = [
-  "172.19.0.2",
   "172.19.0.3",
-  "172.19.0.4"
+  "172.19.0.4",
+  "172.19.0.5"
 ]
 
 # kind
@@ -19,7 +19,6 @@ node-ips = [
 #   "172.19.0.3",
 #   "172.19.0.4"
 # ]
-
 
 # Rancher desktop
 # cluster-context-name = "rancher-desktop"
@@ -63,7 +62,6 @@ node-ips = [
 //jaeger
 # install_jaeger = true
 # expose_jaeger  = true
-
 
 //opentelemetry (operator)
 # install_opentelemetry = true

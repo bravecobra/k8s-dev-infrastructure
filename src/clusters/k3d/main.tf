@@ -1,10 +1,10 @@
 resource "docker_network" "k3d_network" {
   name   = "k3d"
   driver = "bridge"
-  ipv6   = true
-  ipam_config {
-    subnet = "fc00:f853:ccd:e793::/64"
-  }
+  ipv6   = false
+  # ipam_config {
+  #   subnet = "fc00:f853:ccd:e793::/64"
+  # }
   ipam_config {
     subnet  = var.k3d-network-subnet
     gateway = var.k3d-network-gateway
