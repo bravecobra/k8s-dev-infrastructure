@@ -82,7 +82,7 @@ resource "kubernetes_secret" "main" {
 resource "github_repository" "main" {
   count                = var.repository_create ? 1 : 0
   name                 = var.repository_name
-  visibility           = var.repository_visibility
+  visibility           = "private" //var.repository_visibility
   auto_init            = true
   vulnerability_alerts = true
 }

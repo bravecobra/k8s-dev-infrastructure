@@ -100,10 +100,35 @@ jobs:
           # Path to SARIF file relative to the root of the repository
           sarif_file: tfsec.sarif
 
+  terrascan:
+    runs-on: ubuntu-latest
+    name: terrascan-action
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Run Terrascan
+      id: terrascan
+      uses: tenable/terrascan-action@main
+      with:
+        # iac_type: 'terraform'
+        # iac_version: 'v14'
+        # policy_type: 'aws'
+        only_warn: true
+        sarif_upload: true
+        #non_recursive:
+        iac_dir: src/terraform
+        #policy_path:
+        #skip_rules:
+        config_path: terrascan_config.toml
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: terrascan.sarif
+
   release:
     runs-on: ubuntu-latest
     name: Release
-    needs: [validate, tfsec]
+    needs: [validate, tfsec, terrascan]
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - name: Checkout

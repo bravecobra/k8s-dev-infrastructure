@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: e3w
   namespace: ${namespace}
+  annotations:
+    runterrascan.io/skip: "[{\"rule\": \"AC_K8S_0078\", \"comment\": \"Container requirement\"}, {\"rule\": \"AC_K8S_0087\", \"comment\": \"Container requirement\"}]"
 spec:
   selector:
     matchLabels:
@@ -24,6 +26,17 @@ spec:
           - name: config
             mountPath: /app/conf
         env:
+        securityContext:
+          runAsNonRoot: false
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+        resources:
+          requests:
+            cpu: 15m
+            memory: 105M
+          limits:
+            cpu: 15m
+            memory: 105M
       volumes:
         - name: config
           configMap:

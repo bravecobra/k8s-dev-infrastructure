@@ -6,6 +6,7 @@ metadata:
   annotations:
     container.apparmor.security.beta.kubernetes.io/redis-commander: runtime/default
     container.security.alpha.kubernetes.io/redis-commander: runtime/default
+    runterrascan.io/skip: "[{\"rule\": \"AC_K8S_0078\", \"comment\": \"Container requirement\"}, {\"rule\": \"AC_K8S_0087\", \"comment\": \"Container requirement\"}]"
 spec:
   replicas: 1
   selector:
@@ -39,9 +40,12 @@ spec:
             initialDelaySeconds: 10
             timeoutSeconds: 5
           resources:
+            requests:
+              cpu: 15m
+              memory: 105M
             limits:
-              cpu: "500m"
-              memory: "512M"
+              cpu: 15m
+              memory: 105M
           securityContext:
             runAsNonRoot: true
             readOnlyRootFilesystem: false

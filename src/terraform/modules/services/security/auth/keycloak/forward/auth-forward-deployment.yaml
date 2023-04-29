@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: traefik-forward-auth-deployment
   namespace: ${namespace}
+  annotations:
+    runterrascan.io/skip: "[{\"rule\": \"AC-K8-NS-PO-H-0117\", \"comment\": \"Demo container\"},{\"rule\": \"AC_K8S_0069\", \"comment\": \"No other tag available\"},{\"rule\": \"AC_K8S_0068\", \"comment\": \"No other tag available\"}]"
 spec:
   selector:
     matchLabels:
@@ -70,6 +72,17 @@ spec:
           value: "debug"
         - name: "LIFETIME"
           value: "43200"
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 50m
+          limits:
+            memory: 100Mi
+            cpu: 100m
+        securityContext:
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
       volumes:
         - name: certs
           secret:
