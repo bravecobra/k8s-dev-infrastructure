@@ -3,7 +3,7 @@ domain-name = "k8s.local"
 # k3s
 cluster-context-name = "k3d-devinfra"
 loadbalancer-ip      = "172.19.0.7"
-cluster-type         = "k3d"
+cluster-type         = "k3s"
 node-ips = [
   "172.19.0.3",
   "172.19.0.4",

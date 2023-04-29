@@ -44,6 +44,7 @@ jobs:
           echo DD_SITE=somedomain >> src/terraform/.env
           echo NEW_RELIC_ENDPOINT=someendpoint >> src/terraform/.env
           echo NEW_RELIC_LICENSE_KEY=somekey >> src/terraform/.env
+          echo DOCKER_HOST= >> src/clusters/k3d/.env
 
       - name: terraform validate src-clusters-k3d
         uses: dflook/terraform-validate@v1
