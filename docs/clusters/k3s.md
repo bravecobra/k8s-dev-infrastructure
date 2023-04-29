@@ -43,9 +43,17 @@ Make sure docker is up and running.
     cp ~/.kube/config /mnt/c/users/$(whoami)/.kube/config
     ```
 
-Create a `.env` file to store your `DOCKER_HOST` location. If left empty it'll take the default. Next, just apply the terraform code as usual.
+Create a `.env` file to store your `DOCKER_HOST` location. If left empty it'll take the default. Make sure there is no newline at the end of the file.
+
+To find the value of your current DOCKER_HOST
 
 ```shell
+docker context inspect --format='{{.Endpoints.docker.Host}}'
+```
+
+Next, just apply the terraform code as usual.
+
+```powershell
 cd ./src/clusters/k3s
 echo "DOCKER_HOST=" >> .env
 terraform init --upgrade
