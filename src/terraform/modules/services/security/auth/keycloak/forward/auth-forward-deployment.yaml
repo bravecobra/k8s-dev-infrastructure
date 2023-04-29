@@ -79,6 +79,10 @@ spec:
           limits:
             memory: 100Mi
             cpu: 100m
+        securityContext:
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
       volumes:
         - name: certs
           secret:

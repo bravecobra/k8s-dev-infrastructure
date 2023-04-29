@@ -19,11 +19,15 @@ spec:
     spec:
       containers:
       - name: storage-azurite-container
-        image: mcr.microsoft.com/azurestorage-azurite:${version}
+        image: mcr.microsoft.com/azure-storage/azurite:${version}
         ports:
         - containerPort: 10000
         - containerPort: 10001
         - containerPort: 10002
+        securityContext:
+          runAsNonRoot: false
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
         resources:
           requests:
             cpu: 15m
