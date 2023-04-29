@@ -35,6 +35,7 @@ jobs:
           touch src/certs/cacerts.crt
           touch src/certs/cacerts.key
           touch src/terraform/.env
+          touch src/clusters/k3d/.env
           echo GITHUB_OWNER=somebody >> src/terraform/.env
           echo GITHUB_TOKEN=sometoken >> src/terraform/.env
           echo ORACLE_EMAIL=someemail >> src/terraform/.env
