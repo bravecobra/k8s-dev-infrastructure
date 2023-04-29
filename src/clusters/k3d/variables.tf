@@ -16,7 +16,6 @@ variable "worker-node-count" {
   description = "The amount of worker nodes"
 }
 
-
 variable "install_private_registry" {
   type        = bool
   default     = true
@@ -29,19 +28,16 @@ variable "k3s-version" {
   description = "K3S version to use for the k3s containers"
 }
 
-
 variable "k3d-cluster-name" {
   default     = ["k3d"]
   type        = list(string)
   description = "K3DS cluster prefix"
 }
 
-
 variable "k3d-cluster-domain" {
   type        = string
   description = "The default domain name used in the cluster"
 }
-
 
 variable "k3d-cluster-port" {
   default     = 6445
@@ -55,7 +51,6 @@ variable "k3d-cluster-ip" {
   description = "The Cluster IP"
 }
 
-
 variable "k3d-network-subnet" {
   default     = "172.19.0.0/16"
   type        = string
@@ -67,7 +62,6 @@ variable "k3d-network-gateway" {
   type        = string
   description = "The network gateway for the cluster"
 }
-
 
 variable "expose_azurite" {
   type        = bool
@@ -117,13 +111,11 @@ variable "expose_rds_oracle" {
   description = "Expose Oracle externally"
 }
 
-
 variable "expose_rds_mysql" {
   type        = bool
   default     = false
   description = "Expose Mysql externally"
 }
-
 
 variable "expose_rds_mariadb" {
   type        = bool
@@ -136,7 +128,6 @@ variable "expose_rds_postgres" {
   default     = false
   description = "Expose Postgres externally"
 }
-
 
 variable "expose_nosql_mongodb" {
   type        = bool

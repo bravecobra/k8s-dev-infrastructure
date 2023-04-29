@@ -1,14 +1,17 @@
 resource "docker_network" "k3d_network" {
   name   = "k3d"
   driver = "bridge"
-  ipv6   = true
-  ipam_config {
-    subnet = "fc00:f853:ccd:e793::/64"
-  }
+  ipv6   = false
+  # ipam_config {
+  #   subnet = "fc00:f853:ccd:e793::/64"
+  # }
+  ipam_driver = "default"
   ipam_config {
     subnet  = var.k3d-network-subnet
     gateway = var.k3d-network-gateway
   }
+  ingress    = false
+  attachable = true
   options = {
     "com.docker.network.bridge.enable_ip_masquerade " = "true"
     "com.docker.network.driver.mtu"                   = "1500"
@@ -17,6 +20,7 @@ resource "docker_network" "k3d_network" {
 
 locals {
   is_windows = substr(pathexpand("~"), 0, 1) == "/" ? false : true
+  envs       = { for tuple in regexall("(.*)=(.*)", file(".env")) : tuple[0] => sensitive(tuple[1]) }
 }
 
 resource "local_file" "cluster-config" {
