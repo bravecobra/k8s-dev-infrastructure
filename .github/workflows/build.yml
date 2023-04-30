@@ -13,6 +13,8 @@ on:
 permissions:
   contents: write
   discussions: write
+  actions: read
+  security-events: write
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
