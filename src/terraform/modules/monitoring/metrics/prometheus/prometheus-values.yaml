@@ -48,6 +48,13 @@ prometheus:
     #     memory: 400Mi
     retention: 2h
     additionalScrapeConfigs:
+#%{ if metrics_cadvisor == true }
+      - job_name: cadvisor
+        scrape_interval: 5s
+        static_configs:
+        - targets:
+          - cadvisor.cadvisor.svc.cluster.local:8080
+#%{ endif }
 #%{ if metrics_linkerd == true }
       - job_name: 'linkerd-controller'
         kubernetes_sd_configs:

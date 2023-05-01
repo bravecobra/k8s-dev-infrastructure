@@ -831,3 +831,21 @@ variable "docker_registry_namespace" {
   default     = "registryui"
   description = "Namespace of docker-registry"
 }
+
+variable "cadvisor_namespace" {
+  type        = string
+  default     = "cadvisor"
+  description = "Namespace of cadvisor"
+}
+
+variable "install_cadvisor" {
+  type        = bool
+  default     = false
+  description = "Flag to install cadvisor"
+}
+
+variable "cadvisor_helm_version" {
+  type        = string
+  default     = ""
+  description = "Override Helm version of cadvisor"
+}

@@ -1,4 +1,10 @@
 helm_versions:
+  cadvisor:
+    repository:
+      name: ckotzbauer
+      url: https://ckotzbauer.github.io/helm-charts
+    chart_name: cadvisor
+    chart_version: 2.2.4
   dashboard:
     repository:
       name: k8s-dashboard

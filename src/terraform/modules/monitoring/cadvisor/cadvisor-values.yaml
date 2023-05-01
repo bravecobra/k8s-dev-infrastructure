@@ -1,0 +1,30 @@
+# https://github.com/ckotzbauer/helm-charts/blob/main/charts/cadvisor/values.yaml
+podSecurityPolicy:
+  create: false
+  privileged: false
+
+# Specifies whether a securityContext should be created. Required for privileged operations.
+podSecurityContext:
+  create: true
+  privileged: true
+metrics:
+  enabled: ${metrics_enabled}
+  interval: 30s
+  scrapeTimeout: 30s
+  # This will allow you to specify relabelings on the metrics before ingestion. E.g. to use the kubernetes monitoring
+  # mixin with this chart set metrics.enabled above to true and use:
+  relabelings:
+    - sourceLabels:
+      - name
+      targetLabel: container
+    - sourceLabels:
+      - container_label_io_kubernetes_pod_namespace
+      targetLabel: namespace
+    - sourceLabels:
+      - container_label_io_kubernetes_pod_name
+      targetLabel: pod
+  metricRelabelings:
+    - action: replace
+      sourceLabels:
+      - __meta_kubernetes_pod_node_name
+      targetLabel: node

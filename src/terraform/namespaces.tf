@@ -476,3 +476,17 @@ resource "kubernetes_namespace" "dashboard" {
     }
   }
 }
+
+resource "kubernetes_namespace" "cadvisor" {
+  count = var.install_cadvisor ? 1 : 0
+  metadata {
+    name = var.cadvisor_namespace
+    labels = {
+      "goldilocks.fairwinds.com/enabled" = "true"
+    }
+    annotations = {
+      "kubernetes.io/description" = var.cadvisor_namespace
+      "linkerd.io/inject"         = "enabled"
+    }
+  }
+}

@@ -37,6 +37,11 @@ variable "metrics_rabbitmq" {
   default = false
 }
 
+variable "metrics_cadvisor" {
+  type    = bool
+  default = false
+}
+
 variable "domain-name" {
   description = "Domain Name"
 }
