@@ -5,10 +5,10 @@ variable "helm_release" {
 
 variable "namespace" {
   description = "Namespace"
-  type = string
+  type        = string
 }
 
 variable "metrics_enabled" {
-  type = bool
+  type        = bool
   description = "whether to expose the metrics for prometheus"
 }

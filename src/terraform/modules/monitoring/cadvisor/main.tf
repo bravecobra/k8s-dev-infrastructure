@@ -13,5 +13,5 @@ resource "kubectl_manifest" "dashboard" {
   depends_on = [
     helm_release.cadvisor
   ]
-  yaml_body = templatefile("${path.module}/dashboards/cadvisor-dashboard.yaml", { })
+  yaml_body = templatefile("${path.module}/dashboards/cadvisor-dashboard.yaml", {})
 }
