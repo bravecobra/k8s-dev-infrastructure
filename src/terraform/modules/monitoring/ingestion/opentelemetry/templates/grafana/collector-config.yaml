@@ -7,6 +7,16 @@ receivers:
         endpoint: "0.0.0.0:4318"
 processors:
   batch:
+  attributes:
+    actions:
+    - action: insert
+      key: loki.attribute.labels
+      value: container.name, host.name, service.name, service.version, http_status_code
+  resource:
+    attributes:
+    - action: insert
+      key: loki.resource.labels
+      value: container.name, host.name, service.name, service.version, telemetry.sdk.language, telemetry.sdk.name, telemetry.sdk.version
 extensions:
   health_check:
   pprof:
@@ -27,29 +37,6 @@ exporters:
 #%{ if install_loki == true }
   loki:
     endpoint: "${loki_endpoint}"
-    format: json
-    labels:
-      attributes:
-        source: ""
-        severity: ""
-        "[Scope.1]:ConnectionId": "connectionId"
-        "[Scope.2]:RequestId": "requestId"
-        "[Scope.2]:RequestPath": "requestPath"
-        "[Scope.3]:ActionId": "actionId"
-        "[Scope.3]:ActionName": "actionName"
-        "[Scope.4]:Id": "id"
-        dotnet.ilogger.category: "dotnet_ilogger_category"
-      resource:
-        k8s.cluster.name: "k8s_cluster_name"
-        container.name: "container_name"
-        host.name: "hostname"
-        http.status_code: "http_status_code"
-        service.name: "app"
-        service.instance.id: "instance_id"
-        service.version: "service_version"
-        telemetry.sdk.language: "telemetry_sdk_language"
-        telemetry.sdk.name: "telemetry_sdk_name"
-        telemetry.sdk.version: "telemetry_sdk_version"
 #%{ endif }
   prometheus:
     endpoint: 0.0.0.0:8889

@@ -44,6 +44,7 @@ locals {
     "vpa"                        = { chart_version = var.vpa_helm_version },
     "goldilocks"                 = { chart_version = var.goldilocks_helm_version },
     "dashboard"                  = { chart_version = var.dashboard_helm_version },
+    "cadvisor"                   = { chart_version = var.cadvisor_helm_version },
   }
 }
 
@@ -188,6 +189,7 @@ module "prometheus" {
   metrics_linkerd    = var.install_linkerd
   metrics_rabbitmq   = var.install_rabbitmq
   metrics_tempo      = var.install_tempo
+  metrics_cadvisor   = var.install_cadvisor
   domain-name        = var.domain-name
   namespace          = kubernetes_namespace.prometheus[0].metadata[0].name
   depends_on = [
@@ -575,5 +577,21 @@ module "dashboard" {
     module.coredns,
     module.linkerd,
     kubernetes_namespace.dashboard
+  ]
+}
+
+
+module "cadvisor" {
+  count  = var.install_cadvisor == true ? 1 : 0
+  source = "./modules/monitoring/cadvisor"
+  # domain-name  = var.domain-name
+  metrics_enabled = var.install_prometheus
+  helm_release    = module.versions.chart_versions["cadvisor"].chart_version
+  namespace       = kubernetes_namespace.cadvisor[0].metadata[0].name
+  depends_on = [
+    module.coredns,
+    module.linkerd,
+    module.prometheus,
+    kubernetes_namespace.cadvisor
   ]
 }

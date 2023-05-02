@@ -79,6 +79,8 @@ node-ips = [
 # install_prometheus = true
 # install_grafana    = true
 
+# install_cadvisor = true
+
 //-------------------------------------
 // Search
 //-------------------------------------
