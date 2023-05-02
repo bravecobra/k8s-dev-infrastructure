@@ -582,12 +582,12 @@ module "dashboard" {
 
 
 module "cadvisor" {
-  count        = var.install_cadvisor == true ? 1 : 0
-  source       = "./modules/monitoring/cadvisor"
+  count  = var.install_cadvisor == true ? 1 : 0
+  source = "./modules/monitoring/cadvisor"
   # domain-name  = var.domain-name
   metrics_enabled = var.install_prometheus
-  helm_release = module.versions.chart_versions["cadvisor"].chart_version
-  namespace    = kubernetes_namespace.cadvisor[0].metadata[0].name
+  helm_release    = module.versions.chart_versions["cadvisor"].chart_version
+  namespace       = kubernetes_namespace.cadvisor[0].metadata[0].name
   depends_on = [
     module.coredns,
     module.linkerd,
