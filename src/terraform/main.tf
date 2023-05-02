@@ -591,6 +591,7 @@ module "cadvisor" {
   depends_on = [
     module.coredns,
     module.linkerd,
+    module.prometheus,
     kubernetes_namespace.cadvisor
   ]
 }
