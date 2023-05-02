@@ -444,15 +444,6 @@ jobs:
           timeout: 300
           max-restarts: -1
 
-      - name: Await deployment opentelemetry
-        uses: jupyterhub/action-k8s-await-workloads@v2
-        if: ${{ inputs.install_monitoring == true }}
-        with:
-          workloads: "" # all
-          namespace: "opentelemetry" # default
-          timeout: 300
-          max-restarts: -1
-
       - name: Await deployment loki
         uses: jupyterhub/action-k8s-await-workloads@v2
         if: ${{ inputs.install_monitoring == true }}
@@ -471,12 +462,30 @@ jobs:
           timeout: 300
           max-restarts: -1
 
+      - name: Await deployment cadvisor
+        uses: jupyterhub/action-k8s-await-workloads@v2
+        if: ${{ inputs.install_monitoring == true }}
+        with:
+          workloads: "" # all
+          namespace: "cadvisor" # default
+          timeout: 300
+          max-restarts: -1
+
       - name: Await deployment prometheus
         uses: jupyterhub/action-k8s-await-workloads@v2
         if: ${{ inputs.install_monitoring == true }}
         with:
           workloads: "" # all
           namespace: "prometheus" # default
+          timeout: 300
+          max-restarts: -1
+
+      - name: Await deployment opentelemetry
+        uses: jupyterhub/action-k8s-await-workloads@v2
+        if: ${{ inputs.install_monitoring == true }}
+        with:
+          workloads: "" # all
+          namespace: "opentelemetry" # default
           timeout: 300
           max-restarts: -1
 
@@ -522,15 +531,6 @@ jobs:
         with:
           workloads: "" # all
           namespace: "jaeger" # default
-          timeout: 300
-          max-restarts: -1
-
-      - name: Await deployment cadvisor
-        uses: jupyterhub/action-k8s-await-workloads@v2
-        if: ${{ inputs.install_monitoring == true }}
-        with:
-          workloads: "" # all
-          namespace: "cadvisor" # default
           timeout: 300
           max-restarts: -1
 
