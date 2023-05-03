@@ -136,7 +136,7 @@ helm_versions:
       name: minio
       url: https://charts.min.io/
     chart_name: minio
-    chart_version: 5.0.8
+    chart_version: 5.0.9
   mongodb:
     repository:
       name: bitnami
