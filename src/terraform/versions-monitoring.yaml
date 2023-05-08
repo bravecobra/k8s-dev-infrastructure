@@ -52,7 +52,7 @@ helm_versions:
       name: prometheus-community
       url: https://prometheus-community.github.io/helm-charts
     chart_name: kube-prometheus-stack
-    chart_version: 45.25.0
+    chart_version: 45.26.0
   promtail:
     repository:
       name: grafana
