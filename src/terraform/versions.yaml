@@ -40,7 +40,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: etcd
-    chart_version: 8.10.2
+    chart_version: 8.11.1
   fluent:
     repository:
       name: fluent
