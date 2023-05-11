@@ -124,7 +124,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: mariadb
-    chart_version: 12.1.6
+    chart_version: 12.2.1
   metrics:
     repository:
       name: bitnami
