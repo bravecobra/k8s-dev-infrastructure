@@ -26,6 +26,8 @@ spec:
       log.console.formatter.json.field_map = verbosity:v time msg domain file line pid level:-
       log.console.formatter.json.verbosity_map = debug:7 info:6 notice:5 warning:4 error:3 critical:2 alert:1 emergency:0
       log.console.formatter.time_format = epoch_usecs
+      cluster_formation.randomized_startup_delay_range.min = 0
+      cluster_formation.randomized_startup_delay_range.max = 60
     additionalPlugins:
       - rabbitmq_top
       - rabbitmq_shovel
