@@ -4,7 +4,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: mariadb
-    chart_version: 12.2.2
+    chart_version: 12.2.3
   mongodb:
     repository:
       name: bitnami
