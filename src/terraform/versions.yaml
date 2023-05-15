@@ -76,7 +76,7 @@ helm_versions:
       name: strimzi
       url: https://strimzi.io/charts/
     chart_name: strimzi-kafka-operator
-    chart_version: 0.34.0
+    chart_version: 0.35.0
   keycloak:
     repository:
       name: codecentric
