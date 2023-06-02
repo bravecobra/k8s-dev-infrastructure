@@ -22,7 +22,7 @@ helm_versions:
       name: bitnami
       url: https://charts.bitnami.com/bitnami
     chart_name: mysql
-    chart_version: 9.9.1
+    chart_version: 9.10.1
   postgres:
     repository:
       name: bitnami
