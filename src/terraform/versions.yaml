@@ -34,7 +34,7 @@ helm_versions:
       name: elastic
       url: https://helm.elastic.co
     chart_name: eck-operator
-    chart_version: 2.7.0
+    chart_version: 2.8.0
   etcd:
     repository:
       name: bitnami
