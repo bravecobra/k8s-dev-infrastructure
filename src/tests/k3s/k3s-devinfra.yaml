@@ -1,5 +1,5 @@
 # k3d configuration file, saved as e.g. /home/me/myk3dcluster.yaml
-apiVersion: k3d.io/v1alpha4 # this will change in the future as we make everything more stable
+apiVersion: k3d.io/v1alpha5 # this will change in the future as we make everything more stable
 kind: Simple # internally, we also have a Cluster config, which is not yet available externally
 servers: 1 # same as `--servers 1`
 agents: 2 # same as `--agents 2`
@@ -10,7 +10,7 @@ kubeAPI: # same as `--api-port myhost.my.domain:6445` (where the name would reso
 image: rancher/k3s:v1.25.3-k3s1 # same as `--image rancher/k3s:v1.20.4-k3s1`
 network: k3d # same as `--network my-custom-net`
 # subnet: "172.28.0.0/16" # same as `--subnet 172.28.0.0/16`
-token: superSecretToken # same as `--token superSecretToken`
+# token: superSecretToken # same as `--token superSecretToken`
 ports:
   - port: 80:80 # same as `--port '80:80@loadbalancer'`
     nodeFilters:
