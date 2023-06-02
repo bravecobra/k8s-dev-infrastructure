@@ -220,7 +220,7 @@ helm_versions:
       name: fairwinds-stable
       url: https://charts.fairwinds.com/stable
     chart_name: vpa
-    chart_version: 1.7.2
+    chart_version: 1.7.5
   whoami:
     repository:
       name: cowboysysop
