@@ -106,7 +106,7 @@ helm_versions:
       name: linkerd
       url: https://helm.linkerd.io/stable
     chart_name: linkerd-jaeger
-    chart_version: 30.8.3
+    chart_version: 30.8.4
   localstack:
     repository:
       name: localstack-charts
