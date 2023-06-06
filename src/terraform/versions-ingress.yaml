@@ -10,7 +10,7 @@ helm_versions:
       name: traefik
       url: https://helm.traefik.io/traefik
     chart_name: traefik
-    chart_version: 23.0.1
+    chart_version: 23.1.0
   whoami:
     repository:
       name: cowboysysop
