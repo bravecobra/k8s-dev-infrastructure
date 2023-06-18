@@ -28,7 +28,7 @@ helm_versions:
       name: joxit
       url: https://helm.joxit.dev
     chart_name: docker-registry-ui
-    chart_version: 1.0.1
+    chart_version: 1.1.0
   elasticsearch:
     repository:
       name: elastic
