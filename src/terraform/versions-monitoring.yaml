@@ -64,7 +64,7 @@ helm_versions:
       name: datalust
       url: https://helm.datalust.co
     chart_name: seq
-    chart_version: 2023.1.9133
+    chart_version: 2023.2.0
   tempo:
     repository:
       name: grafana
