@@ -22,4 +22,4 @@ helm_versions:
       name: hashicorp
       url: https://helm.releases.hashicorp.com
     chart_name: vault
-    chart_version: 0.24.1
+    chart_version: 0.25.0
