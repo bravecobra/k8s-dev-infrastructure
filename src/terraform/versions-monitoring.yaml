@@ -16,7 +16,7 @@ helm_versions:
       name: fluent
       url: https://fluent.github.io/helm-charts
     chart_name: fluent-bit
-    chart_version: 0.34.0
+    chart_version: 0.34.2
   goldilocks:
     repository:
       name: fairwinds-stable
