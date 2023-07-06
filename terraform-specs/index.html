@@ -1,0 +1,2614 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../installation-terraform/">
+      
+      
+        <link rel="next" href="../specs/argocd/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>Main - K8S Dev Infrastructure</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#terraform-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="K8S Dev Infrastructure" class="md-header__button md-logo" aria-label="K8S Dev Infrastructure" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            K8S Dev Infrastructure
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Main
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="K8S Dev Infrastructure" class="md-nav__button md-logo" aria-label="K8S Dev Infrastructure" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    K8S Dev Infrastructure
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preparation/" class="md-nav__link">
+        Preparation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Clusters
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Clusters
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clusters/k3s/" class="md-nav__link">
+        K3S with terraform
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clusters/kind/" class="md-nav__link">
+        KinD with terraform
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clusters/desktop-cluster/" class="md-nav__link">
+        Docker Desktop
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clusters/rancher-cluster/" class="md-nav__link">
+        Rancher Desktop
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clusters/minikube-cluster/" class="md-nav__link">
+        Minikube
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation-terraform/" class="md-nav__link">
+        Install
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Terraform Specs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Terraform Specs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Main
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Main
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+    <nav class="md-nav" aria-label="Description">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#providers" class="md-nav__link">
+    Providers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    Modules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    Resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    Inputs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+          Modules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Modules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/argocd/" class="md-nav__link">
+        Argocd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/azurite/" class="md-nav__link">
+        Azurite
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/cert-manager/" class="md-nav__link">
+        Cert manager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/chartversions/" class="md-nav__link">
+        Chartversions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/coredns/" class="md-nav__link">
+        Coredns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/dashboard/" class="md-nav__link">
+        Dashboard
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/elasticsearch/" class="md-nav__link">
+        Elasticsearch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/etcd/" class="md-nav__link">
+        Etcd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/flux2/" class="md-nav__link">
+        Flux2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/goldilocks/" class="md-nav__link">
+        Goldilocks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/identityserver4-admin/" class="md-nav__link">
+        Identityserver4 admin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/jaeger/" class="md-nav__link">
+        Jaeger
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/kafka/" class="md-nav__link">
+        Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/keycloak/" class="md-nav__link">
+        Keycloak
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/linkerd/" class="md-nav__link">
+        Linkerd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/localstack/" class="md-nav__link">
+        Localstack
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/loki/" class="md-nav__link">
+        Loki
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/mariadb/" class="md-nav__link">
+        Mariadb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/metrics/" class="md-nav__link">
+        Metrics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/minio/" class="md-nav__link">
+        Minio
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/mongodb/" class="md-nav__link">
+        Mongodb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/mysql/" class="md-nav__link">
+        Mysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/opentelemetry/" class="md-nav__link">
+        Opentelemetry
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/oracle-xe/" class="md-nav__link">
+        Oracle xe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/postgres/" class="md-nav__link">
+        Postgres
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/prometheus/" class="md-nav__link">
+        Prometheus
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/rabbitmq/" class="md-nav__link">
+        Rabbitmq
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/redis/" class="md-nav__link">
+        Redis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/seq/" class="md-nav__link">
+        Seq
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/sqlserver/" class="md-nav__link">
+        Sqlserver
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/tempo/" class="md-nav__link">
+        Tempo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/traefik/" class="md-nav__link">
+        Traefik
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/vault/" class="md-nav__link">
+        Vault
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../specs/vpa/" class="md-nav__link">
+        Vpa
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+    <nav class="md-nav" aria-label="Description">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#providers" class="md-nav__link">
+    Providers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    Modules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    Resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    Inputs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<!-- markdownlint-disable MD033 -->
+<h1 id="terraform-documentation">Terraform documentation</h1>
+<h2 id="description">Description</h2>
+<!-- BEGIN_TF_DOCS -->
+<h3 id="requirements">Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>terraform</td>
+<td>&gt;= 1.0</td>
+</tr>
+<tr>
+<td>flux</td>
+<td>&gt;= 0.20.0</td>
+</tr>
+<tr>
+<td>github</td>
+<td>&gt;= 5.9.0</td>
+</tr>
+<tr>
+<td>kubectl</td>
+<td>&gt;= 1.14.0</td>
+</tr>
+<tr>
+<td>time</td>
+<td>&gt;= 0.9.1</td>
+</tr>
+<tr>
+<td>tls</td>
+<td>4.0.4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="providers">Providers</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>http</td>
+<td>3.2.1</td>
+</tr>
+<tr>
+<td>kubectl</td>
+<td>1.14.0</td>
+</tr>
+<tr>
+<td>kubernetes</td>
+<td>2.18.1</td>
+</tr>
+<tr>
+<td>null</td>
+<td>3.2.1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modules">Modules</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Source</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>argocd</td>
+<td>./modules/services/deployment/argocd</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>azurite</td>
+<td>./modules/services/storage/azurite</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>certmanager</td>
+<td>./modules/networking/cert-manager</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>coredns</td>
+<td>./modules/networking/coredns</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>dashboard</td>
+<td>./modules/monitoring/dashboard</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>elasticsearch</td>
+<td>./modules/services/search/elasticsearch</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>./modules/services/configuration/etcd</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>flux2</td>
+<td>./modules/services/deployment/flux2</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>goldilocks</td>
+<td>./modules/monitoring/goldilocks</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>identityserver4</td>
+<td>./modules/services/security/auth/identityserver4-admin</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>jaeger</td>
+<td>./modules/monitoring/tracing/jaeger</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>kafka</td>
+<td>./modules/services/messaging/kafka</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>keycloak</td>
+<td>./modules/services/security/auth/keycloak</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>linkerd</td>
+<td>./modules/networking/linkerd</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>localstack</td>
+<td>./modules/services/cloud/localstack</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>loki</td>
+<td>./modules/monitoring/logging/loki</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>mariadb</td>
+<td>./modules/services/database/rds/mariadb</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>metrics</td>
+<td>./modules/monitoring/metrics/metrics</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>minio</td>
+<td>./modules/services/storage/minio</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>mongodb</td>
+<td>./modules/services/database/nosql/mongodb</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>mssql</td>
+<td>./modules/services/database/rds/sqlserver</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>mysql</td>
+<td>./modules/services/database/rds/mysql</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>opentelemetry</td>
+<td>./modules/monitoring/ingestion/opentelemetry</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>oraclexe</td>
+<td>./modules/services/database/rds/oracle-xe</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>postgres</td>
+<td>./modules/services/database/rds/postgres</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>prometheus</td>
+<td>./modules/monitoring/metrics/prometheus</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>rabbitmq</td>
+<td>./modules/services/messaging/rabbitmq</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>redis</td>
+<td>./modules/services/caching/redis</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>registry</td>
+<td>./modules/services/storage/docker</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>seq</td>
+<td>./modules/monitoring/logging/seq</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>tempo</td>
+<td>./modules/monitoring/tracing/tempo</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>traefik</td>
+<td>./modules/networking/traefik</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>vault</td>
+<td>./modules/services/configuration/vault</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>versions</td>
+<td>./modules/utils/chartversions</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>vpa</td>
+<td>./modules/monitoring/vpa</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>whoami</td>
+<td>./samples/whoami</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<h3 id="resources">Resources</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest">kubectl_manifest.notify_watchers</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.argocd</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.azurite</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.cert-manager</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.dashboard</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.docker_registry</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.elasticsearch</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.etcd</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.flux_system</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.goldilocks</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.identityserver4</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.jaeger</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.kafka</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.keycloak</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.linkerd</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.localstack</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.loki</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.mariadb</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.minio</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.mongodb</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.mssql</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.mysql</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.opentelemetry</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.oracle</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.postgres</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.prometheus</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.rabbitmq</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.redis</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.seq</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.tempo</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.traefik</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.vault</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.vpa</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace">kubernetes_namespace.whoami</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource">null_resource.flux_uninstall</a></td>
+<td>resource</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http">http_http.manifestfiles</a></td>
+<td>data source</td>
+</tr>
+<tr>
+<td><a href="https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/data-sources/file_documents">kubectl_file_documents.oracle_manifests</a></td>
+<td>data source</td>
+</tr>
+</tbody>
+</table>
+<h3 id="inputs">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>Default</th>
+<th align="center">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>argocd_helm_version</td>
+<td>Override Helm version of argocd</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>argocd_namespace</td>
+<td>Namespace of argocd</td>
+<td><code>string</code></td>
+<td><code>"argocd"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>azurite_namespace</td>
+<td>Namespace of azurite</td>
+<td><code>string</code></td>
+<td><code>"azurite"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>azurite_version</td>
+<td>Override version of azurite</td>
+<td><code>string</code></td>
+<td><code>"latest"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>cert_manager_helm_version</td>
+<td>Override Helm version of cert-manager</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>cert_manager_namespace</td>
+<td>Namespace of cert-manager</td>
+<td><code>string</code></td>
+<td><code>"cert-manager"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>cluster-context-name</td>
+<td>The kubectl context to use</td>
+<td><code>string</code></td>
+<td>n/a</td>
+<td align="center">yes</td>
+</tr>
+<tr>
+<td>cluster-type</td>
+<td>The type of the cluster. Important for Traefik to route traffic correctly</td>
+<td><code>string</code></td>
+<td><code>"k3s"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>dashboard_helm_version</td>
+<td>Override Helm version of dashboard</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>dashboard_namespace</td>
+<td>Namespace of dashboard</td>
+<td><code>string</code></td>
+<td><code>"dashboard"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>docker_registry_helm_version</td>
+<td>Override Helm version of docker-registry</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>docker_registry_namespace</td>
+<td>Namespace of docker-registry</td>
+<td><code>string</code></td>
+<td><code>"registryui"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>domain-name</td>
+<td>The toplevel domain of the cluster</td>
+<td><code>string</code></td>
+<td>n/a</td>
+<td align="center">yes</td>
+</tr>
+<tr>
+<td>elasticsearch_helm_version</td>
+<td>Override Helm version of ECK (Elasticsearch Operator)</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>elasticsearch_namespace</td>
+<td>Namespace of elasticsearch</td>
+<td><code>string</code></td>
+<td><code>"elasticsearch"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>etcd_helm_version</td>
+<td>Override Helm version of etcd</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>etcd_namespace</td>
+<td>Namespace of etcd</td>
+<td><code>string</code></td>
+<td><code>"etcd"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_azurite</td>
+<td>Flag to expose azurite externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_jaeger</td>
+<td>Flag to expose jaeger externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_kafka</td>
+<td>Flag to expose kafka externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_loki</td>
+<td>Flag to expose loki externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_mariadb</td>
+<td>Flag to expose mariadb externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_mongodb</td>
+<td>Flag to expose mongodb externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_mssql</td>
+<td>Flag to expose SQL Server externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_mysql</td>
+<td>Flag to expose mysql externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_opentelemetry</td>
+<td>Flag to expose opentelemetry collector externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_oracle</td>
+<td>Flag to expose Oracl XE externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_postgres</td>
+<td>Flag to expose postgres externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_rabbitmq</td>
+<td>Flag to expose rabbitmq externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_redis</td>
+<td>Flag to expose redis externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>expose_seq</td>
+<td>Flag to expose seq externally</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>fluent_helm_version</td>
+<td>Override Helm version of fluent-bit</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>flux2_github_repository_branch</td>
+<td>The branch to read configuration from</td>
+<td><code>string</code></td>
+<td><code>"master"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>flux2_github_repository_create</td>
+<td>Create github repo to read configuration from</td>
+<td><code>bool</code></td>
+<td><code>true</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>flux2_github_repository_name</td>
+<td>Name of the github repo to create</td>
+<td><code>string</code></td>
+<td><code>"k8s-flux-example"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>flux2_github_repository_path</td>
+<td>The path inside the repo to read configuration</td>
+<td><code>string</code></td>
+<td><code>"clusters/k8s-local"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>flux2_github_repository_visibility</td>
+<td>Visibility of the repository</td>
+<td><code>string</code></td>
+<td><code>"private"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>flux2_namespace</td>
+<td>Namespace of Flux2</td>
+<td><code>string</code></td>
+<td><code>"flux-system"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>goldilocks_helm_version</td>
+<td>Override Helm version of goldilocks</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>goldilocks_namespace</td>
+<td>Namespace of goldilocks</td>
+<td><code>string</code></td>
+<td><code>"goldilocks"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>identityserver4admin_helm_version</td>
+<td>Override Helm version of Identityserver4 Admin</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>identityserver4admin_mssql_helm_version</td>
+<td>Override Helm version of SQL Server for Identityserver4 Admin</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>identityserver4admin_namespace</td>
+<td>Namespace of Identityserver4 Admin</td>
+<td><code>string</code></td>
+<td><code>"identityserver4"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_argocd</td>
+<td>Flag to install argocd</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_azurite</td>
+<td>Flag to install azurite</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_cert_manager</td>
+<td>Flag to install cert-manager</td>
+<td><code>bool</code></td>
+<td><code>true</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_dashboard</td>
+<td>Flag to install kubernetes dashboard</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_docker_registry</td>
+<td>Flag to install docker-registry</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_elasticsearch</td>
+<td>Flag to install elasticsearch</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_etcd</td>
+<td>Flag to install etcd</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_flux2</td>
+<td>Flag to install flux2</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_goldilocks</td>
+<td>Flag to install goldilocks</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_grafana</td>
+<td>Flag to install grafana</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_identityserver4admin</td>
+<td>Flag to install identityserver4-admin</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_jaeger</td>
+<td>Flag to install jaeger</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_kafka</td>
+<td>Flag to install kafka</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_keycloak</td>
+<td>Flag to install keycloak</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_kibana</td>
+<td>Flag to install kibana</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_linkerd</td>
+<td>Flag to install linkerd</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_localstack</td>
+<td>Flag to install localstack</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_loki</td>
+<td>Flag to install Loki</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_mariadb</td>
+<td>Flag to install mariadb</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_metrics</td>
+<td>Flag to install metrics server</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_minio</td>
+<td>Flag to install minio</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_mongodb</td>
+<td>Flag to install MongoDB</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_mssql</td>
+<td>Flag to install SQL Server</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_mysql</td>
+<td>Flag to install mysql</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_opentelemetry</td>
+<td>Flag to install opentelemetry collector</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_oracle</td>
+<td>Flag to install Oracle XE</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_postgres</td>
+<td>Flag to install postgres</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_prometheus</td>
+<td>Flag to install prometheus</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_promtail</td>
+<td>Flag to install promtail</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_rabbitmq</td>
+<td>Flag to install rabbitmq</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_redis</td>
+<td>Flag to install redis</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_seq</td>
+<td>Flag to install seq</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_tempo</td>
+<td>Flag to install tempo</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_traefik</td>
+<td>Flag to install traefik</td>
+<td><code>bool</code></td>
+<td><code>true</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_vault</td>
+<td>Flag to install vault</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_vpa</td>
+<td>Flag to install vpa</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>install_whoami</td>
+<td>Flag to install whoami</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>jaeger_helm_version</td>
+<td>Override Helm version of jaeger</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>jaeger_namespace</td>
+<td>Namespace of Jaeger</td>
+<td><code>string</code></td>
+<td><code>"jaeger"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>kafka_helm_version</td>
+<td>Override Helm version of kafka strimzi</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>kafka_namespace</td>
+<td>Namespace of kafka</td>
+<td><code>string</code></td>
+<td><code>"kafka"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>keycloak_helm_version</td>
+<td>Override Helm version of keycloak</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>keycloak_include_domainrealm</td>
+<td>Flag to include a default realm</td>
+<td><code>bool</code></td>
+<td><code>false</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>keycloak_namespace</td>
+<td>Namespace of keycloak</td>
+<td><code>string</code></td>
+<td><code>"keycloak"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>linkerd_helm_version</td>
+<td>Override Helm version of linkerd</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>linkerd_namespace</td>
+<td>Namespace of linkerd</td>
+<td><code>string</code></td>
+<td><code>"linkerd"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>linkerdcrds_helm_version</td>
+<td>Override Helm version of linkerd-crds</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>linkerdjaeger_helm_version</td>
+<td>Override Helm version of linkerd-jaeger</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>linkerdviz_helm_version</td>
+<td>Override Helm version of linkerd-viz</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>loadbalancer-ip</td>
+<td>The IP of the loadbalancer</td>
+<td><code>string</code></td>
+<td><code>"172.19.0.2"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>localstack_helm_version</td>
+<td>Override Helm version of localstack</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>localstack_namespace</td>
+<td>Namespace of localstack</td>
+<td><code>string</code></td>
+<td><code>"localstack"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>loki_helm_version</td>
+<td>Override Helm version of loki</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>loki_namespace</td>
+<td>Namespace of loki</td>
+<td><code>string</code></td>
+<td><code>"loki"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>mariadb_helm_version</td>
+<td>Override Helm version of mariadb</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>mariadb_namespace</td>
+<td>Namespace of mariadb</td>
+<td><code>string</code></td>
+<td><code>"mariadb"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>metrics_helm_version</td>
+<td>Override Helm version of metrics-server</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>minio_helm_version</td>
+<td>Override Helm version of minio</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>minio_namespace</td>
+<td>Namespace of minio</td>
+<td><code>string</code></td>
+<td><code>"minio"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>mongodb_helm_version</td>
+<td>Override Helm version of mongodb</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>mongodb_namespace</td>
+<td>Namespace of mongodb</td>
+<td><code>string</code></td>
+<td><code>"mongodb"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>monitoring_backend</td>
+<td>Default monitoring backend</td>
+<td><code>string</code></td>
+<td><code>"grafana"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>mssql_helm_version</td>
+<td>Override Helm version of SQL Server</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>mssql_namespace</td>
+<td>Namespace of SQL Server</td>
+<td><code>string</code></td>
+<td><code>"mssql"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>mysql_helm_version</td>
+<td>Override Helm version of mysql</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>mysql_namespace</td>
+<td>Namespace of mysql</td>
+<td><code>string</code></td>
+<td><code>"mysql"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>node-ips</td>
+<td>The list of ip's of nodes in the cluster</td>
+<td><code>list(any)</code></td>
+<td><pre>[<br>  "172.19.0.2"<br>]</pre></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>opentelemetry_helm_version</td>
+<td>Override Helm version of opentelemetry collector</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>opentelemetry_namespace</td>
+<td>Namespace of opentelemetry collector</td>
+<td><code>string</code></td>
+<td><code>"opentelemetry"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>oracle_namespace</td>
+<td>Namespace of Oracle XE</td>
+<td><code>string</code></td>
+<td><code>"oracle"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>oracle_operator_version</td>
+<td>Version of the Oracle Operator to use</td>
+<td><code>string</code></td>
+<td><code>"0.2.1"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>oracle_xe_version</td>
+<td>Version of the Oracle XE server to install</td>
+<td><code>string</code></td>
+<td><code>"21.3.0-xe"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>postgres_helm_version</td>
+<td>Override Helm version of postgres</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>postgres_namespace</td>
+<td>Namespace of postgres</td>
+<td><code>string</code></td>
+<td><code>"postgres"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>prometheus_helm_version</td>
+<td>Override Helm version of prometheus</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>prometheus_namespace</td>
+<td>Namespace of prometheus</td>
+<td><code>string</code></td>
+<td><code>"prometheus"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>promtail_helm_version</td>
+<td>Override Helm version of promtail</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>rabbitmq_helm_version</td>
+<td>Override Helm version of rabbitmq</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>rabbitmq_namespace</td>
+<td>Namespace of rabbitmq</td>
+<td><code>string</code></td>
+<td><code>"rabbitmq"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>redis_helm_version</td>
+<td>Override Helm version of redis</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>redis_namespace</td>
+<td>Namespace of redis</td>
+<td><code>string</code></td>
+<td><code>"redis"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>seq_helm_version</td>
+<td>Override Helm version of seq</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>seq_namespace</td>
+<td>Namespace of seq</td>
+<td><code>string</code></td>
+<td><code>"seq"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>tempo_helm_version</td>
+<td>Override Helm version of tempo</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>tempo_namespace</td>
+<td>Namespace of tempo</td>
+<td><code>string</code></td>
+<td><code>"tempo"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>traefik_helm_version</td>
+<td>Override Helm version of traefik</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>traefik_namespace</td>
+<td>Namespace of traefik</td>
+<td><code>string</code></td>
+<td><code>"traefik"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>vault_helm_version</td>
+<td>Override Helm version of vault</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>vault_namespace</td>
+<td>Namespace of vault</td>
+<td><code>string</code></td>
+<td><code>"vault"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>vpa_helm_version</td>
+<td>Override Helm version of vpa</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>vpa_namespace</td>
+<td>Namespace of vpa</td>
+<td><code>string</code></td>
+<td><code>"vpa"</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>whoami_helm_version</td>
+<td>Override Helm version of whoami</td>
+<td><code>string</code></td>
+<td><code>""</code></td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>whoami_namespace</td>
+<td>Namespace of whoami</td>
+<td><code>string</code></td>
+<td><code>"whoami"</code></td>
+<td align="center">no</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>argocd-password</td>
+<td>ArgoCD Initial Admin password</td>
+</tr>
+<tr>
+<td>elastic-password</td>
+<td>Elasticsearch user</td>
+</tr>
+<tr>
+<td>elastic-user</td>
+<td>Elasticsearch password</td>
+</tr>
+<tr>
+<td>etcd-password</td>
+<td>Etcd Initial Admin password</td>
+</tr>
+<tr>
+<td>grafana-password</td>
+<td>Grafana Admin password</td>
+</tr>
+<tr>
+<td>grafana-user</td>
+<td>Grafana Admin user</td>
+</tr>
+<tr>
+<td>helm_versions</td>
+<td>Chart versions</td>
+</tr>
+<tr>
+<td>keycloak-password</td>
+<td>Keycloak Initial Admin password</td>
+</tr>
+<tr>
+<td>mariadb-password</td>
+<td>MariaDB password</td>
+</tr>
+<tr>
+<td>minio-password</td>
+<td>Minio Initial root password</td>
+</tr>
+<tr>
+<td>mongodb-password</td>
+<td>MongoDB password</td>
+</tr>
+<tr>
+<td>mssql-password</td>
+<td>MSSQL password</td>
+</tr>
+<tr>
+<td>mysql-password</td>
+<td>Mysql password</td>
+</tr>
+<tr>
+<td>oracle-password</td>
+<td>Oracle password</td>
+</tr>
+<tr>
+<td>postgres-password</td>
+<td>Postgres password</td>
+</tr>
+<tr>
+<td>redis-password</td>
+<td>Redis password</td>
+</tr>
+<tr>
+<td>vault-password</td>
+<td>Vault token</td>
+</tr>
+</tbody>
+</table>
+<!-- END_TF_DOCS -->
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+    
+  </body>
+</html>
