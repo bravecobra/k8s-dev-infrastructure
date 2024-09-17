@@ -58,7 +58,7 @@ helm_versions:
       name: grafana
       url: https://grafana.github.io/helm-charts
     chart_name: promtail
-    chart_version: 6.11.3
+    chart_version: 6.16.6
   seq:
     repository:
       name: datalust
