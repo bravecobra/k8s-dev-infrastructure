@@ -28,7 +28,7 @@ helm_versions:
       name: jaegertracing
       url: https://jaegertracing.github.io/helm-charts
     chart_name: jaeger-operator
-    chart_version: 2.45.0
+    chart_version: 2.57.0
   loki:
     repository:
       name: grafana
